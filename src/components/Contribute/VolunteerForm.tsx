@@ -92,11 +92,11 @@ export default function VolunteerForm() {
   }
 
   return (
-    <div className='bg-white relative'>
-    <div className="px-4 py-16 max-w-7xl mx-auto ">
-      <h1 className="text-4xl font-display text-center text-[#02306A] mb-12 py-6">Volunteer</h1>
+    <div id="volunteer" className='bg-white relative'>
+    <div className="px-6 max-sm:pt-8 max-sm:pb-[150px] md:py-16 max-w-7xl mx-auto ">
+      <h1 className="text-4xl font-display text-center text-[#02306A] mb-4 md:mb-12 py-6">Volunteer</h1>
       
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16">
         {/* Left Column - Description and Image */}
         <div className="space-y-8">
           <div className="space-y-6">

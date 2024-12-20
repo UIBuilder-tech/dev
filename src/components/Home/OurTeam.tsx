@@ -74,13 +74,13 @@ export default function TeamSection() {
   }, [isInView, isHovered, controls])
 
   return (
-    <section ref={containerRef} className="relative  flex w-full flex-row items-center justify-center py-10">
+    <section ref={containerRef} className="relative  flex w-full flex-row items-center justify-center py-10 max-sm:bg-white">
       <div className="container overflow-hidden mx-auto px-4 rounded-3xl bg-white ">
         <div className="flex flex-col lg:flex-row items-center justify-center">
           {/* Left Content */}
-          <div className="flex flex-col justify-center space-y-6 px-10 max-w-[50%] lg:pr-8">
-            <h2 className="text-4xl font-bold text-[#E67E22]">Our Team</h2>
-            <p className="text-gray-600">
+          <div className="flex flex-col justify-center max-sm:items-center max-sm:text-center space-y-4 md:space-y-6 md:px-10 md:max-w-[50%] max-sm:pb-4 lg:pr-8">
+            <h2 className="text-3xl  md:text-4xl font-bold text-[#E67E22]">Our Team</h2>
+            <p className="text-gray-600 max-sm:leading-5 max-sm:text-sm">
               CHF Board represents the collective aspirations of the Chitrapur Saraswat
               community all across the US. Our office bearers carry on the activities of CHF
               within the US and support initiatives of Shri Chitrapur Math (SCM) and US-
@@ -88,20 +88,20 @@ export default function TeamSection() {
             </p>
             <div>
               <button 
-                className="rounded-full border-2 border-[#4299E1] px-6 py-2 text-[#4299E1] transition-colors hover:bg-[#4299E1] hover:text-white"
+                className="rounded-full border-2 border-[#4299E1] px-4 py-1 md:px-6 md:py-2 text-[#4299E1] transition-colors hover:bg-[#4299E1] hover:text-white max-sm:text-sm"
               >
                 Learn More
               </button>
             </div>
           </div>
 
-          <div className="relative flex  w-full flex-row gap-4 items-center justify-center overflow-hidden h-[500px]">
+          <div className="relative flex  w-full flex-row gap-2 md:gap-4 items-center justify-center overflow-hidden h-[300px] md:h-[500px]">
          
   <Marquee pauseOnHover vertical className="[--duration:10s]">
   {boardMembers.map((review, index) => (
        <div 
        key={`${review.name}-${index}`} 
-       className="relative h-[350px] w-[250px] cursor-pointer overflow-hidden rounded-[70px] p-4 flex flex-col justify-end"
+       className="relative h-[250px] w-[150px] md:h-[350px] md:w-[250px] cursor-pointer overflow-hidden rounded-[20px] md:rounded-[70px] p-4 flex flex-col justify-end"
        style={{
          backgroundImage: `linear-gradient(180deg, #24242400 50%, #e67e22 100%),url(${review.img})`,
          backgroundSize: 'cover',
@@ -125,7 +125,7 @@ export default function TeamSection() {
   {boardMembers.map((review, index) => (
       <div 
       key={`${review.name}-${index}`} 
-      className="relative h-[350px] w-[250px] cursor-pointer overflow-hidden rounded-[70px] p-4 flex flex-col justify-end"
+      className="relative h-[250px] w-[150px] md:h-[350px] md:w-[250px] cursor-pointer overflow-hidden rounded-[20px] md:rounded-[70px] p-4 flex flex-col justify-end"
       style={{
         backgroundImage: `linear-gradient(180deg, #24242400 50%, #e67e22 100%), url(${review.img})`,
         backgroundSize: 'cover',

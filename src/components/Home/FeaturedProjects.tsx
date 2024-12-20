@@ -47,16 +47,16 @@ export default function FeaturedProjects() {
   const [hoveredId, setHoveredId] = useState<string | null>(null)
 
   return (
-    <div className="p-8 mx-14">
-      <h2 className="mb-8 text-4xl font-display text-gray-900">Featured Projects</h2>
+    <div className="py-8 px-6 md:p-8 md:mx-14">
+      <h2 className="mb-8 text-3xl md:text-4xl font-display text-gray-900">Featured Projects</h2>
       
       <table className="w-full">
         <thead>
-          <tr className="border-b border-gray-500 text-sm text-gray-600">
-            <th className="pb-4 text-left font-normal">Title</th>
-            <th className="pb-4 text-left font-normal">Tags</th>
-            <th className="pb-4 text-left font-normal">Status</th>
-            <th className="pb-4 w-72"></th>
+          <tr className="border-b border-gray-500 text-xs md:text-sm text-gray-600">
+            <th className="pb-2 md:pb-4 text-left font-normal">Title</th>
+            <th className="pb-2 md:pb-4 text-left font-normal">Tags</th>
+            <th className="pb-2 md:pb-4 text-left font-normal">Status</th>
+            <th className="pb-2 md:pb-4 w-58 md:w-72"></th>
           </tr>
         </thead>
         <tbody>
@@ -70,15 +70,15 @@ export default function FeaturedProjects() {
                 onMouseEnter={() => setHoveredId(project.id)}
                 onMouseLeave={() => setHoveredId(null)}
               >
-                <td className="py-7">
-                  <span className={`text-lg font-medium transition-colors duration-200 ${
+                <td className="md:py-7 py-5">
+                  <span className={`text-xs md:text-lg font-medium transition-colors duration-200 ${
                     isHovered ? 'text-secondary' : 'text-gray-900'
                   }`}>
                     {project.title}
                   </span>
                 </td>
                 <td>
-                  <span className={`inline-flex rounded-full px-4 py-1 text-sm transition-all duration-200 ${
+                  <span className={`inline-flex rounded-full px-2 md:px-4 py-1 text-xs md:text-sm transition-all duration-200 break-words hyphens-auto max-w-[80%] ${
                     isHovered 
                       ? 'bg-secondary text-white border border-secondary' 
                       : 'border border-gray-500 text-gray-600'
@@ -87,14 +87,14 @@ export default function FeaturedProjects() {
                   </span>
                 </td>
                 <td>
-                  <span className={`text-lg transition-colors duration-200 ${
+                  <span className={`text-xs md:text-lg transition-colors duration-200 ${
                     isHovered ? 'text-secondary' : 'text-gray-600'
                   }`}>
                     {project.status}
                   </span>
                 </td>
                 <td className="relative">
-                  <div className="flex items-center justify-end gap-4">
+                  <div className="flex items-center justify-center md:justify-end gap-1 md:gap-4">
                     {isHovered && project.images && (
                       <div className="absolute right-40 flex items-center">
                         {project.images.map((image, index) => (
@@ -125,7 +125,7 @@ export default function FeaturedProjects() {
                           : 'border border-gray-200 text-gray-400'
                       }`}
                     >
-                      <ArrowUpRight className="h-5 w-5" />
+                      <ArrowUpRight className="h-3 w-3 md:h-5 md:w-5" />
                     </button>
                     <button 
                       className={`rounded-full p-2 transition-all duration-200 ${
@@ -134,7 +134,7 @@ export default function FeaturedProjects() {
                           : 'border border-gray-200 text-gray-400'
                       }`}
                     >
-                      <Heart className="h-5 w-5" />
+                      <Heart className="h-3 w-3 md:h-5 md:w-5" />
                     </button>
                   </div>
                 </td>

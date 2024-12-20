@@ -59,17 +59,17 @@ export default function FAQSection() {
       </div>
 
       {/* Cloud 2 - Top center-right */}
-      <div className="absolute top-12 right-[10%] w-24 h-12">
+      <div className="absolute top-12 right-[22%] md:right-[10%] w-24 h-12">
         <img src={cloud2} alt="Cloud 2" className="w-full h-full object-contain" />
       </div>
 
       {/* Cloud 3 - Top center */}
-      <div className="absolute top-4 right-[20%] w-20 h-10">
+      <div className="absolute top-4 right-[40%] md:right-[20%] w-20 h-10">
         <img src={cloud3} alt="Cloud 3" className="w-full h-full object-contain" />
       </div>
 
       <div className="relative z-[10] mx-auto max-w-3xl">
-        <h1 className="mb-12 text-5xl font-semibold text-[#4285f4]">FAQ's</h1>
+        <h1 className="mb-12 text-3xl md:text-5xl font-semibold text-[#4285f4]">FAQ's</h1>
 
         <div className="space-y-4">
         {currentFaqs.map((faq) => (
@@ -81,7 +81,7 @@ export default function FAQSection() {
                 <span className="text-white flex items-center rounded-full bg-secondary p-1">
                   <Plus className="h-3 w-3 " />
                 </span>
-                <span className="text-gray-700 text-lg">{faq.question}</span>
+                <span className="text-gray-700 text-sm md:text-lg">{faq.question}</span>
               </button>
               <AnimatePresence>
                 {openQuestion === faq.id && (
@@ -135,7 +135,7 @@ export default function FAQSection() {
       </div>
 
       {/* Mountain shape at the bottom */}
-      <div className="absolute -bottom-10 left-0 right-0 -z-9 overflow-hidden">
+      <div className="absolute bottom-0 md:-bottom-10 left-0 right-0 -z-9 overflow-hidden">
         <img src={mountain} alt="Mountain" className="w-full h-full object-cover" />
       </div>
     </div>
