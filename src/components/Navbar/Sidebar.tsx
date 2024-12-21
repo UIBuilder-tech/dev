@@ -1,8 +1,8 @@
-import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronRight, X } from 'lucide-react';
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import logo from '../../assets/chfLogo.png';
+import { motion, AnimatePresence } from "framer-motion";
+import { ChevronRight, X } from "lucide-react";
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import logo from "../../assets/chfLogo.png";
 
 interface SidebarProps {
   isOpen: boolean;
@@ -10,39 +10,41 @@ interface SidebarProps {
 }
 
 export default function Sidebar({ isOpen, onClose }: SidebarProps) {
-  const [expandedSection, setExpandedSection] = useState<string | null>('about');
+  const [expandedSection, setExpandedSection] = useState<string | null>(
+    "about"
+  );
 
   const menuSections = {
     about: [
-      { label: 'Our Vision & Mission', id: 'vision-mission' },
-      { label: 'Our Projects', id: 'our-projects' },
-      { label: 'Our Impact', id: 'our-impact' },
-      { label: 'CHF Ambassador', id: 'chf-ambassador' },
-      { label: 'Photo Gallery', id: 'photo-gallery' },
-      { label: 'Newsletter', id: 'newsletter' },
-      { label: 'Our Team', id: 'our-team' },
-      { label: "FAQ's", id: 'faqs' },
+      { label: "Our Vision & Mission", id: "vision-mission" },
+      { label: "Our Projects", id: "our-projects" },
+      { label: "Our Impact", id: "our-impact" },
+      { label: "CHF Ambassador", id: "chf-ambassador" },
+      { label: "Photo Gallery", id: "photo-gallery" },
+      { label: "Newsletter", id: "newsletter" },
+      { label: "Our Team", id: "our-team" },
+      { label: "FAQ's", id: "faqs" },
     ],
     projects: [
-      { label: 'Our Projects', id: 'our-projects' },
-      { label: 'Education', id: 'education' },
-      { label: 'Women Empowerment', id: 'women-empowerment' },
-      { label: 'CHF Ambassador', id: 'chf-ambassador' },
-      { label: 'Heritage Preservation', id: 'heritage-preservation' },
-      { label: 'Special Projects', id: 'special-projects' },
-      { label: 'CHF Grants', id: 'chf-grants' },
+      { label: "Our Projects", id: "our-projects" },
+      { label: "Education", id: "education" },
+      { label: "Women Empowerment", id: "women-empowerment" },
+      { label: "CHF Ambassador", id: "chf-ambassador" },
+      { label: "Heritage Preservation", id: "heritage-preservation" },
+      { label: "Special Projects", id: "special-projects" },
+      { label: "CHF Grants", id: "chf-grants" },
     ],
     contribute: [
-      { label: 'What is Vantiga?', id: '/contribute/#vantiga' },
-      { label: 'Donate', id: '/contribute#donation-table' },
-      { label: 'Payment', id: '/contribute#payment' },
-      { label: 'Volunteer', id: '/contribute#volunteer' },
+      { label: "What is Vantiga?", id: "/contribute/#vantiga" },
+      { label: "Donate", id: "/contribute#donation-table" },
+      { label: "Payment", id: "/contribute#payment" },
+      { label: "Volunteer", id: "/contribute#volunteer" },
     ],
     events: [
-      { label: 'Featured News', id: 'featured-news' },
-      { label: 'Festivals', id: 'festivals' },
-      { label: 'Get Togethers', id: 'get-togethers' },
-      { label: 'Children & Youth Activities', id: 'children-activities' },
+      { label: "Featured News", id: "featured-news" },
+      { label: "Festivals", id: "festivals" },
+      { label: "Get Togethers", id: "get-togethers" },
+      { label: "Children & Youth Activities", id: "children-activities" },
     ],
   };
 
@@ -58,10 +60,10 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
             onClick={onClose}
           />
           <motion.div
-            initial={{ x: '-100%' }}
+            initial={{ x: "-100%" }}
             animate={{ x: 0 }}
-            exit={{ x: '-100%' }}
-            transition={{ type: 'spring', damping: 20 }}
+            exit={{ x: "-100%" }}
+            transition={{ type: "spring", damping: 20 }}
             className="fixed top-0 left-0 bottom-0 w-4/5 bg-secondary z-50 md:hidden z-[99999]"
           >
             <div className="flex justify-between items-center p-4 border-b border-white/20 bg-white">
@@ -85,14 +87,14 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
                     <span className="capitalize">{key}</span>
                     <ChevronRight
                       className={`h-5 w-5 transition-transform ${
-                        expandedSection === key ? 'rotate-90' : ''
+                        expandedSection === key ? "rotate-90" : ""
                       }`}
                     />
                   </button>
                   {expandedSection === key && items.length > 0 && (
                     <motion.div
                       initial={{ height: 0 }}
-                      animate={{ height: 'auto' }}
+                      animate={{ height: "auto" }}
                       exit={{ height: 0 }}
                       className="overflow-hidden bg-white/10"
                     >

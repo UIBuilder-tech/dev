@@ -1,6 +1,6 @@
-import { motion, AnimatePresence } from 'framer-motion';
-import { X } from 'lucide-react';
-import { useState } from 'react';
+import { motion, AnimatePresence } from "framer-motion";
+import { X } from "lucide-react";
+import { useState } from "react";
 
 interface AuthModalProps {
   isOpen: boolean;
@@ -8,23 +8,23 @@ interface AuthModalProps {
 }
 
 export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
-  const [view, setView] = useState<'login' | 'register' | 'reset'>('login');
+  const [view, setView] = useState<"login" | "register" | "reset">("login");
 
   const modalVariants = {
     hidden: { opacity: 0, y: -20 },
     visible: { opacity: 1, y: 0 },
-    exit: { opacity: 0, y: 20 }
+    exit: { opacity: 0, y: 20 },
   };
 
   const overlayVariants = {
     hidden: { opacity: 0 },
     visible: { opacity: 1 },
-    exit: { opacity: 0 }
+    exit: { opacity: 0 },
   };
 
   const renderContent = () => {
     switch (view) {
-      case 'reset':
+      case "reset":
         return (
           <>
             <div className="text-center mb-6">
@@ -52,9 +52,9 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
 
             <div className="mt-6 text-center">
               <p>
-                Already have an account?{' '}
+                Already have an account?{" "}
                 <button
-                  onClick={() => setView('login')}
+                  onClick={() => setView("login")}
                   className="text-secondary hover:underline"
                 >
                   Log On
@@ -64,7 +64,7 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
           </>
         );
 
-      case 'register':
+      case "register":
         return (
           <>
             <div className="text-center mb-6">
@@ -106,7 +106,8 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
                 className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-secondary/20"
               />
               <p className="text-sm text-gray-500">
-                Password must be 6 to 20 characters long with at least one digit, one uppercase & one lower case.
+                Password must be 6 to 20 characters long with at least one
+                digit, one uppercase & one lower case.
               </p>
 
               <button
@@ -119,9 +120,9 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
 
             <div className="mt-6 text-center">
               <p>
-                Already have an account?{' '}
+                Already have an account?{" "}
                 <button
-                  onClick={() => setView('login')}
+                  onClick={() => setView("login")}
                   className="text-secondary hover:underline"
                 >
                   Log On
@@ -161,15 +162,15 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
 
             <div className="mt-6 text-center">
               <button
-                onClick={() => setView('reset')}
+                onClick={() => setView("reset")}
                 className="text-gray-600 hover:text-secondary"
               >
                 Forgot Password?
               </button>
               <p className="mt-4">
-                Don't have an account?{' '}
+                Don't have an account?{" "}
                 <button
-                  onClick={() => setView('register')}
+                  onClick={() => setView("register")}
                   className="text-secondary hover:underline"
                 >
                   Join CHF
@@ -184,7 +185,14 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
   return (
     <AnimatePresence>
       {isOpen && (
-        <div style={{display:"flex",flexDirection:"row", alignItems:"center", justifyContent:"center"}}>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
           <motion.div
             className="fixed inset-0 bg-black/50 z-50"
             variants={overlayVariants}
@@ -214,4 +222,3 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
     </AnimatePresence>
   );
 }
-
