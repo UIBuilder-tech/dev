@@ -4,13 +4,6 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ApiCalling, { GetAccessToken } from '../api/ApiCalling';
 import { toast } from 'react-toastify';
-const loginUrl = import.meta.env.VITE_API_SALESFORCE_LOGIN_API;
-const clientId = import.meta.env.VITE_API_SALESFORCE_CLIENT_ID;
-const clientCecret = import.meta.env.VITE_API_SALESFORCE_CLIENT_SECRET;
-const userName = import.meta.env.VITE_API_SALESFORCE_USER_NAME;
-const userPassword = import.meta.env.VITE_API_SALESFORCE_USER_PASSWORD;
-const instance = import.meta.env.VITE_API_SALESFORCE_INSTACE;
-
 interface AuthModalProps {
   isOpen: boolean;
   onClose: () => void;
