@@ -16,10 +16,12 @@ const ProjectCard = ({
   project,
   isExpanded,
   onExpand,
+  from,
 }: {
   project: Project;
   isExpanded: boolean;
   onExpand: (id: number) => void;
+  from: string;
 }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const navigate = useNavigate();
@@ -80,14 +82,16 @@ const ProjectCard = ({
                 <p className="text-[#808080] text-sm md:text-md leading-5">
                   {project.description}
                 </p>
-                <motion.button
-                  className="mt-8 px-3 md:px-6 py-2 md:py-3 bg-orange-500 rounded-full text-white font-medium flex items-center gap-1"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  Donate{" "}
-                  <Heart className="md:w-5 md:h-5 w-3 h-3" fill="white" />
-                </motion.button>
+                {from === "projects" && (
+                  <motion.button
+                    className="mt-8 px-3 md:px-6 py-2 md:py-3 bg-orange-500 rounded-full text-white font-medium flex items-center gap-1"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    Donate{" "}
+                    <Heart className="md:w-5 md:h-5 w-3 h-3" fill="white" />
+                  </motion.button>
+                )}
               </div>
               <div className="flex-1">
                 <img
@@ -173,7 +177,7 @@ const ProjectCard = ({
 const SpecialProjects = ({
   projects,
   title,
-  from,
+  from = "projects",
 }: {
   projects: Project[];
   title: string;
@@ -246,6 +250,7 @@ const SpecialProjects = ({
                   (project) =>
                     project.id === expandedId && (
                       <ProjectCard
+                        from={from}
                         key={project.id}
                         project={project}
                         isExpanded={true}
@@ -255,6 +260,7 @@ const SpecialProjects = ({
                 )
               : visibleProjects.map((project) => (
                   <ProjectCard
+                    from={from}
                     key={project.id}
                     project={project}
                     isExpanded={project.id === expandedId}
@@ -267,6 +273,7 @@ const SpecialProjects = ({
                   (project) =>
                     project.id !== expandedId && (
                       <ProjectCard
+                        from={from}
                         key={project.id}
                         project={project}
                         isExpanded={false}
