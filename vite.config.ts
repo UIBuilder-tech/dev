@@ -17,7 +17,7 @@ export default defineConfig({
       },
       // Proxy for Salesforce API
       '/salesforce': {
-        target: 'https://your-salesforce-instance.salesforce.com', // Replace with your Salesforce instance URL
+        target: 'https://chfusa--dec2024.sandbox.my.salesforce.com', // Replace with your Salesforce instance URL
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/salesforce/, ''), // Remove /salesforce prefix
         secure: true, // Ensures SSL certificates are validated
