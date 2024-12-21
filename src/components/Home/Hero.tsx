@@ -14,7 +14,7 @@ export default function Hero({ title, desc, img }: Props) {
         <img
           src={img}
           alt="Heritage Building"
-          className="w-full h-full object-cover hero-bg"
+          className="w-full h-full object-cover hero-bg blur-[2px]"
         />
         <div className="absolute inset-0 bg-black/40"></div>
       </div>
