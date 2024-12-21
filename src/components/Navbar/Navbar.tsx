@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import NavLink from './NavLink';
 import AuthModal from '../auth/AuthModal';
 import logo from '../../assets/chfLogo.png'
-import HomeIcon from '../../assets/homeIcon.svg';
+import HomeIcon from '../../assets/navbar-home.svg';
 import ProfileIcon from '../../assets/profileIcon.svg';
 import ContactIcon from '../../assets/contactIcon.svg'
 import Sidebar from './Sidebar';
@@ -99,7 +99,7 @@ export default function Navbar() {
 
               <div className="bg-white backdrop-blur-sm rounded-full pl-4 flex items-center gap-4">
                 <Link to="/">
-                  <img src={HomeIcon} className="w-6 h-6" alt="Home" />
+                  <img src={HomeIcon} className="w-7 h-7" alt="Home" />
                 </Link>
                 <button onClick={() => setIsModalOpen(true)}>
                   <img src={ProfileIcon} className="w-6 h-6" alt="Profile" />
