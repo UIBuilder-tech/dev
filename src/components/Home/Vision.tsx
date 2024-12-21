@@ -4,7 +4,7 @@ import { useState } from "react"
 import { Heart } from 'lucide-react'
 import { Link } from "react-router-dom"
 import VisionImg from "../../assets/vision.png"
-import MissionImg from "../../assets/mission.png"
+import MissionImg from '../../assets/mission.png'
 
 export default function Vision() {
   const [activeSlide, setActiveSlide] = useState(0)
