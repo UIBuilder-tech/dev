@@ -23,31 +23,31 @@ function Newsletter() {
         <div className="">
           {/* Left Content */}
 
-          <div className="h-[460px] flex flex-col lg:flex-row items-center justify-left pl-20">
-            <div className="flex flex-col justify-center space-y-6 px-10 max-w-[50%] lg:pr-8">
-              <h2 className="text-5xl md:text-6xl text-white mb-4">
+          <div className="md:h-[460px] flex flex-col lg:flex-row items-center justify-left md:pl-20">
+            <div className="flex flex-col justify-center md:space-y-6 px-10 md:max-w-[50%] lg:pr-8 max-sm:py-8">
+              <h2 className="text-3xl md:text-5xl md:text-6xl text-white mb-4">
                 Newsletter
               </h2>
 
-              <p className="text-lg md:text-xl text-white leading-relaxed max-w-3xl pb-10">
+              <p className="text-md md:text-xl text-white leading-relaxed max-w-3xl pb-4 md:pb-10">
                 Be a catalyst—become a CHF member—and receive updated news about
                 the programmes, events and more. Inspire your friends, family
                 members, colleagues and neighbors to support the effort in your
                 neighborhood, at your convenience.
               </p>
 
-              <form onSubmit={handleSubmit} className="relative max-w-xl">
+              <form onSubmit={handleSubmit} className="relative md:max-w-xl max-sm:flex max-sm:flex-row max-sm:items-center ">
                 <input
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Enter Your Email Address"
-                  className="w-2/3 px-6 py-4 rounded-full text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-white/20"
+                  className="w-2/3 md:px-6 md:py-4 py-2 px-2 max-sm:text-sm rounded-full text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-white/20"
                   required
                 />
                 <button
                   type="submit"
-                  className="absolute right-[12.5rem] top-1/2 -translate-y-1/2 bg-gray-200 hover:bg-gray-300 transition-colors p-2.5 rounded-full"
+                  className="md:absolute md:right-[12.5rem] md:top-1/2 md:-translate-y-1/2 bg-gray-200 hover:bg-gray-300 transition-colors p-2.5 rounded-full"
                 >
                   <svg
                     viewBox="0 0 24 24"

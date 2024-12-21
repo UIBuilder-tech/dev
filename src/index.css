@@ -72,3 +72,11 @@ backdrop-filter: blur(3px);
   height: 2rem;
   background-color: #d1d5db;
 }
+
+.underline-gradient{
+  width: 87px;
+height: 10px;
+/* UI Properties */
+background: transparent linear-gradient(90deg, var(--unnamed-color-e67e22) 0%, #F1B581 43%, #FFFFFF 100%) 0% 0% no-repeat padding-box;
+background: transparent linear-gradient(90deg, #E67E22 0%, #F1B581 43%, #FFFFFF 100%) 0% 0% no-repeat padding-box;
+}
