@@ -87,7 +87,7 @@ export default function PaymentForm() {
     e.preventDefault()
     if (validateForm()) {
       setIsFormValidate(true)
-      fetch("/create-payment-intent", {
+      fetch("/api/create-payment-intent", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ items: [{ ...formData }] }),

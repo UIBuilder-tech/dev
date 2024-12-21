@@ -5,6 +5,7 @@ import PaymentForm from '../components/Contribute/AddPaymentDetails';
 import VolunteerForm from '../components/Contribute/VolunteerForm';
 import FAQSection from '../components/Home/FAQ';
 import Footer from '../components/Footer/Footer';
+import { Outlet } from 'react-router-dom';
 
 export default function ContributePage() {
   return (
@@ -16,6 +17,7 @@ export default function ContributePage() {
         <VolunteerForm/>
         <FAQSection/>
         <Footer/>
+        <Outlet />
     </div>
     // <div className="min-h-screen bg-cream pt-24 px-4">
     //   <div className="max-w-7xl mx-auto">

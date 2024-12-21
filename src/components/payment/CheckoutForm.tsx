@@ -22,12 +22,12 @@ export default function CheckoutForm() {
     }
 
     setIsLoading(true);
-
+    const { protocol, host } = window.location;
     const { error } = await stripe.confirmPayment({
       elements,
       confirmParams: {
         // Make sure to change this to your payment completion page
-        return_url: returnUrl,
+        return_url: `${protocol}//${host}${returnUrl}`,
       },
     });
 
