@@ -2,6 +2,7 @@ import { useState, useRef } from "react";
 import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight, ArrowUpRight } from "lucide-react";
 import { useWindowWidth } from "../../hooks/useWindowWidth";
+import { Link } from "react-router-dom";
 
 interface program {
   id: number;
@@ -60,9 +61,9 @@ export default function ProjectsCategory({
               {programs[currentProgram].description}
             </p>
             <div className="flex gap-4 md:pt-4">
-              <button className="md:px-6 px-2 py-2 md:py-2.5 border border-blue-600 text-blue-600 rounded-full text-sm md:text-md font-medium hover:bg-blue-700 transition-colors">
+              <Link to='/contribute#volunteer' className="md:px-6 px-2 py-2 md:py-2.5 border border-blue-600 text-blue-600 rounded-full text-sm md:text-md font-medium hover:bg-blue-700 transition-colors">
                 Contribute
-              </button>
+              </Link>
               {/* <button className="px-6 py-2.5 bg-[#e67e22] text-white rounded-full text-sm font-medium hover:bg-orange-600 transition-colors flex items-center gap-2">
                 Donate <span className="text-white text-lg">❤</span>
               </button> */}

@@ -137,13 +137,13 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
             <div className="absolute bottom-0 left-0 right-0 p-4 bg-secondary border-t border-white/20">
               <div className="flex gap-4">
                 <Link
-                  to="/join"
+                  to="/contribute#volunteer"
                   className="flex-1 py-2 px-4 bg-white text-secondary rounded-full text-center font-medium"
                 >
                   Join Us
                 </Link>
                 <Link
-                  to="/donate"
+                  to="/donate#donation-table"
                   className="flex-1 py-2 px-4 bg-white text-secondary rounded-full text-center font-medium"
                 >
                   Donate

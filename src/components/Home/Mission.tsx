@@ -19,13 +19,13 @@ export default function Mission() {
           </p>
           <div className="flex gap-4 mt-10">
             <Link
-              to="/join"
+              to="/contribute#volunteer"
               className="bg-white/10 backdrop-blur-sm text-primary border-2 border-primary px-8 py-3 rounded-full hover:bg-white/20 transition"
             >
               Join Us
             </Link>
             <Link
-              to="/donate"
+              to="/donate#donation-table"
               className="bg-secondary text-white px-8 py-3 rounded-full hover:bg-opacity-90 flex items-center gap-2"
             >
               Donate <Heart className="h-5 w-5" />

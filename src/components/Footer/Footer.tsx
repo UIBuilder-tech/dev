@@ -28,22 +28,22 @@ export default function Footer() {
               </h3>
               <ul className="space-y-1 max-sm:text-xs">
                 <li>
-                  <a href="#" className="hover:underline">
+                  <a href="/contribute#volunteer" className="hover:underline">
                     Become A Member
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:underline">
+                  <a href="/donate#donation-table" className="hover:underline">
                     Donate
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:underline">
+                  <a href="/contribute#volunteer" className="hover:underline">
                     Volunteer
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:underline">
+                  <a href="/donate#donation-table" className="hover:underline">
                     Sponsor a Student
                   </a>
                 </li>
@@ -57,27 +57,27 @@ export default function Footer() {
               </h3>
               <ul className="space-y-1 max-sm:text-xs">
                 <li>
-                  <a href="#" className="hover:underline">
+                  <a href="https://chitrapurmath.net/" className="hover:underline">
                     Chitrapur Math Website
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:underline">
+                  <a href="https://chitrapurmath.net/" className="hover:underline">
                     Chitrapur Ebook
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:underline">
+                  <a href="https://parijnanfoundation.in/" className="hover:underline">
                     Parijnan Foundation
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:underline">
+                  <a href="https://www.parijnanfoundation.in/SamvitSudha.aspx" className="hover:underline">
                     Samvit Sudha
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:underline">
+                  <a href="https://www.parijnanfoundation.in/Parimochan.aspx" className="hover:underline">
                     Parimochan Project
                   </a>
                 </li>
@@ -92,32 +92,32 @@ export default function Footer() {
             </h3>
             <ul className="space-y-1 max-sm:text-xs">
               <li>
-                <a href="#" className="hover:underline">
+                <a href="/" className="hover:underline">
                   Home
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:underline">
+                <a href="/about" className="hover:underline">
                   About CHF
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:underline">
+                <a href="/projects" className="hover:underline">
                   CHF Projects
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:underline">
+                <a href="/donate" className="hover:underline">
                   How You can Help
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:underline">
+                <a href="/events" className="hover:underline">
                   CHF Events & News
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:underline">
+                <a href="/about#photo-gallery" className="hover:underline">
                   Photo Gallery
                 </a>
               </li>
@@ -131,22 +131,22 @@ export default function Footer() {
             </h3>
             <ul className="space-y-1 max-sm:text-xs">
               <li>
-                <a href="#" className="hover:underline">
+                <a href="/donate#donation-table" className="hover:underline">
                   Education
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:underline">
+                <a href="/donate#donation-table" className="hover:underline">
                   Community Development
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:underline">
+                <a href="/donate#donation-table" className="hover:underline">
                   Cultural Preservation
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:underline">
+                <a href="/donate#donation-table" className="hover:underline">
                   Religious Activities
                 </a>
               </li>
