@@ -12,7 +12,7 @@ function PhotoGallery() {
           {galleryImgs.map((review, index) => (
             <img
               key={index}
-              className="relative md:h-[300px] h-[200px] w-[300px] md:w-[450px] cursor-pointer overflow-hidden rounded-[30px] p-2 flex flex-col justify-end object-contain bg-white"
+              className="relative md:h-[300px] h-[200px] w-[300px] md:w-[450px] cursor-pointer overflow-hidden rounded-[30px] flex flex-col justify-end object-contain bg-white"
               src={review.img}
             />
           ))}
@@ -21,7 +21,7 @@ function PhotoGallery() {
           {galleryImgs.map((review, index) => (
             <img
               key={index}
-              className="relative md:h-[300px] h-[200px] w-[300px] md:w-[450px] cursor-pointer overflow-hidden rounded-[30px] p-2 flex flex-col justify-end object-contain bg-white"
+              className="relative md:h-[300px] h-[200px] w-[300px] md:w-[450px] cursor-pointer overflow-hidden rounded-[30px] flex flex-col justify-end object-contain bg-white"
               src={review.img}
             />
           ))}
