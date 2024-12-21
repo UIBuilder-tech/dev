@@ -1,42 +1,41 @@
 import { User, Phone, Heart, Layout } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import {ReactComponent as HomeIcon}  from '../../assets/homeIcon.svg'
-import {ReactComponent as ActiveHomeIcon}  from '../../assets/activeHomeIcon.svg'
+import { ReactComponent as HomeIcon } from '../../assets/homeIcon.svg';
+import { ReactComponent as ActiveHomeIcon } from '../../assets/activeHomeIcon.svg';
 
-
+const ScrollToFooter = (e: React.MouseEvent) => {
+  e.preventDefault();
+  const element = document.getElementById("footer");
+  if (element) {
+    const targetPosition = element.getBoundingClientRect().bottom;
+    window.scrollTo({
+      top: targetPosition,
+      behavior: 'smooth'
+    });
+  }
+};
 export default function MobileNav() {
-  const scrollToFooter = (e: React.MouseEvent) => {
-    e.preventDefault();
-    const element = document.getElementById("footer");
-    if (element) {
-      const targetPosition = element.getBoundingClientRect().bottom;
-      window.scrollTo({
-        top: targetPosition,
-        behavior: 'smooth'
-      });
-    }
-  };
+
 
   const isHomeActive = location.pathname === '/';
 
-
   return (
-    <div className="fixed bottom-0 bg-secondary z-[9999] left-0 right-0 pt-3 pb-2 md:hidden rounded-t-3xl" style={{boxShadow:"-8px 10px 20px 1px"}}>
+    <div className="fixed bottom-0 bg-secondary z-[9999] left-0 right-0 pt-3 pb-2 md:hidden rounded-t-3xl" style={{ boxShadow: "-8px 10px 20px 1px" }}>
       <div className="flex justify-between items-end px-8 relative">
-        <Link to="/profile" className="flex flex-col items-center text-white">
+        <Link to="#" className="flex flex-col items-center text-white">
           <User className="h-6 w-6" />
           <span className="text-xs mt-1.5">Profile</span>
         </Link>
-        <button onClick={scrollToFooter} className="flex flex-col items-center text-white">
+        <button onClick={ScrollToFooter} className="flex flex-col items-center text-white">
           <Phone className="h-6 w-6" />
           <span className="text-xs mt-1.5">Contact</span>
         </button>
-        <Link 
-          to="/" 
+        <Link
+          to="/"
           className="flex flex-col items-center text-white absolute left-1/2 -translate-x-1/2 -top-10"
         >
           <div className="bg-secondary p-4 pt-5 pb-2 rounded-full">
-          {isHomeActive ? (
+            {isHomeActive ? (
               <ActiveHomeIcon className="text-white w-10 h-10" />
             ) : (
               <HomeIcon className="text-white w-10 h-10" />
@@ -58,3 +57,4 @@ export default function MobileNav() {
   );
 }
 
+export { ScrollToFooter }
