@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 interface MarqueeProps {
   className?: string;
@@ -17,6 +17,7 @@ function Marquee({
   children,
   vertical = false,
   repeat = 4,
+
   ...props
 }: MarqueeProps) {
   const baseWrapperClasses = [
@@ -28,8 +29,10 @@ function Marquee({
     "[--gap:1rem]",
     "gap-[var(--gap)]",
     vertical ? "flex-col" : "flex-row",
-    className
-  ].filter(Boolean).join(" ");
+    className,
+  ]
+    .filter(Boolean)
+    .join(" ");
 
   const getMarqueeItemClasses = () => {
     return [
@@ -37,9 +40,17 @@ function Marquee({
       "shrink-0",
       "justify-around",
       "gap-[var(--gap)]",
-      vertical ? (reverse ? "animate-marquee-down flex-col" : "animate-marquee-up flex-col") : "animate-marquee",
+      vertical
+        ? reverse
+          ? "animate-marquee-down flex-col"
+          : "animate-marquee-up flex-col"
+        : reverse
+        ? "animate-marquee-reverse flex-row"
+        : "animate-marquee flex-row",
       pauseOnHover ? "group-hover:[animation-play-state:paused]" : "",
-    ].filter(Boolean).join(" ");
+    ]
+      .filter(Boolean)
+      .join(" ");
   };
 
   return (

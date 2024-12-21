@@ -19,12 +19,7 @@ interface FormErrors {
   [key: string]: string
 }
 
-interface Props{
-  totalDonationAmount:number;
-}
-
-
-export default function PaymentForm({totalDonationAmount}:Props) {
+export default function PaymentForm() {
   const [formData, setFormData] = useState<FormData>({
     name: '',
     email: '',
@@ -40,7 +35,7 @@ export default function PaymentForm({totalDonationAmount}:Props) {
   const [errors, setErrors] = useState<FormErrors>({})
   const [isNameVerified, setIsNameVerified] = useState(false)
   const totalAmount = sessionStorage.getItem("totalDonationAmount")
-console.log("totalAmount",totalAmount)
+
   const validateForm = (): boolean => {
     const newErrors: FormErrors = {}
 
@@ -99,12 +94,12 @@ console.log("totalAmount",totalAmount)
   }
 
   return (
-    <div id="payment" className=" md:mx-8 p-8 py-16">
-      <h2 className="text-3xl md:text-4xl font-display text-gray-900 mb-8">Add Details & Pay</h2>
+    <div className=" mx-8 p-8 py-16">
+      <h2 className="text-4xl font-display text-gray-900 mb-8">Add Details & Pay</h2>
       
-      <form onSubmit={handleSubmit} className="flex flex-col md:flex-row items-center justify-between gap-12">
+      <form onSubmit={handleSubmit} className="flex flex-row items-center justify-between gap-12">
         {/* Left Column - Personal Details */}
-        <div className="bg-white rounded-3xl p-6 md:p-12 shadow-sm">
+        <div className="bg-white rounded-3xl p-12 shadow-sm">
           <div className="space-y-6">
             {/* Name Field with Verification Check */}
             <div className="relative">
@@ -208,26 +203,26 @@ console.log("totalAmount",totalAmount)
                   onChange={handleInputChange}
                   className="w-4 h-4 text-primary rounded border-gray-300 focus:ring-primary"
                 />
-                <span className="text-xs md:text-sm text-gray-600 italic">Remember me</span>
+                <span className="text-sm text-gray-600 italic">Remember me</span>
               </label>
             </div>
           </div>
         </div>
 
         {/* Right Column - Payment Details */}
-        <div className="space-y-8 md:space-y-8 md:w-1/2">
+        <div className="space-y-8 w-1/2">
           {/* Total Amount */}
-          <div className="border-b border-gray-400 pb-2 md:pb-4">
+          <div className="border-b border-gray-400 pb-4">
             <div className="flex justify-between items-center">
               <span className="text-[#516072]">Total Amount</span>
-              <span className="text-[#516072] text-xl font-medium flex flex-row items-center gap-2"><div className={`flex items-center justify-center w-6 h-6 ${Number(totalDonationAmount)===0 ? "bg-[#D3D3D3]" : "bg-secondary"} rounded-full`}>
+              <span className="text-[#516072] text-xl font-medium flex flex-row items-center gap-2"><div className={`flex items-center justify-center w-6 h-6 ${Number(totalAmount)===0 ? "bg-[#D3D3D3]" : "bg-secondary"} rounded-full`}>
           <span className="text-white text-sm">$</span>
-        </div> {totalDonationAmount}</span>
+        </div> {totalAmount}.00</span>
             </div>
           </div>
 
           {/* Payment Methods */}
-          <div className="grid grid-cols-2 gap-2 md:gap-6">
+          <div className="grid grid-cols-2 gap-6">
             <label className="flex items-center gap-3 rounded-lg cursor-pointer">
               <input
                 type="radio"
@@ -237,7 +232,7 @@ console.log("totalAmount",totalAmount)
                 onChange={handleInputChange}
                 className="w-6 h-6 text-primary"
               />
-              <div className='bg-white rounded-md w-full p-3 md:p-6'>
+              <div className='bg-white rounded-md w-full p-6'>
               <img src={paypal} alt="PayPal" className="w-24" />
               </div>
             </label>
@@ -251,8 +246,8 @@ console.log("totalAmount",totalAmount)
                 onChange={handleInputChange}
                 className="w-6 h-6 text-primary"
               />
-              <div className='bg-white rounded-md w-full p-3 md:p-6'>
-              <span className='max-sm:text-sm'>Offline <span className='italic'>(Cheque)</span></span>
+              <div className='bg-white rounded-md w-full p-6'>
+              <span>Offline <span className='italic'>(Cheque)</span></span>
               </div>
             </label>
 
@@ -265,8 +260,8 @@ console.log("totalAmount",totalAmount)
                 onChange={handleInputChange}
                 className="w-6 h-6 text-primary"
               />
-              <div className='bg-white rounded-md w-full p-3 md:p-6'>
-              <span className='max-sm:text-sm'>Offline <span className='italic'>(Zelle)</span></span>
+              <div className='bg-white rounded-md w-full p-6'>
+              <span>Offline <span className='italic'>(Zelle)</span></span>
               </div>
             </label>
           </div>

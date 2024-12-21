@@ -6,7 +6,7 @@ interface AmountInputProps {
 
 export default function AmountInput({ value, onChange, readOnly = false }: AmountInputProps) {
   return (
-    <div className="relative flex flex-row justify-center items-center w-full gap-2 md:px-4">
+    <div className="relative flex flex-row justify-center items-center w-full gap-2 px-4">
       <div className="">
         <div className={`flex items-center justify-center w-6 h-6 ${value===0 ? "bg-[#D3D3D3]" : "bg-secondary"} rounded-full`}>
           <span className="text-white text-sm">$</span>

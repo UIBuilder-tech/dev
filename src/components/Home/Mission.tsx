@@ -1,14 +1,14 @@
 import { Heart } from "lucide-react";
 import { Link } from "react-router-dom";
-import VisionImg from "../../assets/vision.png";
+import MissionImg from "../../assets/Mission.png";
 
-export default function Vision() {
+export default function Mission() {
   return (
-    <div className=" mx-auto bg-white rounded-3xl px-10 ">
+    <div className=" mx-auto bg-white rounded-3xl px-10 h-[33.75rem]">
       <div className="flex flex-row justify-between gap-12 items-center">
         <div className="max-w-2xl ml-4">
           <h2 className="font-display text-4xl mb-6 text-secondary">
-            Our Vision
+            Our Mission
           </h2>
           <p className="text-lg text-[#808080]">
             The Chitrapur Heritage Foundation (CHF) envisions a thriving
@@ -32,7 +32,8 @@ export default function Vision() {
             </Link>
           </div>
         </div>
-        <img src={VisionImg} alt="Heritage" className="" />
+
+        <img src={MissionImg} alt="Heritage" className="mission-img" />
       </div>
     </div>
   );
