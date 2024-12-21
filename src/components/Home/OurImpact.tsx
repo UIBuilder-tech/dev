@@ -12,40 +12,28 @@ interface ImpactCard {
 
 const impactCards: ImpactCard[] = [
   {
-    id: "education",
-    title: "Project Name",
+    id: "1",
+    title: "Shri Chitrapur Math Renovation",
+    subtitle: "Community & Heritage",
+    description:
+      "CHF contributed over $300K towards the renovation of Shri Chitrapur Math in Shirali, leading up to the Tercentennial of Guru Parampara in 2008. This initiative reflects CHF's commitment to preserving cultural and spiritual heritage.",
+    image: "https://chfusa.org/static/images/MR(1).jpg", // Temple image
+  },
+  {
+    id: "2",
+    title: "Srivali High School Buildings",
     subtitle: "Education",
     description:
-      "CHF supports school construction in underserved areas in and around Shirali and locations near our Math sites (Karla, Mangalore, and Gokarn), scholarships to needy students, etc.",
-    image:
-      "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&q=80",
+      "CHF funded the construction of two school buildings at Srivali High School, supporting education and providing better learning environments for students in the region.",
+    image: "https://chfusa.org/static/images/SHS(2).jpg", // Education image
   },
   {
-    id: "temple",
-    title: "Temple",
-    subtitle: "Construction",
+    id: "3",
+    title: "Samvit Sudha",
+    subtitle: "Women Empowerment",
     description:
-      "CHF supports school construction in underserved areas in and around Shirali and locations near our Math sites (Karla, Mangalore, and Gokarn), scholarships to needy students, etc. CHF supports school construction in underserved areas in and around Shirali and locations near our Math sites (Karla, and Gokarn), scholarships to needy students, etc.",
-    image:
-      "https://media.istockphoto.com/id/108348556/photo/hindu-temple-in-goa.webp?a=1&b=1&s=612x612&w=0&k=20&c=Hsvqml0mJlacGwAnVI-OhQyH5evXG5ZKWCrYUqlgNxs=",
-  },
-  {
-    id: "food1",
-    title: "Food Donation",
-    subtitle: "Drive",
-    description:
-      "CHF supports school construction in underserved areas in and around Shirali and locations near our Math sites (Karla, Mangalore, and Gokarn), scholarships to needy students, etc. CHF supports school construction in underserved areas in and around Shirali and locations near our Math sites (Karla, and Gokarn), scholarships to needy students, etc.",
-    image:
-      "https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?auto=format&fit=crop&q=80",
-  },
-  {
-    id: "food2",
-    title: "Food Donation",
-    subtitle: "Drive",
-    description:
-      "CHF supports school construction in underserved areas in and around Shirali and locations near our Math sites (Karla, Mangalore, and Gokarn), scholarships to needy students, etc. CHF supports school construction in underserved areas in and around Shirali and locations near our Math sites (Karla, and Gokarn), scholarships to needy students, etc.",
-    image:
-      "https://images.unsplash.com/photo-1593113598332-cd288d649433?auto=format&fit=crop&q=80",
+      "Samvit Sudha, initiated by SCM, focuses on empowering women by providing them with vocational skills and opportunities for self-reliance, fostering growth and independence.",
+    image: "https://chfusa.org/static/images/SS(4).jpg", // Food donation image
   },
 ];
 

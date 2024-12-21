@@ -12,57 +12,57 @@ interface Project {
   images: string[];
 }
 
-const projects: Project[] = [
-  {
-    id: 1,
-    title: "Yatri Nivas",
-    location: "Raj Ghat, Varanasi",
-    description:
-      "Chitrapur Saraswat community at the proposed center for yoga, meditation, and yatri nivas in Varanasi on the banks of River Ganga at Raja Ghat.",
-    images: [ChitrapurMathImg, ChitrapurMathImg, ChitrapurMathImg],
-  },
-  {
-    id: 2,
-    title: "Meditation Centre",
-    location: "Tiruvannamalai",
-    description:
-      "At the foothills of Arunachala Mountain, considered Kailas of the South, Shri Chitrapur Math Charitable Trust has....",
-    images: [ChitrapurMathImg, ChitrapurMathImg, ChitrapurMathImg],
-  },
-  {
-    id: 3,
-    title: "Meditation Centre",
-    location: "Tiruvannamalai",
-    description:
-      "At the foothills of Arunachala Mountain, considered Kailas of the South, Shri Chitrapur Math Charitable Trust has....",
-    images: [ChitrapurMathImg, ChitrapurMathImg, ChitrapurMathImg],
-  },
-  {
-    id: 4,
-    title: "Meditation Centre",
-    location: "Tiruvannamalai",
-    description:
-      "At the foothills of Arunachala Mountain, considered Kailas of the South, Shri Chitrapur Math Charitable Trust has....",
-    images: [ChitrapurMathImg, ChitrapurMathImg, ChitrapurMathImg],
-  },
-  {
-    id: 5,
-    title: "Meditation Centre",
-    location: "Tiruvannamalai",
-    description:
-      "At the foothills of Arunachala Mountain, considered Kailas of the South, Shri Chitrapur Math Charitable Trust has....",
-    images: [ChitrapurMathImg, ChitrapurMathImg, ChitrapurMathImg],
-  },
-  {
-    id: 6,
-    title: "Meditation Centre",
-    location: "Tiruvannamalai",
-    description:
-      "At the foothills of Arunachala Mountain, considered Kailas of the South, Shri Chitrapur Math Charitable Trust has....",
-    images: [ChitrapurMathImg, ChitrapurMathImg, ChitrapurMathImg],
-  },
-  // Add more projects...
-];
+// const projects: Project[] = [
+//   {
+//     id: 1,
+//     title: "Yatri Nivas",
+//     location: "Raj Ghat, Varanasi",
+//     description:
+//       "Chitrapur Saraswat community at the proposed center for yoga, meditation, and yatri nivas in Varanasi on the banks of River Ganga at Raja Ghat.",
+//     images: [ChitrapurMathImg, ChitrapurMathImg, ChitrapurMathImg],
+//   },
+//   {
+//     id: 2,
+//     title: "Meditation Centre",
+//     location: "Tiruvannamalai",
+//     description:
+//       "At the foothills of Arunachala Mountain, considered Kailas of the South, Shri Chitrapur Math Charitable Trust has....",
+//     images: [ChitrapurMathImg, ChitrapurMathImg, ChitrapurMathImg],
+//   },
+//   {
+//     id: 3,
+//     title: "Meditation Centre",
+//     location: "Tiruvannamalai",
+//     description:
+//       "At the foothills of Arunachala Mountain, considered Kailas of the South, Shri Chitrapur Math Charitable Trust has....",
+//     images: [ChitrapurMathImg, ChitrapurMathImg, ChitrapurMathImg],
+//   },
+//   {
+//     id: 4,
+//     title: "Meditation Centre",
+//     location: "Tiruvannamalai",
+//     description:
+//       "At the foothills of Arunachala Mountain, considered Kailas of the South, Shri Chitrapur Math Charitable Trust has....",
+//     images: [ChitrapurMathImg, ChitrapurMathImg, ChitrapurMathImg],
+//   },
+//   {
+//     id: 5,
+//     title: "Meditation Centre",
+//     location: "Tiruvannamalai",
+//     description:
+//       "At the foothills of Arunachala Mountain, considered Kailas of the South, Shri Chitrapur Math Charitable Trust has....",
+//     images: [ChitrapurMathImg, ChitrapurMathImg, ChitrapurMathImg],
+//   },
+//   {
+//     id: 6,
+//     title: "Meditation Centre",
+//     location: "Tiruvannamalai",
+//     description:
+//       "At the foothills of Arunachala Mountain, considered Kailas of the South, Shri Chitrapur Math Charitable Trust has....",
+//     images: [ChitrapurMathImg, ChitrapurMathImg, ChitrapurMathImg],
+//   },
+//   // Add more projects...
+// ];
 
 const ProjectCard = ({
   project,
@@ -129,7 +129,9 @@ const ProjectCard = ({
 
             <div className="flex gap-8 flex-1">
               <div className="flex-1">
-                <p className="text-[#808080] text-md leading-5">{project.description}</p>
+                <p className="text-[#808080] text-md leading-5">
+                  {project.description}
+                </p>
                 <motion.button
                   className="mt-8 px-6 py-3 bg-orange-500 rounded-full text-white font-medium flex items-center gap-1"
                   whileHover={{ scale: 1.05 }}
@@ -202,7 +204,9 @@ const ProjectCard = ({
               </div>
             </div>
 
-            <p className="text-[#808080] flex-1 leading-5">{project.description}</p>
+            <p className="text-[#808080] flex-1 leading-5">
+              {project.description}
+            </p>
 
             <button className="mt-4 w-full py-3 bg-gray-100  text-gray-600 font-medium flex items-center justify-between px-6 rounded-3xl">
               READ MORE
@@ -215,7 +219,13 @@ const ProjectCard = ({
   );
 };
 
-const SpecialProjects = () => {
+const SpecialProjects = ({
+  projects,
+  title,
+}: {
+  projects: Project[];
+  title: string;
+}) => {
   const [currentPage, setCurrentPage] = useState(0);
   const [expandedId, setExpandedId] = useState(1); // Set first card as expanded by default
   const itemsPerPage = 3;
@@ -252,7 +262,7 @@ const SpecialProjects = () => {
 
   return (
     <div className="w-full max-w-7xl mx-auto py-12">
-      <h2 className="text-3xl   mb-8">Special Projects</h2>
+      <h2 className="text-3xl   mb-8">{title}</h2>
 
       <div className="relative">
         <div className="flex items-center justify-center gap-6 mb-8">
