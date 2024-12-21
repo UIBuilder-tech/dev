@@ -4,6 +4,8 @@ import { ReactComponent as HomeIcon } from "../../assets/homeIcon.svg";
 import { ReactComponent as ActiveHomeIcon } from "../../assets/activeHomeIcon.svg";
 
 export default function MobileNav() {
+  const location = useLocation();
+  
   const scrollToFooter = (e: React.MouseEvent) => {
     e.preventDefault();
     const element = document.getElementById("footer");
@@ -17,6 +19,9 @@ export default function MobileNav() {
   };
 
   const isHomeActive = location.pathname === "/";
+  const isProfileActive = location.pathname === "/profile";
+  const isContributeActive = location.pathname === "/contribute";
+  const isProjectsActive = location.pathname === "/projects";
 
   return (
     <div
@@ -25,7 +30,7 @@ export default function MobileNav() {
     >
       <div className="flex justify-between items-end px-8 relative">
         <Link to="/profile" className="flex flex-col items-center text-white">
-          <User className="h-6 w-6" />
+          <User className="h-6 w-6" fill={isProfileActive ? "white" : "none"} />
           <span className="text-xs mt-1.5">Profile</span>
         </Link>
         <button
@@ -48,16 +53,23 @@ export default function MobileNav() {
           </div>
           <span className="text-xs">Home</span>
         </Link>
-        <div className=" p-4 h-8 w-8"></div>
+        <div className="p-4 h-8 w-8"></div>
         <Link
           to="/contribute"
           className="flex flex-col items-center text-white"
         >
-          <Heart className="h-6 w-6" />
+          <Heart 
+            className="h-6 w-6" 
+            fill={isContributeActive ? "white" : "none"}
+          />
           <span className="text-xs mt-1.5">Donate</span>
         </Link>
         <Link to="/projects" className="flex flex-col items-center text-white">
-          <Layout className="h-6 w-6" />
+          <Layout 
+            className="h-6 w-6" 
+            fill={isProjectsActive ? "white" : "none"} 
+            stroke={isProjectsActive ? "#3b82f6" : "white"} 
+          />
           <span className="text-xs mt-1.5">Projects</span>
         </Link>
       </div>

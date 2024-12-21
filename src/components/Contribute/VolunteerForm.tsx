@@ -92,7 +92,7 @@ export default function VolunteerForm() {
   }
 
   return (
-    <div id="volunteer" className='bg-white relative'>
+    <div className='bg-white relative'>
     <div className="px-6 max-sm:pt-8 max-sm:pb-[150px] md:py-16 max-w-7xl mx-auto ">
       <h1 className="text-4xl font-display text-center text-[#02306A] mb-4 md:mb-12 py-6">Volunteer</h1>
       

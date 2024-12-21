@@ -41,7 +41,7 @@ export default function Hero({ from }: Props) {
                 to="/donate"
                 className="bg-[#fbf3e8] text-secondary font-[450] md:px-8 md:py-3 rounded-full hover:bg-opacity-90 flex items-center gap-2 max-sm:text-sm px-4 py-2"
               >
-                Donate <Heart className="h-5 w-5" fill="#fbf3e8" />
+                Donate <Heart className="h-5 w-5" fill="#e67e22" />
               </Link>
             </div>
           </div>

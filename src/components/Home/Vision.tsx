@@ -53,7 +53,7 @@ export default function Vision() {
                       to="/donate"
                       className="bg-secondary text-white px-4 md:px-8 py-2 md:py-3 rounded-full hover:bg-opacity-90 flex items-center justify-center gap-2 text-sm md:text-base flex-1 md:flex-none"
                     >
-                      Donate <Heart className="h-4 w-4 md:h-5 md:w-5" />
+                      Donate <Heart className="h-4 w-4 md:h-5 md:w-5" fill="white" />
                     </Link>
                   </div>
                 </div>

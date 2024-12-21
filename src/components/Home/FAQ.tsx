@@ -34,7 +34,7 @@ const faqData = [
     id: 5,
     question: "When and how (media) will I receive a receipt for my CHF donation?",
     answer: "Answer text here..."
-  }
+  },
 ]
 
 const itemsPerPage = 5

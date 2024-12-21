@@ -5,7 +5,7 @@ import involved from '../../assets/contribute-get-invloved.svg'
 
 export default function Vantiga() {
   return (
-    <section id="vantiga" className="relative bg-[#E67E22] py-16">
+    <section className="relative bg-[#E67E22] py-16">
         <div className='container absolute -top-[70px] md:-top-[150px] right-0 left-0 mx-auto bg-white rounded-[30px] md:rounded-[50px] p-2 md:p-10 max-w-[90%] md:max-w-[75%]'>
         <div className="flex flex-row justify-around md:gap-6 item-center text-center w-full">
             <div className='flex flex-col space-y-2 md:space-y-4 items-start p-2 md:p-4'>

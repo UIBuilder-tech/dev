@@ -43,12 +43,16 @@ const projects: Project[] = [
   }
 ]
 
-export default function FeaturedProjects() {
+interface Props{
+  title:string;
+}
+
+export default function FeaturedProjects({title}:Props) {
   const [hoveredId, setHoveredId] = useState<string | null>(null)
 
   return (
     <div className="py-8 px-6 md:p-8 md:mx-14">
-      <h2 className="mb-8 text-3xl md:text-4xl font-display text-gray-900">Featured Projects</h2>
+      <h2 className="mb-8 text-3xl md:text-4xl font-display text-gray-900">{title}</h2>
       
       <table className="w-full">
         <thead>

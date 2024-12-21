@@ -14,7 +14,7 @@ export default function HomePage() {
       <Hero from="home"/>
       <Vision/>
       <Programs/>
-      <FeaturedProjects/>
+      <FeaturedProjects title="Featured Projects"/>
       <ImpactSection/>
       <VolunteerSection/>
       <TeamSection/>
