@@ -4,7 +4,7 @@ import { useState } from "react"
 import { Heart } from 'lucide-react'
 import { Link } from "react-router-dom"
 import VisionImg from "../../assets/vision.png"
-import MissionImg from '../../assets/mission.png'
+// import MissionImg from '../../assets/mission.png'
 
 export default function Vision() {
   const [activeSlide, setActiveSlide] = useState(0)
@@ -18,7 +18,7 @@ export default function Vision() {
     {
       title: "Our Mission",
       content: "The Chitrapur Heritage Foundation (CHF) envisions a thriving community that embraces its cultural and spiritual roots while fostering sustainable progress. By supporting personal growth and collective well-being, CHF aims to preserve heritage and wisdom for future generations, inspiring a fairer and better world.",
-      image: MissionImg
+      image: VisionImg
     }
   ]
 
