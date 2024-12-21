@@ -10,11 +10,17 @@ import ProjectsCategory from "../components/projects/ProjectsCategory";
 import { EducationPrograms } from "../utils/ProjectsCategory";
 import SpecialProjects from "../components/projects/SpecialProjects";
 import GrantsSection from "../components/projects/GrantsSection";
+import ChitrapurMathImg from "../assets/Shirali_Math.jpg";
 
 export default function ProjectsPage() {
   return (
     <div className="min-h-screen bg-cream">
-      <Hero />
+      <Hero
+        title="Empowering Progress through Impactful Projects"
+        desc="Explore our transformative initiatives that preserve heritage, empower communities, and promote education. From sustainable development to women's empowerment, our projects reflect a commitment to creating a brighter future rooted in tradition and progress.
+"
+        img={ChitrapurMathImg}
+      />
       <FeaturedProjects title="Our Projects" />
       <ProjectsCategory
         categoryTitle="Education"

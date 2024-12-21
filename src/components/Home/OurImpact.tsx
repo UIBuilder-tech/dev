@@ -143,9 +143,9 @@ export default function ImpactSection() {
               ))}
             </div>
             <div className="flex justify-between text-sm mx-5">
-              <h5 className="text-[#02306A]">
+              {/* <h5 className="text-[#02306A]">
                 Target Donation <span className="text-[#C7C7C7]">(in $)</span>
-              </h5>
+              </h5> */}
               <span className="text-[#f97316]">1000+ Donors</span>
             </div>
           </div>
@@ -160,16 +160,16 @@ export default function ImpactSection() {
               <div className="text-sm text-[#666666]">Schools Connected</div>
             </div>
 
-            <div className="bg-[#F4F5F7] p-6 flex flex-col space-y-2 items-center justify-center rounded-xl max-sm:hidden">
+            <div className="bg-[#F4F5F7] p-6 flex col-span-2 flex-col space-y-2 items-center justify-center rounded-xl max-sm:hidden">
               <div className="text-2xl font-bold text-[#02306A]">95% - 99%</div>
               <div className="text-sm text-[#666666]">
                 Student Graduation Rate
               </div>
             </div>
-            <div className="bg-[#F4F5F7] p-6 flex flex-col space-y-2 items-center justify-center rounded-xl max-sm:hidden">
+            {/* <div className="bg-[#F4F5F7] p-6 flex flex-col space-y-2 items-center justify-center rounded-xl max-sm:hidden">
               <div className="text-3xl font-bold text-[#0066FF]">100+</div>
               <div className="text-sm text-[#666666]">Fifth Parameter</div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

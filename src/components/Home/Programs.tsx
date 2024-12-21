@@ -14,7 +14,7 @@ const visionCards: VisionCard[] = [
     id: "education",
     title: "Education & Grants",
     description:
-      "CHF supports 5 schools in India, impacting 3,000+ students through programs like scholarships, vocational training, infrastructure development, and digital learning, empowering them to break the poverty cycle.",
+      "Chitrapur Heritage Foundation (CHF) supports 9 schools in India, empowering over 3,000 underprivileged students through quality education, scholarship’s,  vocational training, and personnel development programs.",
     image:
       "https://images.unsplash.com/photo-1719937206168-f4c829152b91?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
@@ -22,7 +22,7 @@ const visionCards: VisionCard[] = [
     id: "women",
     title: "Women Empowerment",
     description:
-      "Our women empowerment initiatives focus on providing skills training, education, and economic opportunities to help women become self-reliant and contribute to their communities.",
+      "Chitrapur Heritage Foundation (CHF) supports women's empowerment initiatives in India, providing vocational training, entrepreneurship development, financial literacy, and leadership training to promote economic self-reliance and independence. These initiatives aim to empower women to build a better future for themselves, their families, and their communities.",
     image:
       "https://images.unsplash.com/photo-1732480509153-b895ce4c1b64?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
@@ -30,7 +30,7 @@ const visionCards: VisionCard[] = [
     id: "heritage",
     title: "Heritage Preservation",
     description:
-      "We work to preserve and promote Indian cultural heritage through various programs supporting traditional arts, dance, music, and cultural education initiatives.",
+      "The Chitrapur Math preserves and promotes the cultural heritage of the Chitrapur Saraswat community through documentation, conservation of heritage sites, and organization of cultural festivals and events. These efforts aim to safeguard the community's traditions, customs, and history for future generations.",
     image:
       "https://images.unsplash.com/photo-1731375659532-d3341d0a5b5e?q=80&w=1949&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },

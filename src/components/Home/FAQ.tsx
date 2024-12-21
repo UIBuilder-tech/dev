@@ -1,163 +1,170 @@
+"use client";
+
 import { useState } from "react";
-import { ArrowUpRight, Heart } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ChevronRight, ChevronLeft, Plus } from "lucide-react";
+import cloud1 from "../../assets/cloud1.svg";
+import cloud2 from "../../assets/cloud2.svg";
+import cloud3 from "../../assets/cloud3.svg";
+import mountain from "../../assets/mountain.svg";
 
-interface Project {
-  id: string;
-  title: string;
-  tag: string;
-  status: string;
-  images?: string[];
-}
-
-const projects: Project[] = [
+// Sample FAQ data - you can replace with your actual data
+const faqData = [
   {
-    id: "1",
-    title: "Vantiga",
-    tag: "Education",
-    status: "Ongoing",
-    images: [
-      "https://images.unsplash.com/photo-1461603950871-cd64bcf7acf0?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8ZG9uYXRpb24lMjBpbmRpYXxlbnwwfHwwfHx8MA%3D%3D",
-    ],
+    id: 1,
+    question:
+      "Are my donations to CHF including Vantiga tax-deductible in the United States?",
+    answer: "Answer text here...",
   },
   {
-    id: "2",
-    title: "Samvit Sudha",
-    tag: "Women Empowerment",
-    status: "Ongoing",
-    images: [
-      "https://media.istockphoto.com/id/1473466236/photo/senior-man-piggybacking-grandson-in-park-during-weekend.webp?a=1&b=1&s=612x612&w=0&k=20&c=mjDlykHVoERZ7gvb2DwHq-S_Cz65OJ7LFjOKxhAYuaM=",
-      "https://media.istockphoto.com/id/1295213888/photo/senior-man-sitting-at-park-bench.webp?a=1&b=1&s=612x612&w=0&k=20&c=tHfhqX88nslAu6T7Ghc6MV-XsptZZ_AvMv6c7ZaLwNY=",
-    ],
+    id: 2,
+    question:
+      "What is the correct amount of Vantiga I need to pay per year to the Math?",
+    answer: "Answer text here...",
   },
   {
-    id: "3",
-    title: "SPEVC School",
-    tag: "Education",
-    status: "Ongoing",
-    images: [
-      "https://images.unsplash.com/photo-1524069290683-0457abfe42c3?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8aW5kaWElMjBzY2hvb2x8ZW58MHx8MHx8fDA%3D",
-    ],
+    id: 3,
+    question:
+      "Do I always have to login (join) CHF when accessing the CHF website?",
+    answer: "Answer text here...",
   },
   {
-    id: "4",
-    title: "Parijanashram Vidyalaya",
-    tag: "Education",
-    status: "Ongoing",
-    images: [
-      "https://images.unsplash.com/photo-1574758324765-a29c77fb9c91?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGluZGlhJTIwc2Nob29sfGVufDB8fDB8fHww",
-    ],
+    id: 4,
+    question:
+      "How do I specify the particular project to which I want to donate?",
+    answer: "Answer text here...",
+  },
+  {
+    id: 5,
+    question:
+      "When and how (media) will I receive a receipt for my CHF donation?",
+    answer: "Answer text here...",
   },
 ];
 
-export default function FeaturedProjects() {
-  const [hoveredId, setHoveredId] = useState<string | null>(null);
+const itemsPerPage = 5;
+
+export default function FAQSection() {
+  const [openQuestion, setOpenQuestion] = useState<number | null>(null);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const totalPages = Math.ceil(faqData.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const currentFaqs = faqData.slice(startIndex, startIndex + itemsPerPage);
+
+  const toggleQuestion = (id: number) => {
+    setOpenQuestion(openQuestion === id ? null : id);
+  };
 
   return (
-    <div className="py-8 px-6 md:p-8 md:mx-14">
-      <h2 className="mb-8 text-3xl md:text-4xl font-display text-gray-900">
-        Featured Projects
-      </h2>
+    <div className="relative h-[650px] px-4 mt-16 py-12 md:px-8">
+      {/* Cloud 1 - Top right */}
+      <div className="absolute top-0 right-0 w-32 h-16">
+        <img
+          src={cloud1}
+          alt="Cloud 1"
+          className="w-full h-full object-contain"
+        />
+      </div>
 
-      <table className="w-full">
-        <thead>
-          <tr className="border-b border-gray-500 text-xs md:text-sm text-gray-600">
-            <th className="pb-2 md:pb-4 text-left font-normal">Title</th>
-            <th className="pb-2 md:pb-4 text-left font-normal">Tags</th>
-            <th className="pb-2 md:pb-4 text-left font-normal">Status</th>
-            <th className="pb-2 md:pb-4 w-58 md:w-72"></th>
-          </tr>
-        </thead>
-        <tbody>
-          {projects.map((project) => {
-            const isHovered = project.id === hoveredId;
+      {/* Cloud 2 - Top center-right */}
+      <div className="absolute top-12 right-[22%] md:right-[10%] w-24 h-12">
+        <img
+          src={cloud2}
+          alt="Cloud 2"
+          className="w-full h-full object-contain"
+        />
+      </div>
 
-            return (
-              <tr
-                key={project.id}
-                className="border-b border-gray-500 transition-colors duration-200"
-                onMouseEnter={() => setHoveredId(project.id)}
-                onMouseLeave={() => setHoveredId(null)}
+      {/* Cloud 3 - Top center */}
+      <div className="absolute top-4 right-[40%] md:right-[20%] w-20 h-10">
+        <img
+          src={cloud3}
+          alt="Cloud 3"
+          className="w-full h-full object-contain"
+        />
+      </div>
+
+      <div className="relative z-[10] mx-auto max-w-3xl">
+        <h1 className="mb-12 text-3xl md:text-5xl font-semibold text-[#4285f4]">
+          FAQ's
+        </h1>
+
+        <div className="space-y-4">
+          {currentFaqs.map((faq) => (
+            <div key={faq.id} className="overflow-hidden">
+              <button
+                onClick={() => toggleQuestion(faq.id)}
+                className="flex w-full items-center gap-4 text-left py-4 "
               >
-                <td className="md:py-7 py-5">
-                  <span
-                    className={`text-xs md:text-lg font-medium transition-colors duration-200 ${
-                      isHovered ? "text-secondary" : "text-gray-900"
-                    }`}
+                <span className="text-white flex items-center rounded-full bg-secondary p-1">
+                  <Plus className="h-3 w-3 " />
+                </span>
+                <span className="text-gray-700 text-sm md:text-lg">
+                  {faq.question}
+                </span>
+              </button>
+              <AnimatePresence>
+                {openQuestion === faq.id && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="ml-9 mb-4"
                   >
-                    {project.title}
-                  </span>
-                </td>
-                <td>
-                  <span
-                    className={`inline-flex rounded-full px-2 md:px-4 py-1 text-xs md:text-sm transition-all duration-200 break-words hyphens-auto max-w-[80%] ${
-                      isHovered
-                        ? "bg-secondary text-white border border-secondary"
-                        : "border border-gray-500 text-gray-600"
-                    }`}
-                  >
-                    {project.tag}
-                  </span>
-                </td>
-                <td>
-                  <span
-                    className={`text-xs md:text-lg transition-colors duration-200 ${
-                      isHovered ? "text-secondary" : "text-gray-600"
-                    }`}
-                  >
-                    {project.status}
-                  </span>
-                </td>
-                <td className="relative">
-                  <div className="flex items-center justify-center md:justify-end gap-1 md:gap-4">
-                    {isHovered && project.images && (
-                      <div className="absolute right-40 flex items-center">
-                        {project.images.map((image, index) => (
-                          <div
-                            key={index}
-                            className="absolute"
-                            style={{
-                              right: `${index * 60}px`,
-                              transform:
-                                index === 1 ? "rotate(6deg)" : "rotate(-3deg)",
-                              zIndex: project.images!.length - index,
-                            }}
-                          >
-                            <div className="h-20 w-28 overflow-hidden rounded-lg border-2 border-white shadow-md">
-                              <img
-                                src={image}
-                                alt={`${project.title} image ${index + 1}`}
-                                className="h-full w-full object-cover"
-                              />
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                    <button
-                      className={`rounded-full p-2 transition-all duration-200 ${
-                        isHovered
-                          ? "bg-secondary border border-secondary text-white"
-                          : "border border-gray-200 text-gray-400"
-                      }`}
-                    >
-                      <ArrowUpRight className="h-3 w-3 md:h-5 md:w-5" />
-                    </button>
-                    <button
-                      className={`rounded-full p-2 transition-all duration-200 ${
-                        isHovered
-                          ? "bg-secondary border border-secondary text-white"
-                          : "border border-gray-200 text-gray-400"
-                      }`}
-                    >
-                      <Heart className="h-3 w-3 md:h-5 md:w-5" />
-                    </button>
-                  </div>
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+                    <p className="text-gray-600">{faq.answer}</p>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+              <div className="border-b border-gray-500" />
+            </div>
+          ))}
+        </div>
+
+        {totalPages > 1 && (
+          <div className="mt-8 flex items-center justify-center gap-4">
+            <button
+              onClick={() => setCurrentPage((prev) => Math.max(1, prev - 1))}
+              disabled={currentPage === 1}
+              className="rounded-full p-2 text-gray-600 hover:bg-gray-100 disabled:opacity-50"
+            >
+              <ChevronLeft className="h-5 w-5" />
+            </button>
+
+            <div className="flex gap-2">
+              {Array.from({ length: totalPages }).map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentPage(index + 1)}
+                  className={`h-2 w-2 rounded-full ${
+                    currentPage === index + 1 ? "bg-[#FF9966]" : "bg-gray-300"
+                  }`}
+                />
+              ))}
+            </div>
+
+            <button
+              onClick={() =>
+                setCurrentPage((prev) => Math.min(totalPages, prev + 1))
+              }
+              disabled={currentPage === totalPages}
+              className="rounded-full p-2 text-gray-600 hover:bg-gray-100 disabled:opacity-50"
+            >
+              <ChevronRight className="h-5 w-5" />
+            </button>
+          </div>
+        )}
+      </div>
+
+      {/* Mountain shape at the bottom */}
+      <div className="absolute bottom-0 md:-bottom-10 left-0 right-0 -z-9 overflow-hidden">
+        <img
+          src={mountain}
+          alt="Mountain"
+          className="w-full h-full object-cover"
+        />
+      </div>
     </div>
   );
 }

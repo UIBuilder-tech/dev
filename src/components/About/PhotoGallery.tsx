@@ -8,7 +8,7 @@ function PhotoGallery() {
         <h2 className="text-4xl font-bold text-[#242424] py-10">
           Photo Gallery
         </h2>{" "}
-        <Marquee pauseOnHover className="[--duration:10s]">
+        <Marquee pauseOnHover className="[--duration:20s]">
           {galleryImgs.map((review, index) => (
             <img
               key={index}
@@ -17,7 +17,7 @@ function PhotoGallery() {
             />
           ))}
         </Marquee>
-        <Marquee reverse pauseOnHover className="[--duration:10s]">
+        <Marquee reverse pauseOnHover className="[--duration:20s]">
           {galleryImgs.map((review, index) => (
             <img
               key={index}
