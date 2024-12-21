@@ -1,15 +1,28 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import ApiCalling from '../api/ApiCalling';
+import { toast } from 'react-toastify';
 
 interface AuthModalProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
+interface FormDataType {
+  firstName?: string;
+  lastName?: string;
+  email?: string;
+  password?: string;
+  confirmPassword?: string;
+  contact?: string;
+}
+type ViewType = 'login' | 'register' | 'reset';
 export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
-  const [view, setView] = useState<'login' | 'register' | 'reset'>('login');
-
+  const [formData, setFormData] = useState<FormDataType>({});
+  const [view, setView] = useState<ViewType>('login');
+  const navigate = useNavigate();
   const modalVariants = {
     hidden: { opacity: 0, y: -20 },
     visible: { opacity: 1, y: 0 },
@@ -22,22 +35,48 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
     exit: { opacity: 0 }
   };
 
+  const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const loginFormHandler = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    let urlPath = '/login';
+
+    if (view === 'register') {
+      urlPath = '/register';
+    } else if (view === 'reset') {
+      urlPath = '/reset';
+    }
+
+    ApiCalling(urlPath, 'POST', formData)
+      .then((response: { token: string }) => {
+        toast.success('Successfully registered');
+        navigate('/profile');
+        sessionStorage.setItem('accessToken', response.token);
+      })
+      .catch((error) => {
+        toast.error('Failed to register');
+        console.error(error);
+      });
+  };
+
   const renderContent = () => {
     switch (view) {
       case 'reset':
         return (
           <>
             <div className="text-center mb-6">
-              <h2 className="text-2xl font-semibold text-gray-800">
-                RESET PASSWORD
-              </h2>
-              <p className="text-gray-500 mt-2">
-                Forgot your password? Let's get you a new one
-              </p>
+              <h2 className="text-2xl font-semibold text-gray-800">RESET PASSWORD</h2>
+              <p className="text-gray-500 mt-2">Forgot your password? Let's get you a new one</p>
             </div>
-
-            <form onSubmit={(e) => e.preventDefault()} className="space-y-4">
+            <form onSubmit={loginFormHandler} className="space-y-4">
               <input
+                required
+                onChange={changeHandler}
+                name="email"
+                value={formData.email || ''}
                 type="email"
                 placeholder="Enter your registered email"
                 className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-secondary/20"
@@ -49,7 +88,6 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
                 RESET PASSWORD
               </button>
             </form>
-
             <div className="mt-6 text-center">
               <p>
                 Already have an account?{' '}
@@ -63,44 +101,63 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
             </div>
           </>
         );
-
       case 'register':
         return (
           <>
             <div className="text-center mb-6">
               <h2 className="text-2xl font-semibold text-gray-800">JOIN CHF</h2>
-              <p className="text-gray-500 mt-2">
-                We are glad you have chosen to register with us, Welcome!
-              </p>
+              <p className="text-gray-500 mt-2">We are glad you have chosen to register with us, Welcome!</p>
             </div>
-
-            <form onSubmit={(e) => e.preventDefault()} className="space-y-4">
+            <form onSubmit={loginFormHandler} className="space-y-4">
               <input
+                required
+                onChange={changeHandler}
+                name="firstName"
+                value={formData.firstName || ''}
                 type="text"
                 placeholder="First Name"
                 className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-secondary/20"
               />
               <input
+                onChange={changeHandler}
+                name="lastName"
+                value={formData.lastName || ''}
                 type="text"
                 placeholder="Last Name"
                 className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-secondary/20"
               />
               <input
+                required
+                onChange={changeHandler}
+                name="contact"
+                value={formData.contact || ''}
                 type="tel"
                 placeholder="Number as (999) 999-9999"
                 className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-secondary/20"
               />
               <input
+                required
+                onChange={changeHandler}
+                name="email"
+                value={formData.email || ''}
                 type="email"
                 placeholder="Email Address"
                 className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-secondary/20"
               />
               <input
+                required
+                onChange={changeHandler}
+                name="password"
+                value={formData.password || ''}
                 type="password"
                 placeholder="Password minimum 6 characters"
                 className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-secondary/20"
               />
               <input
+                required
+                onChange={changeHandler}
+                name="confirmPassword"
+                value={formData.confirmPassword || ''}
                 type="password"
                 placeholder="Confirm Password"
                 className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-secondary/20"
@@ -108,7 +165,6 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
               <p className="text-sm text-gray-500">
                 Password must be 6 to 20 characters long with at least one digit, one uppercase & one lower case.
               </p>
-
               <button
                 type="submit"
                 className="w-full py-3 px-4 bg-secondary text-white rounded hover:bg-opacity-90 transition-colors"
@@ -116,7 +172,6 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
                 JOIN
               </button>
             </form>
-
             <div className="mt-6 text-center">
               <p>
                 Already have an account?{' '}
@@ -130,7 +185,6 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
             </div>
           </>
         );
-
       default: // login
         return (
           <>
@@ -138,19 +192,25 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
               <h2 className="text-2xl font-semibold text-gray-800">LOG ON</h2>
               <p className="text-gray-600 mt-2">Your space to be social</p>
             </div>
-
-            <form onSubmit={(e) => e.preventDefault()} className="space-y-4">
+            <form onSubmit={loginFormHandler} className="space-y-4">
               <input
+                required
+                onChange={changeHandler}
+                name="email"
+                value={formData.email || ''}
                 type="email"
                 placeholder="Email Address"
                 className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-secondary/20"
               />
               <input
+                required
+                onChange={changeHandler}
+                name="password"
+                value={formData.password || ''}
                 type="password"
                 placeholder="Password"
                 className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-secondary/20"
               />
-
               <button
                 type="submit"
                 className="w-full py-3 px-4 bg-secondary text-white rounded hover:bg-opacity-90 transition-colors"
@@ -158,7 +218,6 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
                 LOG ON
               </button>
             </form>
-
             <div className="mt-6 text-center">
               <button
                 onClick={() => setView('reset')}
@@ -184,7 +243,7 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
   return (
     <AnimatePresence>
       {isOpen && (
-        <div style={{display:"flex",flexDirection:"row", alignItems:"center", justifyContent:"center"}}>
+        <div style={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
           <motion.div
             className="fixed inset-0 bg-black/50 z-50"
             variants={overlayVariants}
@@ -206,7 +265,6 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
             >
               <X className="h-6 w-6" />
             </button>
-
             {renderContent()}
           </motion.div>
         </div>
