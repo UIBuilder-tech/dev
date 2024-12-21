@@ -3,7 +3,7 @@ import footerbg from '../../assets/footerbg.svg'
 
 export default function Footer() {
   return (
-    <footer className="relative bg-secondary px-8 py-12 text-white"  >
+    <footer className="relative bg-secondary px-8 py-12 text-white" id="footer" >
       {/* Background graphic overlay */}
        <div className="absolute top-14 bottom-0 left-0 right-0 -z-9 overflow-hidden">
         <img src={footerbg} alt="Mountain" className='h-[700px] w-full' style={{objectFit:"contain"}} />

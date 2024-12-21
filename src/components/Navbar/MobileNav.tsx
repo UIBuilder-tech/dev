@@ -1,5 +1,5 @@
-import { User, Phone, Heart, Layout } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Home, User, Phone, Heart, Layout } from 'lucide-react';
+import { Link, useLocation } from 'react-router-dom';
 import {ReactComponent as HomeIcon}  from '../../assets/homeIcon.svg'
 import {ReactComponent as ActiveHomeIcon}  from '../../assets/activeHomeIcon.svg'
 

@@ -5,14 +5,16 @@ import PaymentForm from '../components/Contribute/AddPaymentDetails';
 import VolunteerForm from '../components/Contribute/VolunteerForm';
 import FAQSection from '../components/Home/FAQ';
 import Footer from '../components/Footer/Footer';
+import { useState } from 'react';
 
 export default function ContributePage() {
+  const [totalDonationAmount, setTotalDonationAmount] = useState<number>(0.00)
   return (
     <div className="min-h-screen bg-cream">
         <Hero/>
         <Vantiga/>
-        <DonationTable />
-        <PaymentForm/>
+        <DonationTable setTotalDonationAmount={setTotalDonationAmount}/>
+        <PaymentForm totalDonationAmount={totalDonationAmount}/>
         <VolunteerForm/>
         <FAQSection/>
         <Footer/>

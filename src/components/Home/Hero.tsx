@@ -25,19 +25,21 @@ export default function Hero({from}:Props) {
           <p className="text-white/90 text-xl mb-8 leading-relaxed">
            {from==="home" ? "Founded in 2005, the Chitrapur Heritage Foundation (CHF) is a nonprofit organization dedicated to fostering sustainable development and preserving the rich cultural heritage of the Chitrapur Saraswat community. With a focus on Heritage, Education,Women's Empowerment and Spiritual Development" : "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet."}
           </p>
-          <div className="flex gap-4">
+          <div className="flex">
             <Link
               to="/join"
-              className="bg-white/10 backdrop-blur-sm text-white border-2 border-white/20 px-8 py-3 rounded-full hover:bg-white/20 transition"
+              className=" text-white border-[1px] border-r-0 border-[#fbf3e8] px-8 py-3 rounded-l-full hover:bg-white/20 transition"
             >
               Join Us
             </Link>
+            <div className='border-[1px] border-l-0 rounded-r-full border-[#fbf3e8]'>
             <Link
               to="/donate"
-              className="bg-secondary text-white px-8 py-3 rounded-full hover:bg-opacity-90 flex items-center gap-2"
+              className="bg-[#fbf3e8] text-secondary font-[450] px-8 py-3 rounded-full hover:bg-opacity-90 flex items-center gap-2"
             >
-              Donate <Heart className="h-5 w-5" />
+              Donate <Heart className="h-5 w-5" fill='#fbf3e8'/>
             </Link>
+            </div>
           </div>
         </div>
       </div>

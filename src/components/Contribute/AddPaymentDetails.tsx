@@ -19,7 +19,12 @@ interface FormErrors {
   [key: string]: string
 }
 
-export default function PaymentForm() {
+interface Props{
+  totalDonationAmount:number;
+}
+
+
+export default function PaymentForm({totalDonationAmount}:Props) {
   const [formData, setFormData] = useState<FormData>({
     name: '',
     email: '',
@@ -35,7 +40,7 @@ export default function PaymentForm() {
   const [errors, setErrors] = useState<FormErrors>({})
   const [isNameVerified, setIsNameVerified] = useState(false)
   const totalAmount = sessionStorage.getItem("totalDonationAmount")
-
+console.log("totalAmount",totalAmount)
   const validateForm = (): boolean => {
     const newErrors: FormErrors = {}
 
@@ -215,9 +220,9 @@ export default function PaymentForm() {
           <div className="border-b border-gray-400 pb-4">
             <div className="flex justify-between items-center">
               <span className="text-[#516072]">Total Amount</span>
-              <span className="text-[#516072] text-xl font-medium flex flex-row items-center gap-2"><div className={`flex items-center justify-center w-6 h-6 ${Number(totalAmount)===0 ? "bg-[#D3D3D3]" : "bg-secondary"} rounded-full`}>
+              <span className="text-[#516072] text-xl font-medium flex flex-row items-center gap-2"><div className={`flex items-center justify-center w-6 h-6 ${Number(totalDonationAmount)===0 ? "bg-[#D3D3D3]" : "bg-secondary"} rounded-full`}>
           <span className="text-white text-sm">$</span>
-        </div> {totalAmount}.00</span>
+        </div> {totalDonationAmount}</span>
             </div>
           </div>
 

@@ -5,7 +5,7 @@ import education from "../../assets/education.svg"
 
 export default function VolunteerSection() {
   return (
-    <section className="relative bg-[#E67E22] py-16">
+    <section className="relative bg-[#E67E22] py-16 my-10">
       <div className="container relative mx-auto px-4">
         <div className="flex flex-col md:flex-row">
           {/* Left illustration */}

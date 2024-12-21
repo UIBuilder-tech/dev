@@ -5,7 +5,11 @@ import FilterSearch from './FilterSearch';
 import { donationData } from './donationData';
 import { DonationCategory, DonationItem, DonationSubcategory } from './types';
 
-export default function DonationTable() {
+interface Props{
+  setTotalDonationAmount:unknown;
+}
+
+export default function DonationTable({setTotalDonationAmount}:Props) {
   const [expandedCategories, setExpandedCategories] = useState<string[]>([
     donationData.length > 0 ? donationData[0].id : ''
   ]);
@@ -13,6 +17,7 @@ export default function DonationTable() {
   const [amounts, setAmounts] = useState<Record<string, number>>({});
   const [quantities, setQuantities] = useState<Record<string, number>>({});
   const [remarks, setRemarks] = useState<Record<string, string>>({});
+  const [useDefaultDonation, setUseDefaultDonation] = useState(false);
 
   const toggleCategory = (categoryId: string) => {
     setExpandedCategories(prev => 
@@ -43,68 +48,74 @@ export default function DonationTable() {
   };
 
   const removeItem = (itemId: string) => {
-    // Reset amount, quantity, and remarks for the specific item
-    setAmounts(prev => {
-      const newAmounts = { ...prev };
-      delete newAmounts[itemId];
-      return newAmounts;
-    });
-    setQuantities(prev => {
-      const newQuantities = { ...prev };
-      delete newQuantities[itemId];
-      return newQuantities;
-    });
-    setRemarks(prev => {
-      const newRemarks = { ...prev };
-      delete newRemarks[itemId];
-      return newRemarks;
-    });
+    setAmounts(prev => ({ ...prev, [itemId]: 0 }));
+    setQuantities(prev => ({ ...prev, [itemId]: 0 }));
+    setRemarks(prev => ({ ...prev, [itemId]: '' }));
+  };
+
+  const handleDefaultDonationChange = (checked: boolean) => {
+    setUseDefaultDonation(checked);
+    if (checked) {
+      const defaultAmounts: Record<string, number> = {};
+      const defaultQuantities: Record<string, number> = {};
+
+      donationData.forEach(category => {
+        const processItems = (items: DonationItem[]) => {
+          items.forEach(item => {
+            defaultAmounts[item.id] = item.defaultAmount || item.amount;
+            defaultQuantities[item.id] = item.hasQuantity ? 1 : 1; // Change this line
+          });
+        };
+
+        if (category.items) processItems(category.items);
+        if (category.subcategories) {
+          category.subcategories.forEach(subcategory => {
+            if (subcategory.items) processItems(subcategory.items);
+          });
+        }
+      });
+
+      setAmounts(defaultAmounts);
+      setQuantities(defaultQuantities);
+    } else {
+      setAmounts({});
+      setQuantities({});
+    }
   };
 
   // Calculate total amounts across all categories
   const totalAmount = useMemo(() => {
-    // Iterate through donation data to include all items
     return donationData.reduce((categoryTotal, category) => {
-      // Add items from main category
       const categoryItemsTotal = category.items ? category.items.reduce((itemTotal, item) => {
         const itemAmount = amounts[item.id] ?? item.amount;
-        const itemQuantity = quantities[item.id] ?? 1;
-        
-        // Only add to total if quantity is > 0 or not a quantity-based item
-        if (itemQuantity > 0 || !item.hasQuantity) {
-          return itemTotal + (itemAmount * itemQuantity);
-        }
-        return itemTotal;
+        const itemQuantity = item.hasQuantity ? (quantities[item.id] ?? 0) : 1; // Change this line
+        return itemTotal + (itemAmount * itemQuantity);
       }, 0) : 0;
 
-      // Add items from subcategories
       const subcategoriesTotal = category.subcategories ? category.subcategories.reduce((subcategoryTotal, subcategory) => {
-        const subcategoryItemsTotal = subcategory.items.reduce((itemTotal, item) => {
+        const subcategoryItemsTotal = subcategory.items ? subcategory.items.reduce((itemTotal, item) => {
           const itemAmount = amounts[item.id] ?? item.amount;
-          const itemQuantity = quantities[item.id] ?? 1;
-          // Only add to total if quantity is > 0 or not a quantity-based item
-          if (itemQuantity > 0 || !item.hasQuantity) {
-            return itemTotal + (itemAmount * itemQuantity);
-          }
-          return itemTotal;
-        }, 0);
+          const itemQuantity = item.hasQuantity ? (quantities[item.id] ?? 0) : 1; // Change this line
+          return itemTotal + (itemAmount * itemQuantity);
+        }, 0) : 0;
         return subcategoryTotal + subcategoryItemsTotal;
       }, 0) : 0;
-      const totalAmount= categoryTotal + categoryItemsTotal + subcategoriesTotal
-      sessionStorage.setItem("totalDonationAmount",totalAmount.toString())
+
       return categoryTotal + categoryItemsTotal + subcategoriesTotal;
     }, 0);
   }, [amounts, quantities, donationData]);
 
+  useEffect(() => {
+    setTotalDonationAmount(totalAmount)
+  }, [totalAmount]);
+
   const renderDonationItems = (items: DonationItem[], categoryName: string) => (
     <tbody className=''>
       {items.map(item => {
-        // Use default amount if no custom amount is set
         const itemAmount = amounts[item.id] ?? item.amount;
-        // Use 1 as default quantity if no quantity is set
-        const itemQuantity = quantities[item.id] ?? (categoryName === 'EDUCATION' && item.hasQuantity ? 0 : 1);
-        // Calculate total item amount
+        const itemQuantity = item.hasQuantity ? (quantities[item.id] ?? 0) : 1; // Change this line
         const totalItemAmount = itemAmount * itemQuantity;
+        const isTrashActive = totalItemAmount > 0;
 
         return (
           <tr key={item.id} className="border-t border-gray-300">
@@ -116,7 +127,7 @@ export default function DonationTable() {
               />
             </td>
             <td className="py-2 px-2 text-center flex mx-8">
-              {categoryName === 'EDUCATION' && item.hasQuantity ? (
+              {item.hasQuantity ? (
                 <input
                   type="number"
                   min="0"
@@ -148,7 +159,8 @@ export default function DonationTable() {
               />
               <button 
                 onClick={() => removeItem(item.id)} 
-                className={`p-1 ${totalItemAmount === 0 ? "text-gray-400" : "text-black hover:text-red-500"}`}
+                className={`p-1 ${isTrashActive ? "text-black hover:text-red-500" : "text-gray-400 cursor-not-allowed"}`}
+                disabled={!isTrashActive}
               >
                 <Trash2 className="h-4 w-4" />
               </button>
@@ -163,7 +175,7 @@ export default function DonationTable() {
     <div className="bg-cream rounded-lg p-6 px-16 mx-auto py-16">
       <div className="mb-6 flex flex-row items-center justify-between">
         <h2 className="text-3xl font-display text-dark mb-6">Donate</h2>
-        <FilterSearch />
+        <FilterSearch onDefaultDonationChange={handleDefaultDonationChange} />
       </div>
 
       <div className="space-y-4">
@@ -237,3 +249,4 @@ export default function DonationTable() {
     </div>
   );
 }
+
