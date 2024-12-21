@@ -173,9 +173,11 @@ const ProjectCard = ({
 const SpecialProjects = ({
   projects,
   title,
+  from,
 }: {
   projects: Project[];
   title: string;
+  from?: string;
 }) => {
   const [currentPage, setCurrentPage] = useState(0);
   const [expandedId, setExpandedId] = useState(1); // Set first card as expanded by default
@@ -184,6 +186,7 @@ const SpecialProjects = ({
   const windowWidth = useWindowWidth();
   const isMobile = windowWidth < 768;
 
+  console.log(from);
   const handleExpand = (id: number) => {
     setExpandedId(id === expandedId ? id : id); // Always set to clicked id
   };

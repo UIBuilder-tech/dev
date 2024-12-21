@@ -11,16 +11,18 @@ import {
 } from "../utils/ProjectsCategory";
 import SpecialProjects from "../components/projects/SpecialProjects";
 import ChitrapurMathImg from "../assets/Shirali_Math.jpg";
+import Yuvas from "../assets/Yuvas.png";
+import Yuvas1 from "../assets/Yuvas1.png";
 
 export default function EventsPage() {
   const FeaturedNews = [
     {
       id: 1,
-      title: "Gokulashtami in New Jersey",
+      title: "Chitrapur Yuvadhara",
       location: "New Jersey, USA",
       description:
-        "Celebrated annually at the Balwalli residence, this event brings children and parents together to honor Shri Krishna through poojas, bhajans, and cultural festivities. The event is filled with vibrant traditions and spiritual devotion.",
-      images: [ChitrapurMathImg, ChitrapurMathImg],
+        "Chitrāpur Yuvadhārā is a dynamic group of young adults aged 15 to 35, inspired by the Chitrāpur Saraswat community's 300-year-old Guru Parampara. With a focus on personal growth, cultural connection, and spiritual development, members engage in various activities to bond, learn, and contribute to their community. Established on 20th August 2008, Yuvadhārā aims to deepen the connection of youth with the Math, Guru Parampara, and Chitrāpur Samaj, while promoting social responsibility and self-expression. Representatives are located across different regions, including the West Coast, East Coast, and Midwest.",
+      images: [Yuvas, Yuvas1],
     },
     {
       id: 2,
@@ -36,14 +38,6 @@ export default function EventsPage() {
       location: "Shirali, India",
       description:
         "Inspired by the nostalgic charm of Chitrapur village, this project brings the essence of Shirali to community members by celebrating its cultural and spiritual heritage, evoking fond memories of traditional Bhanap life.",
-      images: [ChitrapurMathImg, ChitrapurMathImg],
-    },
-    {
-      id: 4,
-      title: "Khavda Pottery Preservation",
-      location: "India",
-      description:
-        "A project focused on preserving Khavda Pottery, a fading craft tradition. This initiative highlights the importance of sustaining India’s craft legacy through community awareness and storytelling.",
       images: [ChitrapurMathImg, ChitrapurMathImg],
     },
   ];
