@@ -3,7 +3,7 @@ import Vantiga from "../components/Contribute/Vantiga";
 import FAQSection from "../components/Home/FAQ";
 import Footer from "../components/Footer/Footer";
 import FeaturedProjects from "../components/Home/FeaturedProjects";
-import VisionMissionCarousal from "../components/Home/VisionMissionCarousal";
+import Vision from "../components/Home/Vision";
 import Ambassador from "../components/About/Ambassador";
 import PhotoGallery from "../components/About/PhotoGallery";
 import Newsletter from "../components/About/Newsletter";
@@ -15,7 +15,7 @@ export default function AboutPage() {
     <div className="min-h-screen bg-cream">
       <Hero />
       <Vantiga />
-      <VisionMissionCarousal />
+      <Vision />
       <FeaturedProjects title="Our Projects" />
       <ImpactSection />
       <Ambassador />

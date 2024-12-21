@@ -42,17 +42,17 @@ export default function ProjectsCategory({
     scrollToPage((currentPage - 1 + totalPages) % totalPages);
 
   return (
-    <div className="relative w-full max-w-7xl mx-auto px-6 py-12 ">
-      <h1 className="text-4xl font-bold mb-8">{categoryTitle}</h1>
+    <div className="relative px-6 md:p-8 md:mx-14 px-6 py-12 ">
+      <h1 className="text-4xl mb-8">{categoryTitle}</h1>
 
       {/* Featured Program */}
       <div className="bg-white rounded-3xl p-2">
         <div className="grid grid-cols-1 lg:grid-cols-2 ">
           <div className="space-y-6 flex flex-col justify-center px-10">
-            <h2 className="text-2xl font-semibold">
+            <p className="text-2xl ">
               {programs[currentProgram].title}
-            </h2>
-            <p className="text-gray-600 text-base leading-relaxed">
+            </p>
+            <p className="text-[#808080] text-base leading-6">
               {programs[currentProgram].description}
             </p>
             <div className="flex gap-4 pt-4">
@@ -133,7 +133,7 @@ export default function ProjectsCategory({
                 />
                 <div className="absolute inset-0 bg-black/40 hover:bg-black/50 transition-colors" />
                 <div className="absolute top-0 left-0 right-0 p-4 text-white max-w-sm">
-                  <h3 className="text-lg pr-8">{program.title}</h3>
+                  <p className="text-lg pr-8">{program.title}</p>
                   <div className="h-[1px] mt-2 w-1/3 bg-white"></div>
                 </div>
                 <motion.div

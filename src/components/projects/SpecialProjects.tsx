@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Heart, ArrowDownLeft } from "lucide-react";
+import { Heart, ArrowDownLeft, Plus } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import ChitrapurMathImg from "../../assets/Shirali_Math.jpg";
 
@@ -118,8 +118,8 @@ const ProjectCard = ({
             {/* Expanded state content remains the same */}
             <div className="flex justify-between items-start">
               <div>
-                <h2 className="text-2xl font-bold mb-1">{project.title} at</h2>
-                <h3 className="text-2xl font-bold">{project.location}</h3>
+                <p className="text-xl">{project.title} at</p>
+                <p className="text-xl  ">{project.location}</p>
                 <div className="w-12 h-1 bg-orange-500 mt-2 mb-4" />
               </div>
               <div className="bg-orange-500 rounded-full p-3 cursor-pointer">
@@ -129,13 +129,13 @@ const ProjectCard = ({
 
             <div className="flex gap-8 flex-1">
               <div className="flex-1">
-                <p className="text-gray-600 text-lg">{project.description}</p>
+                <p className="text-[#808080] text-md leading-5">{project.description}</p>
                 <motion.button
-                  className="mt-8 px-6 py-3 bg-orange-500 rounded-full text-white font-medium flex items-center gap-2"
+                  className="mt-8 px-6 py-3 bg-orange-500 rounded-full text-white font-medium flex items-center gap-1"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  Donate <Heart fill="white" />
+                  Donate <Heart className="w-5 h-5" fill="white" />
                 </motion.button>
               </div>
               <div className="flex-1">
@@ -174,8 +174,8 @@ const ProjectCard = ({
             {/* Collapsed state content remains the same */}
             <div className="flex justify-between items-start">
               <div>
-                <h2 className="text-xl font-bold mb-1">{project.title}</h2>
-                <h3 className="text-xl font-bold mb-4">{project.location}</h3>
+                <p className="text-xl ">{project.title}</p>
+                <p className="text-xl   mb-4">{project.location}</p>
                 <div className="w-12 h-1 bg-orange-500 mb-4" />
               </div>
               <button
@@ -202,11 +202,11 @@ const ProjectCard = ({
               </div>
             </div>
 
-            <p className="text-gray-600 flex-1">{project.description}</p>
+            <p className="text-[#808080] flex-1 leading-5">{project.description}</p>
 
-            <button className="mt-4 w-full py-3 bg-gray-100 rounded-lg text-gray-600 font-medium flex items-center justify-between px-6">
+            <button className="mt-4 w-full py-3 bg-gray-100  text-gray-600 font-medium flex items-center justify-between px-6 rounded-3xl">
               READ MORE
-              <span>+</span>
+              <Plus className="h-6 w-6 md:h-8 md:w-8 border border-secondary rounded-full p-1.5 md:p-2 text-secondary bg-[#FBF3E8] font-bold" />
             </button>
           </motion.div>
         )}
@@ -251,8 +251,8 @@ const SpecialProjects = () => {
   );
 
   return (
-    <div className="w-full max-w-7xl mx-auto px-4 py-8">
-      <h2 className="text-3xl font-bold mb-8">Special Projects</h2>
+    <div className="w-full max-w-7xl mx-auto py-12">
+      <h2 className="text-3xl   mb-8">Special Projects</h2>
 
       <div className="relative">
         <div className="flex items-center justify-center gap-6 mb-8">
