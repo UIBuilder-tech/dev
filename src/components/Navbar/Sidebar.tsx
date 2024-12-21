@@ -143,7 +143,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
                   Join Us
                 </Link>
                 <Link
-                  to="/donate#donation-table"
+                  to=" /contribute#donation-table"
                   className="flex-1 py-2 px-4 bg-white text-secondary rounded-full text-center font-medium"
                 >
                   Donate

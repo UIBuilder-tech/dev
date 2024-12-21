@@ -33,7 +33,7 @@ export default function Footer() {
                   </a>
                 </li>
                 <li>
-                  <a href="/donate#donation-table" className="hover:underline">
+                  <a href=" /contribute#donation-table" className="hover:underline">
                     Donate
                   </a>
                 </li>
@@ -43,7 +43,7 @@ export default function Footer() {
                   </a>
                 </li>
                 <li>
-                  <a href="/donate#donation-table" className="hover:underline">
+                  <a href=" /contribute#donation-table" className="hover:underline">
                     Sponsor a Student
                   </a>
                 </li>
@@ -107,7 +107,7 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <a href="/donate" className="hover:underline">
+                <a href=" /contribute" className="hover:underline">
                   How You can Help
                 </a>
               </li>
@@ -131,22 +131,22 @@ export default function Footer() {
             </h3>
             <ul className="space-y-1 max-sm:text-xs">
               <li>
-                <a href="/donate#donation-table" className="hover:underline">
+                <a href=" /contribute#donation-table" className="hover:underline">
                   Education
                 </a>
               </li>
               <li>
-                <a href="/donate#donation-table" className="hover:underline">
+                <a href=" /contribute#donation-table" className="hover:underline">
                   Community Development
                 </a>
               </li>
               <li>
-                <a href="/donate#donation-table" className="hover:underline">
+                <a href=" /contribute#donation-table" className="hover:underline">
                   Cultural Preservation
                 </a>
               </li>
               <li>
-                <a href="/donate#donation-table" className="hover:underline">
+                <a href=" /contribute#donation-table" className="hover:underline">
                   Religious Activities
                 </a>
               </li>
