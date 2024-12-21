@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Heart, ArrowDownLeft, Plus } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import ChitrapurMathImg from "../../assets/Shirali_Math.jpg";
 import { useWindowWidth } from "../../hooks/useWindowWidth";
 
 interface Project {
@@ -12,58 +11,6 @@ interface Project {
   description: string;
   images: string[];
 }
-
-// const projects: Project[] = [
-//   {
-//     id: 1,
-//     title: "Yatri Nivas",
-//     location: "Raj Ghat, Varanasi",
-//     description:
-//       "Chitrapur Saraswat community at the proposed center for yoga, meditation, and yatri nivas in Varanasi on the banks of River Ganga at Raja Ghat.",
-//     images: [ChitrapurMathImg, ChitrapurMathImg, ChitrapurMathImg],
-//   },
-//   {
-//     id: 2,
-//     title: "Meditation Centre",
-//     location: "Tiruvannamalai",
-//     description:
-//       "At the foothills of Arunachala Mountain, considered Kailas of the South, Shri Chitrapur Math Charitable Trust has....",
-//     images: [ChitrapurMathImg, ChitrapurMathImg, ChitrapurMathImg],
-//   },
-//   {
-//     id: 3,
-//     title: "Meditation Centre",
-//     location: "Tiruvannamalai",
-//     description:
-//       "At the foothills of Arunachala Mountain, considered Kailas of the South, Shri Chitrapur Math Charitable Trust has....",
-//     images: [ChitrapurMathImg, ChitrapurMathImg, ChitrapurMathImg],
-//   },
-//   {
-//     id: 4,
-//     title: "Meditation Centre",
-//     location: "Tiruvannamalai",
-//     description:
-//       "At the foothills of Arunachala Mountain, considered Kailas of the South, Shri Chitrapur Math Charitable Trust has....",
-//     images: [ChitrapurMathImg, ChitrapurMathImg, ChitrapurMathImg],
-//   },
-//   {
-//     id: 5,
-//     title: "Meditation Centre",
-//     location: "Tiruvannamalai",
-//     description:
-//       "At the foothills of Arunachala Mountain, considered Kailas of the South, Shri Chitrapur Math Charitable Trust has....",
-//     images: [ChitrapurMathImg, ChitrapurMathImg, ChitrapurMathImg],
-//   },
-//   {
-//     id: 6,
-//     title: "Meditation Centre",
-//     location: "Tiruvannamalai",
-//     description:
-//       "At the foothills of Arunachala Mountain, considered Kailas of the South, Shri Chitrapur Math Charitable Trust has....",
-//     images: [ChitrapurMathImg, ChitrapurMathImg, ChitrapurMathImg],
-//   },
-//   // Add more projects...
-// ];
 
 const ProjectCard = ({
   project,
@@ -94,15 +41,15 @@ const ProjectCard = ({
       animate={
         isExpanded
           ? {
-            width: window.innerWidth < 768 ? "375px" : "640px",
-            height: window.innerWidth < 768 ? "auto" : "450px",
-            zIndex: 10,
-          }
-        : {
-            width:  window.innerWidth < 768 ? "180px" : "320px",
-            height: window.innerWidth < 768 ? "auto" : "450px",
-            zIndex: 0,
-          }
+              width: window.innerWidth < 768 ? "375px" : "640px",
+              height: window.innerWidth < 768 ? "auto" : "450px",
+              zIndex: 10,
+            }
+          : {
+              width: window.innerWidth < 768 ? "180px" : "320px",
+              height: window.innerWidth < 768 ? "auto" : "450px",
+              zIndex: 0,
+            }
       }
       transition={{ duration: 0.3 }}
       onClick={handleClick}
@@ -130,13 +77,16 @@ const ProjectCard = ({
 
             <div className="flex md:gap-8 flex-1">
               <div className="flex-1">
-                <p className="text-[#808080] text-sm md:text-md leading-5">{project.description}</p>
+                <p className="text-[#808080] text-sm md:text-md leading-5">
+                  {project.description}
+                </p>
                 <motion.button
                   className="mt-8 px-3 md:px-6 py-2 md:py-3 bg-orange-500 rounded-full text-white font-medium flex items-center gap-1"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  Donate <Heart className="md:w-5 md:h-5 w-3 h-3" fill="white" />
+                  Donate{" "}
+                  <Heart className="md:w-5 md:h-5 w-3 h-3" fill="white" />
                 </motion.button>
               </div>
               <div className="flex-1">
@@ -176,7 +126,9 @@ const ProjectCard = ({
             <div className="flex justify-between items-start">
               <div>
                 <p className="md:text-xl text-md">{project.title}</p>
-                <p className="md:text-xl text-md mb-2 md:mb-4">{project.location}</p>
+                <p className="md:text-xl text-md mb-2 md:mb-4">
+                  {project.location}
+                </p>
                 <div className="w-12 h-1 bg-orange-500 mb-2 md:mb-4" />
               </div>
               <button
@@ -203,7 +155,9 @@ const ProjectCard = ({
               </div>
             </div>
 
-            <p className="text-[#808080] flex-1 text-sm md:text-md leading-5">{project.description}</p>
+            <p className="text-[#808080] flex-1 text-sm md:text-md leading-5">
+              {project.description}
+            </p>
 
             <button className="mt-4 w-full py-2 md:py-3 bg-gray-100 max-sm:text-xs text-gray-600 font-medium flex items-center justify-between px-3 md:px-6 rounded-3xl">
               READ MORE
@@ -227,7 +181,7 @@ const SpecialProjects = ({
   const [expandedId, setExpandedId] = useState(1); // Set first card as expanded by default
   const itemsPerPage = 3;
   const totalPages = Math.ceil(projects.length / itemsPerPage);
-  const windowWidth = useWindowWidth()
+  const windowWidth = useWindowWidth();
   const isMobile = windowWidth < 768;
 
   const handleExpand = (id: number) => {
@@ -261,76 +215,83 @@ const SpecialProjects = ({
 
   return (
     <div className="w-full max-w-7xl mx-auto py-12">
-      <h2 className="text-3xl mb-4 md:mb-8 max-sm:px-5">Special Projects</h2>
+      <h2 className="text-3xl mb-4 md:mb-8 max-sm:px-5">{title}</h2>
 
       <div className="relative">
         <div className="flex items-center justify-center gap-6 mb-8">
-      {!isMobile &&    <button
-            onClick={prevPage}
-            className="p-2 rounded-full bg-white shadow-lg h-10 hover:bg-gray-50 flex-shrink-0"
-          >
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
+          {!isMobile && (
+            <button
+              onClick={prevPage}
+              className="p-2 rounded-full bg-white shadow-lg h-10 hover:bg-gray-50 flex-shrink-0"
             >
-              <path d="M15 19l-7-7 7-7" />
-            </svg>
-          </button>}
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+              >
+                <path d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+          )}
 
           <div className="flex md:flex-row items-center flex-col gap-4 md:gap-6">
-            {isMobile ?
-            visibleProjects.map((project) => (
-              project.id === expandedId && (
-                <ProjectCard
-                  key={project.id}
-                  project={project}
-                  isExpanded={true}
-                  onExpand={handleExpand}
-                />
-              )
-            ))
-            :
-            visibleProjects.map((project) => (
-              <ProjectCard
-                key={project.id}
-                project={project}
-                isExpanded={project.id === expandedId}
-                onExpand={handleExpand}
-              />
-            ))}
-          {isMobile &&  <div className="flex-1 flex flex-row gap-3 md:gap-4">
-              {visibleProjects.map((project) => (
-                project.id !== expandedId && (
+            {isMobile
+              ? visibleProjects.map(
+                  (project) =>
+                    project.id === expandedId && (
+                      <ProjectCard
+                        key={project.id}
+                        project={project}
+                        isExpanded={true}
+                        onExpand={handleExpand}
+                      />
+                    )
+                )
+              : visibleProjects.map((project) => (
                   <ProjectCard
                     key={project.id}
                     project={project}
-                    isExpanded={false}
+                    isExpanded={project.id === expandedId}
                     onExpand={handleExpand}
                   />
-                )
-              ))}
-            </div>}
+                ))}
+            {isMobile && (
+              <div className="flex-1 flex flex-row gap-3 md:gap-4">
+                {visibleProjects.map(
+                  (project) =>
+                    project.id !== expandedId && (
+                      <ProjectCard
+                        key={project.id}
+                        project={project}
+                        isExpanded={false}
+                        onExpand={handleExpand}
+                      />
+                    )
+                )}
+              </div>
+            )}
           </div>
 
-         {!isMobile && <button
-            onClick={nextPage}
-            className="p-2 rounded-full bg-white shadow-lg hover:bg-gray-50 h-10 flex-shrink-0"
-          >
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
+          {!isMobile && (
+            <button
+              onClick={nextPage}
+              className="p-2 rounded-full bg-white shadow-lg hover:bg-gray-50 h-10 flex-shrink-0"
             >
-              <path d="M9 5l7 7-7 7" />
-            </svg>
-          </button>}
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+              >
+                <path d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+          )}
         </div>
 
         <div className="flex justify-center gap-4">
