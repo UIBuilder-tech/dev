@@ -1,4 +1,11 @@
 import ChitrapurMathImg from "../assets/Shirali_Math.jpg";
+import YugadiImg from "../assets/festivals/Yugadi 2024_calender at SCM Shirali.jpg";
+import JanmadivasImg from "../assets/festivals/Janmotsava 2024 at Karla.jpg";
+import ShivarathriImg from "../assets/festivals/Mahashivaratri_1 at SCM, Shirali.jpg";
+import GuruPurnimaImg from "../assets/festivals/Gurupurnima 2024.jpg";
+import GokulashtamiImg from "../assets/festivals/Gokulashtami Celebrations.jpg";
+import DepavaliImg from "../assets/festivals/Deepa Prajwalana on Deepavali.jpg";
+import NavarathriImg from "../assets/festivals/Kumarika Pujana_Navratri_Celebration_1.jpg";
 
 interface Program {
   id: number;
@@ -163,56 +170,55 @@ export const HeritagePrograms: Program[] = [
   },
 ];
 
-
 export const EventsFestivals: Program[] = [
   {
     id: 1,
     title: "Yugadi Celebrations",
     description:
       "Sadhakas marked the beginning of the Hindu New Year with a special Yugadi program. The event, rooted in the teachings of our Math, featured cultural performances, stotra chanting, and a message of new beginnings.",
-    image: ChitrapurMathImg,
+    image: YugadiImg,
   },
   {
     id: 2,
     title: "Shivaratri Celebrations",
     description:
       "In honor of Lord Shiva, Shivaratri is celebrated during satsangs with deep devotion. Inspired by the Math's emphasis on meditation and prayer, the celebrations include stotra chanting, bhajans, and reflections on Lord Shiva’s significance in our lives.",
-    image: ChitrapurMathImg,
+    image: ShivarathriImg,
   },
   {
     id: 3,
     title: "Guru Purnima",
     description:
       "Guru Purnima, a day dedicated to honoring the Guru, holds special significance for all of us. Sadhakas across the United States participate in samuhik guru pujan, either online or in-person, reaffirming their devotion to Param Pujya Swamiji and our revered Guru parampara.",
-    image: ChitrapurMathImg,
+    image: GuruPurnimaImg,
   },
   {
     id: 4,
     title: "Gokulashtami Celebrations",
     description:
       "The West Coast celebrated Gokulashtami with devotion and joy at a park in Fremont, CA. The event included stotra chanting, bhajans, and traditional garba, celebrating the divine leelas of Lord Krishna.",
-    image: ChitrapurMathImg,
+    image: GokulashtamiImg,
   },
   {
     id: 5,
     title: "Navratri Celebrations",
     description:
       "During Navratri, sadhakas meet every evening across the West and East Coasts to chant the shlokas of Sadhana Panchakam. This year, the West Coast celebrations were enriched by a dance offering by Yuvadhara and Prarthana, highlighting the divine feminine energy.",
-    image: ChitrapurMathImg,
+    image: NavarathriImg,
   },
   {
     id: 6,
     title: "Diwali Celebrations",
     description:
       "As the festival of lights, Diwali is celebrated with great devotion and joy. Sadhakas come together to chant stotras, sing bhajans, and engage in cultural activities, illuminating their hearts and minds with the light of knowledge, unity, and spirituality.",
-    image: ChitrapurMathImg,
+    image: DepavaliImg,
   },
   {
     id: 7,
     title: "Param Pujya Swamiji’s Janmadivas Celebrations",
     description:
       "Sadhakas honor Param Pujya Swamiji’s birthday with great reverence by performing samuhik guru pujan and singing bhajans, coming together in a spirit of devotion and gratitude. The celebration is followed by a joyful cake-cutting ceremony on the West Coast.",
-    image: ChitrapurMathImg,
+    image: JanmadivasImg,
   },
 ];
 
