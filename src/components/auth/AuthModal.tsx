@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import { X } from 'lucide-react';
+import { Loader, X } from 'lucide-react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ApiCalling, { GetAccessToken } from '../api/ApiCalling';
@@ -16,6 +16,11 @@ interface AuthModalProps {
   onClose: () => void;
 }
 
+interface ButtonProps {
+  isLoading?: boolean;
+  text: string;
+  type?: "button" | "submit" | "reset";
+}
 interface FormDataType {
   FirstName?: string;
   LastName?: string;
@@ -24,6 +29,38 @@ interface FormDataType {
   Password__c?: string;
   confirmPassword?: string;
 }
+const CustomButton: React.FC<ButtonProps> = ({ isLoading = false, text, type = "submit" }) => {
+  return (
+    <button
+      type={type}
+      disabled={isLoading}
+      className={`w-full py-3 px-4 text-white rounded transition-colors flex items-center justify-center ${isLoading ? "bg-gray-400 cursor-not-allowed" : "bg-secondary hover:bg-opacity-90"
+        }`}
+      aria-busy={isLoading}
+      aria-label={text}
+    >
+      {isLoading ? (
+        <motion.div
+          className="flex items-center"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.3 }}
+        >
+          <Loader className="w-5 h-5 animate-spin text-white" />
+          <span className="ml-2">Loading...</span>
+        </motion.div>
+      ) : (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.3 }}
+        >
+          {text}
+        </motion.div>
+      )}
+    </button>
+  );
+};
 
 type ViewType = 'login' | 'register' | 'reset';
 export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
@@ -54,41 +91,39 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
     const query = `SELECT Id, FirstName, LastName, Email, Password__c FROM Contact WHERE Email = '${formData.Email}'`;
     const encodedQuery = encodeURIComponent(query);
     const urlData = `/services/data/v57.0/query?q=${encodedQuery}`;
-    console.log("🚀 ~ loginFormHandler ~ urlData:", urlData)
-    // GetAccessToken().then((data) => {
-    //   const accessToken = data.access_token;
-    //   ApiCalling(urlData)
-    //     .then((response) => {
-    //       console.log("🚀 ~ .then ~ response:", response)
-    //       const { totalSize, records } = response;
-    //       // if (records.length > 0) {
-    //       //   if (totalSize === 0) {
-    //       //     toast.error('User not found');
-    //       //   } else {
-    //       //     sessionStorage.setItem('accessToken', accessToken);
-    //       //     toast.success('User successfully logged in.');
-    //       //     navigate('/profile');
-    //       //     sessionStorage.setItem("user", JSON.stringify(records[0]));
-    //       //   }
-    //       // } else {
-    //       //   const resData = response
-    //       //   resData.forEach((v) => {
-    //       //     if (v?.message) {
-    //       //       toast.error(v.message);
-    //       //     }
-    //       //   })
-    //       // }
+    GetAccessToken().then((data) => {
+      const accessToken = data.access_token;
+      sessionStorage.setItem('accessToken', accessToken);
+      ApiCalling(urlData)
+        .then((response) => {
+          const { totalSize, records } = response;
+          if (records.length > 0) {
+            if (totalSize === 0) {
+              toast.error('User not found');
+            } else {
+              toast.success('User successfully logged in.');
+              navigate('/profile');
+              onClose();
+              sessionStorage.setItem("user", JSON.stringify(records[0]));
+            }
+          } else {
+            if (Array.isArray(response) && response.length > 0) {
+              toast.error(response[0].message);
+            } else {
+              toast.error("User not found")
+            }
+          }
 
-    //     })
-    //     .catch((error) => {
-    //       toast.error('request Failed');
-    //       console.error(error);
-    //     }).finally(() => {
-    //       setIsDisable(false)
-    //     });
-    // }).catch(e => {
-    //   toast.error('Failed to get access token');
-    // })
+        })
+        .catch((error) => {
+          toast.error('request Failed');
+          console.error(error);
+        }).finally(() => {
+          setIsDisable(false)
+        });
+    }).catch(e => {
+      toast.error('Failed to get access token');
+    })
   };
   const registerFormHandler = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -96,11 +131,10 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
       toast.error('Passwords do not match');
       return
     }
-    const urlData = "/salesforce/services/data/v57.0/sobjects/Contact";
+    const urlData = "/services/data/v57.0/sobjects/Contact";
     setIsDisable(true)
     GetAccessToken().then((data) => {
       const accessToken = data.access_token;
-      console.log("🚀 ~ GetAccessToken ~ accessToken:", accessToken)
       sessionStorage.setItem('accessToken', accessToken);
       const insertData = {
         FirstName: formData.FirstName,
@@ -148,18 +182,12 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
                 placeholder="Enter your registered email"
                 className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-secondary/20"
               />
-              <button
-                type="submit"
-                className="w-full py-3 px-4 bg-secondary text-white rounded hover:bg-opacity-90 transition-colors"
-              >
-                RESET PASSWORD
-              </button>
+              <CustomButton text='RESET PASSWORD' isLoading={isDisable} />
             </form>
             <div className="mt-6 text-center">
               <p>
                 Already have an account?{' '}
                 <button
-                  disabled={isDisable}
                   onClick={() => setView('login')}
                   className="text-secondary hover:underline"
                 >
@@ -233,13 +261,7 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
               <p className="text-sm text-gray-500">
                 Password must be 6 to 20 characters long with at least one digit, one uppercase & one lower case.
               </p>
-              <button
-                disabled={isDisable}
-                type="submit"
-                className="w-full py-3 px-4 bg-secondary text-white rounded hover:bg-opacity-90 transition-colors"
-              >
-                JOIN
-              </button>
+              <CustomButton text='JOIN' isLoading={isDisable} />
             </form>
             <div className="mt-6 text-center">
               <p>
@@ -280,12 +302,8 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
                 placeholder="Password"
                 className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-secondary/20"
               />
-              <button
-                type="submit"
-                className="w-full py-3 px-4 bg-secondary text-white rounded hover:bg-opacity-90 transition-colors"
-              >
-                LOG ON
-              </button>
+              <CustomButton text='LOG In' isLoading={isDisable} />
+
             </form>
             <div className="mt-6 text-center">
               <button
@@ -311,34 +329,47 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
 
   return (
     <AnimatePresence>
-      {isOpen && (
-        <div style={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
-          <motion.div
-            className="fixed inset-0 bg-black/50 z-50"
-            variants={overlayVariants}
-            initial="hidden"
-            animate="visible"
-            exit="exit"
+    {isOpen && (
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        {/* Overlay */}
+        <motion.div
+          className="fixed inset-0 bg-black/50 z-50"
+          variants={overlayVariants}
+          initial="hidden"
+          animate="visible"
+          exit="exit"
+          onClick={onClose}
+        />
+        {/* Modal */}
+        <motion.div
+          className="fixed top-[10%] -translate-x-1/2 -translate-y-1/2 bg-white rounded-lg p-8 w-full max-w-md z-50 overflow-hidden"
+          style={{ maxHeight: "90vh", overflowY: "auto" }} // Add scrolling behavior
+          variants={modalVariants}
+          initial="hidden"
+          animate="visible"
+          exit="exit"
+        >
+          {/* Close Button */}
+          <button
             onClick={onClose}
-          />
-          <motion.div
-            className="fixed top-[10%] -translate-x-1/2 -translate-y-1/2 bg-white rounded-lg p-8 w-full max-w-md z-50"
-            variants={modalVariants}
-            initial="hidden"
-            animate="visible"
-            exit="exit"
+            className="absolute right-4 top-4 text-gray-500 hover:text-gray-700"
           >
-            <button
-              onClick={onClose}
-              className="absolute right-4 top-4 text-gray-500 hover:text-gray-700"
-            >
-              <X className="h-6 w-6" />
-            </button>
-            {renderContent()}
-          </motion.div>
-        </div>
-      )}
-    </AnimatePresence>
+            <X className="h-6 w-6" />
+          </button>
+          {/* Content */}
+          {renderContent()}
+        </motion.div>
+      </div>
+    )}
+  </AnimatePresence>
+  
   );
 }
 

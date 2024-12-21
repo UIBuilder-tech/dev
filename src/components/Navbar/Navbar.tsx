@@ -1,4 +1,4 @@
-import { Home, User, Phone, Heart } from 'lucide-react';
+import { Home, User, Phone, Heart, LogOut } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import NavLink from './NavLink';
 import IconNavLink from './IconNavLink';
@@ -80,6 +80,12 @@ export default function Navbar() {
                 <div onClick={ScrollToFooter}>
                   <IconNavLink to="javascript:void(0)" icon={Phone} />
                 </div>
+                {
+                  data?.accessToken ?
+                    <div onClick={() => { sessionStorage.clear(); window.location.href = "/" }}>
+                      <IconNavLink to="javascript:void(0)" icon={LogOut} />
+                    </div> : null
+                }
                 <Link
                   to="/donate"
                   className="bg-secondary text-white px-6 py-3 rounded-full hover:bg-opacity-90 flex items-center gap-2"

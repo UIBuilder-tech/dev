@@ -19,7 +19,6 @@ const ApiCalling = async (
   }
   if (token) {
     myHeaders.append("token", token);
-    myHeaders.append('Content-Type', 'application/json');
   }
   myHeaders.append('Authorization', `Bearer ${token}`);
 
@@ -35,7 +34,7 @@ const ApiCalling = async (
   }
 
   const response = await fetch(url, requestOptions);
-  SessionActiveOrNot(response);
+  // SessionActiveOrNot(response);
   return response.json();
 };
 
