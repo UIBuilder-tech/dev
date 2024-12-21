@@ -37,7 +37,7 @@ function Marquee({
       "shrink-0",
       "justify-around",
       "gap-[var(--gap)]",
-      vertical ? (reverse ? "animate-marquee-down flex-col" : "animate-marquee-up flex-col") : "animate-marquee",
+      vertical ? (reverse ? "animate-marquee-down flex-col" : "animate-marquee-up flex-col") : (reverse ? "animate-marquee-right flex-row" : "animate-marquee-left flex-row"),
       pauseOnHover ? "group-hover:[animation-play-state:paused]" : "",
     ].filter(Boolean).join(" ");
   };

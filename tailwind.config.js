@@ -18,6 +18,8 @@ export default {
         'marquee-up': 'marquee-up var(--duration) linear infinite',
         'marquee-down': 'marquee-down var(--duration) linear infinite',
         'marquee': 'marquee var(--duration) linear infinite',
+        'marquee-left': 'marquee-left var(--duration) linear infinite',
+        'marquee-right': 'marquee-right var(--duration) linear infinite',
       },
       keyframes: {
         'marquee-up': {
@@ -31,6 +33,14 @@ export default {
         'marquee': {
           '0%': { transform: 'translateX(0)' },
           '100%': { transform: 'translateX(calc(-100% - var(--gap)))' }
+        },
+        'marquee-left': {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(calc(-100% - var(--gap)))' }
+        },
+        'marquee-right': {
+          '0%': { transform: 'translateX(calc(-100% - var(--gap)))' },
+          '100%': { transform: 'translateX(0)' }
         }
       },
     },
