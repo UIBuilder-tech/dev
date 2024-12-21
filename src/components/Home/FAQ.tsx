@@ -1,20 +1,19 @@
-"use client";
+'use client'
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { ChevronRight, ChevronLeft, Plus } from "lucide-react";
-import cloud1 from "../../assets/cloud1.svg";
-import cloud2 from "../../assets/cloud2.svg";
-import cloud3 from "../../assets/cloud3.svg";
-import mountain from "../../assets/mountain.svg";
+import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { ChevronRight, ChevronLeft, Plus } from 'lucide-react'
+import cloud1 from '../../assets/cloud1.svg'
+import cloud2 from '../../assets/cloud2.svg'
+import cloud3 from '../../assets/cloud3.svg'
+import mountain from '../../assets/mountain.svg'
 
 // Sample FAQ data - you can replace with your actual data
 const faqData = [
   {
     id: 1,
-    question:
-      "Are my donations to CHF including Vantiga tax-deductible in the United States?",
-    answer: "Answer text here...",
+    question: "Are my donations to CHF including Vantiga tax-deductible in the United States?",
+    answer: "Answer text here..."
   },
   {
     id: 2,
@@ -27,12 +26,23 @@ const faqData = [
     question:
       "Do I always have to login (join) CHF when accessing the CHF website?",
     answer: "Answer text here...",
+    id: 2,
+    question: "What is the correct amount of Vantiga I need to pay per year to the Math?",
+    answer: "Answer text here..."
+  },
+  {
+    id: 3,
+    question: "Do I always have to login (join) CHF when accessing the CHF website?",
+    answer: "Answer text here..."
   },
   {
     id: 4,
     question:
       "How do I specify the particular project to which I want to donate?",
     answer: "Answer text here...",
+    id: 4,
+    question: "How do I specify the particular project to which I want to donate?",
+    answer: "Answer text here..."
   },
   {
     id: 5,
@@ -55,43 +65,48 @@ export default function FAQSection() {
   const toggleQuestion = (id: number) => {
     setOpenQuestion(openQuestion === id ? null : id);
   };
+    id: 5,
+    question: "When and how (media) will I receive a receipt for my CHF donation?",
+    answer: "Answer text here..."
+  }
+]
+
+const itemsPerPage = 5
+
+export default function FAQSection() {
+  const [openQuestion, setOpenQuestion] = useState<number | null>(null)
+  const [currentPage, setCurrentPage] = useState(1)
+
+  const totalPages = Math.ceil(faqData.length / itemsPerPage)
+  const startIndex = (currentPage - 1) * itemsPerPage
+  const currentFaqs = faqData.slice(startIndex, startIndex + itemsPerPage)
+
+  const toggleQuestion = (id: number) => {
+    setOpenQuestion(openQuestion === id ? null : id)
+  }
 
   return (
     <div className="relative h-[650px] px-4 mt-16 py-12 md:px-8">
       {/* Cloud 1 - Top right */}
       <div className="absolute top-0 right-0 w-32 h-16">
-        <img
-          src={cloud1}
-          alt="Cloud 1"
-          className="w-full h-full object-contain"
-        />
+        <img src={cloud1} alt="Cloud 1" className="w-full h-full object-contain" />
       </div>
 
       {/* Cloud 2 - Top center-right */}
       <div className="absolute top-12 right-[22%] md:right-[10%] w-24 h-12">
-        <img
-          src={cloud2}
-          alt="Cloud 2"
-          className="w-full h-full object-contain"
-        />
+        <img src={cloud2} alt="Cloud 2" className="w-full h-full object-contain" />
       </div>
 
       {/* Cloud 3 - Top center */}
       <div className="absolute top-4 right-[40%] md:right-[20%] w-20 h-10">
-        <img
-          src={cloud3}
-          alt="Cloud 3"
-          className="w-full h-full object-contain"
-        />
+        <img src={cloud3} alt="Cloud 3" className="w-full h-full object-contain" />
       </div>
 
       <div className="relative z-[10] mx-auto max-w-3xl">
-        <h1 className="mb-12 text-3xl md:text-5xl font-semibold text-[#4285f4]">
-          FAQ's
-        </h1>
+        <h1 className="mb-12 text-3xl md:text-5xl font-semibold text-[#4285f4]">FAQ's</h1>
 
         <div className="space-y-4">
-          {currentFaqs.map((faq) => (
+        {currentFaqs.map((faq) => (
             <div key={faq.id} className="overflow-hidden">
               <button
                 onClick={() => toggleQuestion(faq.id)}
@@ -100,15 +115,13 @@ export default function FAQSection() {
                 <span className="text-white flex items-center rounded-full bg-secondary p-1">
                   <Plus className="h-3 w-3 " />
                 </span>
-                <span className="text-gray-700 text-sm md:text-lg">
-                  {faq.question}
-                </span>
+                <span className="text-gray-700 text-sm md:text-lg">{faq.question}</span>
               </button>
               <AnimatePresence>
                 {openQuestion === faq.id && (
                   <motion.div
                     initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: "auto", opacity: 1 }}
+                    animate={{ height: 'auto', opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
                     transition={{ duration: 0.3 }}
                     className="ml-9 mb-4"
@@ -125,7 +138,7 @@ export default function FAQSection() {
         {totalPages > 1 && (
           <div className="mt-8 flex items-center justify-center gap-4">
             <button
-              onClick={() => setCurrentPage((prev) => Math.max(1, prev - 1))}
+              onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
               disabled={currentPage === 1}
               className="rounded-full p-2 text-gray-600 hover:bg-gray-100 disabled:opacity-50"
             >
@@ -138,16 +151,14 @@ export default function FAQSection() {
                   key={index}
                   onClick={() => setCurrentPage(index + 1)}
                   className={`h-2 w-2 rounded-full ${
-                    currentPage === index + 1 ? "bg-[#FF9966]" : "bg-gray-300"
+                    currentPage === index + 1 ? 'bg-[#FF9966]' : 'bg-gray-300'
                   }`}
                 />
               ))}
             </div>
 
             <button
-              onClick={() =>
-                setCurrentPage((prev) => Math.min(totalPages, prev + 1))
-              }
+              onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
               disabled={currentPage === totalPages}
               className="rounded-full p-2 text-gray-600 hover:bg-gray-100 disabled:opacity-50"
             >
@@ -159,12 +170,8 @@ export default function FAQSection() {
 
       {/* Mountain shape at the bottom */}
       <div className="absolute bottom-0 md:-bottom-10 left-0 right-0 -z-9 overflow-hidden">
-        <img
-          src={mountain}
-          alt="Mountain"
-          className="w-full h-full object-cover"
-        />
+        <img src={mountain} alt="Mountain" className="w-full h-full object-cover" />
       </div>
     </div>
-  );
+  )
 }

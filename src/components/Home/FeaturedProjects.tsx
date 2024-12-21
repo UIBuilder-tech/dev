@@ -170,9 +170,9 @@ export default function FeaturedProjects({ title }: { title: string }) {
                   </span>
                 </td>
                 <td className="relative">
-                  <div className="flex items-center justify-center md:justify-end gap-1 md:gap-4">
+                  <div className="flex items-center justify-center md:justify-end gap-1 max-sm:ml-2 md:gap-4">
                     {isHovered && project.images && (
-                      <div className="absolute right-40 flex items-center">
+                      <div className="absolute max-sm:hidden right-40 flex items-center">
                         {project.images.map((image, index) => (
                           <div
                             key={index}

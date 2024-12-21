@@ -1,6 +1,7 @@
 import { useState, useRef } from "react";
 import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight, ArrowUpRight } from "lucide-react";
+import { useWindowWidth } from "../../hooks/useWindowWidth";
 
 interface program {
   id: number;
@@ -21,6 +22,8 @@ export default function ProjectsCategory({
   const [currentProgram, setCurrentProgram] = useState(0);
   const [currentPage, setCurrentPage] = useState(0);
   const carouselRef = useRef<HTMLDivElement>(null);
+    const windowWidth = useWindowWidth()
+    const isMobile = windowWidth < 768;
 
   const itemsPerPage = 3;
   const totalPages = Math.ceil(programs.length / itemsPerPage);
@@ -42,26 +45,27 @@ export default function ProjectsCategory({
     scrollToPage((currentPage - 1 + totalPages) % totalPages);
 
   return (
-    <div className="relative px-6 md:p-8 md:mx-14 px-6 py-12 ">
-      <h1 className="text-4xl mb-8">{categoryTitle}</h1>
+    <div className="relative px-5 md:p-8 md:mx-14 py-6 md:py-12 ">
+      <h1 className="text-3xl md:text-4xl mb-4 md:mb-8">{categoryTitle}</h1>
 
       {/* Featured Program */}
       <div className="bg-white rounded-3xl p-2">
-        <div className="grid grid-cols-1 lg:grid-cols-2 ">
-          <div className="space-y-6 flex flex-col justify-center px-10">
-            <p className="text-2xl ">
+        <div className="grid grid-cols-1 lg:grid-cols-2 md:gap-16">
+          <div className="md:space-y-6 space-y-4 flex flex-col justify-center px-4 md:px-10">
+            <p className="text-xl max-sm:pt-2 md:text-2xl md:max-w-[50%]">
               {programs[currentProgram].title}
             </p>
-            <p className="text-[#808080] text-base leading-6">
+            <div className="underline-gradient rounded-xl"/>
+            <p className="text-[#808080] text-sm md:text-base md:leading-6 md:max-w-[80%] md:text-justify">
               {programs[currentProgram].description}
             </p>
-            <div className="flex gap-4 pt-4">
-              <button className="px-6 py-2.5 border-2 border-blue-600 text-blue-600 rounded-full text-sm font-medium hover:bg-blue-700 transition-colors">
-                Join Us
+            <div className="flex gap-4 md:pt-4">
+              <button className="md:px-6 px-2 py-2 md:py-2.5 border border-blue-600 text-blue-600 rounded-full text-sm md:text-md font-medium hover:bg-blue-700 transition-colors">
+                Contribute
               </button>
-              <button className="px-6 py-2.5 bg-[#e67e22] text-white rounded-full text-sm font-medium hover:bg-orange-600 transition-colors flex items-center gap-2">
+              {/* <button className="px-6 py-2.5 bg-[#e67e22] text-white rounded-full text-sm font-medium hover:bg-orange-600 transition-colors flex items-center gap-2">
                 Donate <span className="text-white text-lg">❤</span>
-              </button>
+              </button> */}
             </div>
           </div>
           <div className="flex flex-wrap gap-4 p-4">
@@ -74,10 +78,10 @@ export default function ProjectsCategory({
                 transition={{ duration: 0.5 }}
                 src={programs[currentProgram].image}
                 alt={programs[currentProgram].title}
-                className="w-full h-48 object-cover rounded-xl"
+                className="w-full h-[250px] object-cover rounded-tr-xl rounded-bl-xl"
               />
             </div>
-            <div className="flex flex-wrap w-full">
+            <div className="max-sm:hidden flex flex-wrap w-full">
               <div className="w-1/2 pr-2">
                 <motion.img
                   key={`sub1-${currentProgram}`}
@@ -87,7 +91,7 @@ export default function ProjectsCategory({
                   transition={{ duration: 0.5 }}
                   src={programs[currentProgram].image}
                   alt="Sub image 1"
-                  className="w-full h-32 object-cover rounded-xl"
+                  className="w-full h-[250px] object-cover rounded-tl-xl rounded-br-xl"
                 />
               </div>
               <div className="w-1/2">
@@ -99,7 +103,7 @@ export default function ProjectsCategory({
                   transition={{ duration: 0.5 }}
                   src={programs[currentProgram].image}
                   alt="Sub image 2"
-                  className="w-full h-32 object-cover rounded-xl"
+                  className="w-full h-[250px] object-cover rounded-xl"
                 />
               </div>
             </div>
@@ -108,7 +112,7 @@ export default function ProjectsCategory({
       </div>
 
       {/* Bottom Carousel */}
-      <div className="relative overflow-hidden py-10">
+      <div className="relative overflow-hidden md:py-6">
         <motion.div
           ref={carouselRef}
           className="flex overflow-x-scroll py-4"
@@ -120,7 +124,7 @@ export default function ProjectsCategory({
           {programs.map((program, index) => (
             <motion.div
               key={program.id}
-              className={`flex-none w-1/3 p-1 m-1 aspect-[3/2] ${
+              className={`flex-none w-[250px] md:w-1/3 p-1 m-1 aspect-[3/2] ${
                 index === currentProgram ? "rounded-xl" : ""
               }`}
               onClick={() => setCurrentProgram(index)}
@@ -133,14 +137,14 @@ export default function ProjectsCategory({
                 />
                 <div className="absolute inset-0 bg-black/40 hover:bg-black/50 transition-colors" />
                 <div className="absolute top-0 left-0 right-0 p-4 text-white max-w-sm">
-                  <p className="text-lg pr-8">{program.title}</p>
+                  <p className="text-sm md:text-lg pr-8 max-sm:leading-4">{program.title}</p>
                   <div className="h-[1px] mt-2 w-1/3 bg-white"></div>
                 </div>
                 <motion.div
                   className={
                     index === currentProgram
-                      ? "absolute top-4 right-4 w-12 h-12  bg-[#E67E22] rounded-full flex items-center justify-center"
-                      : "absolute top-4 right-4 w-12 h-12 border border-2  rounded-full flex items-center justify-center"
+                      ? "absolute top-4 right-4 md:w-12 md:h-12 w-6 h-6  bg-[#E67E22] rounded-full flex items-center justify-center"
+                      : "absolute top-4 right-4 md:w-12 md:h-12 w-6 h-6 border border-2  rounded-full flex items-center justify-center"
                   }
                   initial={{ opacity: 0, rotate: 0 }}
                   animate={{
@@ -149,7 +153,7 @@ export default function ProjectsCategory({
                   }}
                   transition={{ duration: 0.3 }}
                 >
-                  <ArrowUpRight className="w-8 h-8 text-gray-50" />
+                  <ArrowUpRight className="md:w-8 md:h-8 w-4 h-4 text-gray-50" />
                 </motion.div>
               </div>
             </motion.div>
@@ -171,18 +175,18 @@ export default function ProjectsCategory({
         </div>
       </div>
       {/* Navigation Arrows */}
-      <button
+    {!isMobile &&  <button
         onClick={prevPage}
         className="absolute z-10 left-5 top-3/4 -translate-y-1/2 -translate-x-1/2 w-10 h-10 bg-[#e67e22] text-white rounded-full flex items-center justify-center hover:bg-gray-100 transition-colors shadow-md"
       >
         <ChevronLeft className="w-6 h-6" />
-      </button>
-      <button
+      </button>}
+     {!isMobile && <button
         onClick={nextPage}
         className="absolute right-5 top-3/4 -translate-y-1/2 translate-x-1/2 w-10 h-10 bg-[#e67e22] text-white rounded-full flex items-center justify-center hover:bg-gray-100 transition-colors shadow-md"
       >
         <ChevronRight className="w-6 h-6" />
-      </button>
+      </button>}
     </div>
   );
 }

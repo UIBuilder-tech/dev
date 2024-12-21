@@ -164,7 +164,7 @@ export default function ImpactSection() {
 
       {/* Bottom Cards */}
       <div className="grid grid-cols-3 md:grid-cols-3 gap-2 md:gap-6 mt-4 md:mt-6">
-        {impactCards.slice(1).map((card) => (
+        {impactCards.map((card) => (
           <motion.div
             key={card.id}
             className={`relative h-[200px] md:h-[275px] rounded-xl md:rounded-3xl overflow-hidden cursor-pointer ${

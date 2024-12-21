@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Heart, ArrowDownLeft, Plus } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import ChitrapurMathImg from "../../assets/Shirali_Math.jpg";
+import { useWindowWidth } from "../../hooks/useWindowWidth";
 
 interface Project {
   id: number;
@@ -93,15 +94,15 @@ const ProjectCard = ({
       animate={
         isExpanded
           ? {
-              width: "640px",
-              height: "450px",
-              zIndex: 10,
-            }
-          : {
-              width: "320px",
-              height: "450px",
-              zIndex: 0,
-            }
+            width: window.innerWidth < 768 ? "375px" : "640px",
+            height: window.innerWidth < 768 ? "auto" : "450px",
+            zIndex: 10,
+          }
+        : {
+            width:  window.innerWidth < 768 ? "180px" : "320px",
+            height: window.innerWidth < 768 ? "auto" : "450px",
+            zIndex: 0,
+          }
       }
       transition={{ duration: 0.3 }}
       onClick={handleClick}
@@ -109,7 +110,7 @@ const ProjectCard = ({
       <AnimatePresence mode="wait">
         {isExpanded ? (
           <motion.div
-            className="p-8 h-full flex flex-col"
+            className="md:p-8 p-3 h-full flex flex-col"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -118,33 +119,31 @@ const ProjectCard = ({
             {/* Expanded state content remains the same */}
             <div className="flex justify-between items-start">
               <div>
-                <p className="text-xl">{project.title} at</p>
-                <p className="text-xl  ">{project.location}</p>
+                <p className="md:text-xl text-md">{project.title} at</p>
+                <p className="md:text-xl text-md ">{project.location}</p>
                 <div className="w-12 h-1 bg-orange-500 mt-2 mb-4" />
               </div>
-              <div className="bg-orange-500 rounded-full p-3 cursor-pointer">
-                <ArrowDownLeft className="w-6 h-6 text-white" />
+              <div className="bg-orange-500 rounded-full p-2 md:p-3 cursor-pointer">
+                <ArrowDownLeft className="md:w-6 md:h-6 w-4 h-4 text-white" />
               </div>
             </div>
 
-            <div className="flex gap-8 flex-1">
+            <div className="flex md:gap-8 flex-1">
               <div className="flex-1">
-                <p className="text-[#808080] text-md leading-5">
-                  {project.description}
-                </p>
+                <p className="text-[#808080] text-sm md:text-md leading-5">{project.description}</p>
                 <motion.button
-                  className="mt-8 px-6 py-3 bg-orange-500 rounded-full text-white font-medium flex items-center gap-1"
+                  className="mt-8 px-3 md:px-6 py-2 md:py-3 bg-orange-500 rounded-full text-white font-medium flex items-center gap-1"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  Donate <Heart className="w-5 h-5" fill="white" />
+                  Donate <Heart className="md:w-5 md:h-5 w-3 h-3" fill="white" />
                 </motion.button>
               </div>
               <div className="flex-1">
                 <img
                   src={project.images[currentImageIndex]}
                   alt={project.title}
-                  className="w-full h-64 object-cover rounded-lg"
+                  className="w-full md:h-64 object-cover rounded-lg"
                 />
                 <div className="flex justify-center gap-2 mt-4">
                   {project.images.map((_, index) => (
@@ -167,7 +166,7 @@ const ProjectCard = ({
           </motion.div>
         ) : (
           <motion.div
-            className="p-6 h-full flex flex-col card-expand-area"
+            className="md:p-6 p-2 h-full flex flex-col card-expand-area"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -176,18 +175,18 @@ const ProjectCard = ({
             {/* Collapsed state content remains the same */}
             <div className="flex justify-between items-start">
               <div>
-                <p className="text-xl ">{project.title}</p>
-                <p className="text-xl   mb-4">{project.location}</p>
-                <div className="w-12 h-1 bg-orange-500 mb-4" />
+                <p className="md:text-xl text-md">{project.title}</p>
+                <p className="md:text-xl text-md mb-2 md:mb-4">{project.location}</p>
+                <div className="w-12 h-1 bg-orange-500 mb-2 md:mb-4" />
               </div>
               <button
                 onClick={(e) => {
                   e.stopPropagation();
                   navigate("/contribute");
                 }}
-                className="p-2 rounded-full border-2 border-gray-200"
+                className="p-1 md:p-2 rounded-full border-2 border-gray-200"
               >
-                <Heart className="w-5 h-5 text-orange-500" />
+                <Heart className="md:w-5 md:h-5 w-3 h-3 text-orange-500" />
               </button>
             </div>
 
@@ -198,19 +197,17 @@ const ProjectCard = ({
                     key={index}
                     src={img}
                     alt={project.title}
-                    className="w-12 h-12 object-cover rounded-full -ml-2 first:ml-0"
+                    className="md:w-12 md:h-12 w-8 h-8 object-cover rounded-full -ml-2 first:ml-0"
                   />
                 ))}
               </div>
             </div>
 
-            <p className="text-[#808080] flex-1 leading-5">
-              {project.description}
-            </p>
+            <p className="text-[#808080] flex-1 text-sm md:text-md leading-5">{project.description}</p>
 
-            <button className="mt-4 w-full py-3 bg-gray-100  text-gray-600 font-medium flex items-center justify-between px-6 rounded-3xl">
+            <button className="mt-4 w-full py-2 md:py-3 bg-gray-100 max-sm:text-xs text-gray-600 font-medium flex items-center justify-between px-3 md:px-6 rounded-3xl">
               READ MORE
-              <Plus className="h-6 w-6 md:h-8 md:w-8 border border-secondary rounded-full p-1.5 md:p-2 text-secondary bg-[#FBF3E8] font-bold" />
+              <Plus className="h-5 w-5 md:h-8 md:w-8 border border-secondary rounded-full p-1 md:p-2 text-secondary bg-[#FBF3E8] font-bold" />
             </button>
           </motion.div>
         )}
@@ -230,6 +227,8 @@ const SpecialProjects = ({
   const [expandedId, setExpandedId] = useState(1); // Set first card as expanded by default
   const itemsPerPage = 3;
   const totalPages = Math.ceil(projects.length / itemsPerPage);
+  const windowWidth = useWindowWidth()
+  const isMobile = windowWidth < 768;
 
   const handleExpand = (id: number) => {
     setExpandedId(id === expandedId ? id : id); // Always set to clicked id
@@ -262,11 +261,11 @@ const SpecialProjects = ({
 
   return (
     <div className="w-full max-w-7xl mx-auto py-12">
-      <h2 className="text-3xl   mb-8">{title}</h2>
+      <h2 className="text-3xl mb-4 md:mb-8 max-sm:px-5">Special Projects</h2>
 
       <div className="relative">
         <div className="flex items-center justify-center gap-6 mb-8">
-          <button
+      {!isMobile &&    <button
             onClick={prevPage}
             className="p-2 rounded-full bg-white shadow-lg h-10 hover:bg-gray-50 flex-shrink-0"
           >
@@ -280,10 +279,22 @@ const SpecialProjects = ({
             >
               <path d="M15 19l-7-7 7-7" />
             </svg>
-          </button>
+          </button>}
 
-          <div className="flex gap-6">
-            {visibleProjects.map((project) => (
+          <div className="flex md:flex-row items-center flex-col gap-4 md:gap-6">
+            {isMobile ?
+            visibleProjects.map((project) => (
+              project.id === expandedId && (
+                <ProjectCard
+                  key={project.id}
+                  project={project}
+                  isExpanded={true}
+                  onExpand={handleExpand}
+                />
+              )
+            ))
+            :
+            visibleProjects.map((project) => (
               <ProjectCard
                 key={project.id}
                 project={project}
@@ -291,9 +302,21 @@ const SpecialProjects = ({
                 onExpand={handleExpand}
               />
             ))}
+          {isMobile &&  <div className="flex-1 flex flex-row gap-3 md:gap-4">
+              {visibleProjects.map((project) => (
+                project.id !== expandedId && (
+                  <ProjectCard
+                    key={project.id}
+                    project={project}
+                    isExpanded={false}
+                    onExpand={handleExpand}
+                  />
+                )
+              ))}
+            </div>}
           </div>
 
-          <button
+         {!isMobile && <button
             onClick={nextPage}
             className="p-2 rounded-full bg-white shadow-lg hover:bg-gray-50 h-10 flex-shrink-0"
           >
@@ -307,7 +330,7 @@ const SpecialProjects = ({
             >
               <path d="M9 5l7 7-7 7" />
             </svg>
-          </button>
+          </button>}
         </div>
 
         <div className="flex justify-center gap-4">
