@@ -53,7 +53,7 @@ export default function FeaturedProjects({title}:Props) {
   return (
     <div className="py-8 px-6 md:p-8 md:mx-14">
       <h2 className="mb-8 text-3xl md:text-4xl font-display text-gray-900">{title}</h2>
-      
+      <div className='max-h-[500px] overflow-y-scroll overflow-x-hidden custom-scrollbar'>
       <table className="w-full">
         <thead>
           <tr className="border-b border-gray-500 text-xs md:text-sm text-gray-600">
@@ -147,6 +147,7 @@ export default function FeaturedProjects({title}:Props) {
           })}
         </tbody>
       </table>
+      </div>
     </div>
   )
 }
