@@ -33,7 +33,7 @@ export default function AboutPage() {
   return (
     <div className="min-h-screen bg-cream">
       <Hero
-        title="Welcome to the Chitrapur Heritage Foundation (CHF)!"
+        title="Welcome to the Chitrapur Heritage Foundation ."
         img={ChitrapurMathImg}
         desc="We are dedicated to promoting sustainable development while preserving the rich cultural and spiritual heritage of the Chitrapur Saraswat community. Through our efforts in education, women's empowerment, heritage preservation, and community development, we create lasting impacts on individual lives and the community as a whole. Join us in our mission to honor the past while building a brighter future rooted in tradition and progress."
       />

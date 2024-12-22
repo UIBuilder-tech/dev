@@ -17,6 +17,8 @@ import GrantsSection from "../components/projects/GrantsSection";
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import ChitrapurMathImg from "../assets/Shirali_Math.jpg";
+import Vantiga from "../components/Contribute/Vantiga";
+import HeroImg from "../assets/photoGallery/img11.png";
 
 interface Project {
   id: number;
@@ -26,21 +28,21 @@ interface Project {
   images: string[];
 }
 export default function ProjectsPage() {
-    const location = useLocation();
-  
-    useEffect(() => {
-      // Handle initial load with hash
-      const hash = location.hash.replace('#', '');
-      if (hash) {
-        // Add a small delay to ensure the content is rendered
-        setTimeout(() => {
-          const element = document.getElementById(hash);
-          if (element) {
-            element.scrollIntoView({ behavior: 'smooth' });
-          }
-        }, 100);
-      }
-    }, [location.hash]); // Only run when hash changes
+  const location = useLocation();
+
+  useEffect(() => {
+    // Handle initial load with hash
+    const hash = location.hash.replace("#", "");
+    if (hash) {
+      // Add a small delay to ensure the content is rendered
+      setTimeout(() => {
+        const element = document.getElementById(hash);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 100);
+    }
+  }, [location.hash]); // Only run when hash changes
   const projects: Project[] = [
     {
       id: 1,
@@ -97,18 +99,31 @@ export default function ProjectsPage() {
     <div className="min-h-screen bg-cream">
       <Hero
         title="Empowering Progress through Impactful Projects"
-        desc="Explore our transformative initiatives that preserve heritage, empower communities, and promote education. From sustainable development to women's empowerment, our projects reflect a commitment to creating a brighter future rooted in tradition and progress.
-"
-        img={ChitrapurMathImg}
+        desc="Explore our transformative initiatives that preserve heritage, empower communities, and promote education. From sustainable development to women's empowerment, our projects reflect a commitment to creating a brighter future rooted in tradition and progress."
+        img={HeroImg}
       />
-      <div id="our-projects">
-        <FeaturedProjects title="Our Projects" />
+      <div id="vantiga">
+        <Vantiga />
       </div>
+      {/* <div id="our-projects">
+        <FeaturedProjects title="Our Projects" />
+      </div> */}
+      <div id="heritage-preservation">
+        <ProjectsCategory
+          categoryTitle="Heritage Preservation"
+          programs={HeritagePrograms}
+        />
+      </div>
+      <VolunteerSection />
+
       <div id="education">
         <ProjectsCategory
           categoryTitle="Education"
           programs={EducationPrograms}
         />
+      </div>
+      <div id="chf-ambassador">
+        <Ambassador />
       </div>
       <div id="women-empowerment">
         <ProjectsCategory
@@ -116,18 +131,9 @@ export default function ProjectsPage() {
           programs={WomenEmpowermentPrograms}
         />
       </div>
-      <VolunteerSection/>
-      <div id="chf-ambassador">
-        <Ambassador />
-      </div>
-      <div id="heritage-preservation">
-        <ProjectsCategory
-          categoryTitle="Heritage Preservation"
-          programs={HeritagePrograms}
-        />
-      </div>
+
       <div id="special-projects">
-      <SpecialProjects title="Special Projects" projects={projects} />
+        <SpecialProjects title="Special Projects" projects={projects} />
       </div>
       <div id="chf-grants">
         <GrantsSection />

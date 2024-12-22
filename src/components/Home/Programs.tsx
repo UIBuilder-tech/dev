@@ -12,7 +12,7 @@ interface VisionCard {
 const visionCards: VisionCard[] = [
   {
     id: "education",
-    title: "Education & Grants",
+    title: "Education",
     description:
       "Chitrapur Heritage Foundation (CHF) supports 9 schools in India, empowering over 3,000 underprivileged students through quality education, scholarship’s,  vocational training, and personnel development programs.",
     image:
@@ -76,7 +76,7 @@ export default function Programs() {
               alt={expandedCard.title}
               className="h-full w-full object-cover"
             />
-            <div className="absolute inset-0 flex flex-col justify-between p-4 md:p-8">
+            <div className="absolute inset-0 flex flex-col justify-between p-4 md:p-8 bg-gradient-to-b from-black/20 to-transparent">
               <div className="flex items-start justify-between">
                 <div className="flex flex-col space-y-2">
                   <p className="text-xl md:text-2xl font-medium text-white max-w-[50%]">
@@ -122,15 +122,15 @@ export default function Programs() {
             onClick={() => setExpandedId(card.id)}
           >
             <div className="relative h-[200px] md:h-[726px]">
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
               <img
                 src={card.image}
                 alt={card.title}
                 className="h-full w-full object-cover"
               />
-              <div className="absolute inset-0 flex flex-col justify-between p-4 md:p-8">
-                <div className="flex items-start justify-between">
-                  <div className="flex flex-col space-y-2">
+              <div className="absolute inset-0 flex flex-col justify-between p-4 md:p-8 bg-gradient-to-r from-black/40 to-transparent">
+                <div className="flex items-start justify-between ">
+                  <div className="flex flex-col space-y-2 ">
                     <p className="text-sm md:text-2xl font-medium text-white max-w-[50%]">
                       {card.title}
                     </p>
