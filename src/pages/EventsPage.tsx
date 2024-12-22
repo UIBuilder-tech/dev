@@ -10,11 +10,29 @@ import {
   EventsFestivals,
 } from "../utils/ProjectsCategory";
 import SpecialProjects from "../components/projects/SpecialProjects";
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import ChitrapurMathImg from "../assets/Shirali_Math.jpg";
 import Yuvas from "../assets/Yuvas.png";
 import Yuvas1 from "../assets/Yuvas1.png";
 
 export default function EventsPage() {
+  const location = useLocation();
+
+  useEffect(() => {
+    // Handle initial load with hash
+    const hash = location.hash.replace('#', '');
+    if (hash) {
+      // Add a small delay to ensure the content is rendered
+      setTimeout(() => {
+        const element = document.getElementById(hash);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    }
+  }, [location.hash]); // Only run when hash changes
+
   const FeaturedNews = [
     {
       id: 1,
@@ -43,26 +61,34 @@ export default function EventsPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-cream">
-      <Hero
+<div className="min-h-screen bg-cream">
+<Hero
         title="Celebrating Tradition and Community"
         desc="Join us as we commemorate festivals, organize satsangs, and conduct enriching activities for children and youth. Stay updated with our latest programs and events that honor tradition, foster spiritual growth, and strengthen the Chitrapur Saraswat community."
         img={ChitrapurMathImg}
       />
+      <div id="featured-news">
       <SpecialProjects
         title="Featured News"
         projects={FeaturedNews}
         from="events"
       />
+      </div>
+      <div id="festivals">
       <ProjectsCategory categoryTitle="Festivals" programs={EventsFestivals} />
-      <ProjectsCategory
-        categoryTitle="Get Togethers"
-        programs={EventGettogthers}
-      />
-      <ProjectsCategory
-        categoryTitle="Childeren & Youth Activities"
-        programs={EventChildrenEducation}
-      />
+      </div>
+      <div id="get-togethers">
+        <ProjectsCategory
+          categoryTitle="Get Togethers"
+          programs={EventGettogthers}
+        />
+      </div>
+      <div id="children-activities">
+        <ProjectsCategory
+          categoryTitle="Children & Youth Activities"
+          programs={EventChildrenEducation}
+        />
+      </div>
       <Newsletter />
       <OurTeam />
       <FAQSection />

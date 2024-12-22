@@ -3,6 +3,7 @@ import heritage from "../../assets/heritage.svg";
 import spirituality from "../../assets/spirituality.svg";
 import education from "../../assets/education.svg";
 import { useWindowWidth } from "../../hooks/useWindowWidth";
+import { Link } from "react-router-dom";
 
 export default function VolunteerSection() {
   const windowWidth = useWindowWidth();
@@ -73,12 +74,12 @@ export default function VolunteerSection() {
                 Empowerment, and Spiritual Development.
               </p>
               <div className="flex flex-wrap max-sm:flex-row gap-1 md:gap-4">
-                <button className="bg-transparent border rounded-3xl max-sm:text-xs p-1 md:p-3 px-2 md:px-5 text-white hover:bg-white/10">
+                <Link to='/contribute#volunteer' className="bg-transparent border rounded-3xl max-sm:text-xs p-1 md:p-3 px-2 md:px-5 text-white hover:bg-white/10">
                   Learn More
-                </button>
-                <button className="bg-white text-[#E67E22] border rounded-3xl max-sm:text-xs p-2 md:p-3 px-3 md:px-5 hover:bg-white/90">
+                </Link>
+                <Link to='/contribute#volunteer' className="bg-white text-[#E67E22] border rounded-3xl max-sm:text-xs p-2 md:p-3 px-3 md:px-5 hover:bg-white/90">
                   Get Involved
-                </button>
+                </Link>
               </div>
             </div>
           </div>

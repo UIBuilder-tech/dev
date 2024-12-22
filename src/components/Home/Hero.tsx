@@ -36,17 +36,17 @@ export default function Hero({ title, desc, img }: Props) {
           </p>
           <div className="flex">
             <Link
-              to="/join"
+              to="/contribute#volunteer"
               className=" text-white border-[1px] border-r-0 border-[#fbf3e8] md:px-8 md:py-3 rounded-l-full hover:bg-white/20 transition max-sm:text-sm px-4 py-2"
             >
               Join Us
             </Link>
             <div className="border-[1px] border-l-0 rounded-r-full border-[#fbf3e8]">
               <Link
-                to="/donate"
+                to=" /contribute#donation-table"
                 className="bg-[#fbf3e8] text-secondary font-[450] md:px-8 md:py-3 rounded-full hover:bg-opacity-90 flex items-center gap-2 max-sm:text-sm px-4 py-2"
               >
-                Donate <Heart className="h-5 w-5" fill="#fbf3e8" />
+                Donate <Heart className="h-5 w-5" fill="#e67e22" />
               </Link>
             </div>
           </div>

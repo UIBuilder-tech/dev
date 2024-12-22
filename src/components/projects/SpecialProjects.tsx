@@ -79,19 +79,15 @@ const ProjectCard = ({
 
             <div className="flex md:gap-8 flex-1">
               <div className="flex-1">
-                <p className="text-[#808080] text-sm md:text-md leading-5">
-                  {project.description}
-                </p>
-                {from === "projects" && (
-                  <motion.button
-                    className="mt-8 px-3 md:px-6 py-2 md:py-3 bg-orange-500 rounded-full text-white font-medium flex items-center gap-1"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    Donate{" "}
-                    <Heart className="md:w-5 md:h-5 w-3 h-3" fill="white" />
-                  </motion.button>
-                )}
+                <p className="text-[#808080] text-sm md:text-md leading-5">{project.description}</p>
+                <motion.button
+                  className="mt-8 px-3 md:px-6 py-2 md:py-3 bg-orange-500 rounded-full text-white font-medium flex items-center gap-1"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={()=>navigate(' /contribute#donation-table')}
+                >
+                  Donate <Heart className="md:w-5 md:h-5 w-3 h-3" fill="white" />
+                </motion.button>
               </div>
               <div className="flex-1">
                 <img
@@ -138,7 +134,7 @@ const ProjectCard = ({
               <button
                 onClick={(e) => {
                   e.stopPropagation();
-                  navigate("/contribute");
+                  navigate("/contribute#volunteer");
                 }}
                 className="p-1 md:p-2 rounded-full border-2 border-gray-200"
               >

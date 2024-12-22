@@ -104,7 +104,7 @@ export default function ImpactSection() {
                       {activeCard.description}
                     </p>
                     <button className="float-right px-3 py-1 max-sm:text-sm md:px-6 md:py-2  bg-secondary text-white rounded-full flex items-center gap-2 shadow-md">
-                      Donate <Heart className="h-4 w-4" />
+                      Donate <Heart className="h-4 w-4" fill="white" />
                     </button>
                   </div>
                 </div>

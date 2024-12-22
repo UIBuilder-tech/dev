@@ -51,7 +51,7 @@ export default function Ambassador() {
             mission and vision. Inspire your friends, family members, colleagues
             and neighbors to support the effort in your neighborhood, at your
             convenience.{" "}
-            <Link to="/join" className="text-blue-500 hover:underline">
+            <Link to="/contribute#volunteer" className="text-blue-500 hover:underline">
               Join Now
             </Link>
           </p>

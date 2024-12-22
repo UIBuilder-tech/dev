@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import Hero from "../components/Home/Hero";
 import Vantiga from "../components/Contribute/Vantiga";
 import FAQSection from "../components/Home/FAQ";
@@ -12,6 +14,22 @@ import ImpactSection from "../components/Home/OurImpact";
 import ChitrapurMathImg from "../assets/Shirali_Math.jpg";
 
 export default function AboutPage() {
+  const location = useLocation();
+
+  useEffect(() => {
+    // Handle initial load with hash
+    const hash = location.hash.replace('#', '');
+    if (hash) {
+      // Add a small delay to ensure the content is rendered
+      setTimeout(() => {
+        const element = document.getElementById(hash);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    }
+  }, [location.hash]); // Only run when hash changes
+
   return (
     <div className="min-h-screen bg-cream">
       <Hero
@@ -23,20 +41,31 @@ export default function AboutPage() {
         title="Welcome to the Chitrapur Heritage Foundation (CHF)!"
         description="We are dedicated to promoting sustainable development while preserving the rich cultural and spiritual heritage of the Chitrapur Saraswat community. Through our efforts in education, women's empowerment, heritage preservation, and community development, we create lasting impacts on individual lives and the community as a whole. Join us in our mission to honor the past while building a brighter future rooted in tradition and progress."
       />
-      <Vision />
-      <FeaturedProjects title="Our Projects" />
-      <ImpactSection />
-      <Ambassador />
-      <PhotoGallery />
-      <Newsletter />
-      <OurTeamAbout />
-      <FAQSection />
+      <div id="vision-mission">
+        <Vision />
+      </div>
+      <div id="our-projects">
+        <FeaturedProjects title="Our Projects" />
+      </div>
+      <div id="our-impact">
+        <ImpactSection />
+      </div>
+      <div id="chf-ambassador">
+        <Ambassador />
+      </div>
+      <div id="photo-gallery">
+        <PhotoGallery />
+      </div>
+      <div id="newsletter">
+        <Newsletter />
+      </div>
+      <div id="our-team">
+        <OurTeamAbout />
+      </div>
+      <div id="faqs">
+        <FAQSection />
+      </div>
       <Footer />
     </div>
-    // <div className="min-h-screen bg-cream pt-24 px-4">
-    //   <div className="max-w-7xl mx-auto">
-    //     <DonationTable />
-    //   </div>
-    // </div>
   );
 }

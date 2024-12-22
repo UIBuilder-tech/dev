@@ -80,3 +80,29 @@ height: 10px;
 background: transparent linear-gradient(90deg, var(--unnamed-color-e67e22) 0%, #F1B581 43%, #FFFFFF 100%) 0% 0% no-repeat padding-box;
 background: transparent linear-gradient(90deg, #E67E22 0%, #F1B581 43%, #FFFFFF 100%) 0% 0% no-repeat padding-box;
 }
+
+.custom-scrollbar {
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: #cacaca91 transparent; /* Firefox */
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 2px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #ffffff;
+  opacity: 0.5;
+  border-radius: 50px;
+}
+
+/* Hide the top and bottom scrollbar buttons */
+.custom-scrollbar::-webkit-scrollbar-button {
+  width: 0;
+  height: 0;
+  display: none; /* Optional backup */
+}
