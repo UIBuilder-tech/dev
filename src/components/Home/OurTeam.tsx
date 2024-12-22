@@ -4,6 +4,7 @@ import { useAnimation, useInView } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import Marquee from "../Marquee";
 import { boardMembers } from "../../utils/boardMembers.jsx";
+import { Link } from "react-router-dom";
 
 // Sample team data - replace with your actual data
 const teamMembers = [
@@ -93,9 +94,9 @@ export default function TeamSection() {
               community.
             </p>
             <div>
-              <button className="rounded-full border-2 border-[#4299E1] px-4 py-1 md:px-6 md:py-2 text-[#4299E1] transition-colors hover:bg-[#4299E1] hover:text-white max-sm:text-sm">
+              <Link to='/contribute#volunteer' className="rounded-full border-2 border-[#4299E1] px-4 py-1 md:px-6 md:py-2 text-[#4299E1] transition-colors hover:bg-[#4299E1] hover:text-white max-sm:text-sm">
                 Learn More
-              </button>
+              </Link>
             </div>
           </div>
 

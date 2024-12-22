@@ -99,7 +99,7 @@ console.log("totalAmount",totalAmount)
   }
 
   return (
-    <div className=" md:mx-8 p-8 py-16">
+    <div className=" md:mx-8 p-6 md:p-8 py-16">
       <h2 className="text-3xl md:text-4xl font-display text-gray-900 mb-8">Add Details & Pay</h2>
       
       <form onSubmit={handleSubmit} className="flex flex-col md:flex-row items-center justify-between gap-12">

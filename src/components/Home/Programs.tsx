@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
 import { ArrowUpRight, Minus, Plus } from "lucide-react";
 import { useWindowWidth } from "../../hooks/useWindowWidth";
+import educationImg from "../../assets/photoGallery/img8.jpg";
+import womenImg from "../../assets/photoGallery/img4.jpg";
+import heritageImg from "../../assets/photoGallery/img9.jpg";
 
 interface VisionCard {
   id: string;
@@ -15,24 +18,21 @@ const visionCards: VisionCard[] = [
     title: "Education",
     description:
       "Chitrapur Heritage Foundation (CHF) supports 9 schools in India, empowering over 3,000 underprivileged students through quality education, scholarship’s,  vocational training, and personnel development programs.",
-    image:
-      "https://images.unsplash.com/photo-1719937206168-f4c829152b91?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    image: educationImg,
   },
   {
     id: "women",
     title: "Women Empowerment",
     description:
       "Chitrapur Heritage Foundation (CHF) supports women's empowerment initiatives in India, providing vocational training, entrepreneurship development, financial literacy, and leadership training to promote economic self-reliance and independence. These initiatives aim to empower women to build a better future for themselves, their families, and their communities.",
-    image:
-      "https://images.unsplash.com/photo-1732480509153-b895ce4c1b64?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    image: womenImg,
   },
   {
     id: "heritage",
     title: "Heritage Preservation",
     description:
       "The Chitrapur Math preserves and promotes the cultural heritage of the Chitrapur Saraswat community through documentation, conservation of heritage sites, and organization of cultural festivals and events. These efforts aim to safeguard the community's traditions, customs, and history for future generations.",
-    image:
-      "https://images.unsplash.com/photo-1731375659532-d3341d0a5b5e?q=80&w=1949&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    image: heritageImg,
   },
 ];
 

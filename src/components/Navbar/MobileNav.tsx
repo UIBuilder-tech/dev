@@ -1,4 +1,4 @@
-import { Home, User, Phone, Heart, Layout } from "lucide-react";
+import {  User, Phone, Heart, Layout } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { ReactComponent as HomeIcon } from "../../assets/homeIcon.svg";
 import { ReactComponent as ActiveHomeIcon } from "../../assets/activeHomeIcon.svg";
@@ -68,7 +68,7 @@ export default function MobileNav() {
           <Layout 
             className="h-6 w-6" 
             fill={isProjectsActive ? "white" : "none"} 
-            stroke={isProjectsActive ? "#3b82f6" : "white"} 
+            stroke={isProjectsActive ? "gray" : "white"} 
           />
           <span className="text-xs mt-1.5">Projects</span>
         </Link>

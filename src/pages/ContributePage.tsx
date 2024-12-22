@@ -1,27 +1,27 @@
-import { useEffect, useRef, useState } from 'react';
-import { useLocation } from 'react-router-dom';
-import DonationTable from '../components/Donate/DonationTable';
-import Hero from '../components/Home/Hero';
-import Vantiga from '../components/Contribute/Vantiga';
-import PaymentForm from '../components/Contribute/AddPaymentDetails';
-import VolunteerForm from '../components/Contribute/VolunteerForm';
-import FAQSection from '../components/Home/FAQ';
-import Footer from '../components/Footer/Footer';
+import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
+import DonationTable from "../components/Donate/DonationTable";
+import Hero from "../components/Home/Hero";
+import Vantiga from "../components/Contribute/Vantiga";
+import PaymentForm from "../components/Contribute/AddPaymentDetails";
+import VolunteerForm from "../components/Contribute/VolunteerForm";
+import FAQSection from "../components/Home/FAQ";
+import Footer from "../components/Footer/Footer";
 import ChitrapurMathImg from "../assets/Shirali_Math.jpg";
 
 export default function ContributePage() {
-  const [totalDonationAmount, setTotalDonationAmount] = useState<number>(0.00);
+  const [totalDonationAmount, setTotalDonationAmount] = useState<number>(0.0);
   const location = useLocation();
 
   useEffect(() => {
     // Handle initial load with hash
-    const hash = location.hash.replace('#', '');
+    const hash = location.hash.replace("#", "");
     if (hash) {
       // Add a small delay to ensure the content is rendered
       setTimeout(() => {
         const element = document.getElementById(hash);
         if (element) {
-          element.scrollIntoView({ behavior: 'smooth' });
+          element.scrollIntoView({ behavior: "smooth" });
         }
       }, 100);
     }

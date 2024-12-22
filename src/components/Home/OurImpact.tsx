@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ArrowUpRight, Heart } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Link } from "react-router-dom";
 
 interface ImpactCard {
   id: string;
@@ -86,9 +87,9 @@ export default function ImpactSection() {
                     <div className="h-0.5 bg-white transition-all duration-500 w-[100%]  md:w-[150%]" />
                   </div>
                   <div className="flex gap-2 md:gap-4">
-                    <button className="rounded-full max-sm:text-xs px-2 py-1 md:px-6 md:py-2 text-white border hover:bg-primary/90">
+                    <Link to='/contribute#donation-table' className="rounded-full max-sm:text-xs px-2 py-1 md:px-6 md:py-2 text-white border hover:bg-primary/90">
                       Learn More
-                    </button>
+                    </Link>
                     <button className="bg-secondary border-secondary rounded-full flex items-center p-2 text-white ">
                       <ArrowUpRight className="h-6 w-6  text-white rounded-full rotate-[175deg]" />
                     </button>
@@ -103,9 +104,9 @@ export default function ImpactSection() {
                     <p className="max-sm:text-xs text-sm text-[#516072] max-sm:leading-5 ">
                       {activeCard.description}
                     </p>
-                    <button className="float-right px-3 py-1 max-sm:text-sm md:px-6 md:py-2  bg-secondary text-white rounded-full flex items-center gap-2 shadow-md">
+                    <Link to='/contribute#donation-table' className="float-right px-3 py-1 max-sm:text-sm md:px-6 md:py-2  bg-secondary text-white rounded-full flex items-center gap-2 shadow-md">
                       Donate <Heart className="h-4 w-4" fill="white" />
-                    </button>
+                    </Link>
                   </div>
                 </div>
               </div>
