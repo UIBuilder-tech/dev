@@ -90,7 +90,7 @@ export default function Navbar() {
             <div className="w-[150px]" />
 
             <div className="flex items-center gap-10">
-              <div className="bg-white text-[20px] lg:text-[16px] desktop-1500:text-[16px] desktop-1200:text-[14px] rounded-full px-8 flex items-center gap-10 desktop-1500:gap-8 desktop-1200:gap-5 font-bold">
+              <div className="bg-white text-[20px] lg:text-[16px] desktop-1500:text-[16px] desktop-1200:text-[14px] rounded-full px-8 flex items-center gap-10 desktop-1500:gap-8 desktop-1200:gap-5 font-medium">
                 <NavLink to="/about">About</NavLink>
                 <NavLink to="/projects">Projects</NavLink>
                 <NavLink to="/contribute">Contribute</NavLink>
