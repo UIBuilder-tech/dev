@@ -43,6 +43,8 @@ export default function ProjectsPage() {
       }, 100);
     }
   }, [location.hash]); // Only run when hash changes
+
+  
   const projects: Project[] = [
     {
       id: 1,
@@ -54,45 +56,20 @@ export default function ProjectsPage() {
     },
     {
       id: 2,
-      title: "Meditation Centre",
+      title: "2020: Pandemic Relief",
       location: "Tiruvannamalai",
       description:
-        "At the foothills of Arunachala Mountain, considered Kailas of the South, Shri Chitrapur Math Charitable Trust has....",
+        "During the pandemic, CHF funded the assistance of SCM to hundreds of struggling families in village hamlets surrounding Chitrapur and Shirali. Working with Chitrapur Math, this initiative provided rice and lentils to aggrieved families, crucial medical equipment such as oxygen concentrators, vaccination assistance, and personal items such as soap and masks.",
       images: [ChitrapurMathImg, ChitrapurMathImg, ChitrapurMathImg],
     },
     {
       id: 3,
-      title: "Meditation Centre",
+      title: "2021: Pandemic Relief ",
       location: "Tiruvannamalai",
       description:
-        "At the foothills of Arunachala Mountain, considered Kailas of the South, Shri Chitrapur Math Charitable Trust has....",
+        "CHF’s pandemic relief efforts included funding the salaries of school teachers of the 9 SCM-affiliated schools supported by CHF.",
       images: [ChitrapurMathImg, ChitrapurMathImg, ChitrapurMathImg],
     },
-    {
-      id: 4,
-      title: "Meditation Centre",
-      location: "Tiruvannamalai",
-      description:
-        "At the foothills of Arunachala Mountain, considered Kailas of the South, Shri Chitrapur Math Charitable Trust has....",
-      images: [ChitrapurMathImg, ChitrapurMathImg, ChitrapurMathImg],
-    },
-    {
-      id: 5,
-      title: "Meditation Centre",
-      location: "Tiruvannamalai",
-      description:
-        "At the foothills of Arunachala Mountain, considered Kailas of the South, Shri Chitrapur Math Charitable Trust has....",
-      images: [ChitrapurMathImg, ChitrapurMathImg, ChitrapurMathImg],
-    },
-    {
-      id: 6,
-      title: "Meditation Centre",
-      location: "Tiruvannamalai",
-      description:
-        "At the foothills of Arunachala Mountain, considered Kailas of the South, Shri Chitrapur Math Charitable Trust has....",
-      images: [ChitrapurMathImg, ChitrapurMathImg, ChitrapurMathImg],
-    },
-    // Add more projects...
   ];
 
   return (

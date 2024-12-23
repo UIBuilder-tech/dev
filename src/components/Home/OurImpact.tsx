@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ArrowUpRight, Heart } from "lucide-react";
+import { Heart } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 import activeArrow from '../../assets/arrowActive.svg' 

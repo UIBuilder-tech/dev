@@ -120,7 +120,7 @@ export default function Navbar() {
                   <img src={ContactIcon} className="desktop-1200:w-6 desktop-1200:h-6 desktop-1500:w-6 desktop-1500:h-6 w-7 h-7 " alt="Contact" />
                 </button>
                 <Link
-                  to=" /contribute#donation-table"
+                  to="/contribute#donation-table"
                   className="bg-secondary text-white px-6 desktop-1200:py-3 desktop-1500:py-3 desktop-1200:py-[12px] desktop-1200:px-5 py-4 rounded-full hover:bg-opacity-90 flex items-center gap-2 text-xl desktop-1200:text-lg desktop-1500:text-lg desktop-1200:text-sm desktop-1200:gap-1"
                 >
                   Donate <Heart className="h-5 w-5 desktop-1200:h-4  desktop-1200:w-4" fill="white" />
