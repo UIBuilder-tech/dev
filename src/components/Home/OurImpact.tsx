@@ -151,12 +151,12 @@ export default function ImpactSection() {
               <div className="text-sm md:text-lg desktop-1500:text-lg desktop-1200:text-[16px] text-[#666666]">Children Educated</div>
             </div>
             <div className="bg-[#F4F5F7] p-3 md:p-6 flex flex-col space-y-2 items-center justify-center rounded-xl">
-              <div className="text-3xl md:text-5xl desktop-1500:text-5xl desktop-1200:text-4xl  text-[#0066FF]">100+</div>
+              <div className="text-3xl md:text-5xl desktop-1500:text-5xl desktop-1200:text-4xl font-bold text-[#0066FF]">100+</div>
               <div className="text-sm md:text-lg desktop-1500:text-lg font-normal text-[#666666] desktop-1200:text-[16px]">Schools Connected</div>
             </div>
 
             <div className="bg-[#F4F5F7] p-6 flex col-span-2 flex-col space-y-2 items-center justify-center rounded-xl max-sm:hidden">
-              <div className="text-2xl md:text-5xl desktop-1500:text-5xl font-[900] text-[#02306A] desktop-1200:text-4xl">95% - 99%</div>
+              <div className="text-2xl md:text-5xl desktop-1500:text-5xl font-bold text-[#02306A] desktop-1200:text-4xl">95% - 99%</div>
               <div className="text-sm md:text-lg desktop-1500:text-lg text-[#666666] desktop-1200:text-[16px]">
                 Student Graduation Rate
               </div>
