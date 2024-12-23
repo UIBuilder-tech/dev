@@ -10,7 +10,7 @@ export default function Vision() {
   useEffect(() => {
     const interval = setInterval(() => {
       setActiveSlide((prevSlide) => (prevSlide + 1) % 3);
-    }, 50000); // Change slide every 3 seconds
+    }, 5000); // Change slide every 3 seconds
 
     return () => clearInterval(interval); // Cleanup interval on component unmount
   }, []);
