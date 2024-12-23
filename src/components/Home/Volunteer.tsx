@@ -21,7 +21,7 @@ export default function VolunteerSection() {
             <img
               src={volunteer}
               alt="Volunteer illustration"
-              className={`w-full max-w-[250px] ${range150 ? 'max-w-[185px]' : ''}`}
+              className={`w-full ${range150 ? 'max-w-[185px]' : ' max-w-[250px]'}`}
             />
           </div>
 
