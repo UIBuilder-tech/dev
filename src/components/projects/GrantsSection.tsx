@@ -60,32 +60,32 @@ export default function GrantsSection() {
             <div className="  space-y-2 rounded-sm">
             
             
-              <p className="text-sm desktop-1500:text-sm desktop-1200:text-xs sm:text-base text-gray-600">
+              <p className="list-disc text-sm desktop-1500:text-sm desktop-1200:text-xs sm:text-base text-gray-600">
                 The beneficiary organization must provide:
               </p>
               <ul className="list-none desktop-1500:text-sm desktop-1200:text-xs space-y-2 text-sm sm:text-base text-gray-600">
                 <li>
-                  • Official receipt of the grant in the name of Chitrapur
+                  Official receipt of the grant in the name of Chitrapur
                   Heritage Foundation
                 </li>
                 <li>
-                  • Progress reports, photographs, press cuttings, and video, or
+                  Progress reports, photographs, press cuttings, and video, or
                   other such material for our records.
                 </li>
                 <li>
-                  • Chitrapur Heritage Foundation's name prominently displayed
+                  Chitrapur Heritage Foundation's name prominently displayed
                   on any equipment sent by us.
                 </li>
                 <li>
-                  • For Sponsor-A- Student scheme and cash grants, appropriate
+                  For Sponsor-A- Student scheme and cash grants, appropriate
                   recognition, media publicity, and inclusion in annual reports.
                 </li>
-                <li>• A copy of the beneficiary's annual report.</li>
+                <li>A copy of the beneficiary's annual report.</li>
                 <li>
-                  • Audited financial statement of the beneficiary organization
+                  Audited financial statement of the beneficiary organization
                 </li>
                 <li>
-                  • A copy of the Current and Valid Tax Exemption Certificate
+                  A copy of the Current and Valid Tax Exemption Certificate
                 </li>
               </ul>
               </div>
@@ -105,37 +105,37 @@ export default function GrantsSection() {
               </div>
               <ul className="space-y-2 text-sm desktop-1500:text-sm desktop-1200:text-xs sm:text-base text-gray-600 ml-8">
                 <li>
-                  • The organization has to have existed for a minimum of one
+                  The organization has to have existed for a minimum of one
                   (1) year from the date of registration.
                 </li>
                 <li>
-                  • The organization must be registered as a non-profit that
+                  The organization must be registered as a non-profit that
                   implements social development projects in India, with no
                   political affiliations.
                 </li>
                 <li>
-                  • The organization's physical address must be verifiable.
+                  The organization's physical address must be verifiable.
                 </li>
                 <li>
-                  • All registration documents such as 80G, FCRA, etc., must be
+                  All registration documents such as 80G, FCRA, etc., must be
                   available upon request.
                 </li>
                 <li>
-                  • Organizations must have an Executive Board of Trustees that
+                  Organizations must have an Executive Board of Trustees that
                   maintains budgets, annual activity reports, and audited
                   financial statements. These must be available yearly upon
                   request.
                 </li>
                 <li>
-                  • The organization must fully comply with local and central
+                  The organization must fully comply with local and central
                   government regulations and labor laws.
                 </li>
                 <li>
-                  • The organization must have defined indicators that measure
+                  The organization must have defined indicators that measure
                   its performance against its stated objectives.
                 </li>
                 <li>
-                  • Grant applicants must demonstrate the potential of
+                  Grant applicants must demonstrate the potential of
                   continuing the funded work in a self-renewing manager after
                   funding from Chitrapur Heritage Foundation ceases
                 </li>

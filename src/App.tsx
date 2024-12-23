@@ -6,6 +6,7 @@ import ComingSoon from "./pages/ComingSoon";
 import AboutPage from "./pages/AboutPage";
 import ProjectsPage from "./pages/ProjectsPage";
 import EventsPage from "./pages/EventsPage";
+import Profile from "./pages/ProfilePage";
 
 function App() {
   console.log("HERE");
@@ -18,7 +19,7 @@ function App() {
         <Route path="/projects" element={<ProjectsPage />} />
         <Route path="/contribute" element={<ContributePage />} />
         <Route path="/events" element={<EventsPage />} />
-        <Route path="/profile" element={<ComingSoon />} />
+        <Route path="/profile" element={<Profile />} />
         <Route path="/contact" element={<ComingSoon />} />
         <Route path="/donate" element={<ComingSoon />} />
         <Route path="/join" element={<ComingSoon />} />
