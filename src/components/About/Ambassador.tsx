@@ -43,30 +43,30 @@ export default function Ambassador() {
 <div className="bg-white">
       <div className="max-w-7xl mx-auto px-4 pt-10 pb-20">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-[#1a3c77] mb-4">
+          <h2 className="text-3xl md:text-5xl text-[#1a3c77] mb-4 desktop-1500:text-4xl desktop-1200:text-4xl">
             CHF Ambassador
           </h2>
-          <p className="text-gray-600 max-w-5xl mx-auto md:text-lg leading-5 md:leading-relaxed">
+          <p className="text-[#808080] max-w-5xl mx-auto md:text-lg desktop-1500:text-md leading-5 md:leading-6 desktop-1200:text-[16px]">
             Be a catalyst—become a CHF Ambassador—and help to spread CHF's
             mission and vision. Inspire your friends, family members, colleagues
             and neighbors to support the effort in your neighborhood, at your
             convenience.{" "}
-            <Link to="/contribute#volunteer" className="text-blue-500 hover:underline">
+            <Link to="/contribute#volunteer" className="text-blue-500 underline italic">
               Join Now
             </Link>
           </p>
         </div>
 
         {/* Desktop View */}
-        <div className="hidden md:grid md:grid-cols-4 gap-8">
+        <div className="hidden md:grid md:grid-cols-4 gap-8 desktop-1200:gap-0">
           {steps.map((step, index) => (
             <div key={index} className="flex flex-col items-center text-center">
               <div className="mb-6">
-                <img src={step.image} alt="" className="object-contain" />
+                <img src={step.image} alt="" className="object-contain desktop-1200:w-[130px]" />
               </div>
               <div>
-                <p className="text-gray-600 text-lg max-w-52 text-left leading-6">
-                  <span className="text-[#1a3c77] text-lg font-semibold mb-1">
+                <p className="text-gray-600 text-lg desktop-1500:text-lg desktop-1200:max-w-[10rem]   desktop-1200:text-sm desktop-1500:max-w-52 text-left leading-6">
+                  <span className="text-[#1a3c77] text-lg desktop-1500:text-lg desktop-1200:text-sm font-bold mb-1">
                     {step.title}{" "}
                   </span>
                   {step.description}

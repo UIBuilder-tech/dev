@@ -78,7 +78,7 @@ export default function Navbar() {
           </div>
 
           {/* Desktop Header */}
-          <div className="hidden md:flex justify-between items-center px-4 py-4">
+          <div className="hidden md:flex justify-between items-center px-4 py-6">
             <Link to="/" className={`logo-container ${scrollDirection === 'down' ? '!hidden' : ''}`}>
               <img 
                 src={logo}
@@ -90,19 +90,19 @@ export default function Navbar() {
             <div className="w-[150px]" />
 
             <div className="flex items-center gap-10">
-              <div className="bg-white rounded-full px-8 flex items-center gap-10">
+              <div className="bg-white text-[20px] lg:text-[16px] desktop-1500:text-[16px] desktop-1200:text-[14px] rounded-full px-8 flex items-center gap-10 desktop-1500:gap-8 desktop-1200:gap-5 font-bold">
                 <NavLink to="/about">About</NavLink>
                 <NavLink to="/projects">Projects</NavLink>
                 <NavLink to="/contribute">Contribute</NavLink>
                 <NavLink to="/events">Events & News</NavLink>
               </div>
 
-              <div className="bg-white backdrop-blur-sm rounded-full pl-4 flex items-center gap-4">
+              <div className="bg-white backdrop-blur-sm rounded-full pl-6 flex items-center gap-5 desktop-1200:gap-4">
                 <Link to="/">
-                  <img src={HomeIcon} className="w-7 h-7" alt="Home" />
+                  <img src={HomeIcon} className="desktop-1500:w-6 desktop-1500:h-6 desktop-1200:w-6 desktop-1200:h-6 w-7 h-7" alt="Home" />
                 </Link>
                 <button onClick={() => setIsModalOpen(true)}>
-                  <img src={ProfileIcon} className="w-6 h-6" alt="Profile" />
+                  <img src={ProfileIcon} className="desktop-1200:w-5 desktop-1200:h-6 desktop-1500:w-6 desktop-1500:h-6 w-7 h-7" alt="Profile" />
                 </button>
                 <button 
                   onClick={(e) => {
@@ -117,13 +117,13 @@ export default function Navbar() {
                     }
                   }}
                 >
-                  <img src={ContactIcon} className="w-6 h-6" alt="Contact" />
+                  <img src={ContactIcon} className="desktop-1200:w-6 desktop-1200:h-6 desktop-1500:w-6 desktop-1500:h-6 w-7 h-7 " alt="Contact" />
                 </button>
                 <Link
                   to=" /contribute#donation-table"
-                  className="bg-secondary text-white px-6 py-3 rounded-full hover:bg-opacity-90 flex items-center gap-2"
+                  className="bg-secondary text-white px-6 desktop-1200:py-3 desktop-1500:py-3 desktop-1200:py-[12px] desktop-1200:px-5 py-4 rounded-full hover:bg-opacity-90 flex items-center gap-2 text-xl desktop-1200:text-lg desktop-1500:text-lg desktop-1200:text-sm desktop-1200:gap-1"
                 >
-                  Donate <Heart className="h-5 w-5" />
+                  Donate <Heart className="h-5 w-5 desktop-1200:h-4  desktop-1200:w-4" fill="white" />
                 </Link>
               </div>
             </div>

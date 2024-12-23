@@ -1,5 +1,10 @@
 import { useState } from "react";
 import { ArrowUpRight, Heart } from "lucide-react";
+import activeDonate from '../../assets/projectActiveDonateIcon.svg'
+import inactiveDonate from '../../assets/projectInactiveDonateIcon.svg'
+import activeSideArrow from '../../assets/activeSideArrow.svg'
+import inactiveSideArrow from '../../assets/inactiveSideArrow.svg'
+import { Link } from "react-router-dom";
 
 interface Project {
   id: string;
@@ -172,7 +177,7 @@ export default function FeaturedProjects({title}:Props) {
                   </span>
                 </td>
                 <td className="relative">
-                  <div className="flex items-center justify-center md:justify-end gap-1 max-sm:ml-2 md:gap-4">
+                  <div className="flex items-center justify-center md:justify-end gap-1 max-sm:ml-2 max-sm:mx-2 md:mx-4">
                     {isHovered && project.images && (
                       <div className="absolute max-sm:hidden right-40 flex items-center">
                         {project.images.map((image, index) => (
@@ -197,24 +202,23 @@ export default function FeaturedProjects({title}:Props) {
                         ))}
                       </div>
                     )}
-                    <button
-                      className={`rounded-full p-2 transition-all duration-200 ${
-                        isHovered
-                          ? "bg-secondary border border-secondary text-white"
-                          : "border border-gray-200 text-gray-400"
-                      }`}
+                    <Link
+                      to="/projects"
                     >
-                      <ArrowUpRight className="h-3 w-3 md:h-5 md:w-5" />
-                    </button>
-                    <button
-                      className={`rounded-full p-2 transition-all duration-200 ${
-                        isHovered
-                          ? "bg-secondary border border-secondary text-white"
-                          : "border border-gray-200 text-gray-400"
-                      }`}
+                     {isHovered ?
+                     <img src={activeSideArrow} className="w-14 h-14"/>
+                     :
+                      <img src={inactiveSideArrow} className="w-14 h-14"/>
+                     }
+                    </Link>
+                    <Link
+                      to="/contribute#donation-table"
                     >
-                      <Heart className="h-3 w-3 md:h-5 md:w-5" />
-                    </button>
+                    {isHovered ?
+                    <img src={activeDonate} className="w-14 h-14"/>
+                    :
+                     <img src={inactiveDonate} className="w-14 h-14"/>}
+                    </Link>
                   </div>
                 </td>
               </tr>

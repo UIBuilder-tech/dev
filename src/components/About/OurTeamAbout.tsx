@@ -35,8 +35,8 @@ export default function OurTeamAbout() {
   };
 
   return (
-    <div className="relative w-full max-w-7xl mx-auto px-4 py-10 md:py-12 bg-white rounded-3xl shadow-lg max-sm:max-h -[37.313rem]md:h-[37.313rem] my-10 max-sm:pb-16 md:my-20">
-      <h2 className="text-[2.5rem] text-center mb-10">Our Team</h2>
+    <div className="relative w-full max-w-7xl desktop-1500:max-w-7xl desktop-1200:max-w-6xl mx-auto px-4 py-10 md:py-12 bg-white rounded-3xl shadow-lg max-sm:max-h-[37.313rem] md:h-[37.313rem] my-10 max-sm:pb-16 md:my-20 ">
+      <h2 className="text-[2.5rem] text-center mb-10 desktop-1200:text-[2rem] desktop-1500:text-[2.25rem]">Our Team</h2>
 
       <div
         className={`grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-x-1 gap-y-6 md:mb-12 md:px-20 transition-opacity duration-1000 ${
@@ -49,13 +49,13 @@ export default function OurTeamAbout() {
               <img
                 src={member.img}
                 alt={member.name}
-                className="md:w-[7.5rem] w-10 h-10 md:h-[7.5rem] rounded-full object-cover"
+                className="md:w-[7.5rem] desktop-1500:w-[7.5rem] desktop-1500:h-[7.5rem] desktop-1200:w-[6.5rem] w-10 h-10 md:h-[7.5rem] desktop-1200:h-[6.5rem] rounded-full object-cover"
               />
             </div>
             <div className="flex flex-col">
-              <h3 className="md:text-lg text-sm font-medium text-gray-900">
+              <p className="md:text-lg text-sm font-medium text-gray-900">
                 {member.name}
-              </h3>
+              </p>
               <p className="text-gray-500 md:text-sm text-xs italic mt-0.5">
                 {member.role}
               </p>

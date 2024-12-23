@@ -24,12 +24,12 @@ function Newsletter() {
           {/* Left Content */}
 
           <div className="md:h-[460px] flex flex-col lg:flex-row items-center justify-left md:pl-20">
-            <div className="flex flex-col justify-center md:space-y-6 px-10 md:max-w-[50%] lg:pr-8 max-sm:py-8">
-              <h2 className="text-3xl md:text-5xl md:text-6xl text-white mb-4">
+            <div className="flex flex-col justify-center md:space-y-6 desktop-1200:space-y-2 px-10 md:max-w-[50%] lg:pr-8 max-sm:py-8">
+              <h2 className="text-3xl md:text-5xl md:text-6xl text-white mb-4 desktop-1200:text-4xl desktop-1500:text-5xl">
                 Newsletter
               </h2>
 
-              <p className="text-md md:text-xl text-white leading-relaxed max-w-3xl pb-4 md:pb-10">
+              <p className="text-md md:text-xl text-white leading-relaxed max-w-3xl pb-4 md:pb-10 desktop-1200:text-lg desktop-1200:leading-6">
                 Be a catalyst—become a CHF member—and receive updated news about
                 the programmes, events and more. Inspire your friends, family
                 members, colleagues and neighbors to support the effort in your

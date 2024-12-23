@@ -8,6 +8,8 @@ import VolunteerForm from "../components/Contribute/VolunteerForm";
 import FAQSection from "../components/Home/FAQ";
 import Footer from "../components/Footer/Footer";
 import ChitrapurMathImg from "../assets/Shirali_Math.jpg";
+import PhotoGallery from "../components/About/PhotoGallery";
+import Ambassador from "../components/About/Ambassador";
 
 export default function ContributePage() {
   const [totalDonationAmount, setTotalDonationAmount] = useState<number>(0.0);
@@ -46,6 +48,8 @@ export default function ContributePage() {
       <div id="volunteer">
         <VolunteerForm />
       </div>
+      <PhotoGallery/>
+      <Ambassador/>
       <FAQSection />
       <Footer />
     </div>

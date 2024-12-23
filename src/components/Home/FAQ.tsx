@@ -146,11 +146,12 @@ export default function FAQSection() {
       </div>
 
       <div className="relative z-[10] mx-auto max-w-3xl">
-        <h1 className="mb-12 text-3xl md:text-5xl font-semibold text-[#4285f4]">
+        <h1 className="mb-12 text-3xl md:text-5xl text-primary">
           FAQ's
         </h1>
 
-        <div className="space-y-4">
+        <div className="space-y-4 max-h-[450px] overflow-y-scroll " 
+        style={{scrollbarWidth:"none"}}>
           {currentFaqs.map((faq) => (
             <div key={faq.id} className="overflow-hidden">
               <button

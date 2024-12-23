@@ -99,13 +99,13 @@ console.log("totalAmount",totalAmount)
   }
 
   return (
-    <div className=" md:mx-8 p-6 md:p-8 py-16">
-      <h2 className="text-3xl md:text-4xl font-display text-gray-900 mb-8">Add Details & Pay</h2>
+    <div className=" md:mx-8 p-6 md:p-12 py-16">
+      <h2 className="text-3xl md:text-5xl font-display text-gray-900 mb-8">Add Details & Pay</h2>
       
       <form onSubmit={handleSubmit} className="flex flex-col md:flex-row items-center justify-between gap-12">
         {/* Left Column - Personal Details */}
-        <div className="bg-white rounded-3xl p-6 md:p-12 shadow-sm">
-          <div className="space-y-6">
+        <div className="bg-white rounded-3xl p-6 md:p-12 shadow-sm text-xl">
+          <div className="space-y-8">
             {/* Name Field with Verification Check */}
             <div className="relative">
               <input
@@ -215,11 +215,12 @@ console.log("totalAmount",totalAmount)
         </div>
 
         {/* Right Column - Payment Details */}
-        <div className="space-y-8 md:space-y-8 md:w-1/2">
+        <div className="space-y-8 md:space-y-0 md:w-1/2 md:h-[550px] flex flex-col justify-between">
           {/* Total Amount */}
+          <div className='space-y-8'>
           <div className="border-b border-gray-400 pb-2 md:pb-4">
             <div className="flex justify-between items-center">
-              <span className="text-[#516072]">Total Amount</span>
+              <span className="text-[#516072] md:text-md">Total Amount</span>
               <span className="text-[#516072] text-xl font-medium flex flex-row items-center gap-2"><div className={`flex items-center justify-center w-6 h-6 ${Number(totalDonationAmount)===0 ? "bg-[#D3D3D3]" : "bg-secondary"} rounded-full`}>
           <span className="text-white text-sm">$</span>
         </div> {totalDonationAmount}</span>
@@ -270,7 +271,8 @@ console.log("totalAmount",totalAmount)
               </div>
             </label>
           </div>
-
+          </div>
+          <div className='space-y-8'>
           {/* Powered by Stripe */}
           <div className="flex justify-center items-center gap-2">
             <span className='italic text-[#516072] text-sm'>Powered by</span>
@@ -280,10 +282,11 @@ console.log("totalAmount",totalAmount)
           {/* Submit Button */}
           <button
             type="submit"
-            className="w-full bg-secondary text-white rounded-full py-3 hover:bg-primary/90 transition-colors"
+            className="w-full bg-secondary text-white rounded-full py-3 md:py-4 md:text-xl hover:bg-primary/90 transition-colors"
           >
             Continue
           </button>
+          </div>
         </div>
       </form>
     </div>

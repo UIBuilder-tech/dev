@@ -101,9 +101,9 @@ export default function ProjectsPage() {
 "
         img={ChitrapurMathImg}
       />
-      <div id="our-projects">
+      {/* <div id="our-projects">
         <FeaturedProjects title="Our Projects" />
-      </div>
+      </div> */}
       <div id="education">
         <ProjectsCategory
           categoryTitle="Education"
@@ -129,7 +129,7 @@ export default function ProjectsPage() {
       <div id="special-projects">
       <SpecialProjects title="Special Projects" projects={projects} />
       </div>
-      <div id="chf-grants">
+      <div id="chf-grants" className="bg-white">
         <GrantsSection />
       </div>
       <Newsletter />

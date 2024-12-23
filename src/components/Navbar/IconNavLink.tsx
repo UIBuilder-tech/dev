@@ -8,7 +8,7 @@ interface IconNavLinkProps {
 
 export default function IconNavLink({ to, icon: Icon }: IconNavLinkProps) {
   const location = useLocation();
-  const isActive = location.pathname === to;
+const isActive = location.pathname === to;
 
   return (
     <Link

@@ -3,6 +3,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Heart, ArrowDownLeft, Plus } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useWindowWidth } from "../../hooks/useWindowWidth";
+import  ActiveArrow from '../../assets/arrowActive.svg'
+import DonateActive from '../../assets/projectActiveDonateIcon.svg'
+import DonateInctive from '../../assets/projectInactiveDonateIcon.svg'
 
 interface Project {
   id: number;
@@ -25,6 +28,10 @@ const ProjectCard = ({
 }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const navigate = useNavigate();
+  const windowWidth = useWindowWidth();
+  const isMobile = windowWidth < 768; // md breakpoint
+  const range150 = windowWidth>=1200 && windowWidth <=1500;
+  const range120 = windowWidth>1500 && windowWidth <=1900;
 
   const handleClick = (e: React.MouseEvent) => {
     if (
@@ -43,12 +50,12 @@ const ProjectCard = ({
       animate={
         isExpanded
           ? {
-              width: window.innerWidth < 768 ? "375px" : "640px",
-              height: window.innerWidth < 768 ? "auto" : "450px",
+              width: window.innerWidth < 768 ? "375px" : range150 ? "520px" : "640px",
+              height: window.innerWidth < 768 ? "auto" :  "450px",
               zIndex: 10,
             }
           : {
-              width: window.innerWidth < 768 ? "180px" : "320px",
+              width: window.innerWidth < 768 ? "180px" :range150 ? "280px" : "320px",
               height: window.innerWidth < 768 ? "auto" : "450px",
               zIndex: 0,
             }
@@ -59,7 +66,7 @@ const ProjectCard = ({
       <AnimatePresence mode="wait">
         {isExpanded ? (
           <motion.div
-            className="md:p-8 p-3 h-full flex flex-col"
+            className={`${range150 ? "p-6" : "md:p-8"} p-3 h-full flex flex-col`}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -68,18 +75,26 @@ const ProjectCard = ({
             {/* Expanded state content remains the same */}
             <div className="flex justify-between items-start">
               <div>
-                <p className="md:text-xl text-md">{project.title} at</p>
-                <p className="md:text-xl text-md ">{project.location}</p>
+                <p className={` text-md ${range150 ? 'text-lg' : 'text-xl'}`}>{project.title} at</p>
+                <p className={` text-md ${range150 ? 'text-lg' : 'text-xl'}`}>{project.location}</p>
                 <div className="w-12 h-1 bg-orange-500 mt-2 mb-4" />
               </div>
-              <div className="bg-orange-500 rounded-full p-2 md:p-3 cursor-pointer">
-                <ArrowDownLeft className="md:w-6 md:h-6 w-4 h-4 text-white" />
+              <div className="flex flex-row cursor-pointer">
+                {/* <ArrowDownLeft className="md:w-6 md:h-6 w-4 h-4 text-white" /> */}
+                <img onClick={(e) => {
+                  e.stopPropagation();
+                  navigate("/contribute#volunteer");
+                }} src={DonateActive} className="md:w-16 md:h-16 w-8 h-8 " />
+                <img onClick={(e) => {
+                  e.stopPropagation();
+                  navigate("/contribute#donate-table");
+                }} src={ActiveArrow} className="md:w-16 md:h-16 w-8 h-8 "/>
               </div>
             </div>
 
             <div className="flex md:gap-8 flex-1">
               <div className="flex-1">
-                <p className="text-[#808080] text-sm md:text-md leading-5">
+                <p className={`text-[#808080] text-sm md:text-md leading-5 ${range150 ? 'text-xs' :''}`}>
                   {project.description}
                 </p>
                 {from === "projects" && (
@@ -94,13 +109,13 @@ const ProjectCard = ({
                   </motion.button>
                 )}
               </div>
-              <div className="flex-1">
+              <div className="flex-1 flex flex-col justify-center items-end">
                 <img
                   src={project.images[currentImageIndex]}
                   alt={project.title}
-                  className="w-full md:h-64 object-cover rounded-lg"
+                  className={`${range150 || range120  ? 'w-[200px] h-[300px]' : 'w-full h-[250px] md:h-64'} object-cover rounded-lg`}
                 />
-                <div className="flex justify-center gap-2 mt-4">
+                <div className={`${range150 || range120  ? 'w-[200px] h-[300px]' : 'w-full md:h-64'} flex justify-center gap-2 mt-4`}>
                   {project.images.map((_, index) => (
                     <button
                       key={index}
@@ -121,17 +136,18 @@ const ProjectCard = ({
           </motion.div>
         ) : (
           <motion.div
-            className="md:p-6 p-2 h-full flex flex-col card-expand-area"
+            className="md:p-6 p-2 h-full flex flex-col justify-between card-expand-area"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
           >
+            <div>
             {/* Collapsed state content remains the same */}
             <div className="flex justify-between items-start">
               <div>
-                <p className="md:text-xl text-md">{project.title}</p>
-                <p className="md:text-xl text-md mb-2 md:mb-4">
+                <p className={` text-md ${range150 ? 'text-lg' : 'text-xl'}`}>{project.title}</p>
+                <p className={`${range150 ? 'text-lg' : 'text-xl'} mb-2 md:mb-4`}>
                   {project.location}
                 </p>
                 <div className="w-12 h-1 bg-orange-500 mb-2 md:mb-4" />
@@ -141,9 +157,10 @@ const ProjectCard = ({
                   e.stopPropagation();
                   navigate("/contribute#volunteer");
                 }}
-                className="p-1 md:p-2 rounded-full border-2 border-gray-200"
               >
-                <Heart className="md:w-5 md:h-5 w-3 h-3 text-orange-500" />
+                {/* <Heart className="md:w-5 md:h-5 w-3 h-3 text-orange-500" /> */}
+                <img src={DonateInctive} className="md:w-16 md:h-16 w-8 h-8 " />
+
               </button>
             </div>
 
@@ -160,14 +177,15 @@ const ProjectCard = ({
               </div>
             </div>
 
-            <p className="text-[#808080] flex-1 text-sm md:text-md leading-5">
+            <p className={`text-[#808080] text-sm md:text-md leading-5 max-sm:line-clamp-5 line-clamp-6 overflow-hidden  ${range150 ? 'text-xs' :''}`}>
               {project.description}
             </p>
-
-            <button className="mt-4 w-full py-2 md:py-3 bg-gray-100 max-sm:text-xs text-gray-600 font-medium flex items-center justify-between px-3 md:px-6 rounded-3xl">
+            </div>
+            <button className="mt-4 w-full py-2 md:py-3 bg-gray-100 max-sm:text-xs text-gray-600 font-medium flex items-center justify-between px-3 md:px-6 rounded-3xl desktop-1200:text-sm desktop-1200:py-2 desktop-1200:px-4">
               READ MORE
-              <Plus className="h-5 w-5 md:h-8 md:w-8 border border-secondary rounded-full p-1 md:p-2 text-secondary bg-[#FBF3E8] font-bold" />
+              <Plus className="h-5 w-5 md:h-8 md:w-8  rounded-full p-1 md:p-2 text-secondary bg-[#ffffff] font-bold" />
             </button>
+
           </motion.div>
         )}
       </AnimatePresence>
@@ -190,6 +208,8 @@ const SpecialProjects = ({
   const totalPages = Math.ceil(projects.length / itemsPerPage);
   const windowWidth = useWindowWidth();
   const isMobile = windowWidth < 768;
+  const range150 = windowWidth>=1200 && windowWidth <=1500;
+  const range120 = windowWidth>1500 && windowWidth <=1900;
 
   console.log(from);
   const handleExpand = (id: number) => {
@@ -223,18 +243,18 @@ const SpecialProjects = ({
 
   return (
     <div className="w-full max-w-7xl mx-auto py-12">
-      <h2 className="text-3xl mb-4 md:mb-8 max-sm:px-5">{title}</h2>
+      <h2 className={`text-3xl desktop-1200:text-4xl mb-4 md:mb-8 max-sm:px-5 ${range150 ? "pl-20" :""}`}>{title}</h2>
 
       <div className="relative">
         <div className="flex items-center justify-center gap-6 mb-8">
           {!isMobile && (
             <button
               onClick={prevPage}
-              className="p-2 rounded-full bg-white shadow-lg h-10 hover:bg-gray-50 flex-shrink-0"
+              className={` ${range150 ? 'p-2' : 'p-2 h-10'} rounded-full bg-white shadow-lg hover:bg-gray-50  flex-shrink-0`}
             >
               <svg
-                width="24"
-                height="24"
+                width={range150 ? "18" :"24"}
+                height={range150 ? "18" :"24"}
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
@@ -289,11 +309,11 @@ const SpecialProjects = ({
           {!isMobile && (
             <button
               onClick={nextPage}
-              className="p-2 rounded-full bg-white shadow-lg hover:bg-gray-50 h-10 flex-shrink-0"
+              className={` ${range150 ? 'p-2' : 'p-2 h-10'} rounded-full bg-white shadow-lg hover:bg-gray-50  flex-shrink-0`}
             >
               <svg
-                width="24"
-                height="24"
+                width={range150 ? "18" :"24"}
+                height={range150 ? "18" :"24"}
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"

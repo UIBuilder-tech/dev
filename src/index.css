@@ -4,12 +4,27 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'Helvetica Neue';
+  src: url('src/assets/fonts/HelveticaNeueRoman.otf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Helvetica Neue';
+  src: url('src/assets/fonts/HelveticaNeueMedium.otf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+
 @layer base {
   h1, h2, h3, h4, h5, h6 {
     font-family: 'DM Serif Display', serif;
   }
   body {
-    font-family: 'Helvetica Now', Helvetica, Arial, sans-serif;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   }
 }
 
@@ -22,15 +37,77 @@
 
 .logo-container {
   position: absolute;
-  width: 150px;
-  height: 111px;
+  width: 205px;
+  height: 140px;
   background: #FFFFFF;
   border-radius: 0 72px 72px 0;
   transform: rotate(90deg);
   display: flex;
   align-items: center;
   justify-content: center;
+  left: 35px;
+  z-index: 99;
 }
+
+.logo {
+  width: 123px;
+  height: 99px;
+  transform: rotate(-90deg);
+  object-fit: contain;
+  position: relative;
+  left:5px;
+  z-index: 999;
+}
+
+
+/* 125% */
+@media (min-width:1501px) and (max-width:1900px){
+  .logo-container {
+    position: absolute;
+    width: 180px;
+    height: 120px;
+    background: #FFFFFF;
+    border-radius: 0 72px 72px 0;
+    transform: rotate(90deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    left: 35px;
+  }
+  .logo {
+    width: 100px;
+    height: 90px;
+    transform: rotate(-90deg);
+    object-fit: contain;
+    position: relative;
+    left:5px;
+  }
+}
+
+/* 150% */
+@media (min-width:1200px) and (max-width:1500px){
+  .logo-container {
+    position: absolute;
+    width: 150px;
+    height: 100px;
+    background: #FFFFFF;
+    border-radius: 0 72px 72px 0;
+    transform: rotate(90deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    left: 35px;
+  }
+  .logo {
+    width: 90px;
+    height: 80px;
+    transform: rotate(-90deg);
+    object-fit: contain;
+    position: relative;
+    left:5px;
+  }
+}
+
 .mobile-logo-container {
   background: #FFFFFF;
   display: flex;
@@ -39,13 +116,6 @@
   width: 120px;
 }
 
-.logo {
-  width: 150px;
-  height: 99px;
-  transform: rotate(-90deg);
-  object-fit: contain;
-  padding: 0 30px;
-}
 
 .mobile-logo {
   height: 45px;
