@@ -1,4 +1,5 @@
-import { Mail, Plus } from "lucide-react";
+import { Mail } from "lucide-react";
+import grantsIcon from "../../assets/grantsIcon.svg";
 
 export default function GrantsSection() {
   return (
@@ -21,7 +22,12 @@ export default function GrantsSection() {
             </h2>
             <div className="space-y-6">
               <div className="flex gap-3">
-                <Plus className="w-5 h-5 text-[#E67E22] flex-shrink-0 mt-1" />
+                {/* <grantsIcon className="w-5 h-5 text-[#E67E22] flex-shrink-0 mt-1" /> */}
+                <img
+                  src={grantsIcon}
+                  alt="grantsIcon"
+                  className="w-5 h-5 text-[#E67E22] flex-shrink-0 mt-1"
+                />
                 <p className="text-sm sm:text-base text-gray-600">
                   CHF supports community service organizations in India whose
                   goals and objectives closely match one of CHF's thematic
@@ -29,7 +35,11 @@ export default function GrantsSection() {
                 </p>
               </div>
               <div className="flex gap-3">
-                <Plus className="w-5 h-5 text-[#E67E22] flex-shrink-0 mt-1" />
+                <img
+                  src={grantsIcon}
+                  alt="grantsIcon"
+                  className="w-5 h-5 text-[#E67E22] flex-shrink-0 mt-1"
+                />
                 <p className="text-sm sm:text-base text-gray-600">
                   We do not provide grants for budget line items labeled as
                   "Operational Expenses," "Endowments" or for individuals; and
@@ -38,7 +48,11 @@ export default function GrantsSection() {
                 </p>
               </div>
               <div className="flex gap-3">
-                <Plus className="w-5 h-5 text-[#E67E22] flex-shrink-0 mt-1" />
+                <img
+                  src={grantsIcon}
+                  alt="grantsIcon"
+                  className="w-5 h-5 text-[#E67E22] flex-shrink-0 mt-1"
+                />
                 <p className="text-sm sm:text-base text-gray-600">
                   We do not provide grants for budget line items labeled as
                   "Operational Expenses," "Endowments" or for individuals; and
@@ -55,32 +69,39 @@ export default function GrantsSection() {
               Conditions for Grants
             </h2>
             <div className="p-4 space-y-2 rounded-sm">
-              <p className="text-sm sm:text-base text-gray-600">
-                The beneficiary organization must provide:
-              </p>
-              <ul className="list-none space-y-2 text-sm sm:text-base text-gray-600">
+              <div className="flex gap-3">
+                <img
+                  src={grantsIcon}
+                  alt="grantsIcon"
+                  className="w-5 h-full text-[#E67E22] flex-shrink-0 mt-1"
+                />
+                <p className="text-sm sm:text-base text-gray-600">
+                  The beneficiary organization must provide:
+                </p>
+              </div>
+              <ul className="list-disc space-y-2 text-sm sm:text-base text-gray-600">
                 <li>
-                  • Official receipt of the grant in the name of Chitrapur
+                  Official receipt of the grant in the name of Chitrapur
                   Heritage Foundation
                 </li>
                 <li>
-                  • Progress reports, photographs, press cuttings, and video, or
+                  Progress reports, photographs, press cuttings, and video, or
                   other such material for our records.
                 </li>
                 <li>
-                  • Chitrapur Heritage Foundation's name prominently displayed
+                  Chitrapur Heritage Foundation's name prominently displayed
                   on any equipment sent by us.
                 </li>
                 <li>
-                  • For Sponsor-A- Student scheme and cash grants, appropriate
+                  For Sponsor-A- Student scheme and cash grants, appropriate
                   recognition, media publicity, and inclusion in annual reports.
                 </li>
-                <li>• A copy of the beneficiary's annual report.</li>
+                <li>A copy of the beneficiary's annual report.</li>
                 <li>
-                  • Audited financial statement of the beneficiary organization
+                  Audited financial statement of the beneficiary organization
                 </li>
                 <li>
-                  • A copy of the Current and Valid Tax Exemption Certificate
+                  A copy of the Current and Valid Tax Exemption Certificate
                 </li>
               </ul>
             </div>
@@ -91,45 +112,49 @@ export default function GrantsSection() {
             <h2 className="text-xl font-semibold mb-6">Selection Criteria</h2>
             <div className="space-y-4">
               <div className="flex gap-3">
-                <Plus className="w-5 h-5 text-[#E67E22] flex-shrink-0 mt-1" />
+                <img
+                  src={grantsIcon}
+                  alt="grantsIcon"
+                  className="w-5 h-5 text-[#E67E22] flex-shrink-0 mt-1"
+                />
                 <p className="text-sm sm:text-base text-gray-600">
                   In general, Chitrapur Heritage Foundation gives priority to
                   applications from our core community trusts and foundations.
                 </p>
               </div>
-              <ul className="space-y-2 text-sm sm:text-base text-gray-600 ml-8">
+              <ul className="list-disc space-y-2 text-sm sm:text-base text-gray-600 ml-8">
                 <li>
-                  • The organization has to have existed for a minimum of one
+                  The organization has to have existed for a minimum of one
                   (1) year from the date of registration.
                 </li>
                 <li>
-                  • The organization must be registered as a non-profit that
+                  The organization must be registered as a non-profit that
                   implements social development projects in India, with no
                   political affiliations.
                 </li>
                 <li>
-                  • The organization's physical address must be verifiable.
+                  The organization's physical address must be verifiable.
                 </li>
                 <li>
-                  • All registration documents such as 80G, FCRA, etc., must be
+                  All registration documents such as 80G, FCRA, etc., must be
                   available upon request.
                 </li>
                 <li>
-                  • Organizations must have an Executive Board of Trustees that
+                  Organizations must have an Executive Board of Trustees that
                   maintains budgets, annual activity reports, and audited
                   financial statements. These must be available yearly upon
                   request.
                 </li>
                 <li>
-                  • The organization must fully comply with local and central
+                  The organization must fully comply with local and central
                   government regulations and labor laws.
                 </li>
                 <li>
-                  • The organization must have defined indicators that measure
+                  The organization must have defined indicators that measure
                   its performance against its stated objectives.
                 </li>
                 <li>
-                  • Grant applicants must demonstrate the potential of
+                  Grant applicants must demonstrate the potential of
                   continuing the funded work in a self-renewing manager after
                   funding from Chitrapur Heritage Foundation ceases
                 </li>

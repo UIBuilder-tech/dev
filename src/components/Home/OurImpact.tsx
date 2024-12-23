@@ -2,6 +2,8 @@ import { useState } from "react";
 import { ArrowUpRight, Heart } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
+import Srivali from "../../assets/Srivali High School.png";
+import ChitrapurMathImg from "../../assets/Shirali_Math.jpg";
 
 interface ImpactCard {
   id: string;
@@ -18,7 +20,7 @@ const impactCards: ImpactCard[] = [
     subtitle: "Community & Heritage",
     description:
       "CHF contributed over $300K towards the renovation of Shri Chitrapur Math in Shirali, leading up to the Tercentennial of Guru Parampara in 2008. This initiative reflects CHF's commitment to preserving cultural and spiritual heritage.",
-    image: "https://chfusa.org/static/images/MR(1).jpg", // Temple image
+    image: ChitrapurMathImg, // Temple image
   },
   {
     id: "2",
@@ -26,7 +28,7 @@ const impactCards: ImpactCard[] = [
     subtitle: "Education",
     description:
       "CHF funded the construction of two school buildings at Srivali High School, supporting education and providing better learning environments for students in the region.",
-    image: "https://chfusa.org/static/images/SHS(2).jpg", // Education image
+    image: Srivali, // Education image
   },
   {
     id: "3",
@@ -34,7 +36,8 @@ const impactCards: ImpactCard[] = [
     subtitle: "Women Empowerment",
     description:
       "Samvit Sudha, initiated by SCM, focuses on empowering women by providing them with vocational skills and opportunities for self-reliance, fostering growth and independence.",
-    image: "https://chfusa.org/static/images/SS(4).jpg", // Food donation image
+    image:
+      "https://samvitsudha.com/wp-content/uploads/2023/09/2-Fabric-Unit-training-@-Workplace.jpg", // Food donation image
   },
 ];
 
@@ -69,7 +72,7 @@ export default function ImpactSection() {
                 alt={activeCard.title}
                 className="w-full h-full object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-b from-black/50 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-b from-black/30 to-transparent" />
 
               <div className="absolute inset-0 p-4 md:p-8 flex flex-col justify-between">
                 <div className="flex justify-between items-start w-full">
@@ -87,7 +90,10 @@ export default function ImpactSection() {
                     <div className="h-0.5 bg-white transition-all duration-500 w-[100%]  md:w-[150%]" />
                   </div>
                   <div className="flex gap-2 md:gap-4">
-                    <Link to='/contribute#donation-table' className="rounded-full max-sm:text-xs px-2 py-1 md:px-6 md:py-2 text-white border hover:bg-primary/90">
+                    <Link
+                      to="/contribute#donation-table"
+                      className="rounded-full max-sm:text-xs px-2 py-1 md:px-6 md:py-2 text-white border hover:bg-primary/90"
+                    >
                       Learn More
                     </Link>
                     <button className="bg-secondary border-secondary rounded-full flex items-center p-2 text-white ">
@@ -104,7 +110,10 @@ export default function ImpactSection() {
                     <p className="max-sm:text-xs text-sm text-[#516072] max-sm:leading-5 ">
                       {activeCard.description}
                     </p>
-                    <Link to='/contribute#donation-table' className="float-right px-3 py-1 max-sm:text-sm md:px-6 md:py-2  bg-secondary text-white rounded-full flex items-center gap-2 shadow-md">
+                    <Link
+                      to="/contribute#donation-table"
+                      className="float-right px-3 py-1 max-sm:text-sm md:px-6 md:py-2  bg-secondary text-white rounded-full flex items-center gap-2 shadow-md"
+                    >
                       Donate <Heart className="h-4 w-4" fill="white" />
                     </Link>
                   </div>
