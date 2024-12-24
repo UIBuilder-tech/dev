@@ -2,22 +2,27 @@ import { useState, FormEvent } from 'react'
 import { Check } from 'lucide-react'
 import stripe from '../../assets/stripe.svg'
 import paypal from '../../assets/paypal.svg'
-
-interface FormData {
-  name: string
-  email: string
-  phone: string
-  address: string
-  city: string
-  zipCode: string
-  country: string
-  paymentMethod: 'paypal' | 'cheque' | 'zelle'
-  rememberMe: boolean
-}
+import { UseDataContext } from '../context/DataContext'
+import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 interface FormErrors {
   [key: string]: string
 }
+interface FormType {
+  id: number; // A unique identifier (e.g., timestamp)
+  name: string; // Name of the user
+  email: string; // Email address
+  phone: string; // Phone number
+  address: string; // Address line
+  city: string; // City name
+  zipCode: string; // Zip/postal code
+  country: string; // Country name
+  paymentMethod: string; // Payment method (e.g., 'online', 'offline')
+  rememberMe: boolean; // Whether the user opts for "remember me"
+  amount: string | null; // Total amount
+}
+
 
 interface Props{
   totalDonationAmount:number;
@@ -25,7 +30,11 @@ interface Props{
 
 
 export default function PaymentForm({totalDonationAmount}:Props) {
-  const [formData, setFormData] = useState<FormData>({
+  const totalAmount = sessionStorage.getItem("totalDonationAmount")
+
+  // Usage
+  const defaultForm: FormType = {
+    id: Date.now(),
     name: '',
     email: '',
     phone: '',
@@ -33,14 +42,17 @@ export default function PaymentForm({totalDonationAmount}:Props) {
     city: '',
     zipCode: '',
     country: '',
-    paymentMethod: 'paypal',
-    rememberMe: false
-  })
+    paymentMethod: 'online',
+    rememberMe: false,
+    amount: totalAmount
+  };
+  const [formData, setFormData] = useState<FormType>(defaultForm)
 
   const [errors, setErrors] = useState<FormErrors>({})
-  const [isNameVerified, setIsNameVerified] = useState(false)
-  const totalAmount = sessionStorage.getItem("totalDonationAmount")
-console.log("totalAmount",totalAmount)
+  const [isNameVerified, setIsNameVerified] = useState<boolean>(false)
+  const [IsFormValidate, setIsFormValidate] = useState<boolean>(false)
+  const navigation = useNavigate();
+  const { setData } = UseDataContext();
   const validateForm = (): boolean => {
     const newErrors: FormErrors = {}
 
@@ -79,7 +91,25 @@ console.log("totalAmount",totalAmount)
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
     if (validateForm()) {
-      console.log('Form submitted:', formData)
+      setIsFormValidate(true)
+      fetch("/api/create-payment-intent", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ items: [{ ...formData }] }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          setData((v) => ({ ...v, clientSecret: data.clientSecret }))
+          sessionStorage.setItem('clientSecret', data.clientSecret)
+          // Save data to sessionStorage
+          sessionStorage.setItem('formdata', JSON.stringify(formData));
+
+          navigation("checkout")
+        }).catch((err) => {
+          toast.error(err.message)
+        });
+
+      // console.log('Form submitted:', formData)
     }
   }
 
@@ -101,7 +131,7 @@ console.log("totalAmount",totalAmount)
   return (
     <div className=" md:mx-8 p-6 md:p-12 py-16">
       <h2 className="text-3xl md:text-5xl font-display text-gray-900 mb-8">Add Details & Pay</h2>
-      
+
       <form onSubmit={handleSubmit} className="flex flex-col md:flex-row items-center justify-between gap-12">
         {/* Left Column - Personal Details */}
         <div className="bg-white rounded-3xl p-6 md:p-12 shadow-sm text-xl">
@@ -127,6 +157,7 @@ console.log("totalAmount",totalAmount)
                 type="email"
                 name="email"
                 value={formData.email}
+                disabled={IsFormValidate}
                 onChange={handleInputChange}
                 className={`w-full border-b ${errors.email ? 'border-red-500' : 'border-gray-200'} py-3 focus:outline-none focus:border-primary`}
                 placeholder="Email Address"
@@ -137,6 +168,7 @@ console.log("totalAmount",totalAmount)
             {/* Phone Field */}
             <div>
               <input
+                disabled={IsFormValidate}
                 type="tel"
                 name="phone"
                 value={formData.phone}
@@ -150,6 +182,7 @@ console.log("totalAmount",totalAmount)
             {/* Address Field */}
             <div>
               <input
+                disabled={IsFormValidate}
                 type="text"
                 name="address"
                 value={formData.address}
@@ -164,6 +197,7 @@ console.log("totalAmount",totalAmount)
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <input
+                  disabled={IsFormValidate}
                   type="text"
                   name="city"
                   value={formData.city}
@@ -175,6 +209,7 @@ console.log("totalAmount",totalAmount)
               </div>
               <div>
                 <input
+                  disabled={IsFormValidate}
                   type="text"
                   name="zipCode"
                   value={formData.zipCode}
@@ -189,6 +224,7 @@ console.log("totalAmount",totalAmount)
             {/* Country and Remember Me Row */}
             <div className="flex items-center justify-between">
               <select
+                disabled={IsFormValidate}
                 name="country"
                 value={formData.country}
                 onChange={handleInputChange}
@@ -202,6 +238,7 @@ console.log("totalAmount",totalAmount)
 
               <label className="flex items-center gap-2 cursor-pointer">
                 <input
+                  disabled={IsFormValidate}
                   type="checkbox"
                   name="rememberMe"
                   checked={formData.rememberMe}
@@ -241,14 +278,15 @@ console.log("totalAmount",totalAmount)
               <div className='bg-white rounded-md w-full p-3 md:p-6'>
               <img src={paypal} alt="PayPal" className="w-24" />
               </div>
-            </label>
+            </label> */}
 
             <label className="flex items-center gap-3 cursor-pointer">
               <input
+                disabled={IsFormValidate}
                 type="radio"
                 name="paymentMethod"
-                value="cheque"
-                checked={formData.paymentMethod === 'cheque'}
+                value="online"
+                checked={formData.paymentMethod === 'online'}
                 onChange={handleInputChange}
                 className="w-6 h-6 text-primary"
               />
@@ -259,10 +297,11 @@ console.log("totalAmount",totalAmount)
 
             <label className="flex items-center gap-3 cursor-pointer">
               <input
+                disabled={IsFormValidate}
                 type="radio"
                 name="paymentMethod"
-                value="zelle"
-                checked={formData.paymentMethod === 'zelle'}
+                value="cheque"
+                checked={formData.paymentMethod === 'cheque'}
                 onChange={handleInputChange}
                 className="w-6 h-6 text-primary"
               />
@@ -274,13 +313,15 @@ console.log("totalAmount",totalAmount)
           </div>
           <div className='space-y-8'>
           {/* Powered by Stripe */}
-          <div className="flex justify-center items-center gap-2">
-            <span className='italic text-[#516072] text-sm'>Powered by</span>
-            <img src={stripe} alt="Powered by Stripe" className="h-6" />
-          </div>
+          {formData.paymentMethod === 'online' ?
+            <div className="flex justify-center items-center gap-2">
+              <span className='italic text-[#516072] text-sm'>Payment by</span>
+              <img src={stripe} alt="Powered by Stripe" className="h-6" />
+            </div> : null}
 
           {/* Submit Button */}
           <button
+            disabled={IsFormValidate}
             type="submit"
             className="w-full bg-secondary text-white rounded-full py-3 md:py-4 md:text-xl hover:bg-primary/90 transition-colors"
           >
