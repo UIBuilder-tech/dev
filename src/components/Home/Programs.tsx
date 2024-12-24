@@ -19,7 +19,6 @@ const visionCards: VisionCard[] = [
   {
     id: "education",
     title: "Education",
-    title: "Education",
     description:
       "Chitrapur Heritage Foundation (CHF) supports 9 schools in India, empowering over 3,000 underprivileged students through quality education, scholarship’s,  vocational training, and personnel development programs.",
     image: educationImg,
@@ -89,7 +88,7 @@ export default function Programs() {
                   <div className="h-0.5 bg-white w-full" />
                 </div>
                 <div className="flex flex-row items-center text-white">
-                  <Link to='/contribute#volunteer' className="p-2 border rounded-3xl px-4 text-xl desktop-1200:text-lg ">Learn More</Link>
+                  <Link to='/projects' className="p-2 border rounded-3xl px-4 text-xl desktop-1200:text-lg ">Learn More</Link>
                 <button
                   onClick={() => setExpandedId("")}
                   className=""
