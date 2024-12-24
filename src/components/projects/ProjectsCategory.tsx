@@ -69,17 +69,17 @@ export default function ProjectsCategory({
 
   return (
     <div className="relative px-5 md:p-8 md:mx-14 py-6 md:py-12 ">
-      <h1 className="text-3xl md:text-5xl mb-4 md:mb-8 desktop-1200:text-3xl desktop-1500:text-4xl ">{categoryTitle}</h1>
+      <h1 className="text-3xl md:text-5xl mb-4 md:mb-8 desktop-1200:text-3xl desktop-1500:text-4xl  desktop-1900:text-5xl ">{categoryTitle}</h1>
 
       {/* Featured Program */}
-      <div className="bg-white rounded-3xl p-2 md:p-10 md:pl-14 desktop-1500:p-6 desktop-1200:p-6">
-        <div className="grid grid-cols-1 lg:grid-cols-[1.45fr_1fr] md:gap-16">
+      <div className="bg-white rounded-3xl p-2 md:p-10 md:pl-14  desktop-1900:pl-14 desktop-1500:p-6 desktop-1200:p-6">
+        <div className="grid grid-cols-1 lg:grid-cols-[1.45fr_1fr] md:gap-16  desktop-1900:gap-5">
           <div className="md:space-y-6 space-y-4 flex flex-col justify-center px-4 md:px-10">
-            <p className="text-xl max-sm:pt-2 md:text-3xl font-bold md:max-w-[50%] desktop-1500:text-2xl desktop-1200:text-xl">
+            <p className="text-xl max-sm:pt-2 md:text-3xl font-semibold md:max-w-[50%] desktop-1500:text-2xl desktop-1200:text-xl  desktop-1900:text-3xl">
               {programs[currentProgram].title}
             </p>
             <div className="underline-gradient rounded-xl"/>
-            <p className="text-[#808080] text-sm md:text-xl md:leading-6 md:max-w-[90%] desktop-1500:text-[18px] desktop-1200:text-[16px]">
+            <p className="text-[#808080] text-sm md:text-xl md:leading-6 md:max-w-[90%] desktop-1500:text-[18px] desktop-1200:text-[16px]  desktop-1900:max-w-[80%]">
               {programs[currentProgram].description}
             </p>
             <div className="flex gap-4 md:pt-4">
@@ -94,14 +94,14 @@ export default function ProjectsCategory({
            </>
              :
              
-             <Link to='/contribute#volunteer' className="md:px-6 px-3 py-2 md:py-2.5 border-2 border-blue-600 text-blue-600 rounded-full text-sm md:text-xl font-medium hover:bg-blue-700 transition-colors desktop-1200:px-4 desktop-1200:py-2 desktop-1500:text-[18px] desktop-1200:text-[16px]">
+             <Link to='/contribute#volunteer' className="md:px-6 px-3 py-2 md:py-2.5 border-2 border-blue-600 text-blue-600 rounded-full text-sm md:text-xl font-medium hover:bg-blue-700 transition-colors desktop-1200:px-4 desktop-1200:py-2 desktop-1500:text-[18px] desktop-1200:text-[16px]  desktop-1900:text-[20px]  desktop-1900:py-3  desktop-1900:px-5">
                 Contribute
               </Link>
               }
             </div>
           </div>
           <div className="flex flex-wrap gap-6 p-4">
-            <div className="w-full desktop-1200:w-[450px] desktop-1500:w-[500px]">
+            <div className="w-full desktop-1200:w-[450px] desktop-1500:w-[500px]  desktop-1900:w-[600px]">
               <motion.img
                 key={`main-${currentProgram}`}
                 initial={{ opacity: 0 }}
@@ -114,7 +114,7 @@ export default function ProjectsCategory({
               />
             </div>
             <div className="max-sm:hidden flex flex-wrap w-full">
-              <div className="w-1/2 pr-4  desktop-1200:w-[225px] desktop-1500:w-[250px]">
+              <div className="w-1/2 pr-4  desktop-1200:w-[225px] desktop-1500:w-[250px]  desktop-1900:w-[300px]">
                 <motion.img
                   key={`sub1-${currentProgram}`}
                   initial={{ opacity: 0 }}
@@ -126,7 +126,7 @@ export default function ProjectsCategory({
                   className="w-full h-[250px] desktop-1200:h-[175px] desktop-1500:h-[225px] object-cover rounded-tl-xl rounded-br-xl"
                 />
               </div>
-              <div className="w-1/2 desktop-1200:w-[225px] desktop-1500:w-[250px]">
+              <div className="w-1/2 desktop-1200:w-[225px] desktop-1500:w-[250px]  desktop-1900:w-[300px]">
                 <motion.img
                   key={`sub2-${currentProgram}`}
                   initial={{ opacity: 0 }}
@@ -158,7 +158,7 @@ export default function ProjectsCategory({
               // key={program.id}
           key={`${program.id}-${currentPage}`}
 
-              className={`flex-none w-[250px] md:w-[500px]  desktop-1200:w-[350px] desktop-1500:w-[425px] p-1  desktop-1500:m-3 m-2 aspect-[3/2] ${
+              className={`flex-none w-[250px] md:w-[500px]  desktop-1200:w-[350px] desktop-1500:w-[425px] p-1   desktop-1900:w-[550px] desktop-1500:m-3 m-2 aspect-[3/2] ${
                 index + currentPage * itemsPerPage === currentProgram ? "rounded-xl" : ""
               }`}
               onClick={() => setCurrentProgram(index + currentPage * itemsPerPage)}
@@ -171,14 +171,14 @@ export default function ProjectsCategory({
                 />
                 <div className="absolute inset-0 bg-black/40 hover:bg-black/50 transition-colors" />
                 <div className="absolute top-0 left-0 right-0 p-4 text-white max-w-sm">
-                  <p className="text-sm md:text-2xl desktop-1500:text-xl desktop-1200:text-lg pr-8 max-sm:leading-4">{program.title}</p>
+                  <p className="text-sm md:text-2xl desktop-1500:text-xl desktop-1200:text-lg  desktop-1900:text-2xl pr-8 max-sm:leading-4">{program.title}</p>
                   <div className="h-[1px] mt-2 w-1/3 bg-white"></div>
                 </div>
                 <motion.div
                   className={
                     index + currentPage * itemsPerPage === currentProgram
-                      ? "absolute top-4 right-4 md:w-20 md:h-20 desktop-1200:w-12 desktop-1200:h-12  desktop-1500:w-16 desktop-1500:h-16 w-8 h-8   rounded-full flex items-center justify-center"
-                      : "absolute top-4 right-4 md:w-20 md:h-20 desktop-1200:w-12 desktop-1200:h-12 desktop-1500:w-16 desktop-1500:h-16 w-8 h-8  flex items-center justify-center"
+                      ? "absolute top-4 right-4 md:w-20 md:h-20 desktop-1200:w-12 desktop-1200:h-12  desktop-1500:w-16 desktop-1500:h-16 w-8 h-8 desktop-1900:w-20 desktop-1900:h-20 rounded-full flex items-center justify-center"
+                      : "absolute top-4 right-4 md:w-20 md:h-20 desktop-1200:w-12 desktop-1200:h-12 desktop-1500:w-16 desktop-1500:h-16 desktop-1900:w-20 desktop-1900:h-20 w-8 h-8  flex items-center justify-center"
                   }
                   initial={{ opacity: 0, rotate: 0 }}
                   animate={{
@@ -188,7 +188,7 @@ export default function ProjectsCategory({
                   transition={{ duration: 0.3 }}
                 >
                   {/* <ArrowUpRight className="md:w-8 md:h-8 w-4 h-4 text-gray-50" /> */}
-                 {index + currentPage * itemsPerPage === currentProgram? <img src={activeArrow} className="md:w-20 md:h-20 desktop-1200:w-12 desktop-1200:h-12 desktop-1500:w-16 desktop-1500:h-16 w-8 h-8 "/> : <img src={inactiveArrrow} className="md:w-20 md:h-20 desktop-1200:w-12 desktop-1200:h-12 desktop-1500:w-16 desktop-1500:h-16 w-8 h-8 "/> }
+                 {index + currentPage * itemsPerPage === currentProgram? <img src={activeArrow} className="md:w-20 md:h-20 desktop-1200:w-12 desktop-1200:h-12 desktop-1500:w-16 desktop-1500:h-16 desktop-1900:w-20 desktop-1900:h-20 w-8 h-8 "/> : <img src={inactiveArrrow} className="md:w-20 md:h-20 desktop-1200:w-12 desktop-1200:h-12 desktop-1500:w-16 desktop-1500:h-16 desktop-1900:w-20 desktop-1900:h-20 w-8 h-8 "/> }
                 </motion.div>
               </div>
             </motion.div>

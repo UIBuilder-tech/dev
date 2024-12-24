@@ -40,10 +40,10 @@ export default function Ambassador() {
   };
 
   return (
-<div className="bg-white">
+<div className="bg-white desktop-1900:mb-8 desktop-1900:mt-10">
       <div className="max-w-7xl mx-auto px-4 pt-10 pb-20">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-5xl text-[#1a3c77] mb-4 desktop-1500:text-4xl desktop-1200:text-4xl">
+          <h2 className="text-3xl md:text-5xl text-[#1a3c77] mb-4 desktop-1500:text-4xl desktop-1200:text-4xl desktop-1900:text-5xl">
             CHF Ambassador
           </h2>
           <p className="text-[#808080] max-w-5xl mx-auto md:text-lg desktop-1500:text-md leading-5 md:leading-6 desktop-1200:text-[16px]">
@@ -62,7 +62,7 @@ export default function Ambassador() {
           {steps.map((step, index) => (
             <div key={index} className="flex flex-col items-center text-center">
               <div className="mb-6">
-                <img src={step.image} alt="" className="object-contain desktop-1200:w-[130px]" />
+                <img src={step.image} alt="" className="object-contain desktop-1200:w-[130px] desktop-1900:w-[160px]" />
               </div>
               <div>
                 <p className="text-gray-600 text-lg desktop-1500:text-lg desktop-1200:max-w-[10rem]   desktop-1200:text-sm desktop-1500:max-w-52 text-left leading-6">

@@ -35,11 +35,11 @@ export default function OurTeamAbout() {
   };
 
   return (
-    <div className="relative w-full max-w-7xl desktop-1500:max-w-7xl desktop-1200:max-w-6xl mx-auto px-4 py-10 md:py-12 bg-white rounded-3xl shadow-lg max-sm:max-h-[37.313rem] md:h-[37.313rem] my-10 max-sm:pb-16 md:my-20 ">
-      <h2 className="text-[2.5rem] text-center mb-10 desktop-1200:text-[2rem] desktop-1500:text-[2.25rem]">Our Team</h2>
+    <div className="relative w-full max-w-7xl desktop-1900:max-w-[90%] desktop-1500:max-w-7xl desktop-1200:max-w-6xl mx-auto px-4 py-10 md:py-12 bg-white rounded-3xl shadow-lg max-sm:max-h-[37.313rem] md:h-[37.313rem] my-10 max-sm:pb-16 md:my-20 desktop-1900:py-14 desktop-1900:h-[42rem]">
+      <h2 className="text-[2.5rem] text-center mb-10 desktop-1200:text-[2rem] desktop-1900:text-5xl desktop-1500:text-[2.25rem]">Our Team</h2>
 
       <div
-        className={`grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-x-1 gap-y-6 md:mb-12 md:px-20 transition-opacity duration-1000 ${
+        className={`grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-x-1 gap-y-6 md:mb-12 md:px-20 transition-opacity duration-1000 desktop-1900:px-32 ${
           isAnimating ? "opacity-0" : "opacity-100"
         }`}
       >
@@ -49,7 +49,7 @@ export default function OurTeamAbout() {
               <img
                 src={member.img}
                 alt={member.name}
-                className="md:w-[7.5rem] desktop-1500:w-[7.5rem] desktop-1500:h-[7.5rem] desktop-1200:w-[6.5rem] w-10 h-10 md:h-[7.5rem] desktop-1200:h-[6.5rem] rounded-full object-cover"
+                className="md:w-[7.5rem] desktop-1500:w-[7.5rem] desktop-1500:h-[7.5rem] desktop-1200:w-[6.5rem] w-10 h-10 md:h-[7.5rem] desktop-1200:h-[6.5rem] desktop-1900:w-[8rem] desktop-100:h-[8rem] rounded-full object-cover"
               />
             </div>
             <div className="flex flex-col">

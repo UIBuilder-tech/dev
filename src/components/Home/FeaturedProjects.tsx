@@ -124,12 +124,12 @@ export default function FeaturedProjects({title}:Props) {
   const [hoveredId, setHoveredId] = useState<string | null>(null)
 
   return (
-    <div className="py-8 px-6 md:p-8 md:mx-14">
-      <h2 className="mb-8 text-3xl md:text-4xl font-display text-gray-900">{title}</h2>
+    <div className="py-8 px-6 md:p-8 md:mx-14 desktop-1900:px-14 desktop-1900:py-14">
+      <h2 className="mb-8 text-3xl md:text-4xl font-display text-gray-900 desktop-1900:text-5xl desktop-1900:pb-5">{title}</h2>
       <div className='max-h-[500px] overflow-y-scroll overflow-x-hidden custom-scrollbar'>
       <table className="w-full">
         <thead>
-          <tr className="border-b border-gray-500 text-xs md:text-sm text-gray-600">
+          <tr className="border-b border-gray-500 text-xs md:text-sm desktop-1900:text-lg text-gray-600">
             <th className="pb-2 md:pb-4 text-left font-normal">Title</th>
             <th className="pb-2 md:pb-4 text-left font-normal">Tags</th>
             <th className="pb-2 md:pb-4 text-left font-normal">Status</th>
@@ -147,9 +147,9 @@ export default function FeaturedProjects({title}:Props) {
                 onMouseEnter={() => setHoveredId(project.id)}
                 onMouseLeave={() => setHoveredId(null)}
               >
-                <td className="md:py-7 py-5">
+                <td className="md:py-7 py-5 desktop-1900:w-[40%]">
                   <span
-                    className={`text-xs md:text-lg font-medium transition-colors duration-200 ${
+                    className={`text-xs md:text-lg desktop-1900:text-2xl font-medium transition-colors duration-200 ${
                       isHovered ? "text-secondary" : "text-gray-900"
                     }`}
                   >
@@ -158,7 +158,7 @@ export default function FeaturedProjects({title}:Props) {
                 </td>
                 <td>
                   <span
-                    className={`inline-flex rounded-full px-2 md:px-4 py-1 text-xs md:text-sm transition-all duration-200 break-words hyphens-auto max-w-[80%] ${
+                    className={`inline-flex rounded-full px-2 md:px-4 py-1 text-xs md:text-sm transition-all duration-200 break-words hyphens-auto max-w-[80%] desktop-1900:text-lg ${
                       isHovered
                         ? "bg-secondary text-white border border-secondary"
                         : "border border-gray-500 text-gray-600"
@@ -169,7 +169,7 @@ export default function FeaturedProjects({title}:Props) {
                 </td>
                 <td>
                   <span
-                    className={`text-xs md:text-lg transition-colors duration-200 ${
+                    className={`text-xs md:text-lg transition-colors desktop-1900:text-xl duration-200 ${
                       isHovered ? "text-secondary" : "text-gray-600"
                     }`}
                   >

@@ -3,18 +3,18 @@ import grantsPointer from "../../assets/grantsPointer.svg"
 
 export default function GrantsSection() {
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 ">
-      <h1 className="text-center text-3xl sm:text-4xl text-primary mb-4">
+    <div className="max-w-7xl desktop-1900:max-w-[80%] mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 ">
+      <h1 className="text-center text-3xl sm:text-4xl text-primary mb-4 desktop-1900:text-5xl">
         CHF Grants
       </h1>
 
-      <p className="text-center text-sm sm:text-base text-gray-600 mb-8 sm:mb-12 max-w-4xl mx-auto desktop-1200:text-xs desktop-1500:text-sm">
+      <p className="text-center text-sm sm:text-base text-gray-600 mb-8 sm:mb-12 max-w-4xl mx-auto desktop-1200:text-xs desktop-1500:text-sm desktop-1900:text-lg">
         CHF supports community service organizations in India whose goals and
         objectives closely match one of CHF's thematic areas.
       </p>
 
       <div className="relative">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 desktop-1200:gap-16">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 desktop-1200:gap-16 desktop-1900:gap-24">
           {/* What We Do & Don't Fund */}
           <div>
             <p className="text-xl desktop-1500:text-xl desktop-1200:text-[16px] font-semibold mb-6">
@@ -147,7 +147,7 @@ export default function GrantsSection() {
       </div>
 
       {/* Email Contact */}
-      <div className="flex flex-col sm:flex-row items-center justify-start gap-2 mt-8 sm:mt-12 text-sm desktop-1200:text-sm sm:text-base text-gray-600">
+      <div className="flex flex-col sm:flex-row items-center justify-start gap-2 mt-8 sm:mt-12 text-sm desktop-1200:text-sm sm:text-base desktop-1900:text-lg text-gray-600">
         <Mail className="w-5 h-5 text-[#E67E22]" />
         <span>Please email all request for grants to </span>
         <a

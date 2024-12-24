@@ -5,7 +5,7 @@ function PhotoGallery() {
   return (
     <div className="mx-auto pb-10 md:py-16">
       <div className="text-center">
-        <h2 className="text-3xl md:text-5xl text-[#242424] py-10 desktop-1500:text-4xl desktop-1200:text-4xl">
+        <h2 className="text-3xl md:text-5xl text-[#242424] py-10 desktop-1500:text-4xl desktop-1200:text-4xl desktop-1900:text-5xl">
           Photo Gallery
         </h2>{" "}
         <Marquee pauseOnHover className="[--duration:20s]">
