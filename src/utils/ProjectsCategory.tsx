@@ -19,65 +19,72 @@ export const EducationPrograms: Program[] = [
     id: 1,
     title: "Scholarship Programs for Underprivileged Students",
     description:
-      "Scholarships are provided to deserving students from underprivileged backgrounds to ensure access to quality education. These scholarships cover school fees, textbooks, and necessary materials, enabling students to pursue academic goals without financial barriers.",
+      "Scholarships to deserving students from underprivileged backgrounds to ensure they have access to quality education. These scholarships cover school fees, textbooks, and other necessary materials, empowering students to pursue their academic goals without financial barriers.",
     image: ChitrapurMathImg,
   },
   {
     id: 2,
     title: "Vocational Training and Skill Development",
     description:
-      "Vocational training programs equip students with practical skills such as technical trades, computer literacy, and entrepreneurship. These programs are designed to enhance employability and foster economic independence, especially in rural areas.",
+      "Vocational training programs that focus on equipping youth and adults with practical skills, such as technical trades, computer literacy, and entrepreneurship. These programs are designed to enhance employability and foster economic independence, especially in rural areas.",
     image: ChitrapurMathImg,
   },
   {
     id: 3,
     title: "Support for School Infrastructure",
     description:
-      "CHF supports the improvement of school infrastructure in underserved areas, including building classrooms, providing essential learning materials, and ensuring schools have proper sanitation and clean drinking water facilities.",
+      "Improving the infrastructure of local schools, particularly in rural or underserved areas. This includes building classrooms, providing essential learning materials, and ensuring that schools have proper sanitation and clean drinking water facilities.",
     image: ChitrapurMathImg,
   },
   {
     id: 4,
     title: "After-School Tutoring and Mentorship Programs",
     description:
-      "After-school tutoring programs provide personalized attention to students in challenging subjects. Additionally, mentorship programs connect students with professionals who guide their career development and personal growth.",
+      "After-school tutoring programs where students receive personalized attention in subjects they find challenging. In addition, mentorship programs connect students with professionals who provide guidance on career development and personal growth.",
     image: ChitrapurMathImg,
   },
   {
     id: 5,
     title: "Educational Workshops and Seminars",
     description:
-      "Workshops and seminars cover academic subjects, life skills, and career guidance, broadening students' horizons and preparing them for both personal and professional success.",
+      "Workshops, seminars, and guest lectures that cover a range of topics from academic subjects to life skills and career guidance. These events are aimed at broadening students' horizons and preparing them for both personal and professional success.",
     image: ChitrapurMathImg,
   },
   {
     id: 6,
     title: "Digital Learning Initiatives",
     description:
-      "Digital learning initiatives are implemented by providing access to computers, the internet, and online learning resources. This helps bridge the digital divide and ensures students have access to modern learning tools.",
+      "Recognizing the growing importance of technology in education, digital learning initiatives are being implemented by providing access to computers, the internet, and online learning resources. This helps bridge the digital divide and ensures students have access to modern learning tools.",
     image: ChitrapurMathImg,
   },
   {
     id: 7,
     title: "Cultural and Heritage Education",
     description:
-      "CHF integrates cultural education into school curricula by organizing programs that teach students about the history, heritage, and values of the Chitrapur Saraswat community, fostering pride and connection to their roots.",
+      "Integration of cultural education into its curriculum by organizing programs that teach students about the history, heritage, and values of our community. This fosters a sense of pride and belonging while helping young people stay connected to their roots.",
     image: ChitrapurMathImg,
   },
   {
     id: 8,
     title: "Teacher Training and Capacity Building",
     description:
-      "CHF offers teacher training programs to improve teaching methods, especially in underserved schools. These programs focus on modern pedagogical practices, classroom management, and student engagement techniques.",
+      "Training programs for teachers to enhance their teaching methods, especially in underserved schools. These programs focus on modern pedagogical practices, classroom management, and student engagement techniques to ensure high-quality education for all.",
     image: ChitrapurMathImg,
   },
   {
     id: 9,
     title: "Support for Higher Education",
     description:
-      "CHF provides financial aid and guidance to students seeking higher education, both in India and abroad. The foundation also offers counseling and resources for university applications and navigating the admissions process.",
+      " Financial aid and guidance to students seeking higher education opportunities, whether in India or abroad. The foundation also provides counseling and resources for students applying to universities and vocational institutions, helping them navigate the complexities of admissions and financial aid processes.",
     image: ChitrapurMathImg,
   },
+  {
+    id: 10,
+    title: "Partnerships with Educational Institutions",
+    description:
+      "Collaboration with schools, colleges, and educational organizations to provide enhanced learning opportunities for students. These partnerships help introduce new academic programs, exchange opportunities, and internships to broaden students' educational experiences.",
+    image: ChitrapurMathImg,
+  }
 ];
 
 export const WomenEmpowermentPrograms: Program[] = [
@@ -85,56 +92,56 @@ export const WomenEmpowermentPrograms: Program[] = [
     id: 1,
     title: "Vocational Training Programs",
     description:
-      "CHF provides vocational training in various skills such as tailoring, handicrafts, and traditional crafts, empowering women to generate income and achieve economic self-reliance.",
+      "Training in various skills such as tailoring, handicrafts, hand made paper and other traditional crafts, enabling women to generate income and become economically self-reliant.",
     image: ChitrapurMathImg,
   },
   {
     id: 2,
     title: "Entrepreneurship and Business Skills Development",
     description:
-      "Workshops are conducted to teach women entrepreneurship skills, including business planning, marketing, and financial management, to help them start and run their own businesses.",
+      "Workshops are conducted to teach women the fundamentals of entrepreneurship, including business planning, marketing, and financial management, to help them start and run their own businesses.",
     image: ChitrapurMathImg,
   },
   {
     id: 3,
     title: "Financial Literacy Workshops",
     description:
-      "Workshops focus on teaching women financial literacy, including managing finances, saving for the future, and making informed financial decisions to improve financial independence.",
+      "Workshops focused on financial literacy, teaching women how to manage their finances, save for the future, and make informed financial decisions.",
     image: ChitrapurMathImg,
   },
   {
     id: 4,
     title: "Self-Help Groups (SHGs) and Microfinance Support",
     description:
-      "CHF supports the formation of self-help groups (SHGs) where women can save, invest, and provide loans to one another, with microfinance initiatives to fund small businesses and improve financial independence.",
+      " Formation of self-help groups where women can come together to save, invest, and provide loans to one another. Microfinance initiatives help these groups fund small business ventures and improve their financial independence.",
     image: ChitrapurMathImg,
   },
   {
     id: 5,
     title: "Leadership and Mentorship Programs",
     description:
-      "Leadership training is provided to empower women to take on community leadership roles, while mentorship programs help women build confidence and skills in communication, decision-making, and management.",
+      "Leadership training to empower women to take on community leadership roles and mentors them to build confidence and skills in areas like communication, decision-making, and management.",
     image: ChitrapurMathImg,
   },
   {
     id: 6,
     title: "Artisan and Craft Revival Programs",
     description:
-      "CHF helps women revive traditional crafts, offering training in producing and marketing these crafts for local and international markets, promoting cultural preservation and entrepreneurship.",
+      "Help women revive traditional crafts, providing training in producing and marketing these crafts for local and international markets.",
     image: ChitrapurMathImg,
   },
   {
     id: 7,
     title: "Health and Wellness Awareness",
     description:
-      "Health and wellness programs focus on raising awareness about women's health, hygiene, and wellness, helping women access essential healthcare services and prioritize their physical and mental well-being.",
+      "Awareness programs that focus on women's health, hygiene, and wellness, helping women access important healthcare services and encouraging them to prioritize their physical and mental wellbeing.",
     image: ChitrapurMathImg,
   },
   {
     id: 8,
     title: "Networking and Community Support Systems",
     description:
-      "CHF fosters community support systems where women can share knowledge, resources, and experiences, building a strong network that encourages collective growth and empowerment.",
+      "Community support systems where women can share knowledge, resources, and experiences, creating a strong network that encourages collective growth and empowerment.",
     image: ChitrapurMathImg,
   },
 ];
@@ -142,30 +149,59 @@ export const WomenEmpowermentPrograms: Program[] = [
 export const HeritagePrograms: Program[] = [
   {
     id: 1,
-    title: "Documentation of Cultural Practices and Traditions",
+    title: "Vantiga",
     description:
-      "CHF supports the documentation and archiving of the unique traditions, rituals, and customs of the Chitrapur Saraswat community through digital records, written histories, and video archives to preserve cultural heritage for future generations.",
+      "Vantiga is the annual contributions made by the Chitrapur Saraswat community to support the Shri Chitrapur Math's spiritual, cultural, and community welfare initiatives, reflecting their commitment to their heritage.",
     image: ChitrapurMathImg,
   },
   {
     id: 2,
-    title: "Conservation of Heritage Sites",
+    title: "Heritage and Spirituality Programs",
     description:
-      "CHF actively works to preserve and restore culturally significant sites, temples, and landmarks. These efforts ensure that these sites remain vibrant centers of spiritual and cultural activity for future generations.",
+      "Initiatives that explore the intersection of cultural heritage and spirituality, including discussions on rituals, customs, and traditions, are organized to help individuals understand the significance of their practices and connect with their roots",
     image: ChitrapurMathImg,
   },
   {
     id: 3,
-    title: "Cultural Festivals and Events",
+    title: "Lectures and Discourses",
     description:
-      "CHF organizes and supports cultural festivals, music performances, and religious events to keep the community connected to its roots. These occasions bring people together to celebrate heritage and preserve traditions.",
+      "Regular lectures and discourses are held featuring spiritual leaders, scholars, and practitioners who share insights on spirituality, philosophy, and the teachings of the Chitrapur Saraswat community. These sessions aim to inspire and educate participants on their spiritual journeys.",
     image: ChitrapurMathImg,
   },
   {
     id: 4,
-    title: "Varanasi Yatri Nivas",
+    title: "Community Worship and Festivals",
     description:
-      "CHF is working on the Varanasi Yatri Nivas project, a proposed center for yoga, meditation, and yatri nivas on the banks of the Ganga at Raja Ghat. This center will serve as a spiritual hub for pilgrims and community members.",
+      "Community worship events and cultural festivals that celebrate the spiritual heritage of the Chitrapur Saraswat community. These gatherings promote unity, shared values, and collective spiritual experiences.",
+    image: ChitrapurMathImg,
+  },
+  {
+    id: 5,
+    title: "Scriptural Study Groups",
+    description:
+      "Study groups focused on sacred texts and scriptures, allowing participants to engage in meaningful discussions and reflections on spiritual teachings and their relevance to modern life.",
+    image: ChitrapurMathImg,
+  },
+  
+  {
+    id: 6,
+    title: "Youth Spiritual Programs",
+    description:
+      "Targeted programs for youth that focus on building a strong spiritual foundation, encouraging leadership qualities, and promoting community service, helping young individuals understand their roles in preserving spiritual and cultural values.",
+    image: ChitrapurMathImg,
+  },
+  {
+    id: 7,
+    title: "Collaborations with Spiritual Leaders",
+    description:
+      "CHF collaborates with spiritual leaders and organizations to host special events, teachings, and practices that enhance the community's spiritual well-being and understanding.",
+    image: ChitrapurMathImg,
+  },
+  {
+    id: 8,
+    title: "Spiritual Retreats and Workshops",
+    description:
+      "CHF organizes retreats and workshops that focus on various aspects of spiritual growth, meditation, and self-discovery. These events provide participants with the opportunity to reflect, learn, and deepen their spiritual practice in a supportive environment.",
     image: ChitrapurMathImg,
   },
 ];
@@ -225,9 +261,9 @@ export const EventsFestivals: Program[] = [
 export const EventGettogthers: Program[] = [
   {
     id: 1,
-    title: "Monthly Get Togethers",
+    title: "Chitrapur Yuvadhara",
     description:
-      "On the West and East Coasts, sadhakas gather monthly for stotra pathan, bhajans, anushthans, and guru pujan. These sessions create a spiritual family, fostering unity and connection while deepening devotion through shared practices.",
+      "This program connects young adults (ages 15-35) with the Math and Guru Parampara through workshops, creative forums, and social responsibility activities. It fosters self-expression, skill development, and a strong sense of community.",
     image: ChitrapurMathImg,
   },
   {
@@ -239,44 +275,9 @@ export const EventGettogthers: Program[] = [
   },
   {
     id: 3,
-    title: "Sankranti Celebrations",
+    title: "Chitrapur Satsang",
     description:
-      "Sankranti marks the transition of the Sun into Capricorn, celebrated with spiritual gatherings emphasizing renewal, gratitude, and devotion. Sadhakas partake in stotra chanting and cultural activities, reinforcing their cultural roots.",
-    image: ChitrapurMathImg,
-  },
-  {
-    id: 4,
-    title: "Hanuman Jayanti",
-    description:
-      "Celebrated with devotion to Lord Hanuman, this get-together includes bhajans, stotras, and reflections on Hanuman's virtues of courage, loyalty, and devotion. Participants strengthen their spiritual resolve through these practices.",
-    image: ChitrapurMathImg,
-  },
-  {
-    id: 5,
-    title: "Ram Navami",
-    description:
-      "Dedicated to Lord Rama's birth, this event incorporates chanting, devotional songs, and reflections on the Ramayana. Sadhakas connect deeply with the values of dharma, righteousness, and devotion epitomized by Lord Rama.",
-    image: ChitrapurMathImg,
-  },
-  {
-    id: 6,
-    title: "Ganesh Chaturthi",
-    description:
-      "This joyous occasion is marked by devotional singing, storytelling about Lord Ganesha, and stotra chanting. Participants celebrate new beginnings and wisdom while strengthening their spiritual community bonds.",
-    image: ChitrapurMathImg,
-  },
-  {
-    id: 7,
-    title: "Datta Jayanti",
-    description:
-      "Honoring the birth of Lord Dattatreya, this gathering focuses on his teachings of humility, knowledge, and devotion. The session includes stotra chanting and discussions, inspiring sadhakas to embody these virtues in their lives.",
-    image: ChitrapurMathImg,
-  },
-  {
-    id: 8,
-    title: "Karthik Poornima",
-    description:
-      "A spiritually uplifting gathering celebrated on the full moon day of Karthik month. It includes deepa pujan (lamp worship), bhajans, and reflections, symbolizing the removal of darkness and the triumph of light and knowledge.",
+      "Through monthly satsangs, sadhakas come together to celebrate festivals in alignment with the practices of our Math, integrating bhajans, stotra chanting, anushthans, and cultural activities. These gatherings unite us as a spiritual family, offering an opportunity to stay connected to our roots while building a strong sense of community.",
     image: ChitrapurMathImg,
   },
 ];
@@ -284,7 +285,7 @@ export const EventGettogthers: Program[] = [
 export const EventChildrenEducation: Program[] = [
   {
     id: 1,
-    title: "Prarthana & Prerana Varg",
+    title: "World Disability Day",
     description:
       "Designed to impart ancient Hindu spiritual values to children, this program integrates storytelling, Sanskrit lessons, crafts, and nature trails. The sessions aim to build spiritual foundations, fostering pride in cultural and spiritual heritage.",
     image: ChitrapurMathImg,

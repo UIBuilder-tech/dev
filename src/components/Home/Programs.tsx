@@ -19,7 +19,6 @@ const visionCards: VisionCard[] = [
   {
     id: "education",
     title: "Education",
-    title: "Education",
     description:
       "Chitrapur Heritage Foundation (CHF) supports 9 schools in India, empowering over 3,000 underprivileged students through quality education, scholarship’s,  vocational training, and personnel development programs.",
     image: educationImg,
@@ -71,7 +70,7 @@ export default function Programs() {
       {expandedCard && (
         <div
           key={expandedCard.id}
-          className=" programs-card relative overflow-hidden rounded-3xl transition-all duration-500 ease-in-out w-full md:w-[783px] desktop-1500:w-[700px]  desktop-1200:w-[550px]"
+          className=" programs-card relative overflow-hidden rounded-3xl transition-all duration-500 ease-in-out w-full md:w-[783px] desktop-1500:w-[700px] desktop-1900:w-[840px] desktop-1200:w-[550px]"
         >
           <div className="relative h-[350px] md:h-[673px] desktop-1500:h-[600px] desktop-1200:h-[500px]">
             <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-transparent" />
@@ -89,7 +88,7 @@ export default function Programs() {
                   <div className="h-0.5 bg-white w-full" />
                 </div>
                 <div className="flex flex-row items-center text-white">
-                  <Link to='/contribute#volunteer' className="p-2 border rounded-3xl px-4 text-xl desktop-1200:text-lg ">Learn More</Link>
+                  <Link to='/projects' className="p-2 border rounded-3xl px-4 text-xl desktop-1200:text-lg ">Learn More</Link>
                 <button
                   onClick={() => setExpandedId("")}
                   className=""
@@ -125,7 +124,7 @@ export default function Programs() {
         {collapsedCards.map((card) => (
           <div
             key={card.id}
-            className="programs-card relative overflow-hidden rounded-3xl transition-all duration-500 ease-in-out cursor-pointer w-full md:w-[350px] desktop-1500:w-[300px] desktop-1200:w-[250px]"
+            className="programs-card relative overflow-hidden rounded-3xl transition-all duration-500 ease-in-out cursor-pointer w-full md:w-[350px] desktop-1900:w-[375px] desktop-1500:w-[300px] desktop-1200:w-[250px]"
             onClick={() => setExpandedId(card.id)}
           >
             <div className="relative h-[200px] md:h-[673px]  desktop-1500:h-[600px] desktop-1200:h-[500px]">

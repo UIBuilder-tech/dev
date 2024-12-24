@@ -70,20 +70,12 @@ export default function Vision() {
                       </div>
 
                       <div className="flex-1 text-center max-w-5xl mx-auto">
-                        <h2 className="font-display text-xl md:text-2xl desktop-1500:text-lg desktop-1200:text-sm mb-4 md:mb-6 text-white max-sm:px-1 desktop-1900:text-2xl">
+                        <h2 className="font-display text-xl md:text-2xl desktop-1500:text-3xl desktop-1200:text-sm mb-4 md:mb-6 text-white max-sm:px-1 desktop-1900:text-2xl">
                           {slide.title}
                         </h2>
                         <p className="text-sm md:text-lg desktop-1500:text-lg desktop-1200:text-sm text-cream/90 mb-6 md:mb-8">
                           {slide.content}
                         </p>
-                        <div className="flex gap-3 md:gap-4 justify-center max-sm:mx-14 items-center">
-                          <Link
-                            to="/about"
-                            className="bg-white/10 backdrop-blur-sm text-primary border-2 border-primary px-4 md:px-8 py-2 md:py-3 rounded-full hover:bg-white/20 transition text-sm md:text-base flex-1 md:flex-none text-center desktop-1200:py-2 desktop-1200:px-3 desktop-1900:text-xl desktop-1900:px-5 desktop-1900:py-3"
-                          >
-                            Learn more
-                          </Link>
-                        </div>
                       </div>
 
                       <div className="w-[262px] desktop-1500:w-[260px] desktop-1200:w-[240px] shrink-0 max-sm:w-[100px] desktop-1900:w-[350px] md:block">

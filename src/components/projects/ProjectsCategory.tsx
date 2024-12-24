@@ -3,9 +3,8 @@ import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useWindowWidth } from "../../hooks/useWindowWidth";
 import { Link, useLocation } from "react-router-dom";
-import activeArrow from '../../assets/arrowActive.svg';
-import inactiveArrrow from '../../assets/arrowInactive.svg'
-
+import activeArrow from "../../assets/arrowActive.svg";
+import inactiveArrrow from "../../assets/arrowInactive.svg";
 
 interface Program {
   id: number;
@@ -27,41 +26,40 @@ export default function ProjectsCategory({
   const [currentPage, setCurrentPage] = useState(0);
   const [currentItems, setCurrentItems] = useState<Program[]>([]);
   const carouselRef = useRef<HTMLDivElement>(null);
-    const windowWidth = useWindowWidth()
-    const isMobile = windowWidth < 768;
-      const location = useLocation();
+  const windowWidth = useWindowWidth();
+  const isMobile = windowWidth < 768;
+  const location = useLocation();
 
-      const itemsPerPage = 3; // Changed to 3 items per page
-      const totalPages = Math.ceil(programs.length / itemsPerPage);
-      
-      const scrollToPage = (page: number) => {
-        if (page >= 0 && page < totalPages) {
-          setCurrentPage(page);
-        }
-      };
-      
-      useEffect(() => {
-        const startIndex = currentPage * itemsPerPage;
-        const newItems = programs.slice(startIndex, startIndex + itemsPerPage);
-        setCurrentItems(newItems);
-      }, [currentPage, programs, itemsPerPage]);
-      
-      const nextPage = () => {
-        const newPage = currentPage + 1;
-        if (newPage < totalPages) {
-          setCurrentPage(newPage);
-        }
-      };
-      
-      const prevPage = () => {
-        const newPage = currentPage - 1;
-        if (newPage >= 0) {
-          setCurrentPage(newPage);
-        }
-      };
+  const itemsPerPage = 3; // Changed to 3 items per page
+  const totalPages = Math.ceil(programs.length / itemsPerPage);
 
+  const scrollToPage = (page: number) => {
+    if (page >= 0 && page < totalPages) {
+      setCurrentPage(page);
+    }
+  };
 
-      console.log("currentItems",currentItems)
+  useEffect(() => {
+    const startIndex = currentPage * itemsPerPage;
+    const newItems = programs.slice(startIndex, startIndex + itemsPerPage);
+    setCurrentItems(newItems);
+  }, [currentPage, programs, itemsPerPage]);
+
+  const nextPage = () => {
+    const newPage = currentPage + 1;
+    if (newPage < totalPages) {
+      setCurrentPage(newPage);
+    }
+  };
+
+  const prevPage = () => {
+    const newPage = currentPage - 1;
+    if (newPage >= 0) {
+      setCurrentPage(newPage);
+    }
+  };
+
+  console.log("currentItems", currentItems);
 
   // const nextPage = () => scrollToPage((currentPage + 1) % totalPages);
   // const prevPage = () =>
@@ -108,7 +106,11 @@ export default function ProjectsCategory({
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.5 }}
-                src={programs[currentProgram].image}
+                src={
+                  typeof programs[currentProgram].image === "string"
+                    ? programs[currentProgram].image
+                    : programs[currentProgram].image[0]
+                }
                 alt={programs[currentProgram].title}
                 className="w-full h-[250px] desktop-1200:h-[175px] desktop-1500:h-[225px] object-cover rounded-tr-xl rounded-bl-xl"
               />
@@ -121,7 +123,11 @@ export default function ProjectsCategory({
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.5 }}
-                  src={programs[currentProgram].image}
+                  src={
+                    typeof programs[currentProgram].image === "string"
+                      ? programs[currentProgram].image
+                      : programs[currentProgram].image[1]
+                  }
                   alt="Sub image 1"
                   className="w-full h-[250px] desktop-1200:h-[175px] desktop-1500:h-[225px] object-cover rounded-tl-xl rounded-br-xl"
                 />
@@ -133,7 +139,11 @@ export default function ProjectsCategory({
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.5 }}
-                  src={programs[currentProgram].image}
+                  src={
+                    typeof programs[currentProgram].image === "string"
+                      ? programs[currentProgram].image
+                      : programs[currentProgram].image[2]
+                  }
                   alt="Sub image 2"
                   className="w-full h-[250px] desktop-1200:h-[175px] desktop-1500:h-[225px]  object-cover rounded-tl-xl rounded-br-xl"
                 />
@@ -161,11 +171,17 @@ export default function ProjectsCategory({
               className={`flex-none w-[250px] md:w-[500px]  desktop-1200:w-[350px] desktop-1500:w-[425px] p-1   desktop-1900:w-[550px] desktop-1500:m-3 m-2 aspect-[3/2] ${
                 index + currentPage * itemsPerPage === currentProgram ? "rounded-xl" : ""
               }`}
-              onClick={() => setCurrentProgram(index + currentPage * itemsPerPage)}
+              onClick={() =>
+                setCurrentProgram(index + currentPage * itemsPerPage)
+              }
             >
               <div className="relative h-full rounded-xl overflow-hidden">
                 <img
-                  src={program.image}
+                  src={
+                    typeof program.image === "string"
+                      ? programs[currentProgram].image
+                      : programs[currentProgram].image[0]
+                  }
                   alt={program.title}
                   className="w-full h-full object-cover"
                 />
@@ -183,7 +199,10 @@ export default function ProjectsCategory({
                   initial={{ opacity: 0, rotate: 0 }}
                   animate={{
                     opacity: 1,
-                    rotate: index + currentPage * itemsPerPage === currentProgram ? 180 : 0,
+                    rotate:
+                      index + currentPage * itemsPerPage === currentProgram
+                        ? 180
+                        : 0,
                   }}
                   transition={{ duration: 0.3 }}
                 >
@@ -210,18 +229,22 @@ export default function ProjectsCategory({
         </div>
       </div>
       {/* Navigation Arrows */}
-    {!isMobile &&  <button
-        onClick={prevPage}
-        className="absolute z-10 left-10 top-3/4 -translate-y-1/2 -translate-x-1/2 w-10 h-10 bg-[#e67e22] text-white rounded-full flex items-center justify-center hover:bg-gray-100 transition-colors shadow-md"
-      >
-        <ChevronLeft className="w-6 h-6" />
-      </button>}
-     {!isMobile && <button
-        onClick={nextPage}
-        className="absolute right-10 top-3/4 -translate-y-1/2 translate-x-1/2 w-10 h-10 bg-[#e67e22] text-white rounded-full flex items-center justify-center hover:bg-gray-100 transition-colors shadow-md"
-      >
-        <ChevronRight className="w-6 h-6" />
-      </button>}
+      {!isMobile && (
+        <button
+          onClick={prevPage}
+          className="absolute z-10 left-10 top-3/4 -translate-y-1/2 -translate-x-1/2 w-10 h-10 bg-[#e67e22] text-white rounded-full flex items-center justify-center hover:bg-gray-100 transition-colors shadow-md"
+        >
+          <ChevronLeft className="w-6 h-6" />
+        </button>
+      )}
+      {!isMobile && (
+        <button
+          onClick={nextPage}
+          className="absolute right-10 top-3/4 -translate-y-1/2 translate-x-1/2 w-10 h-10 bg-[#e67e22] text-white rounded-full flex items-center justify-center hover:bg-gray-100 transition-colors shadow-md"
+        >
+          <ChevronRight className="w-6 h-6" />
+        </button>
+      )}
     </div>
   );
 }

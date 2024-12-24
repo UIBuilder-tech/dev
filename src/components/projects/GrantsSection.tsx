@@ -1,4 +1,4 @@
-import { Mail, Plus } from "lucide-react";
+import { Mail } from "lucide-react";
 import grantsPointer from "../../assets/grantsPointer.svg"
 
 export default function GrantsSection() {

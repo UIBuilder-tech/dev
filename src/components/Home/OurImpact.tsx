@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ArrowUpRight, Heart } from "lucide-react";
+import { Heart } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 import activeArrow from '../../assets/arrowActive.svg' 
@@ -123,13 +123,13 @@ export default function ImpactSection() {
         {/* Stats Cards */}
         <div className="space-y-5">
           <div className="bg-white rounded-2xl desktop-1200:p-8 desktop-1500:p-10 p-6 md:p-10 shadow-md">
-            <div className="grid grid-cols-6 gap-2 text-center mb-2 md:mb-6">
-              {["5", "0", "0", "0", "0", "0"].map((digit, i) => (
+            <div className="grid grid-cols-7 gap-2 text-center mb-2 md:mb-6">
+              {["$", "5", "0", "0", "0", "0", "0"].map((digit, i) => (
                 <>
                   <h3
                     key={i}
-                    className={`text-4xl md:text-5xl font-bold text-[#0066FF] relative ${
-                      i < 5 ? "digit-separator" : ""
+                    className={`text-4xl font-bold text-[#0066FF] relative ${
+                      i < 6 ? "digit-separator" : ""
                     }`}
                   >
                     {digit}

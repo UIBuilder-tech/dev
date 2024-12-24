@@ -8,7 +8,7 @@ export const donationData: DonationCategory[] = [
       {
         id: 'shs',
         name: 'Srivali High School, Shirali (Sponsor-A-Student)',
-        amount: 120,
+        amount: 300,
         description: 'Sponsor-A-Student at the Srivali High School. We suggest a minimum commitment of $300 for 3 years. This will sponsor one student thru high school (8th, 9th and 10th standard) - $25/m',
         hasQuantity: true
       },
@@ -20,12 +20,12 @@ export const donationData: DonationCategory[] = [
       {
         id: 'spevc',
         name: 'Shri Parijnanashram Educational and Vocational Centre (SPEVC), Virar',
-        amount: 0
+        amount: 250
       },
       {
         id: 'pvko',
         name: 'Parijnan Vidyalay, Kotekar',
-        amount: 0
+        amount: 100
       },
       {
         id: 'ges',
@@ -41,7 +41,7 @@ export const donationData: DonationCategory[] = [
           {
             id: 'vantiga',
             name: 'Vantiga',
-            amount: 365,
+            amount: 500,
             description: 'Annual Vantiga contribution'
           },
           {
@@ -59,7 +59,7 @@ export const donationData: DonationCategory[] = [
           {
             id: 'anandashraya',
             name: 'Anandashraya',
-            amount: 0
+            amount: 150
           },
           {
             id: 'vaidika',

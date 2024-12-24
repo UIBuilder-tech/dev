@@ -1,9 +1,21 @@
 import { useState } from "react";
-import { ArrowUpRight, Heart } from "lucide-react";
-import activeDonate from '../../assets/projectActiveDonateIcon.svg'
-import inactiveDonate from '../../assets/projectInactiveDonateIcon.svg'
-import activeSideArrow from '../../assets/activeSideArrow.svg'
-import inactiveSideArrow from '../../assets/inactiveSideArrow.svg'
+import activeDonate from "../../assets/projectActiveDonateIcon.svg";
+import inactiveDonate from "../../assets/projectInactiveDonateIcon.svg";
+import activeSideArrow from "../../assets/activeSideArrow.svg";
+import inactiveSideArrow from "../../assets/inactiveSideArrow.svg";
+import vantiga from "../../assets/Shirali_Math.jpg";
+import spevc1 from "../../assets/photoGallery/img1.jpg";
+import spevc2 from "../../assets/photoGallery/img6.jpg";
+import Srivali from "../../assets/Srivali High School.png";
+import Parijnanashram from "../../assets/Shirali_Math.jpg";
+import Solar from "../../assets/Shirali_Math.jpg";
+import SamvitSudha from "../../assets/photoGallery/img13.png";
+import SamvitSudha1 from "../../assets/photoGallery/img12.png";
+import Kotekar from "../../assets/Exit.jpg";
+import Kotekar1 from "../../assets/PPUC Annday (2).jpg";
+import Kotekar2 from "../../assets/Assembly.jpg";
+import Yatri from "../../assets/Shirali_Math.jpg";
+
 import { Link } from "react-router-dom";
 
 interface Project {
@@ -20,54 +32,56 @@ const projects: Project[] = [
     title: "Vantiga",
     tag: "Heritage",
     status: "Ongoing",
-    images: [
-      "https://images.unsplash.com/photo-1461603950871-cd64bcf7acf0?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8ZG9uYXRpb24lMjBpbmRpYXxlbnwwfHwwfHx8MA%3D%3D",
-    ],
+    images: [vantiga],
   },
   {
     id: "2",
     title: "Samvit Sudha",
     tag: "Women Empowerment",
     status: "Ongoing",
-    images: [
-      "https://media.istockphoto.com/id/1473466236/photo/senior-man-piggybacking-grandson-in-park-during-weekend.webp?a=1&b=1&s=612x612&w=0&k=20&c=mjDlykHVoERZ7gvb2DwHq-S_Cz65OJ7LFjOKxhAYuaM=",
-    ],
+    images: [SamvitSudha,SamvitSudha1],
   },
   {
     id: "3",
     title: "SPEVC School",
     tag: "Education",
     status: "Ongoing",
-    images: [
-      "https://images.unsplash.com/photo-1524069290683-0457abfe42c3?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8aW5kaWElMjBzY2hvb2x8ZW58MHx8MHx8fDA%3D",
-    ],
+    images: [spevc1, spevc2],
   },
   {
     id: "4",
     title: "Parijanashram Vidyalaya",
     tag: "Education",
     status: "Ongoing",
-    images: [
-      "https://images.unsplash.com/photo-1574758324765-a29c77fb9c91?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGluZGlhJTIwc2Nob29sfGVufDB8fDB8fHww",
-    ],
+    images: [Parijnanashram],
   },
   {
     id: "5",
-    title: "Yatri Varanasi",
+    title: "Yatri Nivas Varanasi",
     tag: "Heritage",
     status: "Ongoing",
-    images: [
-      "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?w=500&auto=format&fit=crop&q=60",
-    ],
+    images: [Yatri],
   },
   {
-    id: "6",
-    title: "Solar Grid Projects",
-    tag: "Heritage",
+    id: "9",
+    title: "Kotekar Project",
+    tag: "Education",
+    status: "Completed",
+    images: [Kotekar,Kotekar1],
+  },
+  {
+    id: "11",
+    title: "Grid Connected Solar Project",
+    tag: "Education",
+    status: "Completed",
+    images: [Solar],
+  },
+  {
+    id: "8",
+    title: "Sponsor-A-Student (Srivali School)",
+    tag: "Education",
     status: "Ongoing",
-    images: [
-      "https://images.unsplash.com/photo-1494496195153-43c3ade2e09d?w=500&auto=format&fit=crop&q=60",
-    ],
+    images: [Srivali],
   },
   {
     id: "7",
@@ -78,50 +92,14 @@ const projects: Project[] = [
       "https://images.unsplash.com/photo-1547354225-3e5a5f001d24?w=500&auto=format&fit=crop&q=60",
     ],
   },
-  {
-    id: "8",
-    title: "Holding Hands",
-    tag: "Women Empowerment",
-    status: "Ongoing",
-    images: [
-      "https://images.unsplash.com/photo-1584824486539-53bb4646bdbc?w=500&auto=format&fit=crop&q=60",
-    ],
-  },
-  {
-    id: "9",
-    title: "Kotekar Project",
-    tag: "Education",
-    status: "Completed",
-    images: [
-      "https://images.unsplash.com/photo-1599427301888-716e5d3b9dcf?w=500&auto=format&fit=crop&q=60",
-    ],
-  },
-  {
-    id: "10",
-    title: "Water Management at Shirali and Gokarna Math",
-    tag: "Heritage",
-    status: "Ongoing",
-    images: [
-      "https://images.unsplash.com/photo-1516915798915-38d4b818ded6?w=500&auto=format&fit=crop&q=60",
-    ],
-  },
-  {
-    id: "11",
-    title: "Grid Connected Solar Project",
-    tag: "Education",
-    status: "Completed",
-    images: [
-      "https://images.unsplash.com/photo-1581090142392-b13f0b6b568c?w=500&auto=format&fit=crop&q=60",
-    ],
-  },
 ];
 
-interface Props{
-  title:string;
+interface Props {
+  title: string;
 }
 
-export default function FeaturedProjects({title}:Props) {
-  const [hoveredId, setHoveredId] = useState<string | null>(null)
+export default function FeaturedProjects({ title }: Props) {
+  const [hoveredId, setHoveredId] = useState<string | null>(null);
 
   return (
     <div className="py-8 px-6 md:p-8 md:mx-14 desktop-1900:px-14 desktop-1900:py-14">
@@ -228,5 +206,5 @@ export default function FeaturedProjects({title}:Props) {
       </table>
     </div>
     </div>
-  )
+  );
 }
