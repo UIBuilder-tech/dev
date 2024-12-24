@@ -24,7 +24,12 @@ interface FormType {
 }
 
 
-export default function PaymentForm() {
+interface Props{
+  totalDonationAmount:number;
+}
+
+
+export default function PaymentForm({totalDonationAmount}:Props) {
   const totalAmount = sessionStorage.getItem("totalDonationAmount")
 
   // Usage
@@ -124,13 +129,13 @@ export default function PaymentForm() {
   }
 
   return (
-    <div className=" mx-8 p-8 py-16">
-      <h2 className="text-4xl font-display text-gray-900 mb-8">Add Details & Pay</h2>
+    <div className=" md:mx-8 p-6 md:p-12 py-16">
+      <h2 className="text-3xl md:text-5xl font-display text-gray-900 mb-8">Add Details & Pay</h2>
 
-      <form onSubmit={handleSubmit} className="flex flex-row items-center justify-between gap-12">
+      <form onSubmit={handleSubmit} className="flex flex-col md:flex-row items-center justify-between gap-12">
         {/* Left Column - Personal Details */}
-        <div className="bg-white rounded-3xl p-12 shadow-sm">
-          <div className="space-y-6">
+        <div className="bg-white rounded-3xl p-6 md:p-12 shadow-sm text-xl">
+          <div className="space-y-8">
             {/* Name Field with Verification Check */}
             <div className="relative">
               <input
@@ -240,27 +245,28 @@ export default function PaymentForm() {
                   onChange={handleInputChange}
                   className="w-4 h-4 text-primary rounded border-gray-300 focus:ring-primary"
                 />
-                <span className="text-sm text-gray-600 italic">Remember me</span>
+                <span className="text-xs md:text-sm text-gray-600 italic">Remember me</span>
               </label>
             </div>
           </div>
         </div>
 
         {/* Right Column - Payment Details */}
-        <div className="space-y-8 w-1/2">
+        <div className="space-y-8 md:space-y-0 md:w-1/2 md:h-[550px] flex flex-col justify-between">
           {/* Total Amount */}
-          <div className="border-b border-gray-400 pb-4">
+          <div className='space-y-8'>
+          <div className="border-b border-gray-400 pb-2 md:pb-4">
             <div className="flex justify-between items-center">
-              <span className="text-[#516072]">Total Amount</span>
-              <span className="text-[#516072] text-xl font-medium flex flex-row items-center gap-2"><div className={`flex items-center justify-center w-6 h-6 ${Number(totalAmount) === 0 ? "bg-[#D3D3D3]" : "bg-secondary"} rounded-full`}>
-                <span className="text-white text-sm">$</span>
-              </div> {totalAmount}.00</span>
+              <span className="text-[#516072] md:text-md">Total Amount</span>
+              <span className="text-[#516072] text-xl font-medium flex flex-row items-center gap-2"><div className={`flex items-center justify-center w-6 h-6 ${Number(totalDonationAmount)===0 ? "bg-[#D3D3D3]" : "bg-secondary"} rounded-full`}>
+          <span className="text-white text-sm">$</span>
+        </div> {totalDonationAmount}</span>
             </div>
           </div>
 
           {/* Payment Methods */}
-          <div className="grid grid-cols-2 gap-6">
-            {/* <label className="flex items-center gap-3 rounded-lg cursor-pointer">
+          <div className="grid grid-cols-2 gap-2 md:gap-6">
+            <label className="flex items-center gap-3 rounded-lg cursor-pointer">
               <input
                 type="radio"
                 name="paymentMethod"
@@ -269,8 +275,8 @@ export default function PaymentForm() {
                 onChange={handleInputChange}
                 className="w-6 h-6 text-primary"
               />
-              <div className='bg-white rounded-md w-full p-6'>
-              <img src={'/assets/images/paypal.svg'} alt="PayPal" className="w-24" />
+              <div className='bg-white rounded-md w-full p-3 md:p-6'>
+              <img src={paypal} alt="PayPal" className="w-24" />
               </div>
             </label> */}
 
@@ -284,8 +290,8 @@ export default function PaymentForm() {
                 onChange={handleInputChange}
                 className="w-6 h-6 text-primary"
               />
-              <div className='bg-white rounded-md w-full p-6'>
-                <span>online</span>
+              <div className='bg-white rounded-md w-full p-3 md:p-6'>
+              <span className='max-sm:text-sm'>Offline <span className='italic'>(Cheque)</span></span>
               </div>
             </label>
 
@@ -299,12 +305,13 @@ export default function PaymentForm() {
                 onChange={handleInputChange}
                 className="w-6 h-6 text-primary"
               />
-              <div className='bg-white rounded-md w-full p-6'>
-                <span>Offline <span className='italic'>(cheque)</span></span>
+              <div className='bg-white rounded-md w-full p-3 md:p-6'>
+              <span className='max-sm:text-sm'>Offline <span className='italic'>(Zelle)</span></span>
               </div>
             </label>
           </div>
-
+          </div>
+          <div className='space-y-8'>
           {/* Powered by Stripe */}
           {formData.paymentMethod === 'online' ?
             <div className="flex justify-center items-center gap-2">
@@ -316,13 +323,13 @@ export default function PaymentForm() {
           <button
             disabled={IsFormValidate}
             type="submit"
-            className="w-full bg-secondary text-white rounded-full py-3 hover:bg-primary/90 transition-colors"
+            className="w-full bg-secondary text-white rounded-full py-3 md:py-4 md:text-xl hover:bg-primary/90 transition-colors"
           >
             Continue
           </button>
+          </div>
         </div>
       </form>
     </div>
   )
 }
-

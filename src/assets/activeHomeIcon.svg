@@ -4,7 +4,7 @@
       <rect id="Rectangle_44" data-name="Rectangle 44" width="39" height="39" transform="translate(0 -0.17)" fill="none"/>
     </g>
     <g id="icons_Q2" data-name="icons Q2" transform="translate(3.235 1.618)">
-      <path id="Path_5" data-name="Path 5" d="M20.179,2a.89.89,0,0,0-.566.243L4.485,15.914A1.618,1.618,0,0,0,4,17.127V35.976H16.134V22.952h8.089V35.976H36.358V17.127a1.618,1.618,0,0,0-.485-1.213L20.745,2.243A.89.89,0,0,0,20.179,2Z" transform="translate(-3.999 -2)" fill="currentcolor" stroke="currentcolor" stroke-linecap="round" stroke-width="1"/>
+      <path id="Path_5" data-name="Path 5" d="M20.179,2a.89.89,0,0,0-.566.243L4.485,15.914A1.618,1.618,0,0,0,4,17.127V35.976H16.134V22.952h8.089V35.976H36.358V17.127a1.618,1.618,0,0,0-.485-1.213L20.745,2.243A.89.89,0,0,0,20.179,2Z" transform="translate(-3.999 -2)" fill="currentcolor" stroke="#e67e22" stroke-linecap="round" stroke-width="1"/>
     </g>
   </g>
 </svg>

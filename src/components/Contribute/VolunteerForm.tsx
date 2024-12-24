@@ -93,36 +93,36 @@ export default function VolunteerForm() {
 
   return (
     <div className='bg-white relative'>
-    <div className="px-4 py-16 max-w-7xl mx-auto ">
-      <h1 className="text-4xl font-display text-center text-[#02306A] mb-12 py-6">Volunteer</h1>
+    <div className="px-6 max-sm:pt-8 max-sm:pb-[150px] md:py-16 max-w-7xl mx-auto ">
+      <h1 className="text-4xl md:text-5xl font-display text-center text-[#02306A] mb-4 md:mb-12 py-6">Volunteer</h1>
       
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+      <div className="grid grid-cols-1 lg:grid-cols-[1.75fr_1fr] gap-10 md:gap-16">
         {/* Left Column - Description and Image */}
         <div className="space-y-8">
-          <div className="space-y-6">
-            <p className="text-[#808080] leading-relaxed">
+          <div className="space-y-6 md:text-xl max-w-[80%]">
+            <p className="text-[#808080] font-medium leading-6">
               We offer volunteering opportunities in the US as well as community projects in and around Chitrapur/Shirali.
             </p>
             
-            <p className="text-[#808080] leading-relaxed">
+            <p className="text-[#808080] font-medium leading-6">
               Become a part of the solution to community's challenges by showing them how even your smallest action can make a significant difference in the lives of others.For more information on how you can become a CHF Volunteer, please contact us via phone or email as shown below-
             </p>
 
             <div className="space-y-3">
               <a 
                 href="tel:(215) 666 3200" 
-                className="flex items-center gap-2 text-black hover:text-primary/90"
+                className="flex items-center gap-2 text-[#516072] hover:text-primary/90"
               >
-                <Phone className="h-5 w-5 text-secondary" />
-                <span>(215) 666 3200</span>
+                <Phone className="h-5 w-5 text-secondary " />
+                <span className='underline'>(215) 666 3200</span>
               </a>
               
               <a 
                 href="mailto:contactus@chfusa.org"
-                className="flex items-center gap-2 text-black hover:text-primary/90"
+                className="flex items-center gap-2 text-[#516072] hover:text-primary/90"
               >
                 <Mail className="h-5 w-5 text-secondary" />
-                <span>contactus@chfusa.org</span>
+                <span className='underline'>contactus@chfusa.org</span>
               </a>
             </div>
           </div>
@@ -139,7 +139,7 @@ export default function VolunteerForm() {
 
         {/* Right Column - Form */}
         <div>
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-6 max-w-[80%]">
             <div>
               <select
                 name="category"
@@ -258,4 +258,3 @@ export default function VolunteerForm() {
     </div>
   )
 }
-
