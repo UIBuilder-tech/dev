@@ -20,7 +20,7 @@ export default function Hero({ title, desc, img, from = "home" }: Props) {
         <div className="absolute inset-0 bg-black/50"></div>
       </div>
 
-      <div className="relative max-w-7xl mx-auto ml-10 md:pt-32 pt-24 max-sm:pb-16">
+      <div className="relative max-w-7xl mx-auto px-4 md:pt-32 pt-24 max-sm:pb-16">
         <div className="max-w-3xl pt-10 max-sm:pb-10 md:pt-15">
           <h1 className="font-display text-3xl md:text-5xl text-white mb-3 md:mb-6 leading-tight">
             {/* {from === "home"
