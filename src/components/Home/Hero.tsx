@@ -5,9 +5,10 @@ interface Props {
   title: string;
   desc: string;
   img: string;
+  from: string;
 }
 
-export default function Hero({ title, desc, img }: Props) {
+export default function Hero({ title, desc, img, from = "home" }: Props) {
   return (
     <div className="relative  md:min-h-screen">
       <div className="absolute inset-0">
@@ -26,8 +27,13 @@ export default function Hero({ title, desc, img }: Props) {
               ? "Chitrapur Heritage Foundation"
               : "Vantiga Donations"} */}
             {title}
+            {from === "home" && (
+              <p className="text-sm md:text-sm text-white text-left px-1 font-body">
+                IRS certified 501c(3) organization, Tax id: 20-2738955
+              </p>
+            )}
           </h1>
-          <p className="text-white/90 text-sm md:text-xl mb-8 leading-relaxed max-sm:leading-2">
+          <p className="text-white/90 text-sm md:text-lg mb-8 leading-relaxed max-sm:leading-2">
             {/* {from === "home"
               ? "Founded in 2005, the Chitrapur Heritage Foundation (CHF) is a nonprofit organization dedicated to fostering sustainable development and preserving the rich cultural heritage of the Chitrapur Saraswat community. With a focus on Heritage, Education,Women's Empowerment and Spiritual Development"
               : "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet."}
