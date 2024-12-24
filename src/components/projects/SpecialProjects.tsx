@@ -32,6 +32,7 @@ const ProjectCard = ({
   const isMobile = windowWidth < 768; // md breakpoint
   const range150 = windowWidth>=1200 && windowWidth <=1500;
   const range120 = windowWidth>1500 && windowWidth <=1900;
+  const range100 = windowWidth >=1900;
 
   const handleClick = (e: React.MouseEvent) => {
     if (
@@ -50,13 +51,13 @@ const ProjectCard = ({
       animate={
         isExpanded
           ? {
-              width: window.innerWidth < 768 ? "375px" : range150 ? "520px" : "640px",
-              height: window.innerWidth < 768 ? "auto" :  "450px",
+              width: window.innerWidth < 768 ? "375px" : range150 ? "520px" : range100 ? "800px" : "640px",
+              height: window.innerWidth < 768 ? "auto" :range100 ? "500px" :   "450px",
               zIndex: 10,
             }
           : {
-              width: window.innerWidth < 768 ? "180px" :range150 ? "280px" : "320px",
-              height: window.innerWidth < 768 ? "auto" : "450px",
+              width: window.innerWidth < 768 ? "180px" :range150 ? "280px" :range100 ? "375px" : "320px",
+              height: window.innerWidth < 768 ? "auto" :range100 ? "500px" : "450px",
               zIndex: 0,
             }
       }
@@ -242,8 +243,8 @@ const SpecialProjects = ({
   );
 
   return (
-    <div className="w-full max-w-7xl mx-auto py-12">
-      <h2 className={`text-3xl desktop-1200:text-4xl mb-4 md:mb-8 max-sm:px-5 ${range150 ? "pl-20" :""}`}>{title}</h2>
+    <div className="w-full max-w-7xl mx-auto py-12 desktop-1900:max-w-full">
+      <h2 className={`text-3xl desktop-1200:text-4xl desktop-1900:text-5xl desktop-1900:pl-[160px] desktop-1900:relative mb-4 md:mb-8 max-sm:px-5 ${range150 ? "pl-20" :""}`}>{title}</h2>
 
       <div className="relative">
         <div className="flex items-center justify-center gap-6 mb-8">

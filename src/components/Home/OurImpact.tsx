@@ -53,8 +53,8 @@ export default function ImpactSection() {
   };
 
   return (
-    <div className="py-8 px-4 md:p-8 bg-cream md:mx-14">
-      <h2 className="text-3xl md:text-4xl font-display text-gray-900 mb-8">
+    <div className="py-8 px-4 md:p-8 bg-cream md:mx-14 desktop-1900:mx-16">
+      <h2 className="text-3xl md:text-4xl font-display text-gray-900 mb-8 desktop-1900:text-5xl">
         Our Impact
       </h2>
 

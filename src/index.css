@@ -108,6 +108,30 @@
   }
 }
 
+@media (min-width:1900px){
+  .logo-container {
+    position: absolute;
+    width: 215px;
+    height: 150px;
+    background: #FFFFFF;
+    border-radius: 0 72px 72px 0;
+    transform: rotate(90deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    left: 55px;
+  }
+  .logo {
+    width: 130px;
+    height: 100px;
+    transform: rotate(-90deg);
+    object-fit: contain;
+    position: relative;
+    left:5px;
+    margin-left: 5px;
+  }
+}
+
 .mobile-logo-container {
   background: #FFFFFF;
   display: flex;

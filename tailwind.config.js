@@ -48,6 +48,7 @@ export default {
         // 'md':'768px',
         // 'lg':'1024px',
         // 'max-sm':'640px',
+        'desktop-1900': '1900px', // Custom breakpoint for 100%
         'desktop-1200': '1200px', // Custom breakpoint for 150%
         'desktop-1500': '1500px', // Custom breakpoint for 125%
         // '125-range': { min: '1501', max: '1900' },

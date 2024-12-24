@@ -1,5 +1,6 @@
 import { Mail, MapPin, Phone } from "lucide-react";
 import footerbg from "../../assets/footerbg.svg";
+import logo from '../../assets/chfLogo.png'
 
 export default function Footer() {
   return (
@@ -16,9 +17,20 @@ export default function Footer() {
           style={{ objectFit: "contain" }}
         />
       </div>
-
+     
       <div className="relative z-10 mx-auto max-w-7xl">
-        <div className="grid grid-cols-2 gap-x-8 gap-y-12 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-2 gap-x-8 gap-y-12 md:grid-cols-2 lg:grid-cols-5">
+        <div className="space-y-12 items-center justify-center flex">
+        <div className=" flex flex-col  items-center justify-center">
+          <img src={logo} className="w-36"/>
+          <h2 className="font-display text-xl desktop-1500:text-3xl desktop-1200:pt-5 pt-10 md:text-2xl text-white text-center desktop-1900:text-xl">
+                      Chitrapur Heritage Foundation, USA
+                    </h2>
+                    <p className="text-sm md:text-sm text-white text-center px-4 md:px-8">
+                      IRS certified 501c(3) organization, Tax id: 20-2738955
+                    </p>
+                    </div>
+        </div>
           {/* First Column: Support Us + Useful Links */}
           <div className="space-y-12">
             {/* Support Us Section */}
@@ -187,7 +199,7 @@ export default function Footer() {
                   Langhorne, PA 19047
                 </span>
               </li>
-              <div className="max-sm:relative max:sm:right-0 max-sm:w-full max-sm:-ml-[100%]">
+              <div className="max-sm:relative max:sm:right-0 max-sm:w-full">
                 <li className="mt-6 pt-6">
                   <p className="font-normal">Mailing Address</p>
                   <p className=" text-sm">
@@ -200,15 +212,15 @@ export default function Footer() {
                 </li>
                 <li className="pt-6">
                   <p className="mb-2">Subscribe to our newsletter</p>
-                  <form className="flex items-center gap-2 bg-white rounded-full">
+                  <form className="flex items-center bg-white rounded-full">
                     <input
                       type="email"
                       placeholder="Enter Your Email Address"
-                      className="flex-1 rounded-full px-4 py-2 text-sm font-thin text-gray-800 placeholder:text-gray-400 hover:border-none"
+                      className="flex-1 rounded-l-full max-sm:px-4 px-1 bg-white py-2 text-sm font-thin text-gray-800 placeholder:text-gray-400 hover:border-none"
                     />
                     <button
                       type="submit"
-                      className="rounded-full bg-white h-10 w-10 p-3 flex text-secondary items-center justify-center hover:bg-white/20"
+                      className="rounded-r-full bg-white h-10 max-sm:h-9 w-10 p-3 flex text-secondary items-center justify-center hover:bg-white/20"
                     >
                       →
                     </button>

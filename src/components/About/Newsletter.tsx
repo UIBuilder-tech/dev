@@ -23,7 +23,7 @@ function Newsletter() {
         <div className="">
           {/* Left Content */}
 
-          <div className="md:h-[460px] flex flex-col lg:flex-row items-center justify-left md:pl-20">
+          <div className="md:h-[460px] desktop-1900:h-[550px] flex flex-col lg:flex-row items-center justify-left md:pl-20">
             <div className="flex flex-col justify-center md:space-y-6 desktop-1200:space-y-2 px-10 md:max-w-[50%] lg:pr-8 max-sm:py-8">
               <h2 className="text-3xl md:text-5xl md:text-6xl text-white mb-4 desktop-1200:text-4xl desktop-1500:text-5xl">
                 Newsletter
