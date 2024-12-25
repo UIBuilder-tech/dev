@@ -1,80 +1,78 @@
-// import m1 from "../assets/boardMembers/Arun.jpg";
-import m2 from '../assets/boardMembers/Sumant Padbidri.jpg';
-// import m3 from "../assets/boardMembers/Millind.jpg";
-import m4 from '../assets/boardMembers/Ashwin Bijur.jpg';
-import m5 from '../assets/boardMembers/Mamta Savkur.jpg';
-import m6 from '../assets/boardMembers/Ashwin Bijur.jpg';
-import m7 from '../assets/boardMembers/Neena Karnad.jpeg';
-import m8 from '../assets/boardMembers/Shashank Udyawer.png';
-import m9 from '../assets/boardMembers/Sudhir Golikeri.jpg';
-import m10 from '../assets/boardMembers/Santosh G.jpg';
-import m11 from '../assets/boardMembers/Nandu maam.jpg';
-import m12 from '../assets/boardMembers/Ashok Kulkarni.jpg';
+import m1 from "../assets/boardMembers/Arun.jpg";
+import m2 from "../assets/boardMembers/Sumant Padbidri.jpg";
+import m3 from "../assets/boardMembers/Milindjpg.jpg";
+import m4 from "../assets/boardMembers/Ashwin Bijur.jpg";
+import m5 from "../assets/boardMembers/Mamta Savkur.jpg";
+import m7 from "../assets/boardMembers/Neena Karnad.jpeg";
+import m8 from "../assets/boardMembers/Shashank Udyawer.png";
+import m9 from "../assets/boardMembers/Sudhir Golikeri.jpg";
+import m10 from "../assets/boardMembers/Santosh G.jpg";
+import m11 from "../assets/boardMembers/Nandu maam.jpg";
+import m12 from "../assets/boardMembers/Ashok Kulkarni.jpg";
 // import m13 from "../assets/boardMembers/Kiran Mundkur.jpg";
-import m14 from '../assets/boardMembers/Shashank Udyawer.png';
-import m15 from '../assets/boardMembers/Pramod Mavinkurve.jpg';
-import m16 from '../assets/boardMembers/Mangesh Hoskote.png';
-import m17 from '../assets/boardMembers/Devyani Padubidri.jpg';
-import m18 from '../assets/boardMembers/Sanjay Savkur.jpg';
-import Placeholder from '../assets/Shirali_Math.jpg';
+import m15 from "../assets/boardMembers/Pramod Mavinkurve.jpg";
+import m16 from "../assets/boardMembers/Mangesh Hoskote.png";
+import m17 from "../assets/boardMembers/Devyani Padubidri.jpg";
+import m18 from "../assets/boardMembers/Sanjay Savkur.jpg";
+import Placeholder from "../assets/Shirali_Math.jpg";
 
 export const boardMembers = [
   // Board Officers
   {
-    name: 'Arun Heble',
-    role: 'Chairman & President',
-    img: Placeholder,
+    name: "Arun Heble",
+    role: "Board Officers - Chairman & President",
+    img: m1,
   },
   {
-    name: 'Sumant Padbidri',
-    role: 'Secretary / Communications',
+    name: "Sumant Padbidri",
+    role: "Board Officers - Secretary / Communications",
     img: m2,
   },
   {
-    name: 'Milind Gokarn',
-    role: 'Treasurer / Finance / Database',
-    img: Placeholder,
+    name: "Milind Gokarn",
+    role: "Board Officers - Treasurer / Finance / Database",
+    img: m3,
   },
   {
-    name: 'Ashwin Bijur',
-    role: 'Assistant Treasurer',
+    name: "Ashwin Bijur",
+    role: "Board Officers - Assistant Treasurer",
     img: m4,
   },
 
   // Board Members
   {
     name: "Santosh Gunavante",
-    role: "Women's empowerment",
+    role: "Board Members - Women's empowerment",
     img: m10,
   },
   {
-    name: 'Nandkishore Kalambi',
-    role: 'Digital',
+    name: "Nandkishore Kalambi",
+    role: "Board Members - Digital",
     img: m11,
   },
   {
     name: "Neena Karnad",
-    role: "Social activities",
+    role: "Board Members - Social activities",
     img: m7,
   },
   {
     name: "Ashok Kulkarni",
-    role: "Education / Grants",
+    role: "Board Members - Education / Grants",
     img: m12,
   },
   {
     name: "Kiran Mundkur",
-    role: "Communications / Social activities",
+    role: "Board Members - Communications / Social activities",
     img: Placeholder,
   },
   {
     name: "Mamta Savkur",
-    role: "Vantiga",
+    role: "Board Members - Vantiga",
     img: m5,
   },
   {
     name: "Shashank Udyawer",
-    role: "Heritage",
+    role: "Board Members - Heritage",
     img: m8,
   },
 

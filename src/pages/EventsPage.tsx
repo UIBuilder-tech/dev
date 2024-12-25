@@ -13,6 +13,7 @@ import SpecialProjects from "../components/projects/SpecialProjects";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import ChitrapurMathImg from "../assets/Shirali_Math.jpg";
+import EventsHero from "../assets/EventsHero.jpg";
 import Yuvas from "../assets/Yuvas.png";
 import Yuvas1 from "../assets/Yuvas1.png";
 
@@ -21,13 +22,13 @@ export default function EventsPage() {
 
   useEffect(() => {
     // Handle initial load with hash
-    const hash = location.hash.replace('#', '');
+    const hash = location.hash.replace("#", "");
     if (hash) {
       // Add a small delay to ensure the content is rendered
       setTimeout(() => {
         const element = document.getElementById(hash);
         if (element) {
-          element.scrollIntoView({ behavior: 'smooth' });
+          element.scrollIntoView({ behavior: "smooth" });
         }
       }, 100);
     }
@@ -61,21 +62,24 @@ export default function EventsPage() {
   ];
 
   return (
-<div className="min-h-screen bg-cream">
-<Hero
+    <div className="min-h-screen bg-cream">
+      <Hero
         title="Celebrating Tradition and Community"
         desc="Join us as we commemorate festivals, organize satsangs, and conduct enriching activities for children and youth. Stay updated with our latest programs and events that honor tradition, foster spiritual growth, and strengthen the Chitrapur Saraswat community."
-        img={ChitrapurMathImg}
+        img={EventsHero}
       />
       <div id="featured-news">
-      <SpecialProjects
-        title="Featured News"
-        projects={FeaturedNews}
-        from="events"
-      />
+        <SpecialProjects
+          title="Featured News"
+          projects={FeaturedNews}
+          from="events"
+        />
       </div>
       <div id="festivals">
-      <ProjectsCategory categoryTitle="Festivals" programs={EventsFestivals} />
+        <ProjectsCategory
+          categoryTitle="Festivals"
+          programs={EventsFestivals}
+        />
       </div>
       <div id="get-togethers">
         <ProjectsCategory
