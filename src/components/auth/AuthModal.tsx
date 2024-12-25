@@ -33,8 +33,8 @@ const CustomButton: React.FC<ButtonProps> = ({
       type={type}
       disabled={isLoading}
       className={`w-full py-3 px-4 text-white rounded transition-colors flex items-center justify-center ${isLoading
-          ? 'bg-gray-400 cursor-not-allowed'
-          : 'bg-secondary hover:bg-opacity-90'
+        ? 'bg-gray-400 cursor-not-allowed'
+        : 'bg-secondary hover:bg-opacity-90'
         }`}
       aria-busy={isLoading}
       aria-label={text}
@@ -95,7 +95,6 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
     GetAccessToken()
       .then(data => {
         const accessToken = data.access_token;
-        setData(v => ({ ...v, accessToken: accessToken }))
         sessionStorage.setItem('accessToken', accessToken);
         ApiCalling(urlData)
           .then(response => {
@@ -106,6 +105,7 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
               } else {
                 toast.success('User successfully logged in.');
                 navigate('/profile');
+                setData(v => ({ ...v, accessToken: accessToken }))
                 onClose();
                 setData(v => ({ ...v, userData: records[0] }))
                 sessionStorage.setItem('user', JSON.stringify(records[0]));
@@ -121,13 +121,12 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
           .catch(error => {
             toast.error('request Failed');
             console.error(error);
+            sessionStorage.removeItem('accessToken');
           })
           .finally(() => {
             setIsDisable(false);
           });
-      })
-        console.log("🚀 ~ loginFormHandler ~ accessToken:", accessToken)
-      .catch(e => {
+      }).catch(() => {
         toast.error('Failed to get access token');
       });
   };
@@ -169,7 +168,7 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
             setIsDisable(false);
           });
       })
-      .catch(e => {
+      .catch(() => {
         toast.error('Failed to get access token');
       });
   };
