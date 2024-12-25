@@ -1,6 +1,8 @@
-import { useState, FormEvent } from "react";
-import { Check } from "lucide-react";
-import stripe from "../../assets/stripe.svg";
+import { useState, FormEvent, useEffect } from 'react'
+import stripe from '../../assets/stripe.svg'
+import { UseDataContext } from '../context/DataContext'
+import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import paypal from "../../assets/paypal.svg";
 
 interface FormData {

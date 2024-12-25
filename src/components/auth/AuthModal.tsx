@@ -22,6 +22,100 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
     exit: { opacity: 0 },
   };
 
+  const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const loginFormHandler = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    console.log('loginFormHandler');
+    setIsDisable(true);
+    const query = `SELECT Id, FirstName, LastName, Email, Phone FROM Contact WHERE Email = '${formData.Email}'`;
+    const encodedQuery = encodeURIComponent(query);
+    const urlData = `/query?q=${encodedQuery}`;
+    GetAccessToken()
+      .then(data => {
+        const accessToken = data.access_token;
+        sessionStorage.setItem('accessToken', accessToken);
+        ApiCalling(urlData)
+          .then(response => {
+            const { totalSize, records } = response;
+            if (records.length > 0) {
+              if (totalSize === 0) {
+                toast.error('User not found');
+              } else {
+                toast.success('User successfully logged in.');
+                navigate('/profile');
+                setData(v => ({ ...v, accessToken: accessToken }))
+                onClose();
+                setData(v => ({ ...v, userData: records[0] }))
+                sessionStorage.setItem('user', JSON.stringify(records[0]));
+              }
+            } else {
+              if (Array.isArray(response) && response.length > 0) {
+                toast.error(response[0].message);
+              } else {
+                toast.error('User not found');
+              }
+              sessionStorage.removeItem('accessToken');
+            }
+          })
+          .catch(error => {
+            toast.error('request Failed');
+            console.error(error);
+            sessionStorage.removeItem('accessToken');
+          })
+          .finally(() => {
+            setIsDisable(false);
+          });
+      }).catch(() => {
+        toast.error('Failed to get access token');
+      });
+  };
+
+  const registerFormHandler = async (
+    event: React.FormEvent<HTMLFormElement>
+  ) => {
+    event.preventDefault();
+    if (formData.Password__c !== formData.confirmPassword) {
+      toast.error('Passwords do not match');
+      return;
+    }
+    const urlData = '/sobjects/Contact';
+    setIsDisable(true);
+    GetAccessToken()
+      .then(data => {
+        const accessToken = data.access_token;
+        sessionStorage.setItem('accessToken', accessToken);
+        const insertData = {
+          FirstName: formData.FirstName,
+          LastName: formData.LastName,
+          Phone: formData.Phone,
+          Email: formData.Email,
+          Password__c: formData.Password__c,
+        };
+        ApiCalling(urlData, 'POST', insertData)
+          .then(res => {
+            if (res.success) {
+              toast.success('User successfully registered. Please login first');
+              setView('login');
+            } else {
+              toast.error('Failed to register. Please try again later');
+            }
+          })
+          .catch(error => {
+            toast.error('Request failed. Please try again later');
+            console.error(error);
+          })
+          .finally(() => {
+            setIsDisable(false);
+          });
+      })
+      .catch(() => {
+        toast.error('Failed to get access token');
+      });
+  };
   const renderContent = () => {
     switch (view) {
       case "reset":
