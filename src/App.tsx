@@ -7,8 +7,8 @@ import AboutPage from "./pages/AboutPage";
 import ProjectsPage from "./pages/ProjectsPage";
 import EventsPage from "./pages/EventsPage";
 import { ToastContainer } from 'react-toastify';
-import { useContext, useEffect, useState } from "react";
-import { DataContext, UseDataContext } from "./components/context/DataContext";
+import { useEffect, useState } from "react";
+import { UseDataContext } from "./components/context/DataContext";
 import { loadStripe, Stripe } from "@stripe/stripe-js";
 import ElementsWrapper from "./components/payment/ElementsWrapper";
 import CheckoutForm from "./components/payment/CheckoutForm";
@@ -39,10 +39,10 @@ function App() {
   }, [data?.clientSecret]);
 
   useEffect(() => {
-    if (data?.accessToken) {
+    if (data?.userData) {
       setShowPrivateRoute(true)
     }
-  }, [data?.accessToken])
+  }, [data?.userData])
 
   return (
     <>
