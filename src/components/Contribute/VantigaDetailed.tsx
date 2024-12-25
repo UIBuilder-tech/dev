@@ -3,7 +3,7 @@ import grantsIcon from "../../assets/grantsIcon.svg";
 export default function VantigaDetailed() {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 desktop-1200:py-12 desktop-1500:py-14 desktop-1900:py-16">
-      <h1 className="text-center text-3xl sm:text-4xl font-bold text-[#1B4F72] mb-4 desktop-1200:text-4xl desktop-1500:text-5xl desktop-1900:text-6xl desktop-1200:mb-4 desktop-1500:mb-6 desktop-1900:mb-8">
+      <h1 className="text-center text-3xl sm:text-5xl text-[#1B4F72] mb-4 desktop-1200:text-4xl desktop-1500:text-5xl desktop-1900:text-6xl desktop-1200:mb-4 desktop-1500:mb-6 desktop-1900:mb-8">
         Vantigā
       </h1>
 
@@ -17,9 +17,9 @@ export default function VantigaDetailed() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 desktop-1200:gap-8 desktop-1500:gap-10 desktop-1900:gap-12">
           {/* What We Do & Don't Fund */}
           <div>
-            <h2 className="text-xl font-semibold mb-6 desktop-1200:text-xl desktop-1500:text-2xl desktop-1900:text-3xl desktop-1200:mb-6 desktop-1500:mb-8 desktop-1900:mb-10">
+            <p className="text-xl font-semibold mb-6 desktop-1200:text-xl desktop-1500:text-2xl desktop-1900:text-3xl desktop-1200:mb-6 desktop-1500:mb-8 desktop-1900:mb-10">
               What is Vantigā
-            </h2>
+            </p>
             <div className="space-y-6 desktop-1200:space-y-6 desktop-1500:space-y-8 desktop-1900:space-y-10">
               <div className="flex gap-3 desktop-1200:gap-4 desktop-1500:gap-5 desktop-1900:gap-6">
                 <img
@@ -90,9 +90,9 @@ export default function VantigaDetailed() {
 
           {/* Selection Criteria */}
           <div>
-            <h2 className="text-xl font-semibold mb-6 desktop-1200:text-xl desktop-1500:text-2xl desktop-1900:text-3xl desktop-1200:mb-6 desktop-1500:mb-8 desktop-1900:mb-10">
+            <p className="text-xl font-semibold mb-6 desktop-1200:text-xl desktop-1500:text-2xl desktop-1900:text-3xl desktop-1200:mb-6 desktop-1500:mb-8 desktop-1900:mb-10">
               What is Math Maryādā
-            </h2>
+            </p>
             <div className="space-y-6 desktop-1200:space-y-6 desktop-1500:space-y-8 desktop-1900:space-y-10">
               <div className="flex gap-3 desktop-1200:gap-4 desktop-1500:gap-5 desktop-1900:gap-6">
                 <img
@@ -133,9 +133,9 @@ export default function VantigaDetailed() {
             </div>
           </div>
           <div>
-            <h2 className="text-xl font-semibold mb-6 desktop-1200:text-xl desktop-1500:text-2xl desktop-1900:text-3xl desktop-1200:mb-6 desktop-1500:mb-8 desktop-1900:mb-10">
+            <p className="text-xl font-semibold mb-6 desktop-1200:text-xl desktop-1500:text-2xl desktop-1900:text-3xl desktop-1200:mb-6 desktop-1500:mb-8 desktop-1900:mb-10">
               Who can pay Vantigā
-            </h2>
+            </p>
             <div className="space-y-6 desktop-1200:space-y-6 desktop-1500:space-y-8 desktop-1900:space-y-10">
               <div className="flex gap-3 desktop-1200:gap-4 desktop-1500:gap-5 desktop-1900:gap-6">
                 <img
