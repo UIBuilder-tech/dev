@@ -20,7 +20,6 @@ const visionCards: VisionCard[] = [
   {
     id: "education",
     title: "Education",
-    title: "Education",
     description:
       "Chitrapur Heritage Foundation (CHF) supports 9 schools in India, empowering over 3,000 underprivileged students through quality education, scholarship's,  vocational training, and personnel development programs.",
     image: educationImg,
