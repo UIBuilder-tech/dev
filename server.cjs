@@ -6,7 +6,7 @@ require('dotenv').config();
 // Sign in to see your own test API key embedded in code samples.
 const stripe = require("stripe")(`${process.env.VITE_STRIPE_CLIENT_SECRET}`);
 // const stripe = require("stripe")('sk_test_51QX2EjD1HGHWO4740PkSZeF6kW0QpepPxc8BNFLpEDEZXuIXdABA9sTEs0zAWKFJyLmNSnEPatPGqx9TlzW49gKU00UmX8e3aw');
-console.log("VITE_STRIPE_CLIENT_SECRET",process.env.VITE_STRIPE_CLIENT_SECRET);
+console.log("VITE_STRIPE_CLIENT_SECRET", process.env.VITE_STRIPE_CLIENT_SECRET);
 
 app.use(express.static("public"));
 app.use(express.json());
@@ -26,18 +26,20 @@ app.post("/create-payment-intent", async (req, res) => {
   console.log("🚀 ~ app.post ~ items:", items)
 
   // Create a PaymentIntent with the order amount and currency
-  const paymentIntent = await stripe.paymentIntents.create({
-    amount: calculateOrderAmount(items),
-    currency: "usd",
-    // In the latest version of the API, specifying the `automatic_payment_methods` parameter is optional because Stripe enables its functionality by default.
-    automatic_payment_methods: {
-      enabled: true,
-    },
-  });
+  try {
+    const paymentIntent = await stripe.paymentIntents.create({
+      amount: calculateOrderAmount(items),
+      currency: "usd",
+      // In the latest version of the API, specifying the `automatic_payment_methods` parameter is optional because Stripe enables its functionality by default.
+      automatic_payment_methods: {
+        enabled: true,
+      },
+    });
 
-  res.send({
-    clientSecret: paymentIntent.client_secret,
-  });
+    res.statusCode(200).send({ clientSecret: paymentIntent.client_secret, });
+  } catch (error) {
+    res.statusCode(500).send(error)
+  }
 });
 
 

@@ -5,6 +5,7 @@ export interface Data {
   clientSecret: string | null;
   paymentData: any | null; // Replace 'PaymentDataType' with the actual type
   accessToken: string | null;
+  userData: any | null;
 }
 
 // Define the context type
@@ -25,6 +26,7 @@ const defaultData: Data = {
   clientSecret: null,
   paymentData: null,
   accessToken: null,
+  userData: null,
 };
 export const DataProvider: React.FC<DataProviderProps> = ({ children }) => {
   const [data, setData] = useState<Data>(defaultData);
@@ -32,12 +34,16 @@ export const DataProvider: React.FC<DataProviderProps> = ({ children }) => {
   useEffect(() => {
     const clientSecretData = sessionStorage.getItem("clientSecret");
     const accessToken = sessionStorage.getItem("accessToken");
+    const user = sessionStorage.getItem("user");
 
     if (clientSecretData) {
       setData((v) => ({ ...v, clientSecret: clientSecretData }));
     }
     if (accessToken) {
       setData((v) => ({ ...v, accessToken }));
+    }
+    if (user) {
+      setData((v) => ({ ...v, userData: JSON.parse(user) }));
     }
   }, []);
 

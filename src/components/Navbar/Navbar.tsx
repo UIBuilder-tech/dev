@@ -1,5 +1,5 @@
-import { Menu, Heart } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Menu, Heart, LogOut } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import NavLink from './NavLink';
 import AuthModal from '../auth/AuthModal';
@@ -9,6 +9,8 @@ import ProfileIcon from '../../assets/profileIcon.svg';
 import ContactIcon from '../../assets/contactIcon.svg';
 import Sidebar from './Sidebar';
 import MobileNav from './MobileNav';
+import { UseDataContext } from '../context/DataContext';
+import IconNavLink from './IconNavLink';
 
 // Custom hook for scroll behavior
 const useScrollDirection = () => {
@@ -37,11 +39,20 @@ const useScrollDirection = () => {
 };
 
 export default function Navbar() {
-  const { data } = useContext(DataContext) ?? {};
+  const { data } = UseDataContext();
   const scrollDirection = useScrollDirection();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-
+  const navigate = useNavigate()
+  const ProfileClickHandler = () => {
+    console.log("🚀 ~ ProfileClickHandler ~ data:", data)
+    if (data?.accessToken) {
+      navigate("/profile")
+    } else {
+      console.log("else condition");
+      setIsModalOpen(true)
+    }
+  };
   return (
     <>
       <nav
@@ -78,9 +89,8 @@ export default function Navbar() {
           <div className='hidden md:flex justify-between items-center px-4 py-6 desktop-1900:py-8'>
             <Link
               to='/'
-              className={`logo-container ${
-                scrollDirection === 'down' ? '!hidden' : ''
-              }`}
+              className={`logo-container ${scrollDirection === 'down' ? '!hidden' : ''
+                }`}
             >
               <img src={logo} alt='CHF Logo' className='logo' />
             </Link>
@@ -103,13 +113,19 @@ export default function Navbar() {
                     alt='Home'
                   />
                 </Link>
-                <button onClick={() => setIsModalOpen(true)}>
+                <button onClick={ProfileClickHandler} type='button'>
                   <img
                     src={ProfileIcon}
                     className='desktop-1200:w-5 desktop-1200:h-6 desktop-1500:w-6 desktop-1500:h-6 desktop-1900:w-7 desktop-1900:h-7 w-7 h-7'
                     alt='Profile'
                   />
                 </button>
+                {
+                  data?.accessToken ?
+                    <div onClick={() => { sessionStorage.clear(); window.location.href = "/" }}>
+                      <IconNavLink to="javascript:void(0)" icon={LogOut} />
+                    </div> : null
+                }
                 <button
                   onClick={e => {
                     e.preventDefault();
@@ -132,7 +148,7 @@ export default function Navbar() {
                 </button>
                 <Link
                   to='/contribute#donation-table'
-                  className='bg-secondary text-white px-6 desktop-1200:py-3 desktop-1500:py-3 desktop-1200:py-[12px] desktop-1900:py-4 desktop-1200:px-5 py-4 rounded-full hover:bg-opacity-90 flex items-center gap-2 text-xl desktop-1200:text-lg desktop-1500:text-lg desktop-1200:text-sm desktop-1200:gap-1 desktop-1900:text-xl'
+                  className='bg-secondary text-white px-6 desktop-1200:py-3 desktop-1500:py-3 desktop-1900:py-4 desktop-1200:px-5 py-4 rounded-full hover:bg-opacity-90 flex items-center gap-2 text-xl desktop-1200:text-lg desktop-1500:text-lg desktop-1200:text-sm desktop-1200:gap-1 desktop-1900:text-xl'
                 >
                   Donate{' '}
                   <Heart

@@ -125,16 +125,14 @@ export default function ImpactSection() {
           <div className="bg-white rounded-2xl desktop-1200:p-8 desktop-1500:p-10 p-6 md:p-10 shadow-md">
             <div className="grid grid-cols-7 gap-2 text-center mb-2 md:mb-6">
               {["$", "5", "0", "0", "0", "0", "0"].map((digit, i) => (
-                <>
                   <h3
-                    key={i}
+                    key={`section_${i}`}
                     className={`text-4xl font-bold text-[#0066FF] relative ${
                       i < 6 ? "digit-separator" : ""
                     }`}
                   >
                     {digit}
                   </h3>
-                </>
               ))}
             </div>
             <div className="flex justify-between text-lg mx-5">

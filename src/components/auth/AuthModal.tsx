@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ApiCalling, { GetAccessToken } from '../api/ApiCalling';
 import { toast } from 'react-toastify';
+import { UseDataContext } from '../context/DataContext';
 interface AuthModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -31,11 +32,10 @@ const CustomButton: React.FC<ButtonProps> = ({
     <button
       type={type}
       disabled={isLoading}
-      className={`w-full py-3 px-4 text-white rounded transition-colors flex items-center justify-center ${
-        isLoading
+      className={`w-full py-3 px-4 text-white rounded transition-colors flex items-center justify-center ${isLoading
           ? 'bg-gray-400 cursor-not-allowed'
           : 'bg-secondary hover:bg-opacity-90'
-      }`}
+        }`}
       aria-busy={isLoading}
       aria-label={text}
     >
@@ -67,6 +67,7 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
   const [isDisable, setIsDisable] = useState<boolean>(false);
   const [formData, setFormData] = useState<FormDataType>({});
   const [view, setView] = useState<ViewType>('login');
+  const { setData } = UseDataContext();
   const navigate = useNavigate();
   const modalVariants = {
     hidden: { opacity: 0, y: -20 },
@@ -88,12 +89,13 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
   const loginFormHandler = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setIsDisable(true);
-    const query = `SELECT Id, FirstName, LastName, Email, Password__c FROM Contact WHERE Email = '${formData.Email}'`;
+    const query = `SELECT Id, FirstName, LastName, Email, Phone FROM Contact WHERE Email = '${formData.Email}'`;
     const encodedQuery = encodeURIComponent(query);
-    const urlData = `/services/data/v57.0/query?q=${encodedQuery}`;
+    const urlData = `/query?q=${encodedQuery}`;
     GetAccessToken()
       .then(data => {
         const accessToken = data.access_token;
+        setData(v => ({ ...v, accessToken: accessToken }))
         sessionStorage.setItem('accessToken', accessToken);
         ApiCalling(urlData)
           .then(response => {
@@ -105,6 +107,7 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
                 toast.success('User successfully logged in.');
                 navigate('/profile');
                 onClose();
+                setData(v => ({ ...v, userData: records[0] }))
                 sessionStorage.setItem('user', JSON.stringify(records[0]));
               }
             } else {
@@ -123,6 +126,7 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
             setIsDisable(false);
           });
       })
+        console.log("🚀 ~ loginFormHandler ~ accessToken:", accessToken)
       .catch(e => {
         toast.error('Failed to get access token');
       });
@@ -135,7 +139,7 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
       toast.error('Passwords do not match');
       return;
     }
-    const urlData = '/services/data/v57.0/sobjects/Contact';
+    const urlData = '/sobjects/Contact';
     setIsDisable(true);
     GetAccessToken()
       .then(data => {

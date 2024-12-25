@@ -1,11 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { PencilIcon, UserPlusIcon, XIcon } from "lucide-react";
+import { UseDataContext } from "../components/context/DataContext";
 
 interface PersonalDetails {
-  firstName: string;
-  lastName: string;
-  email: string;
-  mobile: string;
+  FirstName: string;
+  LastName: string;
+  Email: string;
+  Phone: string;
 }
 
 interface Address {
@@ -31,12 +32,8 @@ export default function Profile() {
   const [isFamilyModalOpen, setIsFamilyModalOpen] = useState(false);
   const [isEditingPersonal, setIsEditingPersonal] = useState(false);
   const [isEditingAddress, setIsEditingAddress] = useState(false);
-  const [personalDetails, setPersonalDetails] = useState<PersonalDetails>({
-    firstName: "Sanjeeva",
-    lastName: "Chitlapalli",
-    email: "sanjeevachitlapalli@gmail.com",
-    mobile: "(861) 893-9153",
-  });
+  const { data } = UseDataContext()
+  const [personalDetails, setPersonalDetails] = useState<PersonalDetails | null>(null);
   const [address, setAddress] = useState<Address>({
     street: "",
     city: "",
@@ -68,6 +65,17 @@ export default function Profile() {
     setIsFamilyModalOpen(false);
   };
 
+  useEffect(() => {
+    console.log('====================================');
+    console.log(data.userData);
+    console.log('====================================');
+    setPersonalDetails(data.userData)
+  }, [data.userData])
+
+  const changeHandler = (e) => {
+    const { name, value } = e.target
+    setPersonalDetails((v:PersonalDetails) => ({ ...v, [name]: value }))
+  }
   return (
     <div className="max-w-4xl mx-auto p-6 space-y-8">
       {/* Personal Details Section */}
@@ -99,13 +107,8 @@ export default function Profile() {
                 <label className="block text-sm font-medium">First Name</label>
                 <input
                   type="text"
-                  value={personalDetails.firstName}
-                  onChange={(e) =>
-                    setPersonalDetails((prev) => ({
-                      ...prev,
-                      firstName: e.target.value,
-                    }))
-                  }
+                  value={personalDetails?.FirstName}
+                  onChange={changeHandler}
                   className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-[#1572E8]"
                 />
               </div>
@@ -113,13 +116,8 @@ export default function Profile() {
                 <label className="block text-sm font-medium">Last Name</label>
                 <input
                   type="text"
-                  value={personalDetails.lastName}
-                  onChange={(e) =>
-                    setPersonalDetails((prev) => ({
-                      ...prev,
-                      lastName: e.target.value,
-                    }))
-                  }
+                  value={personalDetails?.LastName}
+                  onChange={changeHandler}
                   className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-[#1572E8]"
                 />
               </div>
@@ -129,13 +127,8 @@ export default function Profile() {
                 </label>
                 <input
                   type="email"
-                  value={personalDetails.email}
-                  onChange={(e) =>
-                    setPersonalDetails((prev) => ({
-                      ...prev,
-                      email: e.target.value,
-                    }))
-                  }
+                  value={personalDetails?.Email}
+                  onChange={changeHandler}
                   className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-[#1572E8]"
                 />
               </div>
@@ -145,13 +138,8 @@ export default function Profile() {
                 </label>
                 <input
                   type="tel"
-                  value={personalDetails.mobile}
-                  onChange={(e) =>
-                    setPersonalDetails((prev) => ({
-                      ...prev,
-                      mobile: e.target.value,
-                    }))
-                  }
+                  value={personalDetails?.Phone}
+                  onChange={changeHandler}
                   className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-[#1572E8]"
                 />
               </div>
@@ -171,28 +159,30 @@ export default function Profile() {
               </div>
             </>
           ) : (
+            personalDetails &&
             <>
+              {/* {JSON.stringify(personalDetails)} */}
               <div className="space-y-2">
                 <label className="block text-sm text-gray-500">
                   First Name
                 </label>
-                <p className="text-lg">{personalDetails.firstName}</p>
+                <p className="text-lg">{personalDetails.FirstName}</p>
               </div>
               <div className="space-y-2">
                 <label className="block text-sm text-gray-500">Last Name</label>
-                <p className="text-lg">{personalDetails.lastName}</p>
+                <p className="text-lg">{personalDetails.LastName}</p>
               </div>
               <div className="space-y-2">
                 <label className="block text-sm text-gray-500">
                   Email Address
                 </label>
-                <p className="text-lg">{personalDetails.email}</p>
+                <p className="text-lg">{personalDetails.Email}</p>
               </div>
               <div className="space-y-2">
                 <label className="block text-sm text-gray-500">
                   Mobile Number
                 </label>
-                <p className="text-lg">{personalDetails.mobile}</p>
+                <p className="text-lg">{personalDetails.Phone}</p>
               </div>
             </>
           )}
