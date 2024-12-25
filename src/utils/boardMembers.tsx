@@ -24,7 +24,8 @@ interface Member {
   img: string;
 }
 
-export const boardMembers:Member[] = [
+export const boardMembers: Member[] = [
+  // Board Officers
   {
     name: "Arun Heble",
     role: "Chairman & President",
@@ -45,29 +46,11 @@ export const boardMembers:Member[] = [
     role: "Assistant Treasurer",
     img: m4,
   },
-  {
-    name: "Mamta Savkur",
-    role: "Board Member",
-    img: m5,
-  },
-  {
-    name: "Neena Karnad",
-    role: "Board Member",
-    img: m7,
-  },
-  {
-    name: "Shashank Udyawer",
-    role: "Board Member / Heritage",
-    img: m8,
-  },
-  {
-    name: "Sudhir Golikeri",
-    role: "Board Advisor",
-    img: m9,
-  },
+
+  // Board Members
   {
     name: "Santosh Gunavante",
-    role: "Women's Empowerment",
+    role: "Women's empowerment",
     img: m10,
   },
   {
@@ -76,15 +59,32 @@ export const boardMembers:Member[] = [
     img: m11,
   },
   {
+    name: "Neena Karnad",
+    role: "Social activities",
+    img: m7,
+  },
+  {
     name: "Ashok Kulkarni",
     role: "Education / Grants",
     img: m12,
   },
   {
     name: "Kiran Mundkur",
-    role: "Communications / Social Activities",
+    role: "Communications / Social activities",
     img: Placeholder,
   },
+  {
+    name: "Mamta Savkur",
+    role: "Vantiga",
+    img: m5,
+  },
+  {
+    name: "Shashank Udyawer",
+    role: "Heritage",
+    img: m8,
+  },
+
+  // Board Advisors
   {
     name: "Pramod Mavinkurve",
     role: "Board Advisor",
@@ -96,8 +96,15 @@ export const boardMembers:Member[] = [
     img: m16,
   },
   {
+    name: "Sudhir Golikeri",
+    role: "Board Advisor",
+    img: m9,
+  },
+
+  // CHF Teams and Leaders
+  {
     name: "Devyani Padubidri",
-    role: "Youth Outreach",
+    role: "Youth outreach",
     img: m17,
   },
   {
