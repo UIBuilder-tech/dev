@@ -116,6 +116,7 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
               } else {
                 toast.error('User not found');
               }
+              sessionStorage.removeItem('accessToken');
             }
           })
           .catch(error => {
