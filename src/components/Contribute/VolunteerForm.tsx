@@ -99,7 +99,7 @@ export default function VolunteerForm() {
       <div className="grid grid-cols-1 lg:grid-cols-[1.75fr_1fr] gap-10 md:gap-16">
         {/* Left Column - Description and Image */}
         <div className="space-y-8">
-          <div className="space-y-6 md:text-xl max-w-[80%]">
+          <div className="space-y-6 md:text-xl max-w-[80%] max-sm:contents">
             <p className="text-[#808080] font-medium leading-6">
               We offer volunteering opportunities in the US as well as community projects in and around Chitrapur/Shirali.
             </p>
@@ -139,7 +139,7 @@ export default function VolunteerForm() {
 
         {/* Right Column - Form */}
         <div>
-          <form onSubmit={handleSubmit} className="space-y-6 max-w-[80%]">
+          <form onSubmit={handleSubmit} className="space-y-6 max-w-[80%] max-sm:contents">
             <div>
               <select
                 name="category"

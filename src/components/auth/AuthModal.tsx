@@ -1,15 +1,74 @@
-import { motion, AnimatePresence } from "framer-motion";
-import { X } from "lucide-react";
-import { useState } from "react";
-
+import { motion, AnimatePresence } from 'framer-motion';
+import { Loader, X } from 'lucide-react';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import ApiCalling, { GetAccessToken } from '../api/ApiCalling';
+import { toast } from 'react-toastify';
+import { UseDataContext } from '../context/DataContext';
 interface AuthModalProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
-export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
-  const [view, setView] = useState<"login" | "register" | "reset">("login");
+interface ButtonProps {
+  isLoading?: boolean;
+  text: string;
+  type?: 'button' | 'submit' | 'reset';
+}
+interface FormDataType {
+  FirstName?: string;
+  LastName?: string;
+  Phone?: string;
+  Email?: string;
+  Password__c?: string;
+  confirmPassword?: string;
+}
+const CustomButton: React.FC<ButtonProps> = ({
+  isLoading = false,
+  text,
+  type = 'submit',
+}) => {
+  return (
+    <button
+      type={type}
+      disabled={isLoading}
+      className={`w-full py-3 px-4 text-white rounded transition-colors flex items-center justify-center ${isLoading
+        ? 'bg-gray-400 cursor-not-allowed'
+        : 'bg-secondary hover:bg-opacity-90'
+        }`}
+      aria-busy={isLoading}
+      aria-label={text}
+    >
+      {isLoading ? (
+        <motion.div
+          className='flex items-center'
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.3 }}
+        >
+          <Loader className='w-5 h-5 animate-spin text-white' />
+          <span className='ml-2'>Loading...</span>
+        </motion.div>
+      ) : (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.3 }}
+        >
+          {text}
+        </motion.div>
+      )}
+    </button>
+  );
+};
 
+type ViewType = 'login' | 'register' | 'reset';
+export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
+  const [isDisable, setIsDisable] = useState<boolean>(false);
+  const [formData, setFormData] = useState<FormDataType>({});
+  const [view, setView] = useState<ViewType>('login');
+  const { setData } = UseDataContext();
+  const navigate = useNavigate();
   const modalVariants = {
     hidden: { opacity: 0, y: -20 },
     visible: { opacity: 1, y: 0 },
@@ -29,7 +88,6 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
 
   const loginFormHandler = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log('loginFormHandler');
     setIsDisable(true);
     const query = `SELECT Id, FirstName, LastName, Email, Phone FROM Contact WHERE Email = '${formData.Email}'`;
     const encodedQuery = encodeURIComponent(query);
@@ -73,7 +131,6 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
         toast.error('Failed to get access token');
       });
   };
-
   const registerFormHandler = async (
     event: React.FormEvent<HTMLFormElement>
   ) => {
@@ -118,38 +175,35 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
   };
   const renderContent = () => {
     switch (view) {
-      case "reset":
+      case 'reset':
         return (
           <>
-            <div className="text-center mb-6">
-              <h2 className="text-2xl font-semibold text-gray-800">
+            <div className='text-center mb-6 desktop-1500:text-xs desktop-1200:text-xs desktop-1900:text-sm'>
+              <h2 className='text-2xl text-gray-800'>
                 RESET PASSWORD
               </h2>
-              <p className="text-gray-500 mt-2">
+              <p className='text-gray-500 mt-2'>
                 Forgot your password? Let's get you a new one
               </p>
             </div>
-
-            <form onSubmit={(e) => e.preventDefault()} className="space-y-4">
+            <form onSubmit={loginFormHandler} className='space-y-4 desktop-1200:text-xs desktop-1900:text-sm'>
               <input
-                type="email"
-                placeholder="Enter your registered email"
-                className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-secondary/20"
+                required
+                onChange={changeHandler}
+                name='Email'
+                value={formData.Email || ''}
+                type='email'
+                placeholder='Enter your registered email'
+                className='w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-secondary/20'
               />
-              <button
-                type="submit"
-                className="w-full py-3 px-4 bg-secondary text-white rounded hover:bg-opacity-90 transition-colors"
-              >
-                RESET PASSWORD
-              </button>
+              <CustomButton text='RESET PASSWORD' isLoading={isDisable} />
             </form>
-
-            <div className="mt-6 text-center">
+            <div className='mt-6 text-center desktop-1200:text-xs desktop-1900:text-sm'>
               <p>
-                Already have an account?{" "}
+                Already have an account?{' '}
                 <button
-                  onClick={() => setView("login")}
-                  className="text-secondary hover:underline"
+                  onClick={() => setView('login')}
+                  className='text-secondary hover:underline'
                 >
                   Log On
                 </button>
@@ -158,66 +212,81 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
           </>
         );
 
-      case "register":
+      case 'register':
         return (
           <>
-            <div className="text-center mb-6">
-              <h2 className="text-2xl font-semibold text-gray-800">JOIN CHF</h2>
-              <p className="text-gray-500 mt-2">
+            <div className='text-center mb-6 desktop-1500:text-xs desktop-1200:text-xs desktop-1900:text-sm'>
+              <h2 className='text-2xl  text-gray-800'>JOIN CHF</h2>
+              <p className='text-gray-500 mt-2'>
                 We are glad you have chosen to register with us, Welcome!
               </p>
             </div>
-
-            <form onSubmit={(e) => e.preventDefault()} className="space-y-4">
+            <form onSubmit={registerFormHandler} className='space-y-4 desktop-1200:text-xs desktop-1900:text-sm desktop-1200:space-y-2'>
               <input
-                type="text"
-                placeholder="First Name"
-                className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-secondary/20"
+                required
+                onChange={changeHandler}
+                name='FirstName'
+                value={formData.FirstName || ''}
+                type='text'
+                placeholder='First Name'
+                className='w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-secondary/20'
               />
               <input
-                type="text"
-                placeholder="Last Name"
-                className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-secondary/20"
+                onChange={changeHandler}
+                name='LastName'
+                value={formData.LastName || ''}
+                type='text'
+                placeholder='Last Name'
+                className='w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-secondary/20'
               />
               <input
-                type="tel"
-                placeholder="Number as (999) 999-9999"
-                className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-secondary/20"
+                required
+                onChange={changeHandler}
+                name='Phone'
+                value={formData.Phone || ''}
+                type='tel'
+                placeholder='Number as (999) 999-9999'
+                className='w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-secondary/20'
               />
               <input
-                type="email"
-                placeholder="Email Address"
-                className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-secondary/20"
+                required
+                onChange={changeHandler}
+                name='Email'
+                value={formData.Email || ''}
+                type='email'
+                placeholder='Email Address'
+                className='w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-secondary/20'
               />
               <input
-                type="password"
-                placeholder="Password minimum 6 characters"
-                className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-secondary/20"
+                required
+                onChange={changeHandler}
+                name='Password__c'
+                value={formData.Password__c || ''}
+                type='password'
+                placeholder='Password minimum 6 characters'
+                className='w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-secondary/20'
               />
               <input
-                type="password"
-                placeholder="Confirm Password"
-                className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-secondary/20"
+                required
+                onChange={changeHandler}
+                name='confirmPassword'
+                value={formData.confirmPassword || ''}
+                type='password'
+                placeholder='Confirm Password'
+                className='w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-secondary/20'
               />
-              <p className="text-sm text-gray-500">
+              <p className='text-sm text-gray-500 desktop-1200:text-xs'>
                 Password must be 6 to 20 characters long with at least one
                 digit, one uppercase & one lower case.
               </p>
-
-              <button
-                type="submit"
-                className="w-full py-3 px-4 bg-secondary text-white rounded hover:bg-opacity-90 transition-colors"
-              >
-                JOIN
-              </button>
+              <CustomButton text='JOIN' isLoading={isDisable} />
             </form>
-
-            <div className="mt-6 text-center">
+            <div className='mt-6 text-center desktop-1200:text-xs desktop-1900:text-sm'>
               <p>
-                Already have an account?{" "}
+                Already have an account?{' '}
                 <button
-                  onClick={() => setView("login")}
-                  className="text-secondary hover:underline"
+                  onClick={() => setView('login')}
+                  className='text-secondary hover:underline'
                 >
                   Log On
                 </button>
@@ -225,47 +294,46 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
             </div>
           </>
         );
-
       default: // login
         return (
           <>
-            <div className="text-center mb-6">
-              <h2 className="text-2xl font-semibold text-gray-800">LOG ON</h2>
-              <p className="text-gray-600 mt-2">Your space to be social</p>
+            <div className='text-center mb-6 desktop-1500:text-xs desktop-1200:text-xs desktop-1900:text-lg'>
+              <h2 className='text-2xl text-gray-800'>LOG ON</h2>
+              <p className='text-gray-600 mt-2'>Your space to be social</p>
             </div>
-
-            <form onSubmit={(e) => e.preventDefault()} className="space-y-4">
+            <form onSubmit={loginFormHandler} className='space-y-4 desktop-1200:text-xs desktop-1900:text-sm desktop-1200:space-y-2'>
               <input
-                type="email"
-                placeholder="Email Address"
-                className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-secondary/20"
+                required
+                onChange={changeHandler}
+                name='Email'
+                value={formData.Email || ''}
+                type='email'
+                placeholder='Email Address'
+                className='w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-secondary/20'
               />
               <input
-                type="password"
-                placeholder="Password"
-                className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-secondary/20"
+                required
+                onChange={changeHandler}
+                name='Password__c'
+                value={formData.Password__c || ''}
+                type='password'
+                placeholder='Password'
+                className='w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-secondary/20'
               />
-
-              <button
-                type="submit"
-                className="w-full py-3 px-4 bg-secondary text-white rounded hover:bg-opacity-90 transition-colors"
-              >
-                LOG ON
-              </button>
+              <CustomButton text='LOG IN' isLoading={isDisable} />
             </form>
-
-            <div className="mt-6 text-center">
+            <div className='mt-6 text-center desktop-1200:text-xs desktop-1900:text-sm'>
               <button
-                onClick={() => setView("reset")}
-                className="text-gray-600 hover:text-secondary"
+                onClick={() => setView('reset')}
+                className='text-gray-600 hover:text-secondary'
               >
                 Forgot Password?
               </button>
-              <p className="mt-4">
-                Don't have an account?{" "}
+              <p className='mt-4'>
+                Don't have an account?{' '}
                 <button
-                  onClick={() => setView("register")}
-                  className="text-secondary hover:underline"
+                  onClick={() => setView('register')}
+                  className='text-secondary hover:underline'
                 >
                   Join CHF
                 </button>
@@ -281,34 +349,38 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
       {isOpen && (
         <div
           style={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "center",
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'center',
           }}
         >
+          {/* Overlay */}
           <motion.div
-            className="fixed inset-0 bg-black/50 z-50"
+            className='fixed inset-0 bg-black/50 z-50'
             variants={overlayVariants}
-            initial="hidden"
-            animate="visible"
-            exit="exit"
+            initial='hidden'
+            animate='visible'
+            exit='exit'
             onClick={onClose}
           />
+          {/* Modal */}
           <motion.div
-            className="fixed top-[10%] -translate-x-1/2 -translate-y-1/2 bg-white rounded-lg p-8 w-full max-w-md z-50"
+            className='fixed top-[5%] -translate-x-1/2 -translate-y-1/2 bg-white rounded-lg p-8 w-full max-w-md z-50 overflow-hidden'
+            style={{ maxHeight: '90vh', overflowY: 'auto' }} // Add scrolling behavior
             variants={modalVariants}
-            initial="hidden"
-            animate="visible"
-            exit="exit"
+            initial='hidden'
+            animate='visible'
+            exit='exit'
           >
+            {/* Close Button */}
             <button
               onClick={onClose}
-              className="absolute right-4 top-4 text-gray-500 hover:text-gray-700"
+              className='absolute right-4 top-4 text-gray-500 hover:text-gray-700'
             >
-              <X className="h-6 w-6" />
+              <X className='h-6 w-6' />
             </button>
-
+            {/* Content */}
             {renderContent()}
           </motion.div>
         </div>

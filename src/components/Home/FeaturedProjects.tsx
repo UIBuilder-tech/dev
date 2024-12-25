@@ -184,18 +184,18 @@ export default function FeaturedProjects({ title }: Props) {
                       to="/projects"
                     >
                      {isHovered ?
-                     <img src={activeSideArrow} className="w-14 h-14"/>
+                     <img src={activeSideArrow} className="w-14 h-14 max-sm:w-16 max-sm:h-16"/>
                      :
-                      <img src={inactiveSideArrow} className="w-14 h-14"/>
+                      <img src={inactiveSideArrow} className="w-14 h-14 max-sm:w-16 max-sm:h-16"/>
                      }
                     </Link>
                     <Link
                       to="/contribute#donation-table"
                     >
                     {isHovered ?
-                    <img src={activeDonate} className="w-14 h-14"/>
+                    <img src={activeDonate} className="w-14 h-14 max-sm:w-16 max-sm:h-16"/>
                     :
-                     <img src={inactiveDonate} className="w-14 h-14"/>}
+                     <img src={inactiveDonate} className="w-14 h-14 max-sm:w-16 max-sm:h-16"/>}
                     </Link>
                   </div>
                 </td>

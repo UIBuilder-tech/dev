@@ -3,59 +3,71 @@ import stripe from '../../assets/stripe.svg'
 import { UseDataContext } from '../context/DataContext'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
+import { Check } from "lucide-react";
 import paypal from "../../assets/paypal.svg";
 
-interface FormData {
-  name: string;
-  email: string;
-  phone: string;
-  address: string;
-  city: string;
-  zipCode: string;
-  country: string;
-  paymentMethod: "paypal" | "cheque" | "zelle";
-  rememberMe: boolean;
+interface FormErrors {
+  [key: string]: string
+}
+interface FormType {
+  id: number; // A unique identifier (e.g., timestamp)
+  FirstName: string; // Name of the user
+  LastName: string; // Email address
+  Email: string; // Email address
+  Phone: string; // Phone number
+  address: string; // Address line
+  city: string; // City name
+  zipCode: string; // Zip/postal code
+  country: string; // Country name
+  paymentMethod: string; // Payment method (e.g., 'online', 'offline')
+  rememberMe: boolean; // Whether the user opts for "remember me"
+  amount: number | null; // Total amount
 }
 
-interface FormErrors {
-  [key: string]: string;
-}
 
 interface Props {
   totalDonationAmount: number;
 }
 
+
 export default function PaymentForm({ totalDonationAmount }: Props) {
-  const [formData, setFormData] = useState<FormData>({
-    name: "",
-    email: "",
-    phone: "",
-    address: "",
-    city: "",
-    zipCode: "",
-    country: "",
-    paymentMethod: "paypal",
+  const { data } = UseDataContext();
+  // Usage
+  const defaultForm: FormType = {
+    id: Date.now(),
+    FirstName: '',
+    LastName: "",
+    Email: '',
+    Phone: '',
+    address: '',
+    city: '',
+    zipCode: '',
+    country: '',
+    paymentMethod: 'online',
     rememberMe: false,
-  });
+    amount: 0
+  };
+  const [formData, setFormData] = useState<FormType>(defaultForm)
 
-  const [errors, setErrors] = useState<FormErrors>({});
-  const [isNameVerified, setIsNameVerified] = useState(false);
-  const totalAmount = sessionStorage.getItem("totalDonationAmount");
-  console.log("totalAmount", totalAmount);
-
+  const [errors, setErrors] = useState<FormErrors>({})
+  const [IsFormValidate, setIsFormValidate] = useState<boolean>(false)
+  const navigation = useNavigate();
+  const { setData } = UseDataContext();
   const validateForm = (): boolean => {
-    const newErrors: FormErrors = {};
-
-    if (!formData.email) {
-      newErrors.email = "Email is required";
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = "Invalid email format";
+    const newErrors: FormErrors = {}
+    if (!formData.FirstName) {
+      newErrors.FirstName = 'First Name is required'
+    }
+    if (!formData.Email) {
+      newErrors.Email = 'Email is required'
+    } else if (!/\S+@\S+\.\S+/.test(formData.Email)) {
+      newErrors.Email = 'Invalid email format'
     }
 
-    if (!formData.phone) {
-      newErrors.phone = "Phone number is required";
-    } else if (!/^\+?[\d\s-]{10,}$/.test(formData.phone)) {
-      newErrors.phone = "Invalid phone number";
+    if (!formData.Phone) {
+      newErrors.Phone = 'Phone number is required'
+    } else if (!/^\+?[\d\s-]{10,}$/.test(formData.Phone)) {
+      newErrors.Phone = 'Invalid phone number'
     }
 
     if (!formData.address) {
@@ -74,14 +86,37 @@ export default function PaymentForm({ totalDonationAmount }: Props) {
       newErrors.country = "Country is required";
     }
 
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
+    setErrors(newErrors)
+    return Object.keys(newErrors).length === 0
+  }
+  useEffect(() => {
+    setFormData((v: FormType) => ({ ...v, amount: totalDonationAmount }))
+  }, [totalDonationAmount])
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     if (validateForm()) {
-      console.log("Form submitted:", formData);
+      if (formData.paymentMethod === 'online') {
+        setIsFormValidate(true)
+        fetch("/api/create-payment-intent", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ items: [{ ...formData }] }),
+        }).then((res) => res.json())
+          .then((data) => {
+            setData((v) => ({ ...v, clientSecret: data.clientSecret }))
+            sessionStorage.setItem('clientSecret', data.clientSecret)
+            // Save data to sessionStorage
+            sessionStorage.setItem('formdata', JSON.stringify(formData));
+
+            navigation("checkout")
+          }).catch((err) => {
+            setIsFormValidate(false)
+            toast.error(err.message)
+          });
+      } else {
+        toast.info("Please contact us for offline payment")
+      }
     }
   };
 
@@ -100,73 +135,91 @@ export default function PaymentForm({ totalDonationAmount }: Props) {
     if (errors[name]) {
       setErrors((prev) => ({ ...prev, [name]: "" }));
     }
-  };
+  }
+  useEffect(() => {
+    if (data?.userData) {
+      const { FirstName, LastName, Email, Phone } = data.userData;
+      setFormData((v: FormType) => ({ ...v, FirstName, LastName, Email, Phone }))
+    }
+  }, [data])
 
   return (
     <div className="md:mx-8 p-6 md:p-12 py-16 desktop-1200:p-14 desktop-1500:p-16 desktop-1900:p-24">
       <h2 className="text-3xl md:text-5xl font-display text-gray-900 mb-8 desktop-1200:text-4xl desktop-1500:text-[2.5rem] desktop-1900:text-5xl">
         Add Details & Pay
-      </h2>
+</h2>
 
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col md:flex-row items-start justify-between gap-12 desktop-1200:gap-14 desktop-1500:gap-16 desktop-1900:gap-24"
+        className="flex flex-col md:flex-row items-start justify-between gap-12 max-sm:w-full desktop-1200:gap-14 desktop-1500:gap-16 desktop-1900:gap-24"
       >
         {/* Left Column - Personal Details */}
-        <div className="bg-white rounded-3xl p-6 md:p-12 shadow-sm text-xl w-full md:w-1/2 desktop-1200:p-8 desktop-1500:p-10 desktop-1900:p-14">
+        <div className="bg-white rounded-3xl p-6 md:p-12 shadow-sm md:text-xl w-full md:w-1/2 desktop-1200:p-8 desktop-1500:p-10 desktop-1900:p-14">
           <div className="space-y-8">
             {/* Name Field with Verification Check */}
             <div className="relative">
               <input
                 type="text"
-                name="name"
-                value={formData.name}
+                name="FirstName"
+
+                value={formData.FirstName}
+                onChange={handleInputChange}
+                className="w-full border-b border-gray-200 py-3 focus:outline-none focus:border-primary"
+                placeholder="First Name"
+              />
+              {errors.FirstName && <p className="text-red-500 text-sm mt-1">{errors.FirstName}</p>}
+
+            </div>
+            <div className="relative">
+              <input
+                type="text"
+                name="LastName"
+                value={formData.LastName}
                 onChange={handleInputChange}
                 className="w-full border-b border-gray-200 py-3 focus:outline-none focus:border-primary desktop-1200:text-base desktop-1500:text-lg desktop-1900:text-2xl"
-                placeholder="Full Name"
+                placeholder="Last Name"
               />
-              {isNameVerified && (
-                <Check className="absolute right-2 top-1/2 -translate-y-1/2 text-green-500 h-5 w-5" />
-              )}
             </div>
 
             {/* Email Field */}
             <div>
               <input
+
                 type="email"
-                name="email"
-                value={formData.email}
+                name="Email"
+                value={formData.Email}
+                disabled={IsFormValidate}
                 onChange={handleInputChange}
                 className={`w-full border-b ${
-                  errors.email ? "border-red-500" : "border-gray-200"
+                  errors.Email ? "border-red-500" : "border-gray-200"
                 } py-3 focus:outline-none focus:border-primary desktop-1200:text-base desktop-1500:text-lg desktop-1900:text-2xl`}
                 placeholder="Email Address"
               />
-              {errors.email && (
-                <p className="text-red-500 text-sm mt-1">{errors.email}</p>
-              )}
+              {errors.Email && <p className="text-red-500 text-sm mt-1">{errors.Email}</p>}
             </div>
 
             {/* Phone Field */}
             <div>
               <input
+
+                disabled={IsFormValidate}
                 type="tel"
-                name="phone"
-                value={formData.phone}
+                name="Phone"
+                value={formData.Phone}
                 onChange={handleInputChange}
                 className={`w-full border-b ${
-                  errors.phone ? "border-red-500" : "border-gray-200"
+                  errors.Phone ? "border-red-500" : "border-gray-200"
                 } py-3 focus:outline-none focus:border-primary desktop-1200:text-base desktop-1500:text-lg desktop-1900:text-2xl`}
                 placeholder="Phone Number"
               />
-              {errors.phone && (
-                <p className="text-red-500 text-sm mt-1">{errors.phone}</p>
-              )}
+              {errors.Phone && <p className="text-red-500 text-sm mt-1">{errors.Phone}</p>}
             </div>
 
             {/* Address Field */}
             <div>
               <input
+
+                disabled={IsFormValidate}
                 type="text"
                 name="address"
                 value={formData.address}
@@ -185,6 +238,8 @@ export default function PaymentForm({ totalDonationAmount }: Props) {
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <input
+
+                  disabled={IsFormValidate}
                   type="text"
                   name="city"
                   value={formData.city}
@@ -200,6 +255,8 @@ export default function PaymentForm({ totalDonationAmount }: Props) {
               </div>
               <div>
                 <input
+
+                  disabled={IsFormValidate}
                   type="text"
                   name="zipCode"
                   value={formData.zipCode}
@@ -218,6 +275,8 @@ export default function PaymentForm({ totalDonationAmount }: Props) {
             {/* Country and Remember Me Row */}
             <div className="flex items-center justify-between">
               <select
+
+                disabled={IsFormValidate}
                 name="country"
                 value={formData.country}
                 onChange={handleInputChange}
@@ -233,6 +292,7 @@ export default function PaymentForm({ totalDonationAmount }: Props) {
 
               <label className="flex items-center gap-2 cursor-pointer">
                 <input
+                  disabled={IsFormValidate}
                   type="checkbox"
                   name="rememberMe"
                   checked={formData.rememberMe}
@@ -277,10 +337,11 @@ export default function PaymentForm({ totalDonationAmount }: Props) {
             <div className="grid grid-cols-2 gap-2 md:gap-6">
               <label className="flex items-center gap-3 rounded-lg cursor-pointer">
                 <input
+                  disabled={IsFormValidate}
                   type="radio"
                   name="paymentMethod"
-                  value="paypal"
-                  checked={formData.paymentMethod === "paypal"}
+                  value="online"
+                  checked={formData.paymentMethod === 'online'}
                   onChange={handleInputChange}
                   className="w-6 h-6 text-primary"
                 />
@@ -295,10 +356,11 @@ export default function PaymentForm({ totalDonationAmount }: Props) {
 
               <label className="flex items-center gap-3 cursor-pointer">
                 <input
+                  disabled={IsFormValidate}
                   type="radio"
                   name="paymentMethod"
-                  value="cheque"
-                  checked={formData.paymentMethod === "cheque"}
+                  value="offline"
+                  checked={formData.paymentMethod === 'offline'}
                   onChange={handleInputChange}
                   className="w-6 h-6 text-primary"
                 />
@@ -311,10 +373,11 @@ export default function PaymentForm({ totalDonationAmount }: Props) {
 
               <label className="flex items-center gap-3 cursor-pointer">
                 <input
+                  disabled={IsFormValidate}
                   type="radio"
                   name="paymentMethod"
-                  value="zelle"
-                  checked={formData.paymentMethod === "zelle"}
+                  value="offline"
+                  checked={formData.paymentMethod === 'offline'}
                   onChange={handleInputChange}
                   className="w-6 h-6 text-primary"
                 />
@@ -327,25 +390,27 @@ export default function PaymentForm({ totalDonationAmount }: Props) {
             </div>
           </div>
           <div className="space-y-8">
-            {/* Powered by Stripe */}
-            <div className="flex justify-center items-center gap-2">
-              <span className="italic text-[#516072] text-sm desktop-1200:text-sm desktop-1500:text-base desktop-1900:text-xl">
-                Powered by
+              {/* Powered by Stripe */}
+            {formData.paymentMethod === 'online' ?
+                <div className="flex justify-center items-center gap-2">
+                  <span className="italic text-[#516072] text-sm desktop-1200:text-sm desktop-1500:text-base desktop-1900:text-xl">
+                Payment by
               </span>
-              <img
+                  <img
                 src={stripe}
                 alt="Powered by Stripe"
                 className="h-6 desktop-1200:h-6 desktop-1500:h-7 desktop-1900:h-9"
               />
-            </div>
+                </div> : null}
 
-            {/* Submit Button */}
-            <button
-              type="submit"
-              className="w-full bg-secondary text-white rounded-full py-3 md:py-4 md:text-xl hover:bg-primary/90 transition-colors desktop-1200:text-base desktop-1200:py-3 desktop-1500:text-lg desktop-1500:py-3 desktop-1900:text-2xl desktop-1900:py-5"
-            >
-              Continue
-            </button>
+              {/* Submit Button */}
+              <button
+              disabled={IsFormValidate}
+                type="submit"
+                className="w-full bg-secondary text-white rounded-full py-3 md:py-4 md:text-xl hover:bg-primary/90 transition-colors desktop-1200:text-base desktop-1200:py-3 desktop-1500:text-lg desktop-1500:py-3 desktop-1900:text-2xl desktop-1900:py-5"
+              >
+                Continue
+              </button>
           </div>
         </div>
       </form>

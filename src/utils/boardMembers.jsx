@@ -24,8 +24,8 @@ export const boardMembers = [
     img: m1,
   },
   {
-    name: "Sumant Padbidri",
-    role: "Secretary / Communications",
+    name: 'Sumant Padbidri',
+    role: 'Secretary / Communications',
     img: m2,
   },
   {
@@ -34,8 +34,8 @@ export const boardMembers = [
     img: m3,
   },
   {
-    name: "Ashwin Bijur",
-    role: "Assistant Treasurer",
+    name: 'Ashwin Bijur',
+    role: 'Assistant Treasurer',
     img: m4,
   },
 
@@ -46,8 +46,8 @@ export const boardMembers = [
     img: m10,
   },
   {
-    name: "Nandkishore Kalambi",
-    role: "Digital",
+    name: 'Nandkishore Kalambi',
+    role: 'Digital',
     img: m11,
   },
   {
@@ -83,8 +83,8 @@ export const boardMembers = [
     img: m15,
   },
   {
-    name: "Mangesh Hoskote",
-    role: "Board Advisor",
+    name: 'Mangesh Hoskote',
+    role: 'Board Advisor',
     img: m16,
   },
   {
@@ -100,8 +100,8 @@ export const boardMembers = [
     img: m17,
   },
   {
-    name: "Sanjay Savkur",
-    role: "Cultural Activities",
+    name: 'Sanjay Savkur',
+    role: 'Cultural Activities',
     img: m18,
   },
 ];
