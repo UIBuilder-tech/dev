@@ -79,14 +79,14 @@ export default function TeamSection() {
       ref={containerRef}
       className="relative  flex w-full flex-row items-center justify-center py-10 max-sm:bg-white"
     >
-      <div className="container overflow-hidden mx-auto desktop-1200:mx-12 desktop-1200:px-2 px-4 rounded-3xl bg-white ">
+      <div className="container overflow-hidden mx-auto desktop-1200:mx-12 desktop-1200:px-2 desktop-1900:mx-16 desktop-1900:px-10 px-4 rounded-3xl bg-white">
         <div className="flex flex-col lg:flex-row items-center justify-center">
           {/* Left Content */}
           <div className="flex flex-col justify-center max-sm:items-center max-sm:text-center space-y-4 md:space-y-6 md:px-10 md:max-w-[50%]  max-sm:pb-4 lg:pr-8">
-            <h2 className="text-3xl  md:text-5xl text-[#E67E22] desktop-1200:text-4xl">
+            <h2 className="text-3xl  md:text-5xl text-[#E67E22] desktop-1200:text-4xl desktop-1900:text-6xl">
               Our Team
             </h2>
-            <p className="text-[#808080] text-lg max-sm:leading-5 max-sm:text-sm desktop-1500:text-md desktop-1200:text-[16px] desktop-1200:leading-5">
+            <p className="text-[#808080] text-lg max-sm:leading-5 max-sm:text-sm desktop-1500:text-md desktop-1200:text-[16px] desktop-1200:leading-5 desktop-1900:text-xl">
               CHF Board represents the collective aspirations of the Chitrapur
               Saraswat community all across the US. Our office bearers carry on
               the activities of CHF within the US and support initiatives of
@@ -94,18 +94,18 @@ export default function TeamSection() {
               community.
             </p>
             <div className="pt-8">
-              <Link to='/contribute#volunteer' className="rounded-full border-2 border-primary px-4 py-1 md:px-4 md:py-3 text-primary transition-colors hover:bg-[#4299E1] hover:text-white  text-lg max-sm:text-sm">
+              <Link to='/contribute#volunteer' className="rounded-full border-2 border-primary px-4 py-1 md:px-4 md:py-3 text-primary transition-colors hover:bg-[#4299E1] hover:text-white  text-lg max-sm:text-sm desktop-1900:text-2xl">
                 Learn More
               </Link>
             </div>
           </div>
 
-          <div className="relative flex  w-full flex-row gap-2 md:gap-4 items-center justify-center overflow-hidden h-[300px] md:h-[500px]">
+          <div className="relative flex  w-full flex-row gap-2 md:gap-4 items-center justify-center overflow-hidden h-[300px] md:h-[500px] desktop-1900:h-[600px]">
             <Marquee pauseOnHover vertical className="[--duration:10s]">
               {boardMembers.map((review, index) => (
                 <div
                   key={`${review.name}-${index}`}
-                  className="relative h-[250px] w-[150px] md:h-[350px] md:w-[250px] desktop-1200:w-[200px] desktop-1200:h-[300px] cursor-pointer overflow-hidden rounded-[20px] md:rounded-[70px] p-4 flex flex-col justify-end"
+                  className="relative h-[250px] w-[150px] md:h-[350px] md:w-[250px] desktop-1200:w-[200px] desktop-1200:h-[300px] desktop-1900:w-[300px] desktop-1900:h-[400px] cursor-pointer overflow-hidden rounded-[20px] md:rounded-[70px] p-4 flex flex-col justify-end"
                   style={{
                     backgroundImage: `linear-gradient(180deg, #24242400 50%, #e67e22 100%),url(${review.img})`,
                     backgroundSize: "cover",
@@ -131,7 +131,7 @@ export default function TeamSection() {
               {boardMembers.map((review, index) => (
                 <div
                   key={`${review.name}-${index}`}
-                  className="relative h-[250px] w-[150px] md:h-[350px] md:w-[250px] desktop-1200:w-[200px] desktop-1200:h-[300px] cursor-pointer overflow-hidden rounded-[20px] md:rounded-[70px] p-4 flex flex-col justify-end"
+                  className="relative h-[250px] w-[150px] md:h-[350px] md:w-[250px] desktop-1200:w-[200px] desktop-1200:h-[300px] desktop-1900:w-[300px] desktop-1900:h-[400px] cursor-pointer overflow-hidden rounded-[20px] md:rounded-[70px] p-4 flex flex-col justify-end"
                   style={{
                     backgroundImage: `linear-gradient(180deg, #24242400 50%, #e67e22 100%), url(${review.img})`,
                     backgroundSize: "cover",

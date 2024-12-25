@@ -146,11 +146,11 @@ export default function FAQSection() {
       </div>
 
       <div className="relative z-[10] mx-auto max-w-3xl">
-        <h1 className="mb-12 text-3xl md:text-5xl text-primary">
+        <h1 className="mb-12 text-3xl md:text-5xl text-primary desktop-1900:text-6xl">
           FAQ's
         </h1>
 
-        <div className="space-y-4 max-h-[450px] overflow-y-scroll " 
+        <div className="space-y-4 max-h-[450px] desktop-1900:max-h-[400px] overflow-y-scroll " 
         style={{scrollbarWidth:"none"}}>
           {currentFaqs.map((faq) => (
             <div key={faq.id} className="overflow-hidden">
@@ -161,7 +161,7 @@ export default function FAQSection() {
                 <span className="text-white flex items-center rounded-full bg-secondary p-1">
                   <Plus className="h-3 w-3 " />
                 </span>
-                <span className="text-gray-700 text-sm md:text-lg">
+                <span className="text-gray-700 text-sm md:text-lg dxesktop-1900:text-xl">
                   {faq.question}
                 </span>
               </button>
@@ -174,7 +174,7 @@ export default function FAQSection() {
                     transition={{ duration: 0.3 }}
                     className="ml-9 mb-4"
                   >
-                    <p className="text-gray-600">{faq.answer}</p>
+                    <p className="text-gray-600 desktop-1900:text-lg">{faq.answer}</p>
                   </motion.div>
                 )}
               </AnimatePresence>

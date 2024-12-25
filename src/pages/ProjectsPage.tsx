@@ -44,7 +44,6 @@ export default function ProjectsPage() {
     }
   }, [location.hash]); // Only run when hash changes
 
-  
   const projects: Project[] = [
     {
       id: 1,
@@ -57,7 +56,7 @@ export default function ProjectsPage() {
     {
       id: 2,
       title: "2020: Pandemic Relief",
-      location: "Tiruvannamalai",
+      location: "",
       description:
         "During the pandemic, CHF funded the assistance of SCM to hundreds of struggling families in village hamlets surrounding Chitrapur and Shirali. Working with Chitrapur Math, this initiative provided rice and lentils to aggrieved families, crucial medical equipment such as oxygen concentrators, vaccination assistance, and personal items such as soap and masks.",
       images: [ChitrapurMathImg, ChitrapurMathImg, ChitrapurMathImg],
@@ -65,7 +64,7 @@ export default function ProjectsPage() {
     {
       id: 3,
       title: "2021: Pandemic Relief ",
-      location: "Tiruvannamalai",
+      location: "",
       description:
         "CHF’s pandemic relief efforts included funding the salaries of school teachers of the 9 SCM-affiliated schools supported by CHF.",
       images: [ChitrapurMathImg, ChitrapurMathImg, ChitrapurMathImg],

@@ -13,7 +13,7 @@ export default function NavLink({ to, children, className = '' }: NavLinkProps) 
   return (
     <Link 
       to={to} 
-      className={`${className} ${isActive ? 'bg-secondary text-white' : 'text-dark hover:text-primary'} px-6 py-4 desktop-1200:py-3 rounded-full transition-colors`}
+      className={`${className} ${isActive ? 'bg-secondary text-white' : 'text-dark hover:text-primary'} px-6 py-4 desktop-1200:py-3 desktop-1900:py-4 rounded-full transition-colors`}
     >
       {children}
     </Link>

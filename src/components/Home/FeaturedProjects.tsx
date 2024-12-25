@@ -102,110 +102,109 @@ export default function FeaturedProjects({ title }: Props) {
   const [hoveredId, setHoveredId] = useState<string | null>(null);
 
   return (
-    <div className="py-8 px-6 md:p-8 md:mx-14">
-      <h2 className="mb-8 text-3xl md:text-4xl font-display text-gray-900">
-        {title}
-      </h2>
-      <div className="max-h-[500px] overflow-y-scroll overflow-x-hidden custom-scrollbar">
-        <table className="w-full">
-          <thead>
-            <tr className="border-b border-gray-500 text-xs md:text-sm text-gray-600">
-              <th className="pb-2 md:pb-4 text-left font-normal">Title</th>
-              <th className="pb-2 md:pb-4 text-left font-normal">Tags</th>
-              <th className="pb-2 md:pb-4 text-left font-normal">Status</th>
-              <th className="pb-2 md:pb-4 w-58 md:w-72"></th>
-            </tr>
-          </thead>
-          <tbody>
-            {projects.map((project) => {
-              const isHovered = project.id === hoveredId;
+    <div className="py-8 px-6 md:p-8 md:mx-14 desktop-1900:px-14 desktop-1900:py-14">
+      <h2 className="mb-8 text-3xl md:text-4xl font-display text-gray-900 desktop-1900:text-5xl desktop-1900:pb-5">{title}</h2>
+      <div className='max-h-[500px] overflow-y-scroll overflow-x-hidden custom-scrollbar'>
+      <table className="w-full">
+        <thead>
+          <tr className="border-b border-gray-500 text-xs md:text-sm desktop-1900:text-lg text-gray-600">
+            <th className="pb-2 md:pb-4 text-left font-normal">Title</th>
+            <th className="pb-2 md:pb-4 text-left font-normal">Tags</th>
+            <th className="pb-2 md:pb-4 text-left font-normal">Status</th>
+            <th className="pb-2 md:pb-4 w-58 md:w-72"></th>
+          </tr>
+        </thead>
+        <tbody>
+          {projects.map((project) => {
+            const isHovered = project.id === hoveredId;
 
-              return (
-                <tr
-                  key={project.id}
-                  className="border-b border-gray-500 transition-colors duration-200"
-                  onMouseEnter={() => setHoveredId(project.id)}
-                  onMouseLeave={() => setHoveredId(null)}
-                >
-                  <td className="md:py-7 py-5">
-                    <span
-                      className={`text-xs md:text-lg font-medium transition-colors duration-200 ${
-                        isHovered ? "text-secondary" : "text-gray-900"
-                      }`}
-                    >
-                      {project.title}
-                    </span>
-                  </td>
-                  <td>
-                    <span
-                      className={`inline-flex rounded-full px-2 md:px-4 py-1 text-xs md:text-sm transition-all duration-200 break-words hyphens-auto max-w-[80%] ${
-                        isHovered
-                          ? "bg-secondary text-white border border-secondary"
-                          : "border border-gray-500 text-gray-600"
-                      }`}
-                    >
-                      {project.tag}
-                    </span>
-                  </td>
-                  <td>
-                    <span
-                      className={`text-xs md:text-lg transition-colors duration-200 ${
-                        isHovered ? "text-secondary" : "text-gray-600"
-                      }`}
-                    >
-                      {project.status}
-                    </span>
-                  </td>
-                  <td className="relative">
-                    <div className="flex items-center justify-center md:justify-end gap-1 max-sm:ml-2 max-sm:mx-2 md:mx-4">
-                      {isHovered && project.images && (
-                        <div className="absolute max-sm:hidden right-40 flex items-center">
-                          {project.images.map((image, index) => (
-                            <div
-                              key={index}
-                              className="absolute"
-                              style={{
-                                right: `${index * 60}px`,
-                                transform:
-                                  index === 1
-                                    ? "rotate(6deg)"
-                                    : "rotate(-3deg)",
-                                zIndex: project.images!.length - index,
-                              }}
-                            >
-                              <div className="h-20 w-28 overflow-hidden rounded-lg border-2 border-white shadow-md">
-                                <img
-                                  src={image}
-                                  alt={`${project.title} image ${index + 1}`}
-                                  className="h-full w-full object-cover"
-                                />
-                              </div>
+            return (
+              <tr
+                key={project.id}
+                className="border-b border-gray-500 transition-colors duration-200"
+                onMouseEnter={() => setHoveredId(project.id)}
+                onMouseLeave={() => setHoveredId(null)}
+              >
+                <td className="md:py-7 py-5 desktop-1900:w-[40%]">
+                  <span
+                    className={`text-xs md:text-lg desktop-1900:text-2xl font-medium transition-colors duration-200 ${
+                      isHovered ? "text-secondary" : "text-gray-900"
+                    }`}
+                  >
+                    {project.title}
+                  </span>
+                </td>
+                <td>
+                  <span
+                    className={`inline-flex rounded-full px-2 md:px-4 py-1 text-xs md:text-sm transition-all duration-200 break-words hyphens-auto max-w-[80%] desktop-1900:text-lg ${
+                      isHovered
+                        ? "bg-secondary text-white border border-secondary"
+                        : "border border-gray-500 text-gray-600"
+                    }`}
+                  >
+                    {project.tag}
+                  </span>
+                </td>
+                <td>
+                  <span
+                    className={`text-xs md:text-lg transition-colors desktop-1900:text-xl duration-200 ${
+                      isHovered ? "text-secondary" : "text-gray-600"
+                    }`}
+                  >
+                    {project.status}
+                  </span>
+                </td>
+                <td className="relative">
+                  <div className="flex items-center justify-center md:justify-end gap-1 max-sm:ml-2 max-sm:mx-2 md:mx-4">
+                    {isHovered && project.images && (
+                      <div className="absolute max-sm:hidden right-40 flex items-center">
+                        {project.images.map((image, index) => (
+                          <div
+                            key={index}
+                            className="absolute"
+                            style={{
+                              right: `${index * 60}px`,
+                              transform:
+                                index === 1 ? "rotate(6deg)" : "rotate(-3deg)",
+                              zIndex: project.images!.length - index,
+                            }}
+                          >
+                            <div className="h-20 w-28 overflow-hidden rounded-lg border-2 border-white shadow-md">
+                              <img
+                                src={image}
+                                alt={`${project.title} image ${index + 1}`}
+                                className="h-full w-full object-cover"
+                              />
                             </div>
-                          ))}
-                        </div>
-                      )}
-                      <Link to="/projects">
-                        {isHovered ? (
-                          <img src={activeSideArrow} className="w-14 h-14" />
-                        ) : (
-                          <img src={inactiveSideArrow} className="w-14 h-14" />
-                        )}
-                      </Link>
-                      <Link to="/contribute#donation-table">
-                        {isHovered ? (
-                          <img src={activeDonate} className="w-14 h-14" />
-                        ) : (
-                          <img src={inactiveDonate} className="w-14 h-14" />
-                        )}
-                      </Link>
-                    </div>
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      </div>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                    <Link
+                      to="/projects"
+                    >
+                     {isHovered ?
+                     <img src={activeSideArrow} className="w-14 h-14"/>
+                     :
+                      <img src={inactiveSideArrow} className="w-14 h-14"/>
+                     }
+                    </Link>
+                    <Link
+                      to="/contribute#donation-table"
+                    >
+                    {isHovered ?
+                    <img src={activeDonate} className="w-14 h-14"/>
+                    :
+                     <img src={inactiveDonate} className="w-14 h-14"/>}
+                    </Link>
+                  </div>
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
     </div>
   );
 }

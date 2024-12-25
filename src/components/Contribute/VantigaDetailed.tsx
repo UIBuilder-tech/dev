@@ -179,18 +179,6 @@ export default function VantigaDetailed() {
         </div>
         <div className="absolute top-[2.75rem] left-0 right-0 h-0.5 bg-[#E67E22] desktop-1200:top-[2.75rem] desktop-1500:top-[3rem] desktop-1900:top-[3.25rem]"></div>
       </div>
-
-      {/* Email Contact */}
-      <div className="flex flex-col sm:flex-row items-center justify-start gap-2 mt-8 sm:mt-12 text-sm sm:text-base text-gray-600">
-        <Mail className="w-5 h-5 text-[#E67E22]" />
-        <span>Please email all request for grants to </span>
-        <a
-          href="mailto:Grants@chfusa.org"
-          className="text-[#E67E22] hover:underline"
-        >
-          Grants@chfusa.org
-        </a>
-      </div>
     </div>
   );
 }
