@@ -3,8 +3,8 @@ import stripe from '../../assets/stripe.svg'
 import { UseDataContext } from '../context/DataContext'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
-import { Check } from "lucide-react";
 import paypal from "../../assets/paypal.svg";
+const apiBaseurl = import.meta.env.VITE_RETURN_BACKEND_API;
 
 interface FormErrors {
   [key: string]: string
@@ -98,7 +98,7 @@ export default function PaymentForm({ totalDonationAmount }: Props) {
     if (validateForm()) {
       if (formData.paymentMethod === 'online') {
         setIsFormValidate(true)
-        fetch("/api/create-payment-intent", {
+        fetch(`${apiBaseurl}/create-payment-intent`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ items: [{ ...formData }] }),
