@@ -178,15 +178,15 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
       case 'reset':
         return (
           <>
-            <div className='text-center mb-6'>
-              <h2 className='text-2xl font-semibold text-gray-800'>
+            <div className='text-center mb-6 desktop-1500:text-xs desktop-1200:text-xs desktop-1900:text-sm'>
+              <h2 className='text-2xl text-gray-800'>
                 RESET PASSWORD
               </h2>
               <p className='text-gray-500 mt-2'>
                 Forgot your password? Let's get you a new one
               </p>
             </div>
-            <form onSubmit={loginFormHandler} className='space-y-4'>
+            <form onSubmit={loginFormHandler} className='space-y-4 desktop-1200:text-xs desktop-1900:text-sm'>
               <input
                 required
                 onChange={changeHandler}
@@ -198,7 +198,7 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
               />
               <CustomButton text='RESET PASSWORD' isLoading={isDisable} />
             </form>
-            <div className='mt-6 text-center'>
+            <div className='mt-6 text-center desktop-1200:text-xs desktop-1900:text-sm'>
               <p>
                 Already have an account?{' '}
                 <button
@@ -215,13 +215,13 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
       case 'register':
         return (
           <>
-            <div className='text-center mb-6'>
-              <h2 className='text-2xl font-semibold text-gray-800'>JOIN CHF</h2>
+            <div className='text-center mb-6 desktop-1500:text-xs desktop-1200:text-xs desktop-1900:text-sm'>
+              <h2 className='text-2xl  text-gray-800'>JOIN CHF</h2>
               <p className='text-gray-500 mt-2'>
                 We are glad you have chosen to register with us, Welcome!
               </p>
             </div>
-            <form onSubmit={registerFormHandler} className='space-y-4'>
+            <form onSubmit={registerFormHandler} className='space-y-4 desktop-1200:text-xs desktop-1900:text-sm desktop-1200:space-y-2'>
               <input
                 required
                 onChange={changeHandler}
@@ -275,13 +275,13 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
                 placeholder='Confirm Password'
                 className='w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-secondary/20'
               />
-              <p className='text-sm text-gray-500'>
+              <p className='text-sm text-gray-500 desktop-1200:text-xs'>
                 Password must be 6 to 20 characters long with at least one
                 digit, one uppercase & one lower case.
               </p>
               <CustomButton text='JOIN' isLoading={isDisable} />
             </form>
-            <div className='mt-6 text-center'>
+            <div className='mt-6 text-center desktop-1200:text-xs desktop-1900:text-sm'>
               <p>
                 Already have an account?{' '}
                 <button
@@ -297,11 +297,11 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
       default: // login
         return (
           <>
-            <div className='text-center mb-6'>
-              <h2 className='text-2xl font-semibold text-gray-800'>LOG ON</h2>
+            <div className='text-center mb-6 desktop-1500:text-xs desktop-1200:text-xs desktop-1900:text-lg'>
+              <h2 className='text-2xl text-gray-800'>LOG ON</h2>
               <p className='text-gray-600 mt-2'>Your space to be social</p>
             </div>
-            <form onSubmit={loginFormHandler} className='space-y-4'>
+            <form onSubmit={loginFormHandler} className='space-y-4 desktop-1200:text-xs desktop-1900:text-sm desktop-1200:space-y-2'>
               <input
                 required
                 onChange={changeHandler}
@@ -320,9 +320,9 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
                 placeholder='Password'
                 className='w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-secondary/20'
               />
-              <CustomButton text='LOG In' isLoading={isDisable} />
+              <CustomButton text='LOG IN' isLoading={isDisable} />
             </form>
-            <div className='mt-6 text-center'>
+            <div className='mt-6 text-center desktop-1200:text-xs desktop-1900:text-sm'>
               <button
                 onClick={() => setView('reset')}
                 className='text-gray-600 hover:text-secondary'
@@ -366,7 +366,7 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
           />
           {/* Modal */}
           <motion.div
-            className='fixed top-[10%] -translate-x-1/2 -translate-y-1/2 bg-white rounded-lg p-8 w-full max-w-md z-50 overflow-hidden'
+            className='fixed top-[5%] -translate-x-1/2 -translate-y-1/2 bg-white rounded-lg p-8 w-full max-w-md z-50 overflow-hidden'
             style={{ maxHeight: '90vh', overflowY: 'auto' }} // Add scrolling behavior
             variants={modalVariants}
             initial='hidden'
