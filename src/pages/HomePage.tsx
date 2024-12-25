@@ -16,10 +16,11 @@ export default function HomePage() {
         title="Chitrapur Heritage Foundation"
         desc="Founded in 2005, the Chitrapur Heritage Foundation (CHF) is a nonprofit organization dedicated to fostering sustainable development and preserving the rich cultural heritage of the Chitrapur Saraswat community. With a focus on Heritage, Education,Women's Empowerment and Spiritual Development"
         img={ChitrapurMathImg}
+        from="home"
       />
       <Vision />
       <Programs />
-      <FeaturedProjects title="Featured Projects"/>
+      <FeaturedProjects title="Featured Projects" />
       <ImpactSection />
       <VolunteerSection />
       <TeamSection />

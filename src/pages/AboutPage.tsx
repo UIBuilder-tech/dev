@@ -18,13 +18,13 @@ export default function AboutPage() {
 
   useEffect(() => {
     // Handle initial load with hash
-    const hash = location.hash.replace('#', '');
+    const hash = location.hash.replace("#", "");
     if (hash) {
       // Add a small delay to ensure the content is rendered
       setTimeout(() => {
         const element = document.getElementById(hash);
         if (element) {
-          element.scrollIntoView({ behavior: 'smooth' });
+          element.scrollIntoView({ behavior: "smooth" });
         }
       }, 100);
     }
@@ -33,9 +33,9 @@ export default function AboutPage() {
   return (
     <div className="min-h-screen bg-cream">
       <Hero
-        title="Welcome to the Chitrapur Heritage Foundation ."
+        title="Chitrapur Heritage Foundation"
+        desc="Founded in 2005, the Chitrapur Heritage Foundation (CHF) is a nonprofit organization dedicated to fostering sustainable development and preserving the rich cultural heritage of the Chitrapur Saraswat community. With a focus on Heritage, Education,Women's Empowerment and Spiritual Development"
         img={ChitrapurMathImg}
-        desc="We are dedicated to promoting sustainable development while preserving the rich cultural and spiritual heritage of the Chitrapur Saraswat community. Through our efforts in education, women's empowerment, heritage preservation, and community development, we create lasting impacts on individual lives and the community as a whole. Join us in our mission to honor the past while building a brighter future rooted in tradition and progress."
       />
       <Vantiga
         title="Welcome to the Chitrapur Heritage Foundation (CHF)!"
