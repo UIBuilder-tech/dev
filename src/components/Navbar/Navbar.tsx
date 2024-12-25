@@ -158,7 +158,7 @@ export default function Navbar() {
 
       <AuthModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
       <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
-      <MobileNav />
+      <MobileNav profileClick={ProfileClickHandler} />
     </>
   );
 }

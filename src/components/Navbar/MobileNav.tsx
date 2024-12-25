@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { ReactComponent as HomeIcon } from '../../assets/homeIcon.svg';
 import { ReactComponent as ActiveHomeIcon } from '../../assets/activeHomeIcon.svg';
 
-export default function MobileNav() {
+export default function MobileNav({profileClick}: {profileClick: () => void}) {
   const location = useLocation();
 
   const scrollToFooter = (e: React.MouseEvent) => {
@@ -29,7 +29,7 @@ export default function MobileNav() {
       style={{ boxShadow: '-8px 10px 20px 1px' }}
     >
       <div className='flex justify-between items-end px-8 relative'>
-        <Link to='/profile' className='flex flex-col items-center text-white'>
+        <Link to='#' onClick={profileClick} className='flex flex-col items-center text-white'>
           <User className='h-6 w-6' fill={isProfileActive ? 'white' : 'none'} />
           <span className='text-xs mt-1.5'>Profile</span>
         </Link>
