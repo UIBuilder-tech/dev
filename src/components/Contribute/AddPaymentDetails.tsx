@@ -1,59 +1,71 @@
-import { useState, FormEvent } from 'react'
-import { Check } from 'lucide-react'
+import { useState, FormEvent, useEffect } from 'react'
 import stripe from '../../assets/stripe.svg'
-import paypal from '../../assets/paypal.svg'
-
-interface FormData {
-  name: string
-  email: string
-  phone: string
-  address: string
-  city: string
-  zipCode: string
-  country: string
-  paymentMethod: 'paypal' | 'cheque' | 'zelle'
-  rememberMe: boolean
-}
+import { UseDataContext } from '../context/DataContext'
+import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 interface FormErrors {
   [key: string]: string
 }
-
-interface Props{
-  totalDonationAmount:number;
+interface FormType {
+  id: number; // A unique identifier (e.g., timestamp)
+  FirstName: string; // Name of the user
+  LastName: string; // Email address
+  Email: string; // Email address
+  Phone: string; // Phone number
+  address: string; // Address line
+  city: string; // City name
+  zipCode: string; // Zip/postal code
+  country: string; // Country name
+  paymentMethod: string; // Payment method (e.g., 'online', 'offline')
+  rememberMe: boolean; // Whether the user opts for "remember me"
+  amount: number | null; // Total amount
 }
 
 
-export default function PaymentForm({totalDonationAmount}:Props) {
-  const [formData, setFormData] = useState<FormData>({
-    name: '',
-    email: '',
-    phone: '',
+interface Props {
+  totalDonationAmount: number;
+}
+
+
+export default function PaymentForm({ totalDonationAmount }: Props) {
+  const { data } = UseDataContext();
+  // Usage
+  const defaultForm: FormType = {
+    id: Date.now(),
+    FirstName: '',
+    LastName: "",
+    Email: '',
+    Phone: '',
     address: '',
     city: '',
     zipCode: '',
     country: '',
-    paymentMethod: 'paypal',
-    rememberMe: false
-  })
+    paymentMethod: 'online',
+    rememberMe: false,
+    amount: 0
+  };
+  const [formData, setFormData] = useState<FormType>(defaultForm)
 
   const [errors, setErrors] = useState<FormErrors>({})
-  const [isNameVerified, setIsNameVerified] = useState(false)
-  const totalAmount = sessionStorage.getItem("totalDonationAmount")
-console.log("totalAmount",totalAmount)
+  const [IsFormValidate, setIsFormValidate] = useState<boolean>(false)
+  const navigation = useNavigate();
+  const { setData } = UseDataContext();
   const validateForm = (): boolean => {
     const newErrors: FormErrors = {}
-
-    if (!formData.email) {
-      newErrors.email = 'Email is required'
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = 'Invalid email format'
+    if (!formData.FirstName) {
+      newErrors.FirstName = 'First Name is required'
+    }
+    if (!formData.Email) {
+      newErrors.Email = 'Email is required'
+    } else if (!/\S+@\S+\.\S+/.test(formData.Email)) {
+      newErrors.Email = 'Invalid email format'
     }
 
-    if (!formData.phone) {
-      newErrors.phone = 'Phone number is required'
-    } else if (!/^\+?[\d\s-]{10,}$/.test(formData.phone)) {
-      newErrors.phone = 'Invalid phone number'
+    if (!formData.Phone) {
+      newErrors.Phone = 'Phone number is required'
+    } else if (!/^\+?[\d\s-]{10,}$/.test(formData.Phone)) {
+      newErrors.Phone = 'Invalid phone number'
     }
 
     if (!formData.address) {
@@ -75,11 +87,34 @@ console.log("totalAmount",totalAmount)
     setErrors(newErrors)
     return Object.keys(newErrors).length === 0
   }
+  useEffect(() => {
+    setFormData((v: FormType) => ({ ...v, amount: totalDonationAmount }))
+  }, [totalDonationAmount])
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
     if (validateForm()) {
-      console.log('Form submitted:', formData)
+      if (formData.paymentMethod === 'online') {
+        setIsFormValidate(true)
+        fetch("/api/create-payment-intent", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ items: [{ ...formData }] }),
+        }).then((res) => res.json())
+          .then((data) => {
+            setData((v) => ({ ...v, clientSecret: data.clientSecret }))
+            sessionStorage.setItem('clientSecret', data.clientSecret)
+            // Save data to sessionStorage
+            sessionStorage.setItem('formdata', JSON.stringify(formData));
+
+            navigation("checkout")
+          }).catch((err) => {
+            setIsFormValidate(false)
+            toast.error(err.message)
+          });
+      } else {
+        toast.info("Please contact us for offline payment")
+      }
     }
   }
 
@@ -97,11 +132,17 @@ console.log("totalAmount",totalAmount)
       setErrors(prev => ({ ...prev, [name]: '' }))
     }
   }
+  useEffect(() => {
+    if (data?.userData) {
+      const { FirstName, LastName, Email, Phone } = data.userData;
+      setFormData((v: FormType) => ({ ...v, FirstName, LastName, Email, Phone }))
+    }
+  }, [data])
 
   return (
     <div className=" md:mx-8 p-6 md:p-12 py-16">
       <h2 className="text-3xl md:text-5xl font-display text-gray-900 mb-8">Add Details & Pay</h2>
-      
+
       <form onSubmit={handleSubmit} className="flex flex-col md:flex-row items-center justify-between gap-12">
         {/* Left Column - Personal Details */}
         <div className="bg-white rounded-3xl p-6 md:p-12 shadow-sm text-xl">
@@ -110,46 +151,62 @@ console.log("totalAmount",totalAmount)
             <div className="relative">
               <input
                 type="text"
-                name="name"
-                value={formData.name}
+                name="FirstName"
+
+                value={formData.FirstName}
                 onChange={handleInputChange}
                 className="w-full border-b border-gray-200 py-3 focus:outline-none focus:border-primary"
-                placeholder="Full Name"
+                placeholder="First Name"
               />
-              {isNameVerified && (
-                <Check className="absolute right-2 top-1/2 -translate-y-1/2 text-green-500 h-5 w-5" />
-              )}
+              {errors.FirstName && <p className="text-red-500 text-sm mt-1">{errors.FirstName}</p>}
+
+            </div>
+            <div className="relative">
+              <input
+                type="text"
+                name="LastName"
+                value={formData.LastName}
+                onChange={handleInputChange}
+                className="w-full border-b border-gray-200 py-3 focus:outline-none focus:border-primary"
+                placeholder="Last Name"
+              />
             </div>
 
             {/* Email Field */}
             <div>
               <input
+
                 type="email"
-                name="email"
-                value={formData.email}
+                name="Email"
+                value={formData.Email}
+                disabled={IsFormValidate}
                 onChange={handleInputChange}
-                className={`w-full border-b ${errors.email ? 'border-red-500' : 'border-gray-200'} py-3 focus:outline-none focus:border-primary`}
+                className={`w-full border-b ${errors.Email ? 'border-red-500' : 'border-gray-200'} py-3 focus:outline-none focus:border-primary`}
                 placeholder="Email Address"
               />
-              {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
+              {errors.Email && <p className="text-red-500 text-sm mt-1">{errors.Email}</p>}
             </div>
 
             {/* Phone Field */}
             <div>
               <input
+
+                disabled={IsFormValidate}
                 type="tel"
-                name="phone"
-                value={formData.phone}
+                name="Phone"
+                value={formData.Phone}
                 onChange={handleInputChange}
-                className={`w-full border-b ${errors.phone ? 'border-red-500' : 'border-gray-200'} py-3 focus:outline-none focus:border-primary`}
+                className={`w-full border-b ${errors.Phone ? 'border-red-500' : 'border-gray-200'} py-3 focus:outline-none focus:border-primary`}
                 placeholder="Phone Number"
               />
-              {errors.phone && <p className="text-red-500 text-sm mt-1">{errors.phone}</p>}
+              {errors.Phone && <p className="text-red-500 text-sm mt-1">{errors.Phone}</p>}
             </div>
 
             {/* Address Field */}
             <div>
               <input
+
+                disabled={IsFormValidate}
                 type="text"
                 name="address"
                 value={formData.address}
@@ -164,6 +221,8 @@ console.log("totalAmount",totalAmount)
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <input
+
+                  disabled={IsFormValidate}
                   type="text"
                   name="city"
                   value={formData.city}
@@ -175,6 +234,8 @@ console.log("totalAmount",totalAmount)
               </div>
               <div>
                 <input
+
+                  disabled={IsFormValidate}
                   type="text"
                   name="zipCode"
                   value={formData.zipCode}
@@ -189,6 +250,8 @@ console.log("totalAmount",totalAmount)
             {/* Country and Remember Me Row */}
             <div className="flex items-center justify-between">
               <select
+
+                disabled={IsFormValidate}
                 name="country"
                 value={formData.country}
                 onChange={handleInputChange}
@@ -202,6 +265,7 @@ console.log("totalAmount",totalAmount)
 
               <label className="flex items-center gap-2 cursor-pointer">
                 <input
+                  disabled={IsFormValidate}
                   type="checkbox"
                   name="rememberMe"
                   checked={formData.rememberMe}
@@ -218,74 +282,64 @@ console.log("totalAmount",totalAmount)
         <div className="space-y-8 md:space-y-0 md:w-1/2 md:h-[550px] flex flex-col justify-between">
           {/* Total Amount */}
           <div className='space-y-8'>
-          <div className="border-b border-gray-400 pb-2 md:pb-4">
-            <div className="flex justify-between items-center">
-              <span className="text-[#516072] md:text-md">Total Amount</span>
-              <span className="text-[#516072] text-xl font-medium flex flex-row items-center gap-2"><div className={`flex items-center justify-center w-6 h-6 ${Number(totalDonationAmount)===0 ? "bg-[#D3D3D3]" : "bg-secondary"} rounded-full`}>
-          <span className="text-white text-sm">$</span>
-        </div> {totalDonationAmount}</span>
+            <div className="border-b border-gray-400 pb-2 md:pb-4">
+              <div className="flex justify-between items-center">
+                <span className="text-[#516072] md:text-md">Total Amount</span>
+                <span className="text-[#516072] text-xl font-medium flex flex-row items-center gap-2"><div className={`flex items-center justify-center w-6 h-6 ${Number(totalDonationAmount) === 0 ? "bg-[#D3D3D3]" : "bg-secondary"} rounded-full`}>
+                  <span className="text-white text-sm">$</span>
+                </div> {totalDonationAmount}</span>
+              </div>
+            </div>
+
+            {/* Payment Methods */}
+            <div className="grid grid-cols-2 gap-2 md:gap-6">
+              <label className="flex items-center gap-3 cursor-pointer">
+                <input
+                  disabled={IsFormValidate}
+                  type="radio"
+                  name="paymentMethod"
+                  value="online"
+                  checked={formData.paymentMethod === 'online'}
+                  onChange={handleInputChange}
+                  className="w-6 h-6 text-primary"
+                />
+                <div className='bg-white rounded-md w-full p-3 md:p-6'>
+                  <span className='max-sm:text-sm'>Online </span>
+                </div>
+              </label>
+
+              <label className="flex items-center gap-3 cursor-pointer">
+                <input
+                  disabled={IsFormValidate}
+                  type="radio"
+                  name="paymentMethod"
+                  value="offline"
+                  checked={formData.paymentMethod === 'offline'}
+                  onChange={handleInputChange}
+                  className="w-6 h-6 text-primary"
+                />
+                <div className='bg-white rounded-md w-full p-3 md:p-6'>
+                  <span className='max-sm:text-sm'>Offline <span className='italic'>(Cheque)</span></span>
+                </div>
+              </label>
             </div>
           </div>
-
-          {/* Payment Methods */}
-          <div className="grid grid-cols-2 gap-2 md:gap-6">
-            <label className="flex items-center gap-3 rounded-lg cursor-pointer">
-              <input
-                type="radio"
-                name="paymentMethod"
-                value="paypal"
-                checked={formData.paymentMethod === 'paypal'}
-                onChange={handleInputChange}
-                className="w-6 h-6 text-primary"
-              />
-              <div className='bg-white rounded-md w-full p-3 md:p-6'>
-              <img src={paypal} alt="PayPal" className="w-24" />
-              </div>
-            </label>
-
-            <label className="flex items-center gap-3 cursor-pointer">
-              <input
-                type="radio"
-                name="paymentMethod"
-                value="cheque"
-                checked={formData.paymentMethod === 'cheque'}
-                onChange={handleInputChange}
-                className="w-6 h-6 text-primary"
-              />
-              <div className='bg-white rounded-md w-full p-3 md:p-6'>
-              <span className='max-sm:text-sm'>Offline <span className='italic'>(Cheque)</span></span>
-              </div>
-            </label>
-
-            <label className="flex items-center gap-3 cursor-pointer">
-              <input
-                type="radio"
-                name="paymentMethod"
-                value="zelle"
-                checked={formData.paymentMethod === 'zelle'}
-                onChange={handleInputChange}
-                className="w-6 h-6 text-primary"
-              />
-              <div className='bg-white rounded-md w-full p-3 md:p-6'>
-              <span className='max-sm:text-sm'>Offline <span className='italic'>(Zelle)</span></span>
-              </div>
-            </label>
-          </div>
-          </div>
           <div className='space-y-8'>
-          {/* Powered by Stripe */}
-          <div className="flex justify-center items-center gap-2">
-            <span className='italic text-[#516072] text-sm'>Powered by</span>
-            <img src={stripe} alt="Powered by Stripe" className="h-6" />
-          </div>
+            {/* Powered by Stripe */}
+            {formData.paymentMethod === 'online' ?
+              <div className="flex justify-center items-center gap-2">
+                <span className='italic text-[#516072] text-sm'>Payment by</span>
+                <img src={stripe} alt="Powered by Stripe" className="h-6" />
+              </div> : null}
 
-          {/* Submit Button */}
-          <button
-            type="submit"
-            className="w-full bg-secondary text-white rounded-full py-3 md:py-4 md:text-xl hover:bg-primary/90 transition-colors"
-          >
-            Continue
-          </button>
+            {/* Submit Button */}
+            <button
+              disabled={IsFormValidate}
+              type="submit"
+              className="w-full bg-secondary text-white rounded-full py-3 md:py-4 md:text-xl hover:bg-primary/90 transition-colors"
+            >
+              Continue
+            </button>
           </div>
         </div>
       </form>
