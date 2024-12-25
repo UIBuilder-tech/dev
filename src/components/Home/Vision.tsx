@@ -73,7 +73,7 @@ export default function Vision() {
                         <h2 className="font-display text-xl md:text-2xl desktop-1500:text-lg desktop-1200:text-sm mb-4 md:mb-6 text-white max-sm:px-1">
                           {slide.title}
                         </h2>
-                        <p className="text-sm md:text-lg desktop-1500:text-lg desktop-1200:text-sm text-cream/90 mb-6 md:mb-8">
+                        <p className="text-sm md:text-xl desktop-1500:text-lg desktop-1200:text-sm text-cream/90 mb-6 md:mb-8">
                           {slide.content}
                         </p>
                         <div className="flex gap-3 md:gap-4 justify-center max-sm:mx-14 items-center">
