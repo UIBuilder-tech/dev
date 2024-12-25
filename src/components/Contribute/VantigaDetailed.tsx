@@ -4,7 +4,7 @@ import grantsIcon from "../../assets/grantsIcon.svg";
 export default function VantigaDetailed() {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
-      <h1 className="text-center text-3xl sm:text-4xl font-bold text-[#1B4F72] mb-4">
+      <h1 className="text-center text-3xl sm:text-5xl text-[#1B4F72] mb-4">
         Vantiga
       </h1>
 
@@ -18,7 +18,7 @@ export default function VantigaDetailed() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
           {/* What We Do & Don't Fund */}
           <div>
-            <h2 className="text-xl font-semibold mb-6">What is Vantiga</h2>
+            <p className="text-xl font-semibold mb-6">What is Vantiga</p>
             <div className="space-y-6">
               <div className="flex gap-3">
                 <img
@@ -89,7 +89,7 @@ export default function VantigaDetailed() {
 
           {/* Selection Criteria */}
           <div>
-            <h2 className="text-xl font-semibold mb-6">What is Math Maryādā</h2>
+            <p className="text-xl font-semibold mb-6">What is Math Maryādā</p>
             <div className="space-y-6">
               <div className="flex gap-3">
                 <img
@@ -130,7 +130,7 @@ export default function VantigaDetailed() {
             </div>
           </div>
           <div>
-            <h2 className="text-xl font-semibold mb-6">Who can pay Vantigā</h2>
+            <p className="text-xl font-semibold mb-6">Who can pay Vantigā</p>
             <div className="space-y-6">
               <div className="flex gap-3">
                 <img

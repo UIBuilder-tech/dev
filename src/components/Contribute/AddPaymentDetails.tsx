@@ -143,9 +143,9 @@ export default function PaymentForm({ totalDonationAmount }: Props) {
     <div className=" md:mx-8 p-6 md:p-12 py-16">
       <h2 className="text-3xl md:text-5xl font-display text-gray-900 mb-8">Add Details & Pay</h2>
 
-      <form onSubmit={handleSubmit} className="flex flex-col md:flex-row items-center justify-between gap-12">
+      <form onSubmit={handleSubmit} className="flex flex-col md:flex-row items-center justify-between gap-12 max-sm:w-full">
         {/* Left Column - Personal Details */}
-        <div className="bg-white rounded-3xl p-6 md:p-12 shadow-sm text-xl">
+        <div className="bg-white rounded-3xl p-6 md:p-12 shadow-sm md:text-xl">
           <div className="space-y-8">
             {/* Name Field with Verification Check */}
             <div className="relative">

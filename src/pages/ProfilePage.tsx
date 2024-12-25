@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { PencilIcon, UserPlusIcon, XIcon } from "lucide-react";
+import { PencilIcon, UserPlusIcon, XIcon, LogOut, Power } from "lucide-react";
 import { UseDataContext } from "../components/context/DataContext";
+import IconNavLink from "../components/Navbar/IconNavLink";
 
 interface PersonalDetails {
   FirstName: string;
@@ -77,21 +78,26 @@ export default function Profile() {
     setPersonalDetails((v:PersonalDetails) => ({ ...v, [name]: value }))
   }
   return (
-    <div className="max-w-4xl mx-auto p-6 space-y-8">
+    <>
+    <div className="max-w-4xl mx-auto p-6 pt-48 space-y-8 max-sm:space-y-6 max-sm:py-[80px]">
       {/* Personal Details Section */}
-      <div className="bg-white rounded-lg p-6 shadow-sm">
-        <div className="flex justify-between items-center mb-6">
-          <h2 className="text-2xl font-semibold">Personal Details</h2>
-          <div className="flex gap-4">
+      <div className="flex flex-row justify-between items-center">
+      <h2 className="text-5xl max-sm:text-4xl">My Profile</h2>
+      
+      </div>
+      <div className="bg-white rounded-lg p-6 max-sm:p-3 shadow-sm">
+        <div className="flex justify-between md:items-center mb-6 max-sm:flex-col">
+          <p className="text-2xl font-semibold">Personal Details</p>
+          <div className="flex gap-4 max-sm:gap-3 max-sm:justify-between max-sm:pt-4">
             <button
-              className="flex items-center text-[#1572E8] hover:text-[#1572E8]/90"
+              className="flex items-center gap-2 text-[#1572E8] max-sm:text-sm hover:text-[#1572E8]/90"
               onClick={() => setIsEditingPersonal(!isEditingPersonal)}
             >
-              <PencilIcon className="w-4 h-4 mr-2" />
+              <PencilIcon className="w-4 h-4 md:mr-2" />
               Edit Info
             </button>
             <button
-              className="flex items-center px-4 py-2 border border-[#E67E22] text-[#E67E22] rounded hover:bg-[#E67E22] hover:text-white"
+              className="flex items-center px-4 max-sm:px-2 max-sm:text-sm py-2 border border-[#E67E22] rounded-full text-[#E67E22] rounded hover:bg-[#E67E22] hover:text-white"
               onClick={() => setIsFamilyModalOpen(true)}
             >
               <UserPlusIcon className="w-4 h-4 mr-2" />
@@ -146,13 +152,13 @@ export default function Profile() {
               <div className="md:col-span-2 flex gap-4">
                 <button
                   onClick={() => setIsEditingPersonal(false)}
-                  className="px-4 py-2 bg-[#E67E22] text-white rounded hover:bg-[#E67E22]/90"
+                  className="px-6 py-2 bg-[#E67E22] text-white rounded-full hover:bg-[#E67E22]/90"
                 >
                   Save
                 </button>
                 <button
                   onClick={() => setIsEditingPersonal(false)}
-                  className="px-4 py-2 bg-[#F4F5F7] rounded hover:bg-[#F4F5F7]/90"
+                  className="px-6 py-2 bg-[#F4F5F7] rounded-full hover:bg-[#F4F5F7]/90"
                 >
                   Cancel
                 </button>
@@ -166,23 +172,23 @@ export default function Profile() {
                 <label className="block text-sm text-gray-500">
                   First Name
                 </label>
-                <p className="text-lg">{personalDetails.FirstName}</p>
+                <p className="text-lg max-sm:text-[1rem]">{personalDetails.FirstName}</p>
               </div>
               <div className="space-y-2">
                 <label className="block text-sm text-gray-500">Last Name</label>
-                <p className="text-lg">{personalDetails.LastName}</p>
+                <p className="text-lg max-sm:text-[1rem]">{personalDetails.LastName}</p>
               </div>
               <div className="space-y-2">
                 <label className="block text-sm text-gray-500">
                   Email Address
                 </label>
-                <p className="text-lg">{personalDetails.Email}</p>
+                <p className="text-lg max-sm:text-[1rem]">{personalDetails.Email}</p>
               </div>
               <div className="space-y-2">
                 <label className="block text-sm text-gray-500">
                   Mobile Number
                 </label>
-                <p className="text-lg">{personalDetails.Phone}</p>
+                <p className="text-lg max-sm:text-[1rem]">{personalDetails.Phone}</p>
               </div>
             </>
           )}
@@ -190,12 +196,12 @@ export default function Profile() {
       </div>
 
       {/* Address Section */}
-      <div className="bg-white rounded-lg p-6 shadow-sm">
+      <div className="bg-white rounded-lg p-6 max-sm:p-3 shadow-sm">
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-2xl font-semibold">Home Address</h2>
+          <p className="text-2xl font-semibold">Home Address</p>
           {!isEditingAddress && (
             <button
-              className="flex items-center text-[#1572E8] hover:text-[#1572E8]/90"
+              className="flex items-center text-[#1572E8] max-sm:text-sm hover:text-[#1572E8]/90"
               onClick={() => setIsEditingAddress(true)}
             >
               <PencilIcon className="w-4 h-4 mr-2" />
@@ -282,13 +288,13 @@ export default function Profile() {
             <div className="flex gap-4">
               <button
                 onClick={() => setIsEditingAddress(false)}
-                className="px-4 py-2 bg-[#E67E22] text-white rounded hover:bg-[#E67E22]/90"
+                className="px-6 py-2 bg-[#E67E22] text-white rounded-full hover:bg-[#E67E22]/90"
               >
                 Save
               </button>
               <button
                 onClick={() => setIsEditingAddress(false)}
-                className="px-4 py-2 bg-[#F4F5F7] rounded hover:bg-[#F4F5F7]/90"
+                className="px-6 py-2 bg-[#F4F5F7] rounded-full hover:bg-[#F4F5F7]/90"
               >
                 Cancel
               </button>
@@ -300,112 +306,52 @@ export default function Profile() {
               <label className="block text-sm text-gray-500">
                 Street Address
               </label>
-              <p className="text-lg">{address.street || "Not provided"}</p>
+              <p className="text-lg max-sm:text-[1rem]">{address.street || "Not provided"}</p>
             </div>
             <div>
               <label className="block text-sm text-gray-500">City</label>
-              <p className="text-lg">{address.city || "Not provided"}</p>
+              <p className="text-lg max-sm:text-[1rem]">{address.city || "Not provided"}</p>
             </div>
             <div>
               <label className="block text-sm text-gray-500">State</label>
-              <p className="text-lg">{address.state || "Not provided"}</p>
+              <p className="text-lg max-sm:text-[1rem]">{address.state || "Not provided"}</p>
             </div>
             <div>
               <label className="block text-sm text-gray-500">Zip Code</label>
-              <p className="text-lg">{address.zipCode || "Not provided"}</p>
+              <p className="text-lg max-sm:text-[1rem]">{address.zipCode || "Not provided"}</p>
             </div>
             <div>
               <label className="block text-sm text-gray-500">Country</label>
-              <p className="text-lg">{address.country}</p>
+              <p className="text-lg max-sm:text-[1rem]">{address.country}</p>
             </div>
           </div>
         )}
       </div>
 
       {/* Password Change Button */}
-      <div className="flex justify-end">
+      <div className="flex justify-between">
+      {
+                  data?.accessToken ?
+                    <div className="flex flex-row gap-2 border border-secondary px-4 py-2 rounded-full text-secondary cursor-pointer max-sm:text-sm" onClick={() => { sessionStorage.clear(); window.location.href = "/" }}>
+                      {/* <IconNavLink to="javascript:void(0)" icon={LogOut} /> */}
+                      <IconNavLink to="javascript:void(0)" icon={Power}/>
+                      <p>Logout</p>
+                    </div> : null
+                }
         <button
           onClick={() => setIsPasswordModalOpen(true)}
-          className="px-4 py-2 border border-[#1572E8] text-[#1572E8] rounded hover:bg-[#1572E8] hover:text-white"
+          className="px-4 py-2 border border-[#1572E8] max-sm:text-sm text-[#1572E8] rounded-full hover:bg-[#1572E8] hover:text-white"
         >
           Change Password
         </button>
       </div>
-
-      {/* Password Modal */}
-      {isPasswordModalOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-lg p-6 max-w-md w-full">
-            <div className="flex justify-between items-center mb-4">
-              <h2 className="text-2xl font-semibold">Change Password</h2>
-              <button onClick={() => setIsPasswordModalOpen(false)}>
-                <XIcon className="w-6 h-6" />
-              </button>
-            </div>
-            <form onSubmit={handlePasswordSubmit} className="space-y-4">
-              <div className="space-y-2">
-                <label className="block text-sm font-medium">
-                  Old Password
-                </label>
-                <input
-                  type="password"
-                  value={passwords.old}
-                  onChange={(e) =>
-                    setPasswords((prev) => ({ ...prev, old: e.target.value }))
-                  }
-                  className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-[#1572E8]"
-                />
-              </div>
-              <div className="space-y-2">
-                <label className="block text-sm font-medium">
-                  New Password
-                </label>
-                <input
-                  type="password"
-                  value={passwords.new}
-                  onChange={(e) =>
-                    setPasswords((prev) => ({ ...prev, new: e.target.value }))
-                  }
-                  className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-[#1572E8]"
-                />
-                <p className="text-sm text-gray-500">
-                  Password must be 6 to 20 characters long with at least one
-                  digit, one uppercase and one lowercase.
-                </p>
-              </div>
-              <div className="space-y-2">
-                <label className="block text-sm font-medium">
-                  Confirm Password
-                </label>
-                <input
-                  type="password"
-                  value={passwords.confirm}
-                  onChange={(e) =>
-                    setPasswords((prev) => ({
-                      ...prev,
-                      confirm: e.target.value,
-                    }))
-                  }
-                  className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-[#1572E8]"
-                />
-              </div>
-              <button
-                type="submit"
-                className="w-full px-4 py-2 bg-[#E67E22] text-white rounded hover:bg-[#E67E22]/90"
-              >
-                Update
-              </button>
-            </form>
-          </div>
-        </div>
-      )}
-
-      {/* Family Member Modal */}
-      {isFamilyModalOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
+    </div>
+          {/* Family Member Modal */}
+          {isFamilyModalOpen && (
+        <div className="fixed z-[9999] inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
           <div className="bg-white rounded-lg p-6 max-w-2xl w-full">
             <div className="flex justify-between items-center mb-4">
-              <h2 className="text-2xl font-semibold">Family Member Details</h2>
+              <h2 className="text-2xl md:text-3xl pb-4 ">Family Member Details</h2>
               <button onClick={() => setIsFamilyModalOpen(false)}>
                 <XIcon className="w-6 h-6" />
               </button>
@@ -546,14 +492,14 @@ export default function Profile() {
               <div className="flex gap-4">
                 <button
                   type="submit"
-                  className="px-4 py-2 bg-[#E67E22] text-white rounded hover:bg-[#E67E22]/90"
+                  className="px-6 py-2 bg-[#E67E22] rounded-full text-white rounded-full hover:bg-[#E67E22]/90"
                 >
                   Save
                 </button>
                 <button
                   type="button"
                   onClick={() => setIsFamilyModalOpen(false)}
-                  className="px-4 py-2 bg-[#F4F5F7] rounded hover:bg-[#F4F5F7]/90"
+                  className="px-6 py-2 bg-[#F4F5F7] rounded-full hover:bg-[#F4F5F7]/90"
                 >
                   Close
                 </button>
@@ -562,6 +508,74 @@ export default function Profile() {
           </div>
         </div>
       )}
-    </div>
+
+            {/* Password Modal */}
+            {isPasswordModalOpen && (
+        <div className="fixed z-[9999] inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-lg p-6 max-w-md w-full">
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-2xl md:text-3xl pb-3">Change Password</h2>
+              <button onClick={() => setIsPasswordModalOpen(false)}>
+                <XIcon className="w-6 h-6" />
+              </button>
+            </div>
+            <form onSubmit={handlePasswordSubmit} className="space-y-4">
+              <div className="space-y-2">
+                <label className="block text-sm font-medium">
+                  Old Password
+                </label>
+                <input
+                  type="password"
+                  value={passwords.old}
+                  onChange={(e) =>
+                    setPasswords((prev) => ({ ...prev, old: e.target.value }))
+                  }
+                  className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-[#1572E8]"
+                />
+              </div>
+              <div className="space-y-2">
+                <label className="block text-sm font-medium">
+                  New Password
+                </label>
+                <input
+                  type="password"
+                  value={passwords.new}
+                  onChange={(e) =>
+                    setPasswords((prev) => ({ ...prev, new: e.target.value }))
+                  }
+                  className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-[#1572E8]"
+                />
+                <p className="text-sm text-gray-500">
+                  Password must be 6 to 20 characters long with at least one
+                  digit, one uppercase and one lowercase.
+                </p>
+              </div>
+              <div className="space-y-2">
+                <label className="block text-sm font-medium">
+                  Confirm Password
+                </label>
+                <input
+                  type="password"
+                  value={passwords.confirm}
+                  onChange={(e) =>
+                    setPasswords((prev) => ({
+                      ...prev,
+                      confirm: e.target.value,
+                    }))
+                  }
+                  className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-[#1572E8]"
+                />
+              </div>
+              <button
+                type="submit"
+                className="w-full px-4 py-2 bg-[#E67E22] rounded-full text-white rounded hover:bg-[#E67E22]/90"
+              >
+                Update
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
+    </>
   );
 }

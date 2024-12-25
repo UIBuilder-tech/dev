@@ -1,4 +1,4 @@
-import { Menu, Heart, LogOut } from 'lucide-react';
+import { Menu, Heart } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import NavLink from './NavLink';
@@ -10,7 +10,6 @@ import ContactIcon from '../../assets/contactIcon.svg';
 import Sidebar from './Sidebar';
 import MobileNav from './MobileNav';
 import { UseDataContext } from '../context/DataContext';
-import IconNavLink from './IconNavLink';
 
 // Custom hook for scroll behavior
 const useScrollDirection = () => {
@@ -120,12 +119,7 @@ export default function Navbar() {
                     alt='Profile'
                   />
                 </button>
-                {
-                  data?.accessToken ?
-                    <div onClick={() => { sessionStorage.clear(); window.location.href = "/" }}>
-                      <IconNavLink to="javascript:void(0)" icon={LogOut} />
-                    </div> : null
-                }
+                
                 <button
                   onClick={e => {
                     e.preventDefault();
