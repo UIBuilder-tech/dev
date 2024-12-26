@@ -77,20 +77,20 @@ export default function EventsPage() {
       </div>
       <div id="festivals">
         <ProjectsCategory
-          categoryTitle="Festivals"
+          categoryTitle="Chitrapur Talks"
           programs={EventsFestivals}
-        />
-      </div>
-      <div id="get-togethers">
-        <ProjectsCategory
-          categoryTitle="Get Togethers"
-          programs={EventGettogthers}
         />
       </div>
       <div id="children-activities">
         <ProjectsCategory
           categoryTitle="Children & Youth Activities"
           programs={EventChildrenEducation}
+        />
+      </div>
+      <div id="get-togethers">
+        <ProjectsCategory
+          categoryTitle="Get Togethers"
+          programs={EventGettogthers}
         />
       </div>
       <Newsletter />
