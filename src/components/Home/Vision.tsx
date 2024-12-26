@@ -54,12 +54,12 @@ export default function Vision() {
               >
                {index===2 ? (
                   <div className="bg-[#F4A460] max-sm:h-full max-sm:items-center max-sm:justify-center rounded-xl  w-full overflow-hidden max-sm:flex max-sm:flex-col desktop-1900:h-full desktop-1900:flex desktop-1900:justify-center desktop-1900:items-center desktop-1900:flex-col">
-                    <h2 className="font-display text-xl desktop-1500:text-3xl desktop-1200:pt-5 pt-10 md:text-2xl text-white text-center desktop-1900:text-4xl">
+                    {/* <h2 className="font-display text-xl desktop-1500:text-3xl desktop-1200:pt-5 pt-10 md:text-2xl text-white text-center desktop-1900:text-4xl">
                       Chitrapur Heritage Foundation, USA
                     </h2>
                     <p className="text-sm md:text-sm text-white text-center px-4 md:px-8">
                       IRS certified 501c(3) organization, Tax id: 20-2738955
-                    </p>
+                    </p> */}
                     <div className=" flex max-sm:flex-col items-center justify-between gap-8 desktop-1200:mt-2 mt-8">
                       <div className="w-[262px] max-sm:w-[100px] desktop-1500:w-[260px] desktop-1200:w-[240px] desktop-1900:w-[400px] shrink-0 ">
                         <img
