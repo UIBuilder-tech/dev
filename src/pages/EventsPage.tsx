@@ -13,7 +13,7 @@ import SpecialProjects from "../components/projects/SpecialProjects";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import ChitrapurMathImg from "../assets/Shirali_Math.jpg";
-import EventsHero from "../assets/EventsHero.jpg";
+import EventsHero from "../assets/eventsHero.png";
 import Yuvas from "../assets/Yuvas.png";
 import Yuvas1 from "../assets/Yuvas1.png";
 
