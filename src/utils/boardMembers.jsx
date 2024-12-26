@@ -24,8 +24,8 @@ export const boardMembers = [
     img: m1,
   },
   {
-    name: 'Sumant Padbidri',
-    role: 'Secretary / Communications',
+    name: "Sumant Padbidri",
+    role: "Board Officers - Secretary / Communications",
     img: m2,
   },
   {
@@ -34,45 +34,45 @@ export const boardMembers = [
     img: m3,
   },
   {
-    name: 'Ashwin Bijur',
-    role: 'Assistant Treasurer',
+    name: "Ashwin Bijur",
+    role: "Board Officers - Assistant Treasurer",
     img: m4,
   },
 
   // Board Members
   {
     name: "Santosh Gunavante",
-    role: "Women's empowerment",
+    role: "Board Members - Women's empowerment",
     img: m10,
   },
   {
-    name: 'Nandkishore Kalambi',
-    role: 'Digital',
+    name: "Nandkishore Kalambi",
+    role: "Board Members - Digital",
     img: m11,
   },
   {
     name: "Neena Karnad",
-    role: "Social activities",
+    role: "Board Members - Social activities",
     img: m7,
   },
   {
     name: "Ashok Kulkarni",
-    role: "Education / Grants",
+    role: "Board Members - Education / Grants",
     img: m12,
   },
   {
     name: "Kiran Mundkur",
-    role: "Communications / Social activities",
+    role: "Board Members - Communications / Social activities",
     img: Placeholder,
   },
   {
     name: "Mamta Savkur",
-    role: "Vantiga",
+    role: "Board Members - Vantiga",
     img: m5,
   },
   {
     name: "Shashank Udyawer",
-    role: "Heritage",
+    role: "Board Members - Heritage",
     img: m8,
   },
 
