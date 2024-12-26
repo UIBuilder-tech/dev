@@ -89,7 +89,7 @@ export default function EventsPage() {
       </div>
       <div id="get-togethers">
         <ProjectsCategory
-          categoryTitle="Get Togethers"
+          categoryTitle="Events"
           programs={EventGettogthers}
         />
       </div>
