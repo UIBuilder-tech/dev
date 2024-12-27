@@ -145,7 +145,7 @@ export default function PaymentForm({ totalDonationAmount }: Props) {
 
   return (
     <div className="md:mx-8 p-6 md:p-12 py-16 desktop-1200:p-14 desktop-1500:p-16 desktop-1900:p-24">
-      <h2 className="text-3xl md:text-5xl font-display text-gray-900 mb-8 desktop-1200:text-4xl desktop-1500:text-[2.5rem] desktop-1900:text-5xl">
+      <h2 className="text-3xl md:text-4xl font-display text-gray-900 mb-8 desktop-1900:text-5xl">
         Add Details & Pay
 </h2>
 
@@ -155,7 +155,7 @@ export default function PaymentForm({ totalDonationAmount }: Props) {
       >
         {/* Left Column - Personal Details */}
         <div className="bg-white rounded-3xl p-6 md:p-12 shadow-sm md:text-xl w-full md:w-1/2 desktop-1200:p-8 desktop-1500:p-10 desktop-1900:p-14">
-          <div className="space-y-8">
+          <div className="space-y-8 desktop-1200:space-y-4">
             {/* Name Field with Verification Check */}
             <div className="relative">
               <input
@@ -164,7 +164,7 @@ export default function PaymentForm({ totalDonationAmount }: Props) {
 
                 value={formData.FirstName}
                 onChange={handleInputChange}
-                className="w-full border-b border-gray-200 py-3 focus:outline-none focus:border-primary"
+                className="w-full border-b border-gray-200 py-3 focus:outline-none focus:border-primary desktop-1200:text-base desktop-1500:text-lg desktop-1900:text-xl"
                 placeholder="First Name"
               />
               {errors.FirstName && <p className="text-red-500 text-sm mt-1">{errors.FirstName}</p>}
@@ -308,7 +308,7 @@ export default function PaymentForm({ totalDonationAmount }: Props) {
         </div>
 
         {/* Right Column - Payment Details */}
-        <div className="space-y-8 md:space-y-0 md:w-1/2 md:h-[550px] flex flex-col justify-between desktop-1200:h-[480px] desktop-1500:h-[520px] desktop-1900:h-[600px]">
+        <div className="space-y-8 w-full md:space-y-0 md:w-1/2 md:h-[550px] flex flex-col justify-between desktop-1200:h-[480px] desktop-1500:h-[520px] desktop-1900:h-[600px]">
           {/* Total Amount */}
           <div className="space-y-8">
             <div className="border-b border-gray-400 pb-2 md:pb-4">

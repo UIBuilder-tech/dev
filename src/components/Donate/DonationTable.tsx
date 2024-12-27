@@ -240,7 +240,7 @@ export default function DonationTable({setTotalDonationAmount}:Props) {
   return (
     <div className="bg-cream rounded-lg p-5 md:px-16 mx-auto py-16">
       <div className="mb-3 md:mb-6 flex flex-row items-center justify-between">
-        <h2 className="text-3xl md:text-5xl font-display text-dark mb-3 md:mb-6">Donate</h2>
+        <h2 className="text-3xl md:text-4xl font-display text-gray-900 desktop-1900:text-5xl mb-3 md:mb-6">Donate</h2>
         <FilterSearch onDefaultDonationChange={handleDefaultDonationChange} />
       </div>
 

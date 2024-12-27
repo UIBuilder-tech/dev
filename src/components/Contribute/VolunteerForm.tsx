@@ -93,13 +93,13 @@ export default function VolunteerForm() {
 
   return (
     <div className='bg-white relative'>
-    <div className="px-6 max-sm:pt-8 max-sm:pb-[150px] md:py-16 max-w-7xl mx-auto ">
-      <h1 className="text-4xl md:text-5xl font-display text-center text-[#02306A] mb-4 md:mb-12 py-6">Volunteer</h1>
+    <div className="px-6 max-sm:pt-8 max-sm:pb-[150px] md:py-16 max-w-7xl mx-auto">
+      <h1 className=" text-center text-[#02306A] text-3xl md:text-4xl font-display text-gray-900 mb-8 desktop-1900:text-5xl">Volunteer</h1>
       
       <div className="grid grid-cols-1 lg:grid-cols-[1.75fr_1fr] gap-10 md:gap-16">
         {/* Left Column - Description and Image */}
         <div className="space-y-8">
-          <div className="space-y-6 md:text-xl max-w-[80%] max-sm:contents">
+          <div className="space-y-6 md:text-xl max-w-[80%] max-sm:contents desktop-1200:text-sm desktop-1500:text-lg desktop-1900:text-xl">
             <p className="text-[#808080] font-medium leading-6">
               We offer volunteering opportunities in the US as well as community projects in and around Chitrapur/Shirali.
             </p>
@@ -139,7 +139,7 @@ export default function VolunteerForm() {
 
         {/* Right Column - Form */}
         <div>
-          <form onSubmit={handleSubmit} className="space-y-6 max-w-[80%] max-sm:contents">
+          <form onSubmit={handleSubmit} className="space-y-8 desktop-1200:space-y-4 desktop-1900:space-y-6 desktop-1500:space-y-6 max-w-[80%] max-sm:contents">
             <div>
               <select
                 name="category"
@@ -161,7 +161,7 @@ export default function VolunteerForm() {
                 name="name"
                 value={formData.name}
                 onChange={handleInputChange}
-                className="w-full border-b border-gray-200 py-3 focus:outline-none focus:border-primary"
+                className="w-full border-b border-gray-200 py-3 focus:outline-none focus:border-primary desktop-1200:text-base desktop-1500:text-lg desktop-1900:text-xl"
                 placeholder="Full Name"
               />
               {isNameVerified && (
@@ -175,7 +175,7 @@ export default function VolunteerForm() {
                 name="email"
                 value={formData.email}
                 onChange={handleInputChange}
-                className={`w-full border-b ${errors.email ? 'border-red-500' : 'border-gray-200'} py-3 focus:outline-none focus:border-primary`}
+                className={` ${errors.email ? 'border-red-500' : 'border-gray-200'} w-full border-b border-gray-200 py-3 focus:outline-none focus:border-primary desktop-1200:text-base desktop-1500:text-lg desktop-1900:text-xl`}
                 placeholder="Email Address"
               />
               {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
@@ -187,7 +187,7 @@ export default function VolunteerForm() {
                 name="phone"
                 value={formData.phone}
                 onChange={handleInputChange}
-                className={`w-full border-b ${errors.phone ? 'border-red-500' : 'border-gray-200'} py-3 focus:outline-none focus:border-primary`}
+                className={` ${errors.phone ? 'border-red-500' : 'border-gray-200'} w-full border-b border-gray-200 py-3 focus:outline-none focus:border-primary desktop-1200:text-base desktop-1500:text-lg desktop-1900:text-xl`}
                 placeholder="Phone Number"
               />
               {errors.phone && <p className="text-red-500 text-sm mt-1">{errors.phone}</p>}
@@ -199,7 +199,7 @@ export default function VolunteerForm() {
                 name="address"
                 value={formData.address}
                 onChange={handleInputChange}
-                className={`w-full border-b ${errors.address ? 'border-red-500' : 'border-gray-200'} py-3 focus:outline-none focus:border-primary`}
+                className={` ${errors.address ? 'border-red-500' : 'border-gray-200'} w-full border-b border-gray-200 py-3 focus:outline-none focus:border-primary desktop-1200:text-base desktop-1500:text-lg desktop-1900:text-xl`}
                 placeholder="Address"
               />
               {errors.address && <p className="text-red-500 text-sm mt-1">{errors.address}</p>}
@@ -212,7 +212,7 @@ export default function VolunteerForm() {
                   name="city"
                   value={formData.city}
                   onChange={handleInputChange}
-                  className={`w-full border-b ${errors.city ? 'border-red-500' : 'border-gray-200'} py-3 focus:outline-none focus:border-primary`}
+                  className={` ${errors.city ? 'border-red-500' : 'border-gray-200'} w-full border-b border-gray-200 py-3 focus:outline-none focus:border-primary desktop-1200:text-base desktop-1500:text-lg desktop-1900:text-xl`}
                   placeholder="City"
                 />
                 {errors.city && <p className="text-red-500 text-sm mt-1">{errors.city}</p>}
@@ -223,7 +223,7 @@ export default function VolunteerForm() {
                   name="zipCode"
                   value={formData.zipCode}
                   onChange={handleInputChange}
-                  className={`w-full border-b ${errors.zipCode ? 'border-red-500' : 'border-gray-200'} py-3 focus:outline-none focus:border-primary`}
+                  className={` ${errors.zipCode ? 'border-red-500' : 'border-gray-200'} w-full border-b border-gray-200 py-3 focus:outline-none focus:border-primary desktop-1200:text-base desktop-1500:text-lg desktop-1900:text-xl`}
                   placeholder="Zip Code"
                 />
                 {errors.zipCode && <p className="text-red-500 text-sm mt-1">{errors.zipCode}</p>}
@@ -235,7 +235,7 @@ export default function VolunteerForm() {
                 name="country"
                 value={formData.country}
                 onChange={handleInputChange}
-                className={`w-full border-b ${errors.country ? 'border-red-500' : 'border-gray-200'} py-3 focus:outline-none focus:border-primary bg-transparent`}
+                className={`${errors.country ? 'border-red-500' : 'border-gray-200'} w-full border-b border-gray-200 py-3 focus:outline-none focus:border-primary desktop-1200:text-base desktop-1500:text-lg desktop-1900:text-xlt`}
               >
                 <option value="">Country</option>
                 <option value="US">United States</option>
