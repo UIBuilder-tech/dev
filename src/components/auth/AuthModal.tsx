@@ -2,7 +2,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Loader, X } from 'lucide-react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import ApiCalling, { GetAccessToken } from '../api/ApiCalling';
 import { toast } from 'react-toastify';
 import { UseDataContext } from '../context/DataContext';
 interface AuthModalProps {
@@ -81,6 +80,8 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
     exit: { opacity: 0 },
   };
 
+  const BASE_URL = import.meta.env.VITE_RETURN_BACKEND_API;
+
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setFormData(prev => ({ ...prev, [name]: value }));
@@ -89,14 +90,7 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
   const loginFormHandler = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setIsDisable(true);
-    const query = `SELECT Id, FirstName, LastName, Email, Phone FROM Contact WHERE Email = '${formData.Email}'`;
-    const encodedQuery = encodeURIComponent(query);
-    const urlData = `/query?q=${encodedQuery}`;
-    GetAccessToken()
-      .then(data => {
-        const accessToken = data.access_token;
-        sessionStorage.setItem('accessToken', accessToken);
-        ApiCalling(urlData)
+        fetch(`${BASE_URL}/api/contact?email=${formData.Email}`).then(resp=>resp?.json())
           .then(response => {
             const { totalSize, records } = response;
             if (records.length > 0) {
@@ -105,7 +99,6 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
               } else {
                 toast.success('User successfully logged in.');
                 navigate('/profile');
-                setData(v => ({ ...v, accessToken: accessToken }))
                 onClose();
                 setData(v => ({ ...v, userData: records[0] }))
                 sessionStorage.setItem('user', JSON.stringify(records[0]));
@@ -118,6 +111,7 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
               }
               sessionStorage.removeItem('accessToken');
             }
+            console.log("RESPONSE__>", response)
           })
           .catch(error => {
             toast.error('request Failed');
@@ -127,10 +121,8 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
           .finally(() => {
             setIsDisable(false);
           });
-      }).catch(() => {
-        toast.error('Failed to get access token');
-      });
   };
+
   const registerFormHandler = async (
     event: React.FormEvent<HTMLFormElement>
   ) => {
@@ -139,20 +131,23 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
       toast.error('Passwords do not match');
       return;
     }
-    const urlData = '/sobjects/Contact';
+
     setIsDisable(true);
-    GetAccessToken()
-      .then(data => {
-        const accessToken = data.access_token;
-        sessionStorage.setItem('accessToken', accessToken);
-        const insertData = {
+
+        const payload = {
           FirstName: formData.FirstName,
           LastName: formData.LastName,
           Phone: formData.Phone,
           Email: formData.Email,
           Password__c: formData.Password__c,
         };
-        ApiCalling(urlData, 'POST', insertData)
+        fetch(`${BASE_URL}/api/contact`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(payload),
+        }).then(resp=>resp?.json())
           .then(res => {
             if (res.success) {
               toast.success('User successfully registered. Please login first');
@@ -168,11 +163,8 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
           .finally(() => {
             setIsDisable(false);
           });
-      })
-      .catch(() => {
-        toast.error('Failed to get access token');
-      });
   };
+
   const renderContent = () => {
     switch (view) {
       case 'reset':
