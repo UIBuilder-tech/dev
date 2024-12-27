@@ -5,12 +5,15 @@ import { useWindowWidth } from "../../hooks/useWindowWidth";
 import { Link, useLocation } from "react-router-dom";
 import activeArrow from "../../assets/arrowActive.svg";
 import inactiveArrrow from "../../assets/arrowInactive.svg";
+import ChitrapurMathImg from "../../assets/Shirali_Math.jpg";
+
 
 interface Program {
   id: number;
   title: string;
   description: string;
   image: string;
+  url?:string;
 }
 
 interface ProjectsCategoryProps {
@@ -92,8 +95,8 @@ export default function ProjectsCategory({
            </>
              :
              
-             <Link to='/contribute#volunteer' className="md:px-6 px-3 py-2 md:py-2.5 border-2 border-blue-600 text-blue-600 rounded-full text-sm md:text-xl font-medium hover:bg-blue-700 transition-colors desktop-1200:px-4 desktop-1200:py-2 desktop-1500:text-[18px] desktop-1200:text-[16px]  desktop-1900:text-[20px]  desktop-1900:py-3  desktop-1900:px-5">
-                Contribute
+             <Link to={programs[currentProgram]?.url ? programs[currentProgram]?.url : '/contribute#volunteer'} className="md:px-6 px-3 py-2 md:py-2.5 border-2 border-blue-600 text-blue-600 rounded-full text-sm md:text-xl font-medium hover:bg-blue-700 transition-colors desktop-1200:px-4 desktop-1200:py-2 desktop-1500:text-[18px] desktop-1200:text-[16px]  desktop-1900:text-[20px]  desktop-1900:py-3  desktop-1900:px-5 hover:text-white">
+                Learn More
               </Link>
               }
             </div>
@@ -107,9 +110,9 @@ export default function ProjectsCategory({
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.5 }}
                 src={
-                  typeof programs[currentProgram].image === "string"
-                    ? programs[currentProgram].image
-                    : programs[currentProgram].image[0]
+                  (typeof programs[currentProgram]?.image === "string"
+                    ? programs[currentProgram]?.image
+                    : programs[currentProgram]?.image[0]) || ChitrapurMathImg
                 }
                 alt={programs[currentProgram].title}
                 className="w-full h-[250px] desktop-1200:h-[175px] desktop-1500:h-[225px] object-cover rounded-tr-xl rounded-bl-xl"
@@ -124,9 +127,9 @@ export default function ProjectsCategory({
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.5 }}
                   src={
-                    typeof programs[currentProgram].image === "string"
-                      ? programs[currentProgram].image
-                      : programs[currentProgram].image[1]
+                    typeof programs[currentProgram]?.image === "string"
+                      ? programs[currentProgram]?.image
+                      : programs[currentProgram]?.image[1]
                   }
                   alt="Sub image 1"
                   className="w-full h-[250px] desktop-1200:h-[175px] desktop-1500:h-[225px] object-cover rounded-tl-xl rounded-br-xl"
@@ -140,9 +143,9 @@ export default function ProjectsCategory({
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.5 }}
                   src={
-                    typeof programs[currentProgram].image === "string"
-                      ? programs[currentProgram].image
-                      : programs[currentProgram].image[2]
+                    typeof programs[currentProgram]?.image === "string"
+                      ? programs[currentProgram]?.image
+                      : programs[currentProgram]?.image[2]
                   }
                   alt="Sub image 2"
                   className="w-full h-[250px] desktop-1200:h-[175px] desktop-1500:h-[225px]  object-cover rounded-tl-xl rounded-br-xl"
@@ -179,8 +182,8 @@ export default function ProjectsCategory({
                 <img
                   src={
                     typeof program.image === "string"
-                      ? programs[currentProgram].image
-                      : programs[currentProgram].image[0]
+                      ? program?.image
+                      : program?.image[0]
                   }
                   alt={program.title}
                   className="w-full h-full object-cover"
