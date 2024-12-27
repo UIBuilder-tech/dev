@@ -176,7 +176,7 @@ export default function PaymentForm({ totalDonationAmount }: Props) {
                 name="LastName"
                 value={formData.LastName}
                 onChange={handleInputChange}
-                className="w-full border-b border-gray-200 py-3 focus:outline-none focus:border-primary desktop-1200:text-base desktop-1500:text-lg desktop-1900:text-2xl"
+                className="w-full border-b border-gray-200 py-3 focus:outline-none focus:border-primary desktop-1200:text-base desktop-1500:text-lg desktop-1900:text-xl"
                 placeholder="Last Name"
               />
             </div>
@@ -192,7 +192,7 @@ export default function PaymentForm({ totalDonationAmount }: Props) {
                 onChange={handleInputChange}
                 className={`w-full border-b ${
                   errors.Email ? "border-red-500" : "border-gray-200"
-                } py-3 focus:outline-none focus:border-primary desktop-1200:text-base desktop-1500:text-lg desktop-1900:text-2xl`}
+                } py-3 focus:outline-none focus:border-primary desktop-1200:text-base desktop-1500:text-lg desktop-1900:text-xl`}
                 placeholder="Email Address"
               />
               {errors.Email && <p className="text-red-500 text-sm mt-1">{errors.Email}</p>}
@@ -209,7 +209,7 @@ export default function PaymentForm({ totalDonationAmount }: Props) {
                 onChange={handleInputChange}
                 className={`w-full border-b ${
                   errors.Phone ? "border-red-500" : "border-gray-200"
-                } py-3 focus:outline-none focus:border-primary desktop-1200:text-base desktop-1500:text-lg desktop-1900:text-2xl`}
+                } py-3 focus:outline-none focus:border-primary desktop-1200:text-base desktop-1500:text-lg desktop-1900:text-xl`}
                 placeholder="Phone Number"
               />
               {errors.Phone && <p className="text-red-500 text-sm mt-1">{errors.Phone}</p>}
@@ -226,7 +226,7 @@ export default function PaymentForm({ totalDonationAmount }: Props) {
                 onChange={handleInputChange}
                 className={`w-full border-b ${
                   errors.address ? "border-red-500" : "border-gray-200"
-                } py-3 focus:outline-none focus:border-primary desktop-1200:text-base desktop-1500:text-lg desktop-1900:text-2xl`}
+                } py-3 focus:outline-none focus:border-primary desktop-1200:text-base desktop-1500:text-lg desktop-1900:text-xl`}
                 placeholder="Address"
               />
               {errors.address && (
@@ -246,7 +246,7 @@ export default function PaymentForm({ totalDonationAmount }: Props) {
                   onChange={handleInputChange}
                   className={`w-full border-b ${
                     errors.city ? "border-red-500" : "border-gray-200"
-                  } py-3 focus:outline-none focus:border-primary desktop-1200:text-base desktop-1500:text-lg desktop-1900:text-2xl`}
+                  } py-3 focus:outline-none focus:border-primary desktop-1200:text-base desktop-1500:text-lg desktop-1900:text-xl`}
                   placeholder="City"
                 />
                 {errors.city && (
@@ -263,7 +263,7 @@ export default function PaymentForm({ totalDonationAmount }: Props) {
                   onChange={handleInputChange}
                   className={`w-full border-b ${
                     errors.zipCode ? "border-red-500" : "border-gray-200"
-                  } py-3 focus:outline-none focus:border-primary desktop-1200:text-base desktop-1500:text-lg desktop-1900:text-2xl`}
+                  } py-3 focus:outline-none focus:border-primary desktop-1200:text-base desktop-1500:text-lg desktop-1900:text-xl`}
                   placeholder="Zip Code"
                 />
                 {errors.zipCode && (
@@ -282,7 +282,7 @@ export default function PaymentForm({ totalDonationAmount }: Props) {
                 onChange={handleInputChange}
                 className={`w-48 border-b ${
                   errors.country ? "border-red-500" : "border-gray-200"
-                } py-3 focus:outline-none focus:border-primary bg-transparent desktop-1200:text-base desktop-1500:text-lg desktop-1900:text-2xl`}
+                } py-3 focus:outline-none focus:border-primary bg-transparent desktop-1200:text-base desktop-1500:text-lg desktop-1900:text-xl`}
               >
                 <option value="">Country</option>
                 <option value="US">United States</option>

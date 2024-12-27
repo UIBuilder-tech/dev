@@ -1,5 +1,5 @@
 .App {    width: 100%;
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
   max-height: 80vh;
   padding-bottom: 2em;
 }

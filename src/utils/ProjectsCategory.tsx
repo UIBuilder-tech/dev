@@ -13,7 +13,15 @@ interface Program {
   description: string;
   image: string;
 }
+interface Event {
+  id: number;
+  title: string;
+  description: string;
+  image?: string;
+  url?: string;
+}
 
+//projects page data
 export const EducationPrograms: Program[] = [
   {
     id: 1,
@@ -84,7 +92,7 @@ export const EducationPrograms: Program[] = [
     description:
       "Collaboration with schools, colleges, and educational organizations to provide enhanced learning opportunities for students. These partnerships help introduce new academic programs, exchange opportunities, and internships to broaden students' educational experiences.",
     image: ChitrapurMathImg,
-  }
+  },
 ];
 
 export const WomenEmpowermentPrograms: Program[] = [
@@ -151,7 +159,7 @@ export const HeritagePrograms: Program[] = [
     id: 1,
     title: "Vantiga",
     description:
-      "Vantiga is the annual contributions made by the Chitrapur Saraswat community to support the Shri Chitrapur Math's spiritual, cultural, and community welfare initiatives, reflecting their commitment to their heritage.",
+      "Vantiga is the annual contributions made by the Chitrapur Saraswat community to support the Shri Chitrapur Math's spiritual, cultural, and community welfare initiatives, reflecting their commitment to their heritage.",
     image: ChitrapurMathImg,
   },
   {
@@ -182,7 +190,7 @@ export const HeritagePrograms: Program[] = [
       "Study groups focused on sacred texts and scriptures, allowing participants to engage in meaningful discussions and reflections on spiritual teachings and their relevance to modern life.",
     image: ChitrapurMathImg,
   },
-  
+
   {
     id: 6,
     title: "Youth Spiritual Programs",
@@ -206,13 +214,16 @@ export const HeritagePrograms: Program[] = [
   },
 ];
 
-export const EventsFestivals: Program[] = [
+
+//events page data
+export const EventsFestivals: Event[] = [
   {
     id: 1,
     title: "Yugadi Celebrations",
     description:
       "Sadhakas marked the beginning of the Hindu New Year with a special Yugadi program. The event, rooted in the teachings of our Math, featured cultural performances, stotra chanting, and a message of new beginnings.",
     image: YugadiImg,
+    url: "",
   },
   {
     id: 2,
@@ -256,9 +267,51 @@ export const EventsFestivals: Program[] = [
       "Sadhakas honor Param Pujya Swamiji’s birthday with great reverence by performing samuhik guru pujan and singing bhajans, coming together in a spirit of devotion and gratitude. The celebration is followed by a joyful cake-cutting ceremony on the West Coast.",
     image: JanmadivasImg,
   },
+  {
+    id: 8,
+    title: "CHF - KSA Mulaqaut",
+    description:
+      "Mulaqat across the oceans produced by KSA Chitrapur Saraswat Network and Chitrapur Heritage Foundation.",
+  },
+  {
+    id: 9,
+    title: "Life & Times About HH Shrimad Anandashram",
+    description:
+      " Presented to the Sadhakas in India by Jaidev (Sai) Chandavar of Los Angeles on September 17, 2023 (IST).",
+    url: "https://www.youtube.com/watch?v=iRnGeK-U6UY",
+  },
+  {
+    id: 10,
+    title: "Education for Children with Special Needs",
+    description:
+      "Interview of Vinayanand Kallianpur, Principal of Swami Parijnanashram Educational and Vocational Center for the Handicapped, Virar, India by Ashok Kulkarni on April 30, 2022.",
+    url: "https://www.youtube.com/watch?v=Mk4AFUqZ3zE&t=171s",
+  },
+  {
+    id: 11,
+    title: "The Art of Writing Indian Fiction",
+    description:
+      "Shoban Bantwal, Indian fiction writer interviewed by Priti Ubhayakar, content writer, on June 26, 2021.",
+    url: "https://www.youtube.com/watch?v=umHnkh8heNo",
+  },
+  {
+    id: 12,
+    title: "Regulating Internal Inflamation - Cancer Research",
+    description:
+      "Cancer Research by Dr. Prakash and Dr. Mitzi Nagarkatti's, interviewed by Dr. Nivedita Bijoor on April 24, 2021.",
+    url: "https://www.youtube.com/watch?v=VLBGlDmViDw&t=8s",
+  },
+  {
+    id: 13,
+    title: "Championing US Foreign Services",
+    description:
+      " Interview  with Roshni Nirody, US Consulate General Indonesia by Kiran Mundkur on September 11, 2021.",
+    url: "https://www.youtube.com/watch?v=E4EMJlZ3WJA",
+  },
+
 ];
 
-export const EventGettogthers: Program[] = [
+export const EventGettogthers: Event[] = [
   {
     id: 1,
     title: "Chitrapur Yuvadhara",
@@ -280,9 +333,16 @@ export const EventGettogthers: Program[] = [
       "Through monthly satsangs, sadhakas come together to celebrate festivals in alignment with the practices of our Math, integrating bhajans, stotra chanting, anushthans, and cultural activities. These gatherings unite us as a spiritual family, offering an opportunity to stay connected to our roots while building a strong sense of community.",
     image: ChitrapurMathImg,
   },
+  {
+    id: 4,
+    title: "Amgelo Katto",
+    description:
+      "A Variety Entertainment Program from USA residents, cohosted by the Chitrapur Heritage Foundation and Saraswat Foundation on February 26, 2022.",
+    url: "https://www.youtube.com/watch?v=uK2_6w3pqJI",
+  },
 ];
 
-export const EventChildrenEducation: Program[] = [
+export const EventChildrenEducation: Event[] = [
   {
     id: 1,
     title: "World Disability Day",

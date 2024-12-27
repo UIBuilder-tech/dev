@@ -200,3 +200,115 @@ background: transparent linear-gradient(90deg, #E67E22 0%, #F1B581 43%, #FFFFFF 
   height: 0;
   display: none; /* Optional backup */
 }
+
+.previewThumbnail{
+  width:100px;
+  height:50px;
+  border-radius: 5px;
+}
+.postPreviewThumbnail{
+  width:200px;
+  height:160px;
+  border-radius: 5px;
+}
+.linkContainer{
+  background-color: white;
+  padding: 10px 2px;
+}
+.previewTitle{
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 20px;
+}
+.postPreviewTitle{
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 25px;
+  text-overflow: ellipsis;
+  padding-bottom: 2px;
+  overflow-wrap: break-word;  
+  word-wrap: break-word;
+  word-break: break-word;
+}
+.postUrlPreviewTitle{
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 25px;
+  text-overflow: ellipsis;
+  padding-bottom: 2px;
+  overflow-wrap: break-word;  
+  word-wrap: break-word;
+  word-break: break-word;
+}
+.previewMainDescription{
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 20px;
+  color: blue;
+  word-break: break-all;
+}
+.previewDescription{
+  font-size: 12px;
+  font-weight: initial;
+  line-height: 15px;
+}
+.postPreviewDescription{
+  font-size: 12px;
+  font-weight: initial;
+  line-height: 15px;
+  color: gray;
+}
+@media (max-width: 361px){
+  .postPreviewThumbnail{
+      width:150px;
+      height:120px;
+      border-radius: 5px;
+  }
+  .postPreviewTitle{
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 20px;
+      text-overflow: ellipsis;
+      padding-bottom: 2px;
+  }
+  .postUrlPreviewTitle{
+      font-size: 15px;
+      font-weight: 600;
+      line-height: 25px;
+      text-overflow: ellipsis;
+      padding-bottom: 2px;
+  }
+  .postPreviewDescription{
+      font-size: 10px;
+      font-weight: initial;
+      line-height: 15px;
+      color: gray;
+  }
+}
+@media (max-width: 600px){
+  .postPreviewThumbnail{
+      width:150px;
+      height:120px;
+      border-radius: 5px;
+  }
+  .postPreviewTitle{
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 20px;
+      text-overflow: ellipsis;
+      padding-bottom: 2px;
+  }
+  .postUrlPreviewTitle{
+      font-size: 15px;
+      font-weight: 600;
+      line-height: 25px;
+      text-overflow: ellipsis;
+      padding-bottom: 2px;
+  }
+  .postPreviewDescription{
+      font-size: 10px;
+      font-weight: initial;
+      line-height: 15px;
+      color: gray;
+  }
+}

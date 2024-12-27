@@ -13,7 +13,7 @@ interface Program {
   title: string;
   description: string;
   image: string;
-  url?:string;
+  url:string;
 }
 
 interface ProjectsCategoryProps {
@@ -64,9 +64,25 @@ export default function ProjectsCategory({
 
   console.log("currentItems", currentItems);
 
-  // const nextPage = () => scrollToPage((currentPage + 1) % totalPages);
-  // const prevPage = () =>
-  //   scrollToPage((currentPage - 1 + totalPages) % totalPages);
+  function getVideoId(url: string) {
+    const patterns = [
+      /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:watch(?:\/|.+?)?v=|embed\/|v\/|.+\?v=)|youtu\.be\/)([a-zA-Z0-9_-]{11}).*/,
+      /(?:https?:\/\/)?(?:www\.)?youtube\.com\/live\/([a-zA-Z0-9_-]{11}).*/,
+      /(?:https?:\/\/)?(?:www\.)?youtube\.com\/shorts\/([a-zA-Z0-9_-]{11}).*/,
+    ];
+
+
+    for (const pattern of patterns) {
+      const match = url?.match(pattern);
+      if (match && match[1]) {
+        return match[1];
+      }
+    }
+
+
+    return null;
+  }
+
 
   return (
     <div className="relative px-5 md:p-8 md:mx-14 py-6 md:py-12 ">
@@ -101,6 +117,74 @@ export default function ProjectsCategory({
               }
             </div>
           </div>
+          {programs[currentProgram]?.url?.length && programs[currentProgram]?.url !== "" ? 
+          (
+            
+              <iframe
+                id={`post_image_${programs[currentProgram]?.title}`}
+                // onLoad={(e) =>
+                //   programs[currentProgram]?.url
+                //     ?.length === 1
+                //     ? handleIframeLoad(
+                //         e,
+                //         post?.postId
+                //       )
+                //     : {}
+                // }
+                title="youtube"
+                loading="lazy"
+                src={`https://www.youtube.com/embed/${getVideoId(
+                  programs[currentProgram]?.url
+                )}?autoplay=1`}
+                style={{
+                  backgroundColor:
+                    "black",
+                }}
+                srcDoc={`<style>
+* {
+padding: 0;
+margin: 0;
+overflow: hidden;
+}
+
+body, html {
+height: 100%;
+}
+
+img, svg {
+position: absolute;
+width: 100%;
+top: 0;
+bottom: 0;
+margin: auto;
+}
+
+svg {
+filter: drop-shadow(1px 1px 10px hsl(206.5, 70.7%, 8%));
+transition: all 250ms ease-in-out;
+}
+
+body:hover svg {
+filter: drop-shadow(1px 1px 10px hsl(206.5, 0%, 10%));
+transform: scale(1.2);
+}
+</style>
+<a href='https://www.youtube.com/embed/${getVideoId(programs[currentProgram]?.url)}?autoplay=1'>
+<img src='https://img.youtube.com/vi/${getVideoId(
+  programs[currentProgram]?.url
+)}/hqdefault.jpg' alt='Coffee Recipe Javascript Project'><div class='play-button'>
+<button class="ytp-large-play-button ytp-button ytp-large-play-button-red-bg" aria-label="Play" title="Play"><svg version="1.1"  width='50' height='50' viewBox='0 0 60 50'><path class="ytp-large-play-button-bg" d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,0,34,0S12.21,.13,6.9,1.55 C3.97,2.33,2.27,4.81,1.48,7.74C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19 C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z" fill="#f00"></path><path d="M 45,24 27,14 27,34" fill="#fff"></path></svg></button>
+</div> </a>
+`}
+                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen={true}
+                // style={{height:"350px", width:"600px"}}
+                className={
+                  "w-full desktop-1200:w-[450px] desktop-1500:w-[500px]  desktop-1900:w-[600px] h-[250px] desktop-1200:h-[370px] desktop-1500:h-[470px] desktop-1900:h-[500px] object-cover rounded-tr-3xl rounded-bl-3xl my-4"
+                }
+              />
+
+          ):
           <div className="flex flex-wrap gap-6 p-4">
             <div className="w-full desktop-1200:w-[450px] desktop-1500:w-[500px]  desktop-1900:w-[600px]">
               <motion.img
@@ -110,9 +194,9 @@ export default function ProjectsCategory({
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.5 }}
                 src={
-                  (typeof programs[currentProgram]?.image === "string"
+                  programs[currentProgram]?.image ? (typeof programs[currentProgram]?.image === "string"
                     ? programs[currentProgram]?.image
-                    : programs[currentProgram]?.image[0]) || ChitrapurMathImg
+                    : programs[currentProgram]?.image[0]) : ChitrapurMathImg
                 }
                 alt={programs[currentProgram].title}
                 className="w-full h-[250px] desktop-1200:h-[175px] desktop-1500:h-[225px] object-cover rounded-tr-xl rounded-bl-xl"
@@ -126,10 +210,11 @@ export default function ProjectsCategory({
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.5 }}
-                  src={
+                  src={programs[currentProgram]?.image ? 
                     typeof programs[currentProgram]?.image === "string"
                       ? programs[currentProgram]?.image
                       : programs[currentProgram]?.image[1]
+                      : ChitrapurMathImg
                   }
                   alt="Sub image 1"
                   className="w-full h-[250px] desktop-1200:h-[175px] desktop-1500:h-[225px] object-cover rounded-tl-xl rounded-br-xl"
@@ -142,17 +227,18 @@ export default function ProjectsCategory({
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.5 }}
-                  src={
+                  src={programs[currentProgram]?.image ? 
                     typeof programs[currentProgram]?.image === "string"
                       ? programs[currentProgram]?.image
                       : programs[currentProgram]?.image[2]
+                      : ChitrapurMathImg
                   }
                   alt="Sub image 2"
                   className="w-full h-[250px] desktop-1200:h-[175px] desktop-1500:h-[225px]  object-cover rounded-tl-xl rounded-br-xl"
                 />
               </div>
             </div>
-          </div>
+          </div>}
         </div>
       </div>
 
@@ -181,9 +267,14 @@ export default function ProjectsCategory({
               <div className="relative h-full rounded-xl overflow-hidden">
                 <img
                   src={
+                    program?.image?.length ?
                     typeof program.image === "string"
                       ? program?.image
                       : program?.image[0]
+                      :
+                      `https://img.youtube.com/vi/${getVideoId(
+                        program?.url
+                      )}/hqdefault.jpg`
                   }
                   alt={program.title}
                   className="w-full h-full object-cover"
