@@ -24,6 +24,7 @@ interface Project {
   tag: string;
   status: string;
   images?: string[];
+  linkTo?:string;
 }
 
 const projects: Project[] = [
@@ -33,6 +34,7 @@ const projects: Project[] = [
     tag: "Heritage",
     status: "Ongoing",
     images: [vantiga],
+    linkTo: "heritage-preservation"
   },
   {
     id: "2",
@@ -40,6 +42,7 @@ const projects: Project[] = [
     tag: "Women Empowerment",
     status: "Ongoing",
     images: [SamvitSudha,SamvitSudha1],
+    linkTo: "women-empowerment"
   },
   {
     id: "3",
@@ -47,6 +50,7 @@ const projects: Project[] = [
     tag: "Education",
     status: "Ongoing",
     images: [spevc1, spevc2],
+    linkTo:"education"
   },
   {
     id: "4",
@@ -54,6 +58,7 @@ const projects: Project[] = [
     tag: "Education",
     status: "Ongoing",
     images: [Parijnanashram],
+    linkTo:"education"
   },
   {
     id: "5",
@@ -61,6 +66,7 @@ const projects: Project[] = [
     tag: "Heritage",
     status: "Ongoing",
     images: [Yatri],
+    linkTo:"heritage-preservation"
   },
   {
     id: "9",
@@ -68,6 +74,7 @@ const projects: Project[] = [
     tag: "Education",
     status: "Completed",
     images: [Kotekar,Kotekar1],
+    linkTo:"education"
   },
   {
     id: "11",
@@ -75,6 +82,7 @@ const projects: Project[] = [
     tag: "Education",
     status: "Completed",
     images: [Solar],
+    linkTo:"education"
   },
   {
     id: "8",
@@ -82,6 +90,7 @@ const projects: Project[] = [
     tag: "Education",
     status: "Ongoing",
     images: [Srivali],
+    linkTo:"education"
   },
   {
     id: "7",
@@ -91,6 +100,7 @@ const projects: Project[] = [
     images: [
       "https://images.unsplash.com/photo-1547354225-3e5a5f001d24?w=500&auto=format&fit=crop&q=60",
     ],
+    linkTo:"heritage-preservation"
   },
 ];
 
@@ -181,7 +191,7 @@ export default function FeaturedProjects({ title }: Props) {
                       </div>
                     )}
                     <Link
-                      to="/projects"
+                      to={`/projects#${project?.linkTo}`}
                     >
                      {isHovered ?
                      <img src={activeSideArrow} className="w-14 h-14 max-sm:w-16 max-sm:h-16"/>

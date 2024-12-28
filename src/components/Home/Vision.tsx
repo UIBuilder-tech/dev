@@ -31,7 +31,7 @@ export default function Vision() {
     {
       title:
         "“If prosperity has smiled on you, share a little with the poor. Such sharing and caring enlarges you, expands you inwardly, brings about an udāratā (magnanimity) in your outlook.”",
-      content: "–His Holiness Shrīmat Sadyojāt Shaṅkarāshram Swāmījī",
+      content: "– His Holiness Shrīmat Sadyojāt Shaṅkarāshram Swāmījī",
       image: [
         "https://parijnanfoundation.in/wp-content/uploads/2024/06/Swa%CC%84mi%CC%84ji%CC%84-262x322.png",
         "https://parijnanfoundation.in/wp-content/uploads/2024/06/Parijn%CC%83a%CC%84na%CC%84shram-Swa%CC%84mi%CC%84ji%CC%84-258x322.png",
@@ -70,10 +70,10 @@ export default function Vision() {
                       </div>
 
                       <div className="flex-1 text-center max-w-5xl mx-auto">
-                        <h2 className="font-display text-xl md:text-2xl desktop-1500:text-3xl desktop-1200:text-sm mb-4 md:mb-6 text-white max-sm:px-1 desktop-1900:text-2xl">
+                        <h2 className="font-display text-xl md:text-2xl desktop-1500:text-3xl desktop-1200:text-xl mb-4 md:mb-6 text-white max-sm:px-1 desktop-1900:text-3xl">
                           {slide.title}
                         </h2>
-                        <p className="text-sm md:text-xl desktop-1500:text-lg desktop-1200:text-sm text-cream/90 mb-6 md:mb-8">
+                        <p className="text-sm md:text-xl desktop-1500:text-lg desktop-1200:text-sm desktop-1900:text-2xl text-white mb-6 md:mb-8">
                           {slide.content}
                         </p>
                       </div>
@@ -99,7 +99,7 @@ export default function Vision() {
                   </p>
                   <div className="flex gap-3 md:gap-4">
                     <Link
-                      to="/contribute#donation-table"
+                      to="/contribute#volunteer"
                       className="bg-white/10 backdrop-blur-sm text-primary border-2 border-primary px-4 md:px-8 py-2 md:py-3 rounded-full hover:bg-white/20 transition text-sm md:text-xl flex-1 md:flex-none text-center font-bold desktop-1200:text-lg desktop-1200:py-2 desktop-1200:px-6 desktop-1200:border-1 desktop-1900:text-2xl desktop-1900:py-3 desktop-1900:px-8"
                     >
                       Join Us

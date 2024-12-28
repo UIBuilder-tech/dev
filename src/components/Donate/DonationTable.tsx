@@ -1,5 +1,5 @@
 import { useState, useMemo, useEffect } from 'react';
-import { ChevronDown, ChevronUp, Trash2 } from 'lucide-react';
+import { ChevronDown, ChevronUp, Trash2, Info } from 'lucide-react';
 import AmountInput from './AmountInput';
 import FilterSearch from './FilterSearch';
 import { donationData } from './donationData';
@@ -124,7 +124,8 @@ export default function DonationTable({setTotalDonationAmount}:Props) {
           isMobile ?
           <tr aria-rowspan={3} key={item.id} className="border-t border-gray-300">
             <tr aria-rowspan={2}>
-            <td className="py-2 px-2 w-[40%] max-sm:text-sm" style={{wordWrap:"break-word"}}>{item.name}</td>
+            <td className="py-2 px-2 w-[40%] max-sm:text-sm" style={{wordWrap:"break-word"}}>{item.name}{item?.id==="sevas" && <><a target='blank' href='https://chitrapurmath.net/site/rates' className='text-blue-500 cursor-pointer underline font-normal text-xs pl-2'>Know more</a></>}
+            </td>
             <tr>
             <td className="py-2">
               <AmountInput
@@ -185,7 +186,13 @@ export default function DonationTable({setTotalDonationAmount}:Props) {
           </tr>
           :
           <tr key={item.id} className="border-t border-gray-300">
-            <td className="py-2 px-2 max-w-[50%] mx-8" style={{wordWrap:"break-word"}}>{item.name}</td>
+            <td className="relative flex items-center"><div className=''><span className='py-2 px-2 max-w-[50%]' style={{wordWrap:"break-word"}}>{item.name}</span>{item?.id==="sevas" && <><a href='https://chitrapurmath.net/site/rates' target='blank' className='text-blue-500 cursor-pointer underline font-normal text-xs'>Know more</a></>}</div>
+           {item.description && <div className="inline-block ml-2  h-full relative group">
+            <Info className="w-4 h-4 text-gray-500 hover:text-gray-700 cursor-pointer my-auto" />
+            <div className="absolute left-1/2 transform -translate-x-1/2 mt-2 w-[300px] bg-white text-gray-500 text-sm rounded-[20px] p-4 hidden group-hover:block transition-opacity z-10 backdrop-blur-[50px]">
+              {item.description}
+            </div>
+          </div>}</td>
             <td className="py-2 px-2">
               <AmountInput
                 value={itemAmount}
@@ -262,7 +269,7 @@ export default function DonationTable({setTotalDonationAmount}:Props) {
             {expandedCategories.includes(category.id) && (
               <div className="pb-4">
                 <table className="w-full table-fixed border-collapse">
-                  <thead>
+                  {category.items && category.items?.length > 0 ? <thead>
                     <tr className="max-sm:hidden text-sm text-gray-500 border-b border-gray-300">
                       <th className="text-left py-2 px-2 w-1/2 font-normal">Donation Category</th>
                       <th className="text-left py-2 px-2 w-1/5 font-normal text-center">Amount</th>
@@ -270,7 +277,11 @@ export default function DonationTable({setTotalDonationAmount}:Props) {
                       <th className="text-left py-2 px-2 w-1/5 font-normal text-center">Total</th>
                       <th className="text-left py-2 px-2 w-1/3 font-normal">Remarks</th>
                     </tr>
+                  </thead> :
+                  <thead>
+                    <tr className='w-full text-center text-sm text-gray-500'>- Currently there no projects in this category -</tr>
                   </thead>
+                  }
                   {category.items && renderDonationItems(category.items, category.name)}
                   {category.subcategories?.map(subcategory => (
                     <tbody key={subcategory.id} className="border-t border-gray-800">

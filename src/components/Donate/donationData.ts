@@ -66,6 +66,19 @@ export const donationData: DonationCategory[] = [
             name: 'Vaidika Pathashala',
             amount: 0,
             description: 'Support for Vaidika Pathashala'
+          },
+          {
+            id: 'goshala',
+            name: 'Goshala Maintenance',
+            amount: 0,
+            description: 'Support for Goshala Maintenance'
+          },
+          {
+            id: 'sevas',
+            name: 'Sevas',
+            amount: 0,
+            description: 'All Sevas',
+            hasQuantity: true,
           }
         ]
   },
@@ -89,5 +102,10 @@ export const donationData: DonationCategory[] = [
         amount: 0
       }
     ]
+  },
+  {
+    id: 'specialProjects',
+    name: 'SPECIAL PROJECTS',
+    items: []
   }
 ];

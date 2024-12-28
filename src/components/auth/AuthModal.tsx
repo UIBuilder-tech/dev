@@ -90,31 +90,32 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
   const loginFormHandler = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setIsDisable(true);
-        fetch(`${BASE_URL}/api/contact?email=${formData.Email}`).then(resp=>resp?.json())
+
+    const payload = {
+      email: formData.Email,
+      password: formData.Password__c,
+    };
+        fetch(`${BASE_URL}/api/auth/login`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(payload),
+        }).then(resp=>resp?.json())
           .then(response => {
-            const { totalSize, records } = response;
-            if (records.length > 0) {
-              if (totalSize === 0) {
-                toast.error('User not found');
-              } else {
-                toast.success('User successfully logged in.');
+            if (response?.data?.userId) {
+                toast.success(response?.message);
                 navigate('/profile');
                 onClose();
-                setData(v => ({ ...v, userData: records[0] }))
-                sessionStorage.setItem('user', JSON.stringify(records[0]));
-              }
+                setData(v => ({ ...v, userData: response?.data }))
+                sessionStorage.setItem('user', JSON.stringify(response?.data));
             } else {
-              if (Array.isArray(response) && response.length > 0) {
-                toast.error(response[0].message);
-              } else {
-                toast.error('User not found');
-              }
-              sessionStorage.removeItem('accessToken');
+                toast.error(response?.message);
             }
             console.log("RESPONSE__>", response)
           })
           .catch(error => {
-            toast.error('request Failed');
+            toast.error('Something went wrong. Please try again later.');
             console.error(error);
             sessionStorage.removeItem('accessToken');
           })
@@ -135,13 +136,14 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
     setIsDisable(true);
 
         const payload = {
-          FirstName: formData.FirstName,
-          LastName: formData.LastName,
-          Phone: formData.Phone,
-          Email: formData.Email,
-          Password__c: formData.Password__c,
+          firstname: formData.FirstName,
+          lastname: formData.LastName,
+          usernumber: formData.Phone,
+          emailid: formData.Email,
+          userpwd: formData.Password__c,
+          userconfirmPassword: formData.confirmPassword
         };
-        fetch(`${BASE_URL}/api/contact`, {
+        fetch(`${BASE_URL}/api/auth/register`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -150,14 +152,14 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
         }).then(resp=>resp?.json())
           .then(res => {
             if (res.success) {
-              toast.success('User successfully registered. Please login first');
+              toast.success(res?.message);
               setView('login');
             } else {
-              toast.error('Failed to register. Please try again later');
+              toast.error(res?.message);
             }
           })
           .catch(error => {
-            toast.error('Request failed. Please try again later');
+            toast.error('Something went wrong. Please try again later');
             console.error(error);
           })
           .finally(() => {

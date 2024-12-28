@@ -24,7 +24,7 @@ export default function Footer() {
         <div className=" flex flex-col  items-center justify-center">
           <img src={logo} className="w-36"/>
           <h2 className="font-display text-xl desktop-1500:text-3xl desktop-1200:pt-5 pt-10 md:text-2xl text-white text-center desktop-1900:text-xl">
-                      Chitrapur Heritage Foundation, USA
+                      Chitrapur Heritage Foundation USA, Inc.
                     </h2>
                     <p className="text-sm md:text-sm text-white text-center px-4 md:px-8">
                       IRS certified 501c(3) organization, Tax id: 20-2738955
@@ -69,27 +69,27 @@ export default function Footer() {
               </h3>
               <ul className="space-y-1 max-sm:text-xs">
                 <li>
-                  <a href="https://chitrapurmath.net/" className="hover:underline">
+                  <a href="https://chitrapurmath.net/" target="_blank" className="hover:underline">
                     Chitrapur Math Website
                   </a>
                 </li>
                 <li>
-                  <a href="https://chitrapurmath.net/" className="hover:underline">
+                  <a href="https://www.chitrapurebooks.com/" target="_blank" className="hover:underline">
                     Chitrapur Ebook
                   </a>
                 </li>
                 <li>
-                  <a href="https://parijnanfoundation.in/" className="hover:underline">
+                  <a href="https://parijnanfoundation.in/" target="_blank" className="hover:underline">
                     Parijnan Foundation
                   </a>
                 </li>
                 <li>
-                  <a href="https://www.parijnanfoundation.in/SamvitSudha.aspx" className="hover:underline">
+                  <a href="https://samvitsudha.com/" target="_blank" className="hover:underline">
                     Samvit Sudha
                   </a>
                 </li>
                 <li>
-                  <a href="https://www.parijnanfoundation.in/Parimochan.aspx" className="hover:underline">
+                  <a href="https://parijnanfoundation.in/parimochana/" target="_blank" className="hover:underline">
                     Parimochan Project
                   </a>
                 </li>
@@ -173,7 +173,7 @@ export default function Footer() {
             <ul className="space-y-1 max-sm:text-xs max-sm:relative">
               <li className="flex items-center gap-2">
                 <MapPin size={16} className="flex-shrink-0" />
-                <a href="http://www.chfusa.org" className="hover:underline">
+                <a href="http://www.chfusa.org" target="_blank" className="hover:underline">
                   www.chfusa.org
                 </a>
               </li>

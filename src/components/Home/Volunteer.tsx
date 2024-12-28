@@ -105,12 +105,12 @@ export default function VolunteerSection() {
                 Empowerment.
               </p>
               <div className="flex flex-wrap max-sm:flex-row gap-1 md:gap-4">
-                <Link
+                {/* <Link
                   to="/contribute#volunteer"
                   className="bg-transparent border rounded-3xl max-sm:text-xs p-1 md:p-3 px-2 md:px-5 text-white hover:bg-white/10 desktop-1900:text-xl desktop-1900:rounded-full "
                 >
                   Learn More
-                </Link>
+                </Link> */}
                 <Link
                   to="/contribute#volunteer"
                   className="bg-white text-[#E67E22] border rounded-3xl max-sm:text-xs p-2 md:p-3 px-3 md:px-5 hover:bg-white/90 desktop-1900:text-xl desktop-1900:rounded-full"

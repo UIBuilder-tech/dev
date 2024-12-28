@@ -77,6 +77,7 @@ export default function ProjectsPage() {
         title="Empowering Progress through Impactful Projects"
         desc="Explore our transformative initiatives that preserve heritage, empower communities, and promote education. From sustainable development to women's empowerment, our projects reflect a commitment to creating a brighter future rooted in tradition and progress."
         img={HeroImg}
+        from="projects"
       />
       <div id="vantiga">
         <Vantiga />

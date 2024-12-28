@@ -94,7 +94,7 @@ export default function TeamSection() {
               community.
             </p>
             <div className="pt-8">
-              <Link to='/contribute#volunteer' className="rounded-full border-2 border-primary px-4 py-1 md:px-4 md:py-3 text-primary transition-colors hover:bg-[#4299E1] hover:text-white  text-lg max-sm:text-sm desktop-1900:text-2xl">
+              <Link to='/about#our-team' className="rounded-full border-2 border-primary px-4 py-1 md:px-4 md:py-3 text-primary transition-colors hover:bg-[#4299E1] hover:text-white  text-lg max-sm:text-sm desktop-1900:text-2xl">
                 Learn More
               </Link>
             </div>

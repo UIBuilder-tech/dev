@@ -67,6 +67,7 @@ export default function EventsPage() {
         title="Celebrating Tradition and Community"
         desc="Join us as we commemorate festivals, organize satsangs, and conduct enriching activities for children and youth. Stay updated with our latest programs and events that honor tradition, foster spiritual growth, and strengthen the Chitrapur Saraswat community."
         img={EventsHero}
+        from="events"
       />
       <div id="featured-news">
         <SpecialProjects

@@ -17,10 +17,10 @@ export default function Hero({ title, desc, img, from = "" }: Props) {
           alt="Heritage Building"
           className="w-full h-full object-cover hero-bg"
         />
-        <div className="absolute inset-0 bg-black/50"></div>
+       {from!=="events" && <div className="absolute inset-0 bg-black/50"></div>}
       </div>
 
-      <div className="relative h-full flex flex-col justify-between">
+      <div className={`relative ${from!=="projects" && from!=="about" ? "h-[100vh]" : "h-full desktop-1500:pt-12 desktop-1900:pt-28"} flex flex-col justify-between`}>
         <div className="flex-grow flex items-center">
           <div className="max-w-7xl mx-auto px-4 w-full desktop-1200:max-w-5xl desktop-1500:max-w-6xl desktop-1900:max-w-7xl">
             <div className="max-w-3xl pt-24 md:pt-32 desktop-1200:max-w-2xl desktop-1500:max-w-3xl desktop-1900:max-w-3xl">
