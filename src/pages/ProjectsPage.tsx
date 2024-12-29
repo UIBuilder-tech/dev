@@ -51,7 +51,7 @@ export default function ProjectsPage() {
       location: "Raj Ghat, Varanasi",
       description:
         "Chitrapur Saraswat community at the proposed center for yoga, meditation, and yatri nivas in Varanasi on the banks of River Ganga at Raja Ghat.",
-      images: [ChitrapurMathImg, ChitrapurMathImg, ChitrapurMathImg],
+      images: ["https://chitrapurmath.net/documents/upload/1588069798C_(2).png", "https://chitrapurmath.net/documents/upload/1588074364A_(1).png"],
     },
     {
       id: 2,

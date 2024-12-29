@@ -39,6 +39,7 @@ import heritage3 from '../assets/heritage3.jpg'
 import infrastruture from '../assets/infrastructure.jpg'
 import infrastruture1 from '../assets/infrastrucutre1.jpg'
 import scholarship from '../assets/scholarship.png'
+import scholarship1 from '../assets/district.jpg'
 
 interface Program {
   id: number;
@@ -117,7 +118,7 @@ export const EducationPrograms: Program[] = [
     title: "Support for Higher Education",
     description:
       " Financial aid and guidance to students seeking higher education opportunities, whether in India or abroad. The foundation also provides counseling and resources for students applying to universities and vocational institutions, helping them navigate the complexities of admissions and financial aid processes.",
-    image: ["https://chitrapurmath.net/documents/upload/16567391878.jpg",scholarship],
+    image: ["https://chitrapurmath.net/documents/upload/16567391878.jpg",scholarship,scholarship1],
   },
   {
     id: 10,
