@@ -132,12 +132,12 @@ export default function ImpactSection() {
                     <div className="h-0.5 bg-white transition-all duration-500 w-[100%] desktop-1500:w-[150%]  md:w-[150%] desktop-1200:w-[100%]" />
                   </div>
                   <div className="flex gap-2 md:gap-4">
-                    <Link
+                    {/* <Link
                       to="/contribute#donation-table"
                       className="rounded-full max-sm:text-xs px-2 py-1 md:px-6 md:py-2 md:text-lg desktop-1500:text-lg desktop-1200:text-[16px] text-white border hover:bg-primary/90 flex items-center"
                     >
                       Learn More
-                    </Link>
+                    </Link> */}
                     <Link to="/projects" className="">
                       {/* <ArrowUpRight className="h-6 w-6  text-white rounded-full rotate-[175deg]" /> */}
                       <img

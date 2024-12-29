@@ -14,6 +14,7 @@ interface VisionCard {
   title: string;
   description: string;
   image: string;
+  linkTo: string;
 }
 
 const visionCards: VisionCard[] = [
@@ -23,6 +24,7 @@ const visionCards: VisionCard[] = [
     description:
       "Chitrapur Heritage Foundation (CHF) supports 9 schools in India, empowering over 3,000 underprivileged students through quality education, scholarship's,  vocational training, and personnel development programs.",
     image: educationImg,
+    linkTo: "education",
   },
   {
     id: "women",
@@ -30,6 +32,7 @@ const visionCards: VisionCard[] = [
     description:
       "Chitrapur Heritage Foundation (CHF) supports women's empowerment initiatives in India, providing vocational training, entrepreneurship development, financial literacy, and leadership training to promote economic self-reliance and independence. These initiatives aim to empower women to build a better future for themselves, their families, and their communities.",
     image: womenImg,
+    linkTo: "women-empowerment",
   },
   {
     id: "heritage",
@@ -37,6 +40,7 @@ const visionCards: VisionCard[] = [
     description:
       "The Chitrapur Math preserves and promotes the cultural heritage of the Chitrapur Saraswat community through documentation, conservation of heritage sites, and organization of cultural festivals and events. These efforts aim to safeguard the community's traditions, customs, and history for future generations.",
     image: heritageImg,
+    linkTo: "heritage-preservation",
   },
 ];
 
@@ -116,7 +120,7 @@ export default function Programs() {
                     </div>
                     <div className="flex flex-row items-center text-white">
                       <Link
-                        to="/projects"
+                        to={`/projects#${card.linkTo}`}
                         className="p-2 border rounded-3xl px-4 text-xl desktop-1200:text-lg "
                       >
                         Learn More

@@ -74,6 +74,7 @@ export default function EventsPage() {
       images: [SamvitSudha, SamvitSudha1],
     },
   ];
+
   const Spotlight = [
     {
       id: 1,
