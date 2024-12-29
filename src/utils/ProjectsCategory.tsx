@@ -8,7 +8,17 @@ import DepavaliImg from "../assets/festivals/Deepa Prajwalana on Deepavali.jpg";
 import NavarathriImg from "../assets/festivals/Kumarika Pujana_Navratri_Celebration_1.jpg";
 import Yuvas from "../assets/Yuvas.png";
 import Yuvas1 from "../assets/Yuvas1.png";
+import Yuvas2 from "../assets/yuvas2.png";
 import hands from "../assets/hands.jpg";
+import district from "../assets/district.jpg";
+import district1 from "../assets/district1.jpg";
+import district2 from "../assets/district2.jpg";
+import cultural from "../assets/culturalProgUsa.png";
+import cultural1 from "../assets/photoGallery/img9.jpg";
+import cultural2 from "../assets/PPUC Annday (2).jpg";
+import lecture from "../assets/yuvas_lecture.png";
+import chf_logo from "../assets/chfLogo.png";
+import ksa_logo from "../assets/KSA_logo.jpg";
 
 interface Program {
   id: number;
@@ -224,7 +234,7 @@ export const EventsFestivals: Event[] = [
     title: "CHF - KSA Mulaqaut",
     description:
       "Mulaqat across the oceans produced by KSA Chitrapur Saraswat Network and Chitrapur Heritage Foundation.",
-    image: hands,
+    image: [hands, chf_logo, ksa_logo],
   },
   {
     id: 9,
@@ -269,14 +279,14 @@ export const EventGettogthers: Event[] = [
     title: "Chitrapur Yuvadhara",
     description:
       "This program connects young adults (ages 15-35) with the Math and Guru Parampara through workshops, creative forums, and social responsibility activities. It fosters self-expression, skill development, and a strong sense of community.",
-    image: [Yuvas1, Yuvas],
+    image: [Yuvas1, Yuvas, Yuvas2],
   },
   {
     id: 2,
     title: "Uccharan Training Sessions",
     description:
       "Dedicated training sessions to improve stotra pronunciation, enhancing the spiritual discipline and ensuring the correct intonation of sacred chants. These sessions empower participants to connect deeply with the spiritual essence of stotras.",
-    image: ChitrapurMathImg,
+    image: [lecture],
   },
   {
     id: 3,
@@ -350,14 +360,14 @@ export const EventChildrenEducation: Event[] = [
     title: "District-level competition, Palghar",
     description:
       "On December 3, 2024, commemorating World Disability Day, a district-level competition took place in Palghar, with participation from 16 schools. Notably, 11 of these schools catered to students with intellectual disabilities. Our school, Swami Parijnanashram Educational and Vocational Centre in Virar, emerged victorious, securing the overall trophy in this category. We extend warm felicitations to our students, teaching staff, and non-teaching personnel on this achievement.",
-    image: ChitrapurMathImg,
+    image: [district, district1, district2],
   },
   {
     id: 2,
     title: "Chitrapur Yuvadhara",
     description:
       "This program connects young adults (ages 15-35) with the Math and Guru Parampara through workshops, creative forums, and social responsibility activities. It fosters self-expression, skill development, and a strong sense of community.",
-    image: [Yuvas, Yuvas1],
+    image: [Yuvas, Yuvas1, Yuvas2],
   },
   {
     id: 3,
@@ -378,7 +388,7 @@ export const EventChildrenEducation: Event[] = [
     title: "Cultural Education Programs",
     description:
       "Programs integrating lessons on Chitrapur Saraswat history and values into the curriculum. These activities foster pride, cultural awareness, and a sense of belonging while encouraging students to embrace their roots.",
-    image: ChitrapurMathImg,
+    image: [cultural, cultural1, cultural2],
   },
   {
     id: 6,
