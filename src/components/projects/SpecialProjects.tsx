@@ -118,7 +118,7 @@ const ProjectCard = ({
                 <img
                   onClick={(e) => {
                     e.stopPropagation();
-                    navigate("/contribute#donate-table");
+                    // navigate("/contribute#donate-table");
                   }}
                   src={ActiveArrow}
                   className="md:w-16 md:h-16 w-8 h-8 "

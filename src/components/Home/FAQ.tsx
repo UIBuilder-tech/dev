@@ -49,7 +49,7 @@ const faqData = [
     id: 6,
     question: "How can I hold a CHF-supported event in my region/city?",
     answer:
-      "Please contact any CHF Board member or Ambassador. We will be happy to support you with a list of members in the area and ideas for conducting the event. Email and contact details for each CHF Board Member are provided on our website.",
+      "Please contact any CHF Board member or Ambassador. We will be happy to support you with a list of members in the area and ideas for conducting the event. Please reach out to us using contactus@chfusa.org .",
   },
   {
     id: 7,

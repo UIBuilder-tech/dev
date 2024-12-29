@@ -19,6 +19,8 @@ import { useEffect } from "react";
 import ChitrapurMathImg from "../assets/Shirali_Math.jpg";
 import Vantiga from "../components/Contribute/Vantiga";
 import HeroImg from "../assets/photoGallery/img11.png";
+import solar from "../assets/solar1.jpg";
+import solar1 from "../assets/solar2.jpg";
 
 interface Project {
   id: number;
@@ -51,19 +53,22 @@ export default function ProjectsPage() {
       location: "Raj Ghat, Varanasi",
       description:
         "Chitrapur Saraswat community at the proposed center for yoga, meditation, and yatri nivas in Varanasi on the banks of River Ganga at Raja Ghat.",
-      images: ["https://chitrapurmath.net/documents/upload/1588069798C_(2).png", "https://chitrapurmath.net/documents/upload/1588074364A_(1).png"],
+      images: [
+        "https://chitrapurmath.net/documents/upload/1588069798C_(2).png",
+        "https://chitrapurmath.net/documents/upload/1588074364A_(1).png",
+      ],
     },
     {
       id: 2,
-      title: "2020: Pandemic Relief",
-      location: "",
+      title: "Solar plant",
+      location: "Karla",
       description:
-        "During the pandemic, CHF funded the assistance of SCM to hundreds of struggling families in village hamlets surrounding Chitrapur and Shirali. Working with Chitrapur Math, this initiative provided rice and lentils to aggrieved families, crucial medical equipment such as oxygen concentrators, vaccination assistance, and personal items such as soap and masks.",
-      images: [ChitrapurMathImg, ChitrapurMathImg, ChitrapurMathImg],
+        "The Solar Plant in Karla project involves installing a 16kW grid-tied solar system at the Parijnan PU College and Parijnan Vidyalaya in Kotekar to reduce reliance on non-renewable energy, lower operational costs, and promote sustainability.",
+      images: [solar, solar1],
     },
     {
       id: 3,
-      title: "2021: Pandemic Relief ",
+      title: "Pandemic Relief",
       location: "",
       description:
         "CHF’s pandemic relief efforts included funding the salaries of school teachers of the 9 SCM-affiliated schools supported by CHF.",
