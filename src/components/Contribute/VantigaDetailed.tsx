@@ -137,7 +137,7 @@ export default function VantigaDetailed() {
               Who can pay Vantigā
             </p>
             <div className="space-y-6 py-4">
-              <div className="flex gap-3 desktop-1200:gap-4 desktop-1500:gap-5 desktop-1900:gap-6">
+              <div className="flex gap-3 desktop-1200:gap-4 desktop-1500:gap-2 desktop-1900:gap-6">
                 <img
                   src={grantsIcon}
                   alt="grantsIcon"
@@ -153,7 +153,7 @@ export default function VantigaDetailed() {
                   Adult Bhānap lady, even if married outside the community
                 </li>
               </ul>
-              <div className="flex gap-3 desktop-1200:gap-4 desktop-1500:gap-5 desktop-1900:gap-6">
+              <div className="flex gap-3 desktop-1200:gap-4 desktop-1500:gap-2 desktop-1900:gap-4">
                 <img
                   src={grantsIcon}
                   alt="grantsIcon"
