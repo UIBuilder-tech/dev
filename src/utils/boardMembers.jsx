@@ -16,7 +16,7 @@ import m17 from "../assets/boardMembers/Devyani Padubidri.jpg";
 import m18 from "../assets/boardMembers/Sanjay Savkur.jpg";
 import Placeholder from "../assets/Shirali_Math.jpg";
 
-export const boardMember = [
+export const boardMembers = [
   // Board Officer
   {
     name: "Arun Heble",
