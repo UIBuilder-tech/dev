@@ -7,7 +7,6 @@ export default function Footer() {
   return (
     <footer
       className="relative max-sm:mb-[50px] bg-secondary px-8 py-12 text-white"
-      id="footer"
     >
       {/* Background graphic overlay */}
       <div className="absolute top-14 bottom-0 left-0 right-0 -z-9 overflow-hidden">
