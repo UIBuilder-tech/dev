@@ -12,93 +12,51 @@ import mountain from "../../assets/mountain.svg";
 const faqData = [
   {
     id: 1,
-    question: "Are my donations to CHF tax-deductible in the United States?",
+    question:
+      "Are my donations to CHF including Vantiga tax-deductible in the United States?",
     answer:
-      "Yes, donations to CHF are tax-deductible in the United States, as CHF is a 501(c)(3) organization.",
+      "Since CHF is recognized by the IRS as a 501(c)(3) not-for-profit organization (EIN 20-2738955), donations and Vantiga to it are tax-deductible. However, please check with your tax consultant for the specific deductions that would apply in your specific case.",
   },
   {
     id: 2,
     question:
-      "Are my donations to CHF that I specify as Vantiga, tax-deductible in the United States?",
+      "What is the correct amount of Vantiga I need to pay per year to the Math?",
     answer:
-      "Yes, donations designated as Vantiga are tax-deductible in the United States.",
+      "Our revered H.H. Shrimat Anandashram Swamiji said – 'If all paid Vantiga at the rate of 1% of their income, the daily as well as occasional services at the Maths could be performed without any anxiety and the sadhana contemplated by us could be accomplished with peace of mind.' CHF recommends considering donations at the following suggested levels: Vantiga at 1% of your annual income or at a minimum of $1.50/day. Further, donations for special projects in any amount are welcome.",
   },
   {
     id: 3,
     question:
       "Do I always have to login (join) CHF when accessing the CHF website?",
     answer:
-      "No, logging in or joining is not required for accessing the CHF website. However, certain actions, such as donating or joining as a member, may require you to log in.",
+      "Our CHF website at www.chfusa.org has member-specific content available for you. Such content will be of use for any and all Bhanaps in the US. The benefits of enrolling in the CHF USA website include receiving newsletters, getting invites to CHF events, downloading donation receipts, processing donations with minimal data entry, and accessing a directory of members (coming soon). Membership is restricted to Bhanaps for security.",
   },
   {
     id: 4,
     question:
-      "What is the correct amount of Vantiga I need to pay per year to the Math?",
+      "How do I specify the particular project to which I want to donate?",
     answer:
-      "The specific amount of Vantiga to be paid per year is not provided by CHF. You should consult the Shri Chitrapur Math for more information on the correct amount.",
+      "The donation page on the CHF website allows you to specify how you want to split the donated amount between various projects, support-a-student, Vantiga, or the general fund. CHF recommends donations at the following levels: Support A Student at $300/year per student supported and Vantiga at 1% of your annual income or at a minimum of $1/day.",
   },
   {
     id: 5,
     question:
-      "Will my name appear in the Vantiga Payers’ Directory that is published by the Math every 4 years? Can I specify that the donation be made anonymous?",
+      "When and how (media) will I receive a receipt for my CHF donation?",
     answer:
-      "Yes, your name will appear in the Vantiga Payers' Directory unless you specify that you wish to make your donation anonymously.",
+      "We provide receipts electronically if an email address is provided during login or updated later. If you desire a physical receipt, send your details to contactus@chfusa.org with a postal address, and a hardcopy receipt will be mailed to that address.",
   },
   {
     id: 6,
-    question:
-      "Can a non-bhanap family (where both partners are non-bhanaps) pay Vantiga?",
+    question: "How can I hold a CHF-supported event in my region/city?",
     answer:
-      "Yes, a non-bhanap family can pay Vantiga. There are no restrictions on non-bhanap families contributing to Vantiga.",
+      "Please contact any CHF Board member or Ambassador. We will be happy to support you with a list of members in the area and ideas for conducting the event. Email and contact details for each CHF Board Member are provided on our website.",
   },
   {
     id: 7,
     question:
-      "How do I specify the particular project to which I want to donate?",
+      "How do I submit a News item (such as articles, photos, and a description of an event in my region) for the CHF website?",
     answer:
-      "You can specify the project to which you want to donate by indicating your preference when making a donation through the CHF website or by contacting CHF directly.",
-  },
-  {
-    id: 8,
-    question:
-      "Can I donate to a project in India, not on the list of projects currently supported by CHF?",
-    answer:
-      "Yes, you can donate to a project in India that is not currently listed on the CHF website. Please contact CHF for further guidance on such donations.",
-  },
-  {
-    id: 9,
-    question:
-      "When and how (media) will I receive a receipt for my CHF donation?",
-    answer:
-      "You will receive a receipt for your CHF donation either via email or postal mail, depending on the method of donation. The receipt will be provided shortly after your donation is processed.",
-  },
-  {
-    id: 10,
-    question:
-      "How can I hold a Satsang/Prarthana Class/CHF fund-raiser in my region/city?",
-    answer:
-      "To hold a Satsang, Prarthana class, or CHF fundraiser in your region or city, please reach out to CHF with your plans. They will assist you with organizing the event.",
-  },
-  {
-    id: 11,
-    question:
-      "How do I submit a News item (such as articles, photos, and descriptions of an event in my region) for the CHF website?",
-    answer:
-      "You can submit a news item, including articles, photos, and event descriptions, by emailing it to CHF. They will review your submission and publish it on the website if it is relevant.",
-  },
-  {
-    id: 12,
-    question:
-      "How can I announce an upcoming event to be held in my region that would be of interest to bhanaps (CSBs)?",
-    answer:
-      "To announce an upcoming event, you can submit the event details to CHF. They will help promote the event through their website and other communication channels.",
-  },
-  {
-    id: 13,
-    question:
-      "How can I submit a trip report of my visit to India for publishing on the CHF website?",
-    answer:
-      "To submit a trip report of your visit to India, including attending a Math function, meeting Parama Pujya Swamiji, or attending a shibir, email your report to CHF. It will be considered for publication on the CHF website.",
+      "Please choose the location on our website where you would like your details to be published. We will work with the website editorial team to get your content published. Send the details to webmaster@chfusa.org, and volunteers from the web team will get in touch with you.",
   },
 ];
 
@@ -150,8 +108,10 @@ export default function FAQSection() {
           FAQ's
         </h1>
 
-        <div className="space-y-4 max-h-[450px] desktop-1900:max-h-[400px] overflow-y-scroll " 
-        style={{scrollbarWidth:"none"}}>
+        <div
+          className="space-y-4 max-h-[450px] desktop-1900:max-h-[400px] overflow-y-scroll "
+          style={{ scrollbarWidth: "none" }}
+        >
           {currentFaqs.map((faq) => (
             <div key={faq.id} className="overflow-hidden">
               <button
@@ -174,7 +134,9 @@ export default function FAQSection() {
                     transition={{ duration: 0.3 }}
                     className="ml-9 mb-4"
                   >
-                    <p className="text-gray-600 desktop-1900:text-lg">{faq.answer}</p>
+                    <p className="text-gray-600 desktop-1900:text-lg">
+                      {faq.answer}
+                    </p>
                   </motion.div>
                 )}
               </AnimatePresence>
