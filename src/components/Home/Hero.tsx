@@ -17,10 +17,18 @@ export default function Hero({ title, desc, img, from = "" }: Props) {
           alt="Heritage Building"
           className="w-full h-full object-cover hero-bg"
         />
-       {from!=="events" && <div className="absolute inset-0 bg-black/50"></div>}
+        {from !== "events" && (
+          <div className="absolute inset-0 bg-black/50"></div>
+        )}
       </div>
 
-      <div className={`relative ${from!=="projects" && from!=="about" ? "h-[100vh]" : "h-full desktop-1500:pt-12 desktop-1900:pt-28"} flex flex-col justify-between`}>
+      <div
+        className={`relative ${
+          from !== "projects" && from !== "about"
+            ? "h-[100vh]"
+            : "h-full desktop-1500:pt-12 desktop-1900:pt-28"
+        } flex flex-col justify-between`}
+      >
         <div className="flex-grow flex items-center">
           <div className="max-w-7xl mx-auto px-4 w-full desktop-1200:max-w-5xl desktop-1500:max-w-6xl desktop-1900:max-w-7xl">
             <div className="max-w-3xl pt-24 md:pt-32 desktop-1200:max-w-2xl desktop-1500:max-w-3xl desktop-1900:max-w-3xl">
@@ -28,7 +36,7 @@ export default function Hero({ title, desc, img, from = "" }: Props) {
                 {title}
                 {from === "home" && (
                   <p className="text-sm md:text-sm text-white text-left px-1 font-body desktop-1200:text-xs desktop-1500:text-sm desktop-1900:text-sm">
-                    IRS certified 501c(3) organization, Tax id: 20-2738955
+                    IRS certified 501(c)(3) organization, Tax Id: 20-2738955
                   </p>
                 )}
               </h1>
