@@ -14,9 +14,9 @@ interface ImpactCard {
   subtitle?: string;
   description: string;
   image: string;
-  stats1: object;
-  stats2: object;
-  stats3: object;
+  stats1: { key: string; value: string };
+  stats2: { key: string; value: string };
+  stats3: { key: string; value: string };
   linkTo: string;
 }
 
@@ -44,20 +44,20 @@ const impactCards: ImpactCard[] = [
   },
   {
     id: "2",
-    title: "Srivali High School Buildings",
+    title: "CHF funded Schools",
     subtitle: "Education",
     description:
-      "CHF funded the construction of two school buildings at Srivali High School, supporting education and providing better learning environments for students in the region.",
+      "CHF funded 5+ schools with over 3000 students and the construction of two school buildings at Srivali High School, supporting education and providing better learning environments for students in the region.",
     image: Srivali, // Education image
+    stats3: {
+      key: "Funds raised",
+      value: "$ 1,000,000+",
+    },
     stats1: {
-      key: "Children Educated",
-      value: "3,000+",
+      key: "Students Supported in 5+ schools",
+      value: "3000+",
     },
     stats2: {
-      key: "Schools Connected",
-      value: "5+",
-    },
-    stats3: {
       key: "Student Graduation Rate",
       value: "95% - 99%",
     },
@@ -196,20 +196,26 @@ export default function ImpactSection() {
             </div>
           </div> */}
 
-          <div className="bg-white rounded-2xl p-2 md:p-4 grid grid-cols-2 gap-4 shadow-md h-[100px] desktop-1200:h-[480px] desktop-1500:h-[520px] md:h-[520px]">
+          <div className="bg-white rounded-2xl p-2 md:p-4 grid grid-cols-2 gap-4 shadow-md h-auto desktop-1200:h-[480px] desktop-1500:h-[520px] md:h-[520px]">
             <div className="bg-[#F4F5F7] p-3 md:p-6 flex flex-col space-y-2 items-center justify-center rounded-xl">
               <div className="text-3xl desktop-1200:text-4xl desktop-1500:text-5xl md:text-5xl font-bold text-[#f97316]">
                 {activeCard?.stats1?.value}
               </div>
-              <div className="text-sm md:text-lg desktop-1500:text-lg desktop-1200:text-[16px] text-[#666666]">
+              <div className="text-sm text-center md:text-lg desktop-1500:text-lg desktop-1200:text-[16px] text-[#666666]">
                 {activeCard?.stats1?.key}
               </div>
             </div>
             <div className="bg-[#F4F5F7] p-3 md:p-6 flex flex-col space-y-2 items-center justify-center rounded-xl">
-              <div className="text-3xl md:text-5xl desktop-1500:text-5xl desktop-1200:text-4xl font-bold text-[#0066FF]">
+              <div
+                className={`font-bold text-[#0066FF] ${
+                  activeCard?.stats2?.value?.includes("%")
+                    ? "text-2xl md:text-4xl desktop-1500:text-4xl desktop-1200:text-3xl desktop-1200:-mx-5"
+                    : "text-3xl md:text-5xl desktop-1500:text-5xl desktop-1200:text-4xl"
+                }`}
+              >
                 {activeCard?.stats2?.value}
               </div>
-              <div className="text-sm md:text-lg desktop-1500:text-lg font-normal text-[#666666] desktop-1200:text-[16px]">
+              <div className="text-sm text-center md:text-lg desktop-1500:text-lg font-normal text-[#666666] desktop-1200:text-[16px]">
                 {activeCard?.stats2?.key}
               </div>
             </div>

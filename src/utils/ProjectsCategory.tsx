@@ -330,7 +330,7 @@ export const EventsFestivals: Event[] = [
     title: "CHF - KSA Mulaqaut",
     description:
       "Mulaqat across the oceans produced by KSA Chitrapur Saraswat Network and Chitrapur Heritage Foundation.",
-    image: [hands, chf_logo, ksa_logo],
+    image: [satsang, chf_logo, ksa_logo],
   },
   {
     id: 9,
