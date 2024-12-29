@@ -1,4 +1,3 @@
-import ChitrapurMathImg from "../assets/Shirali_Math.jpg";
 import YugadiImg from "../assets/festivals/Yugadi 2024_calender at SCM Shirali.jpg";
 import JanmadivasImg from "../assets/festivals/Janmotsava 2024 at Karla.jpg";
 import ShivarathriImg from "../assets/festivals/Mahashivaratri_1 at SCM, Shirali.jpg";
@@ -19,33 +18,37 @@ import cultural2 from "../assets/PPUC Annday (2).jpg";
 import lecture from "../assets/yuvas_lecture.png";
 import chf_logo from "../assets/chfLogo.png";
 import ksa_logo from "../assets/KSA_logo.jpg";
-import training from '../assets/training.png'
-import training1 from '../assets/training1.png'
-import financeTraining1 from '../assets/financeTraining1.png'
-import financeTraining2 from '../assets/finaceTraining2.png'
-import financeTraining from '../assets/financeTraining.png'
-import selfHelp from '../assets/selfHelp3.png'
-import selfHelp1 from '../assets/selfHelp1.png'
-import selfHelp2 from '../assets/photoGallery/img11.png'
-import networking from '../assets/networking.png'
-import networking1 from '../assets/networking1.png'
-import networking2 from '../assets/networking2.png'
-import health from '../assets/health.png'
-import health1 from '../assets/health1.png'
-import health2 from '../assets/health3.png'
-import heritage1 from '../assets/heritage1.jpg'
-import heritage2 from '../assets/heritage2.jpg'
-import heritage3 from '../assets/heritage3.jpg'
-import infrastruture from '../assets/infrastructure.jpg'
-import infrastruture1 from '../assets/infrastrucutre1.jpg'
-import scholarship from '../assets/scholarship.png'
-import scholarship1 from '../assets/district.jpg'
+import training from "../assets/training.png";
+import training1 from "../assets/training1.png";
+import financeTraining1 from "../assets/financeTraining1.png";
+import financeTraining2 from "../assets/finaceTraining2.png";
+import financeTraining from "../assets/financeTraining.png";
+import selfHelp from "../assets/selfHelp3.png";
+import selfHelp1 from "../assets/selfHelp1.png";
+import selfHelp2 from "../assets/photoGallery/img11.png";
+import networking from "../assets/networking.png";
+import networking1 from "../assets/networking1.png";
+import networking2 from "../assets/networking2.png";
+import health from "../assets/health.png";
+import health1 from "../assets/health1.png";
+import health2 from "../assets/health3.png";
+import heritage1 from "../assets/heritage1.jpg";
+import heritage2 from "../assets/heritage2.jpg";
+import heritage3 from "../assets/heritage3.jpg";
+import infrastruture from "../assets/infrastructure.jpg";
+import infrastruture1 from "../assets/infrastrucutre1.jpg";
+import scholarship from "../assets/scholarship.png";
+import scholarship1 from "../assets/district.jpg";
+import satsang from "../assets/satsang.jpg";
+import satsang1 from "../assets/satsang2.jpg";
+import satsang2 from "../assets/satsang3.jpg";
 
 interface Program {
   id: number;
   title: string;
   description: string;
-  image: string;
+  image?: string | string[];
+  url?: string;
 }
 interface Event {
   id: number;
@@ -62,70 +65,110 @@ export const EducationPrograms: Program[] = [
     title: "Scholarship Programs for Underprivileged Students",
     description:
       "Scholarships to deserving students from underprivileged backgrounds to ensure they have access to quality education. These scholarships cover school fees, textbooks, and other necessary materials, empowering students to pursue their academic goals without financial barriers.",
-    image: ["https://chitrapurmath.net/myAssets/images/report1/coffeeTableWithGlassTop.jpg","https://chitrapurmath.net/myAssets/images/report1/cutting1.jpg","https://chitrapurmath.net/myAssets/images/srivali_trust/school%203.jpg"],
+    image: [
+      "https://chitrapurmath.net/myAssets/images/report1/coffeeTableWithGlassTop.jpg",
+      "https://chitrapurmath.net/myAssets/images/report1/cutting1.jpg",
+      "https://chitrapurmath.net/myAssets/images/srivali_trust/school%203.jpg",
+    ],
   },
   {
     id: 2,
     title: "Vocational Training and Skill Development",
     description:
       "Vocational training programs that focus on equipping youth and adults with practical skills, such as technical trades, computer literacy, and entrepreneurship. These programs are designed to enhance employability and foster economic independence, especially in rural areas.",
-    image: ["https://chitrapurmath.net/documents/gallery/Inauguration_of_Computer_Lab_and_Robotics_Lab_at_Parjnanashram_Vidyalaya_Karla_2_Dec_2024/Karla%2020240202%20(26).jpg","https://chitrapurmath.net/myAssets/images/report1/shelfWithStoreBoughtSteelBrackets.jpg","https://chitrapurmath.net/myAssets/images/report1/preparingWireUp.jpg"],
+    image: [
+      "https://chitrapurmath.net/documents/gallery/Inauguration_of_Computer_Lab_and_Robotics_Lab_at_Parjnanashram_Vidyalaya_Karla_2_Dec_2024/Karla%2020240202%20(26).jpg",
+      "https://chitrapurmath.net/myAssets/images/report1/shelfWithStoreBoughtSteelBrackets.jpg",
+      "https://chitrapurmath.net/myAssets/images/report1/preparingWireUp.jpg",
+    ],
   },
   {
     id: 3,
     title: "Support for School Infrastructure",
     description:
       "Improving the infrastructure of local schools, particularly in rural or underserved areas. This includes building classrooms, providing essential learning materials, and ensuring that schools have proper sanitation and clean drinking water facilities.",
-    image: ["https://chitrapurmath.net/myAssets/images/srivali_trust/IMG_5634.jpg", infrastruture, infrastruture1],
+    image: [
+      "https://chitrapurmath.net/myAssets/images/srivali_trust/IMG_5634.jpg",
+      infrastruture,
+      infrastruture1,
+    ],
   },
   {
     id: 4,
     title: "After-School Tutoring and Mentorship Programs",
     description:
       "After-school tutoring programs where students receive personalized attention in subjects they find challenging. In addition, mentorship programs connect students with professionals who provide guidance on career development and personal growth.",
-    image: ["https://chitrapurmath.net/documents/upload/images/NR-2/ALBUM-2-HARINMAAM/NR-2-1.jpg","https://chitrapurmath.net/documents/upload/23.png","https://chitrapurmath.net/documents/upload/27.png"],
+    image: [
+      "https://chitrapurmath.net/documents/upload/images/NR-2/ALBUM-2-HARINMAAM/NR-2-1.jpg",
+      "https://chitrapurmath.net/documents/upload/23.png",
+      "https://chitrapurmath.net/documents/upload/27.png",
+    ],
   },
   {
     id: 5,
     title: "Educational Workshops and Seminars",
     description:
       "Workshops, seminars, and guest lectures that cover a range of topics from academic subjects to life skills and career guidance. These events are aimed at broadening students' horizons and preparing them for both personal and professional success.",
-    image: ["https://chfusa.org/static/images/photoGallery/SHS(6).jpg","https://chitrapurmath.net/myAssets/images/report1/testingTheChairAndTable2.jpg","https://chitrapurmath.net/documents/upload/1690618078Carpentry_sessions_by_Harin_Hattangady_Maam.jpg"],
+    image: [
+      "https://chfusa.org/static/images/photoGallery/SHS(6).jpg",
+      "https://chitrapurmath.net/myAssets/images/report1/testingTheChairAndTable2.jpg",
+      "https://chitrapurmath.net/documents/upload/1690618078Carpentry_sessions_by_Harin_Hattangady_Maam.jpg",
+    ],
   },
   {
     id: 6,
     title: "Digital Learning Initiatives",
     description:
       "Recognizing the growing importance of technology in education, digital learning initiatives are being implemented by providing access to computers, the internet, and online learning resources. This helps bridge the digital divide and ensures students have access to modern learning tools.",
-    image: ["https://chitrapurmath.net/documents/gallery/Inauguration_of_Computer_Lab_and_Robotics_Lab_at_Parjnanashram_Vidyalaya_Karla_2_Dec_2024/Karla%2020240202%20(27).jpg","https://chitrapurmath.net/documents/gallery/Inauguration_of_Computer_Lab_and_Robotics_Lab_at_Parjnanashram_Vidyalaya_Karla_2_Dec_2024/Karla%2020240202%20(35).jpg","https://chitrapurmath.net/documents/gallery/Inauguration_of_Computer_Lab_and_Robotics_Lab_at_Parjnanashram_Vidyalaya_Karla_2_Dec_2024/Karla%2020240202%20(27).jpg"],
+    image: [
+      "https://chitrapurmath.net/documents/gallery/Inauguration_of_Computer_Lab_and_Robotics_Lab_at_Parjnanashram_Vidyalaya_Karla_2_Dec_2024/Karla%2020240202%20(27).jpg",
+      "https://chitrapurmath.net/documents/gallery/Inauguration_of_Computer_Lab_and_Robotics_Lab_at_Parjnanashram_Vidyalaya_Karla_2_Dec_2024/Karla%2020240202%20(35).jpg",
+      "https://chitrapurmath.net/documents/gallery/Inauguration_of_Computer_Lab_and_Robotics_Lab_at_Parjnanashram_Vidyalaya_Karla_2_Dec_2024/Karla%2020240202%20(27).jpg",
+    ],
   },
   {
     id: 7,
     title: "Cultural and Heritage Education",
     description:
       "Integration of cultural education into its curriculum by organizing programs that teach students about the history, heritage, and values of our community. This fosters a sense of pride and belonging while helping young people stay connected to their roots.",
-    image: ["https://chitrapurmath.net/documents/gallery/Inauguration_of_Computer_Lab_and_Robotics_Lab_at_Parjnanashram_Vidyalaya_Karla_2_Dec_2024/Karla%2020240202%20(20).jpg","https://chitrapurmath.net/documents/gallery/Inauguration_of_Computer_Lab_and_Robotics_Lab_at_Parjnanashram_Vidyalaya_Karla_2_Dec_2024/Karla%2020240202%20(7).jpg","https://chitrapurmath.net/documents/gallery/Inauguration_of_Computer_Lab_and_Robotics_Lab_at_Parjnanashram_Vidyalaya_Karla_2_Dec_2024/Karla%2020240202%20(4).jpg"],
+    image: [
+      "https://chitrapurmath.net/documents/gallery/Inauguration_of_Computer_Lab_and_Robotics_Lab_at_Parjnanashram_Vidyalaya_Karla_2_Dec_2024/Karla%2020240202%20(20).jpg",
+      "https://chitrapurmath.net/documents/gallery/Inauguration_of_Computer_Lab_and_Robotics_Lab_at_Parjnanashram_Vidyalaya_Karla_2_Dec_2024/Karla%2020240202%20(7).jpg",
+      "https://chitrapurmath.net/documents/gallery/Inauguration_of_Computer_Lab_and_Robotics_Lab_at_Parjnanashram_Vidyalaya_Karla_2_Dec_2024/Karla%2020240202%20(4).jpg",
+    ],
   },
   {
     id: 8,
     title: "Teacher Training and Capacity Building",
     description:
       "Training programs for teachers to enhance their teaching methods, especially in underserved schools. These programs focus on modern pedagogical practices, classroom management, and student engagement techniques to ensure high-quality education for all.",
-    image: ["https://chitrapurmath.net/documents/upload/1690624198Juggling_session_by_Omkar_Dhareshwar.jpg","https://chitrapurmath.net/documents/upload/1690618116Interaction_with_HH_Swamiji.jpg","https://chitrapurmath.net/documents/upload/1690701288Group_photo_of_shibirarthis_and_sanchalaks_with_HH_Swamiji.jpg"],
+    image: [
+      "https://chitrapurmath.net/documents/upload/1690624198Juggling_session_by_Omkar_Dhareshwar.jpg",
+      "https://chitrapurmath.net/documents/upload/1690618116Interaction_with_HH_Swamiji.jpg",
+      "https://chitrapurmath.net/documents/upload/1690701288Group_photo_of_shibirarthis_and_sanchalaks_with_HH_Swamiji.jpg",
+    ],
   },
   {
     id: 9,
     title: "Support for Higher Education",
     description:
       " Financial aid and guidance to students seeking higher education opportunities, whether in India or abroad. The foundation also provides counseling and resources for students applying to universities and vocational institutions, helping them navigate the complexities of admissions and financial aid processes.",
-    image: ["https://chitrapurmath.net/documents/upload/16567391878.jpg",scholarship,scholarship1],
+    image: [
+      "https://chitrapurmath.net/documents/upload/16567391878.jpg",
+      scholarship,
+      scholarship1,
+    ],
   },
   {
     id: 10,
     title: "Partnerships with Educational Institutions",
     description:
       "Collaboration with schools, colleges, and educational organizations to provide enhanced learning opportunities for students. These partnerships help introduce new academic programs, exchange opportunities, and internships to broaden students' educational experiences.",
-    image: ["https://chitrapurmath.net/documents/upload/12.png","https://chitrapurmath.net/documents/upload/Pari-1_Feb_2018-Flagging_off_the_Swachh_Mangaluru_Mssion_on_9th_October_2017_at_the_Parijnan_PU_College,_Someshwar-Kotekar.jpg","https://chitrapurmath.net/documents/upload/Pari-2-Feb_2018-_Dr._Sheetal_Savur,_Assoc._Prof.jpg"],
+    image: [
+      "https://chitrapurmath.net/documents/upload/12.png",
+      "https://chitrapurmath.net/documents/upload/Pari-1_Feb_2018-Flagging_off_the_Swachh_Mangaluru_Mssion_on_9th_October_2017_at_the_Parijnan_PU_College,_Someshwar-Kotekar.jpg",
+      "https://chitrapurmath.net/documents/upload/Pari-2-Feb_2018-_Dr._Sheetal_Savur,_Assoc._Prof.jpg",
+    ],
   },
 ];
 
@@ -135,14 +178,22 @@ export const WomenEmpowermentPrograms: Program[] = [
     title: "Vocational Training Programs",
     description:
       "Training in various skills such as tailoring, handicrafts, hand made paper and other traditional crafts, enabling women to generate income and become economically self-reliant.",
-    image: ["https://samvitsudha.com/wp-content/uploads/2023/09/1-Fabric-Unit-Hand-Embroidery-training-565x377.jpg", "https://samvitsudha.com/wp-content/uploads/2023/09/2-Fabric-Unit-training-@-Workplace-565x377.jpg", "https://samvitsudha.com/wp-content/uploads/2023/09/4-Fabric-Unit-Working-at-home-565x377.jpg"],
+    image: [
+      "https://samvitsudha.com/wp-content/uploads/2023/09/1-Fabric-Unit-Hand-Embroidery-training-565x377.jpg",
+      "https://samvitsudha.com/wp-content/uploads/2023/09/2-Fabric-Unit-training-@-Workplace-565x377.jpg",
+      "https://samvitsudha.com/wp-content/uploads/2023/09/4-Fabric-Unit-Working-at-home-565x377.jpg",
+    ],
   },
   {
     id: 2,
     title: "Entrepreneurship and Business Skills Development",
     description:
       "Workshops are conducted to teach women the fundamentals of entrepreneurship, including business planning, marketing, and financial management, to help them start and run their own businesses.",
-    image:[training, "https://samvitsudha.com/wp-content/uploads/2023/09/1-HH-Mothers-working-565x438.jpg", training1],
+    image: [
+      training,
+      "https://samvitsudha.com/wp-content/uploads/2023/09/1-HH-Mothers-working-565x438.jpg",
+      training1,
+    ],
   },
   {
     id: 3,
@@ -156,15 +207,14 @@ export const WomenEmpowermentPrograms: Program[] = [
     title: "Self-Help Groups (SHGs) and Microfinance Support",
     description:
       " Formation of self-help groups where women can come together to save, invest, and provide loans to one another. Microfinance initiatives help these groups fund small business ventures and improve their financial independence.",
-      url: "https://youtu.be/oSyl-EUzFX0?si=KVAkaHGeJQnN-LDo",
-    
+    url: "https://youtu.be/oSyl-EUzFX0?si=KVAkaHGeJQnN-LDo",
   },
   {
     id: 5,
     title: "Leadership and Mentorship Programs",
     description:
       "Leadership training to empower women to take on community leadership roles and mentors them to build confidence and skills in areas like communication, decision-making, and management.",
-      image: [selfHelp,selfHelp1,selfHelp2]
+    image: [selfHelp, selfHelp1, selfHelp2],
   },
   {
     id: 6,
@@ -185,7 +235,7 @@ export const WomenEmpowermentPrograms: Program[] = [
     title: "Networking and Community Support Systems",
     description:
       "Community support systems where women can share knowledge, resources, and experiences, creating a strong network that encourages collective growth and empowerment.",
-    image: [networking1,networking,networking2],
+    image: [networking1, networking, networking2],
   },
 ];
 
@@ -202,28 +252,44 @@ export const HeritagePrograms: Program[] = [
     title: "Heritage and Spirituality Programs",
     description:
       "Initiatives that explore the intersection of cultural heritage and spirituality, including discussions on rituals, customs, and traditions, are organized to help individuals understand the significance of their practices and connect with their roots",
-    image: ["https://chitrapurmath.net/documents/gallery/Shashtyabdapurti_Utsava_-_Karla_-_Day_3_11_Nov_2024/Day%203%20(10).jpg","https://chitrapurmath.net/documents/gallery/Shashtyabdapurti_Utsava_-_Karla_-_Day_3_11_Nov_2024/Day%203%20(3).jpg","https://chitrapurmath.net/documents/gallery/Shashtyabdapurti_Utsava_-_Karla_-_Day_3_11_Nov_2024/Day%203%20(12).jpg"],
+    image: [
+      "https://chitrapurmath.net/documents/gallery/Shashtyabdapurti_Utsava_-_Karla_-_Day_3_11_Nov_2024/Day%203%20(10).jpg",
+      "https://chitrapurmath.net/documents/gallery/Shashtyabdapurti_Utsava_-_Karla_-_Day_3_11_Nov_2024/Day%203%20(3).jpg",
+      "https://chitrapurmath.net/documents/gallery/Shashtyabdapurti_Utsava_-_Karla_-_Day_3_11_Nov_2024/Day%203%20(12).jpg",
+    ],
   },
   {
     id: 3,
     title: "Lectures and Discourses",
     description:
       "Regular lectures and discourses are held featuring spiritual leaders, scholars, and practitioners who share insights on spirituality, philosophy, and the teachings of the Chitrapur Saraswat community. These sessions aim to inspire and educate participants on their spiritual journeys.",
-    image: ["https://chitrapurmath.net/documents/gallery/Shashtyabdapurti_Utsava_-_Karla_-_Day_9_17_Nov_2024/SPU%20Day%209%20(2).jpg","https://chitrapurmath.net/documents/gallery/Shashtyabdapurti_Utsava_-_Karla_-_Day_9_17_Nov_2024/SPU%20Day%209%20(7).jpg","https://chitrapurmath.net/documents/gallery/Shashtyabdapurti_Utsava_-_Karla_-_Day_9_17_Nov_2024/SPU%20Day%209%20(18).jpg"],
+    image: [
+      "https://chitrapurmath.net/documents/gallery/Shashtyabdapurti_Utsava_-_Karla_-_Day_9_17_Nov_2024/SPU%20Day%209%20(2).jpg",
+      "https://chitrapurmath.net/documents/gallery/Shashtyabdapurti_Utsava_-_Karla_-_Day_9_17_Nov_2024/SPU%20Day%209%20(7).jpg",
+      "https://chitrapurmath.net/documents/gallery/Shashtyabdapurti_Utsava_-_Karla_-_Day_9_17_Nov_2024/SPU%20Day%209%20(18).jpg",
+    ],
   },
   {
     id: 4,
     title: "Community Worship and Festivals",
     description:
       "Community worship events and cultural festivals that celebrate the spiritual heritage of the Chitrapur Saraswat community. These gatherings promote unity, shared values, and collective spiritual experiences.",
-    image: ["https://chitrapurmath.net/documents/gallery/Shashti_Rathotsava_at_Shrimat_Ananteshwar_Temple,_Vittla_7_Dec_2024/Vittal%20Shashti%202024%20%20(1).jpg","https://chitrapurmath.net/documents/gallery/Datta_Jayanti,_Palki_Utsava_at_Shri_Satchidananda_Dattatraya_Temple,_Kundapur_14-15_Dec_2024/Datta%20Jayanti%20and%20Palki%20Utsava%20at%20SDT,%20Kundapur%20(21).jpg","https://chitrapurmath.net/documents/gallery/Kartik_Deepotsava_at_Shri_Uma_Maheshwar_Devasthan,_Mangaluru_18_Nov_2024/Kartik%20Deepotsava%20UMD%20MGL%20(1).jpg"],
+    image: [
+      "https://chitrapurmath.net/documents/gallery/Shashti_Rathotsava_at_Shrimat_Ananteshwar_Temple,_Vittla_7_Dec_2024/Vittal%20Shashti%202024%20%20(1).jpg",
+      "https://chitrapurmath.net/documents/gallery/Datta_Jayanti,_Palki_Utsava_at_Shri_Satchidananda_Dattatraya_Temple,_Kundapur_14-15_Dec_2024/Datta%20Jayanti%20and%20Palki%20Utsava%20at%20SDT,%20Kundapur%20(21).jpg",
+      "https://chitrapurmath.net/documents/gallery/Kartik_Deepotsava_at_Shri_Uma_Maheshwar_Devasthan,_Mangaluru_18_Nov_2024/Kartik%20Deepotsava%20UMD%20MGL%20(1).jpg",
+    ],
   },
   {
     id: 5,
     title: "Scriptural Study Groups",
     description:
       "Study groups focused on sacred texts and scriptures, allowing participants to engage in meaningful discussions and reflections on spiritual teachings and their relevance to modern life.",
-    image: ["https://chitrapurmath.net/documents/gallery/Shashtyabdapurti_Utsava_-_Karla_-_Day_5_13_Nov_2024/Day%205%20(42).jpg","https://chitrapurmath.net/documents/gallery/HH_Swamijis_visit_to_Maharshi_Karve_Stree_Shikshan_Saunsthas_Anudanith_Madhyamik_Ashram_Shala,_Kamshet_28_Nov_2024/22.jpg","https://chitrapurmath.net/documents/gallery/Shashtyabdapurti_Utsava_-_Karla_-_Day_5_13_Nov_2024/Day%205%20(1).jpg"],
+    image: [
+      "https://chitrapurmath.net/documents/gallery/Shashtyabdapurti_Utsava_-_Karla_-_Day_5_13_Nov_2024/Day%205%20(42).jpg",
+      "https://chitrapurmath.net/documents/gallery/HH_Swamijis_visit_to_Maharshi_Karve_Stree_Shikshan_Saunsthas_Anudanith_Madhyamik_Ashram_Shala,_Kamshet_28_Nov_2024/22.jpg",
+      "https://chitrapurmath.net/documents/gallery/Shashtyabdapurti_Utsava_-_Karla_-_Day_5_13_Nov_2024/Day%205%20(1).jpg",
+    ],
   },
 
   {
@@ -231,14 +297,22 @@ export const HeritagePrograms: Program[] = [
     title: "Youth Spiritual Programs",
     description:
       "Targeted programs for youth that focus on building a strong spiritual foundation, encouraging leadership qualities, and promoting community service, helping young individuals understand their roles in preserving spiritual and cultural values.",
-    image: ["https://chitrapurmath.net/documents/gallery/Bengaluru_Camp,_Day_1_evening_-_Kalarpanam_by_Girvanapratishtha_23_June_2024/Bangalore%20Camp,%20Day%201%20(evening)%2023%20June%202024%20(22).jpg","https://chitrapurmath.net/documents/gallery/Bengaluru_Camp,_Day_1_evening_-_Kalarpanam_by_Girvanapratishtha_23_June_2024/Bangalore%20Camp,%20Day%201%20(evening)%2023%20June%202024%20(6).jpg","https://chitrapurmath.net/documents/gallery/Bengaluru_Camp,_Day_1_evening_-_Kalarpanam_by_Girvanapratishtha_23_June_2024/Bangalore%20Camp,%20Day%201%20(evening)%2023%20June%202024%20(12).jpg"],
+    image: [
+      "https://chitrapurmath.net/documents/gallery/Bengaluru_Camp,_Day_1_evening_-_Kalarpanam_by_Girvanapratishtha_23_June_2024/Bangalore%20Camp,%20Day%201%20(evening)%2023%20June%202024%20(22).jpg",
+      "https://chitrapurmath.net/documents/gallery/Bengaluru_Camp,_Day_1_evening_-_Kalarpanam_by_Girvanapratishtha_23_June_2024/Bangalore%20Camp,%20Day%201%20(evening)%2023%20June%202024%20(6).jpg",
+      "https://chitrapurmath.net/documents/gallery/Bengaluru_Camp,_Day_1_evening_-_Kalarpanam_by_Girvanapratishtha_23_June_2024/Bangalore%20Camp,%20Day%201%20(evening)%2023%20June%202024%20(12).jpg",
+    ],
   },
   {
     id: 7,
     title: "Collaborations with Spiritual Leaders",
     description:
       "CHF collaborates with spiritual leaders and organizations to host special events, teachings, and practices that enhance the community's spiritual well-being and understanding.",
-    image: ["https://chitrapurmath.net/documents/gallery/Devi_Pujana_and_Shivarpana_of_Pushpa_Ratha_at_SCM_Shirali_11_Oct_2024/Shivarpana%20(1).jpg","https://chitrapurmath.net/documents/gallery/HH_Swamijis_visit_to_Shri_Seetharama_Temple,_Bantwal_21_Sep_2024/Shree%20Seetharama%20Temple%20Bantwal%20(10).jpg","https://chitrapurmath.net/documents/gallery/Tiruvannamalai_Camp_-_July_2024/15.jpg"],
+    image: [
+      "https://chitrapurmath.net/documents/gallery/Devi_Pujana_and_Shivarpana_of_Pushpa_Ratha_at_SCM_Shirali_11_Oct_2024/Shivarpana%20(1).jpg",
+      "https://chitrapurmath.net/documents/gallery/HH_Swamijis_visit_to_Shri_Seetharama_Temple,_Bantwal_21_Sep_2024/Shree%20Seetharama%20Temple%20Bantwal%20(10).jpg",
+      "https://chitrapurmath.net/documents/gallery/Tiruvannamalai_Camp_-_July_2024/15.jpg",
+    ],
   },
   {
     id: 8,
@@ -314,12 +388,8 @@ export const EventGettogthers: Event[] = [
     id: 3,
     title: "Chitrapur Satsang",
     description:
-      "Through monthly satsangs, sadhakas come together to celebrate festivals in alignment with the practices of our Math, integrating bhajans, stotra chanting, anushthans, and cultural activities. These gatherings unite us as a spiritual family, offering an opportunity to stay connected to our roots while building a strong sense of community.",
-    image: [
-      "https://images.unsplash.com/photo-1600093463592-8e36ae95ef56?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
-      "https://images.unsplash.com/photo-1620503374956-c942862f0372?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
-      "https://images.unsplash.com/photo-1621847468516-1ed6a8a97533?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
-    ],
+      "the USWC also conducts Satsang regularly every month, hosted by different families each month and that we chant stotras, sing Bhajans, do Devi AnushThanam and Guru Poojan (7/8 of us), chant Deepa Namaskar and sing Shankar Narayan Geet and Mangal Pad.",
+    image: [satsang, satsang1, satsang2],
   },
   {
     id: 4,
@@ -333,7 +403,11 @@ export const EventGettogthers: Event[] = [
     title: "Yugadi Celebrations",
     description:
       "Sadhakas marked the beginning of the Hindu New Year with a special Yugadi program. The event, rooted in the teachings of our Math, featured cultural performances, stotra chanting, and a message of new beginnings.",
-    image: YugadiImg,
+    image: [
+      YugadiImg,
+      "https://chitrapurmath.net/documents/gallery/Yugadi_2024_at_SCM_Shirali_9_April_2024/thumb/01_thumb.jpg",
+      "https://chitrapurmath.net/documents/gallery/Yugadi_2024_at_SCM_Shirali_9_April_2024/thumb/10_thumb.jpg",
+    ],
     url: "",
   },
   {
@@ -341,42 +415,66 @@ export const EventGettogthers: Event[] = [
     title: "Shivaratri Celebrations",
     description:
       "In honor of Lord Shiva, Shivaratri is celebrated during satsangs with deep devotion. Inspired by the Math's emphasis on meditation and prayer, the celebrations include stotra chanting, bhajans, and reflections on Lord Shiva's significance in our lives.",
-    image: ShivarathriImg,
+    image: [
+      ShivarathriImg,
+      "https://chitrapurmath.net/documents/gallery/Maha_Shivaratri_at_SCM,_Shirali_8_March_2024/thumb/06_thumb.jpg",
+      "https://chitrapurmath.net/documents/gallery/Mahashivaratri_Utsava_at_Shri_Umamaheshwar_Temple_Mangalore_(19_Feb_2023)_Picture_Credit:_Shri_Ganesh_Damble/thumb/06_thumb.jpg",
+    ],
   },
   {
     id: 7,
     title: "Guru Purnima",
     description:
       "Guru Purnima, a day dedicated to honoring the Guru, holds special significance for all of us. Sadhakas across the United States participate in samuhik guru pujan, either online or in-person, reaffirming their devotion to Param Pujya Swamiji and our revered Guru parampara.",
-    image: GuruPurnimaImg,
+    image: [
+      GuruPurnimaImg,
+      "https://chitrapurmath.net/documents/gallery/Datta_Jayanti_Saptah_at_Shri_Guru_Dattatreya_Sannidhi,_Shri_Uma_Maheshwar_Temple,_Mangalore_09_-_15_Dec_2024/thumb/001_thumb.jpg",
+      "https://chitrapurmath.net/documents/gallery/Datta_Jayanti_Saptah_at_Shri_Guru_Dattatreya_Sannidhi,_Shri_Uma_Maheshwar_Temple,_Mangalore_09_-_15_Dec_2024/thumb/020_thumb.jpg",
+    ],
   },
   {
     id: 8,
     title: "Gokulashtami Celebrations",
     description:
       "The West Coast celebrated Gokulashtami with devotion and joy at a park in Fremont, CA. The event included stotra chanting, bhajans, and traditional garba, celebrating the divine leelas of Lord Krishna.",
-    image: GokulashtamiImg,
+    image: [
+      GokulashtamiImg,
+      "https://chitrapurmath.net/documents/gallery/Gokulashtami_at_Shi_Venugopal_Sannidhi,_HH_Vamanashram_Samadhi_Math_Mangalore_26_-_298_Aug_2024/thumb/27-2_thumb.jpg",
+      "https://chitrapurmath.net/documents/gallery/Gokulashtami_at_Shi_Venugopal_Sannidhi,_HH_Vamanashram_Samadhi_Math_Mangalore_26_-_298_Aug_2024/thumb/27-3_thumb.jpg",
+    ],
   },
   {
     id: 9,
     title: "Navratri Celebrations",
     description:
       "During Navratri, sadhakas meet every evening across the West and East Coasts to chant the shlokas of Sadhana Panchakam. This year, the West Coast celebrations were enriched by a dance offering by Yuvadhara and Prarthana, highlighting the divine feminine energy.",
-    image: NavarathriImg,
+    image: [
+      NavarathriImg,
+      "https://chitrapurmath.net/documents/gallery/Navaratri_2023_at_Karla_-_Day_2_(16_Oct_2023)/thumb/Navaratri%20Day%202%20(16%20Oct%202023)%20(6)_thumb.jpg",
+      "https://chitrapurmath.net/documents/gallery/Navaratri_2023_at_Karla_-_Day_9_(23_Oct_2024)/thumb/Navartri%202023%20at%20Karla%20-%20Day%209%20(23%20Oct%202023)%20(16)_thumb.jpg",
+    ],
   },
   {
     id: 10,
     title: "Diwali Celebrations",
     description:
       "As the festival of lights, Diwali is celebrated with great devotion and joy. Sadhakas come together to chant stotras, sing bhajans, and engage in cultural activities, illuminating their hearts and minds with the light of knowledge, unity, and spirituality.",
-    image: DepavaliImg,
+    image: [
+      DepavaliImg,
+      "https://chitrapurmath.net/documents/gallery/Deepa_Prajwalana_on_Deepavali_by_H_H_Swamiji_30_Oct_2014/thumb/10_thumb.jpg",
+      "https://chitrapurmath.net/documents/gallery/Deepa_Prajwalana_on_Deepavali_by_H_H_Swamiji_30_Oct_2014/thumb/10_thumb.jpg",
+    ],
   },
   {
     id: 11,
     title: "Param Pujya Swamiji's Janmadivas Celebrations",
     description:
       "Sadhakas honor Param Pujya Swamiji's birthday with great reverence by performing samuhik guru pujan and singing bhajans, coming together in a spirit of devotion and gratitude. The celebration is followed by a joyful cake-cutting ceremony on the West Coast.",
-    image: JanmadivasImg,
+    image: [
+      JanmadivasImg,
+      "https://chitrapurmath.net/documents/gallery/Janmotsava_2024_at_Karla_-_Day_2_15_June_2024_/thumb/Janmotsava%202024%20(30)_thumb.jpg",
+      "https://chitrapurmath.net/documents/gallery/Janmotsava_2024_at_Karla_-_Day_2_15_June_2024_/thumb/Janmotsava%202024%20(39)_thumb.jpg",
+    ],
   },
 ];
 
