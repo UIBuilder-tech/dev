@@ -72,7 +72,10 @@ export default function ProjectsPage() {
       location: "",
       description:
         "CHF’s pandemic relief efforts included funding the salaries of school teachers of the 9 SCM-affiliated schools supported by CHF.",
-      images: [ChitrapurMathImg, ChitrapurMathImg, ChitrapurMathImg],
+      images: [
+        "https://images.unsplash.com/photo-1584466990297-7e8ab67a5eb0?q=80&w=1965&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "https://images.unsplash.com/photo-1585282284319-e38fb6c29dd1?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mjd8fGNvdmlkfGVufDB8fDB8fHwy",
+      ],
     },
   ];
 

@@ -2,10 +2,11 @@ import { useState } from "react";
 import { Heart } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
-import activeArrow from '../../assets/arrowActive.svg' 
-import inactiveArrow from '../../assets/arrowInactive.svg'
+import activeArrow from "../../assets/arrowActive.svg";
+import inactiveArrow from "../../assets/arrowInactive.svg";
 import Srivali from "../../assets/Srivali High School.png";
 import ChitrapurMathImg from "../../assets/Shirali_Math.jpg";
+import solar1 from "../../assets/solar1.jpg";
 
 interface ImpactCard {
   id: string;
@@ -16,28 +17,27 @@ interface ImpactCard {
   stats1: object;
   stats2: object;
   stats3: object;
-
 }
 
 const impactCards: ImpactCard[] = [
   {
     id: "1",
-    title: "Shri Chitrapur Math Renovation",
+    title: "Karla Solar plant",
     subtitle: "Community & Heritage",
     description:
-      "CHF contributed over $300K towards the renovation of Shri Chitrapur Math in Shirali, leading up to the Tercentennial of Guru Parampara in 2008. This initiative reflects CHF's commitment to preserving cultural and spiritual heritage.",
-    image: ChitrapurMathImg, // Temple image
-    stats1:{
-      key:"Children Educated",
-      value:"10,000+"
+      "The Solar Plant in Karla project involves installing a 16kW grid-tied solar system at the Parijnan PU College and Parijnan Vidyalaya in Kotekar to reduce reliance on non-renewable energy, lower operational costs, and promote sustainability.",
+    image: solar1, // Temple image
+    stats1: {
+      key: "Generated units",
+      value: "94574+",
     },
-    stats2:{
-      key:"Schools Connected",
-      value:"100+"
+    stats2: {
+      key: "Exported units",
+      value: "51312+",
     },
-    stats3:{
-      key:"Student Graduation Rate",
-      value:"95% - 99%"
+    stats3: {
+      key: "Total Savings (Since installation)",
+      value: "₹ 7,42,000+",
     },
   },
   {
@@ -47,17 +47,17 @@ const impactCards: ImpactCard[] = [
     description:
       "CHF funded the construction of two school buildings at Srivali High School, supporting education and providing better learning environments for students in the region.",
     image: Srivali, // Education image
-    stats1:{
-      key:"Children Educated",
-      value:"10,000+"
+    stats1: {
+      key: "Children Educated",
+      value: "10,000+",
     },
-    stats2:{
-      key:"Schools Connected",
-      value:"100+"
+    stats2: {
+      key: "Schools Connected",
+      value: "100+",
     },
-    stats3:{
-      key:"Student Graduation Rate",
-      value:"95% - 99%"
+    stats3: {
+      key: "Student Graduation Rate",
+      value: "95% - 99%",
     },
   },
   {
@@ -68,18 +68,18 @@ const impactCards: ImpactCard[] = [
       "Samvit Sudha, initiated by SCM, focuses on empowering women by providing them with vocational skills and opportunities for self-reliance, fostering growth and independence.",
     image:
       "https://samvitsudha.com/wp-content/uploads/2023/09/2-Fabric-Unit-training-@-Workplace.jpg", // Food donation image
-      stats1:{
-        key:"Women Empowered",
-        value:"1800+"
-      },
-      stats2:{
-        key:"Families Benefitted",
-        value:"1000+"
-      },
-      stats3:{
-        key:"Women Entrepreneurs",
-        value:"300+"
-      },
+    stats1: {
+      key: "Women Empowered",
+      value: "1800+",
+    },
+    stats2: {
+      key: "Families Benefitted",
+      value: "1000+",
+    },
+    stats3: {
+      key: "Women Entrepreneurs",
+      value: "300+",
+    },
   },
 ];
 
@@ -132,12 +132,18 @@ export default function ImpactSection() {
                     <div className="h-0.5 bg-white transition-all duration-500 w-[100%] desktop-1500:w-[150%]  md:w-[150%] desktop-1200:w-[100%]" />
                   </div>
                   <div className="flex gap-2 md:gap-4">
-                    <Link to='/contribute#donation-table' className="rounded-full max-sm:text-xs px-2 py-1 md:px-6 md:py-2 md:text-lg desktop-1500:text-lg desktop-1200:text-[16px] text-white border hover:bg-primary/90 flex items-center">
+                    <Link
+                      to="/contribute#donation-table"
+                      className="rounded-full max-sm:text-xs px-2 py-1 md:px-6 md:py-2 md:text-lg desktop-1500:text-lg desktop-1200:text-[16px] text-white border hover:bg-primary/90 flex items-center"
+                    >
                       Learn More
                     </Link>
                     <Link to="/projects" className="">
                       {/* <ArrowUpRight className="h-6 w-6  text-white rounded-full rotate-[175deg]" /> */}
-                      <img src={activeArrow} className="h-14 w-14 desktop-1500:h-14 desktop-1500:w-14 desktop-1200:w-12 desktop-1200:h-12"/>
+                      <img
+                        src={activeArrow}
+                        className="h-14 w-14 desktop-1500:h-14 desktop-1500:w-14 desktop-1200:w-12 desktop-1200:h-12"
+                      />
                     </Link>
                   </div>
                 </div>
@@ -150,7 +156,10 @@ export default function ImpactSection() {
                     <p className="max-sm:text-xs text-lg desktop-1500:text-lg text-[#516072] max-sm:leading-5 desktop-1200:text-sm">
                       {activeCard.description}
                     </p>
-                    <Link to='/contribute#donation-table' className="float-right px-3 py-1 max-sm:text-sm md:px-6 md:py-2 text-lg desktop-1500:text-lg  bg-secondary text-white rounded-full flex items-center gap-2 shadow-md desktop-1200:text-sm">
+                    <Link
+                      to="/contribute#donation-table"
+                      className="float-right px-3 py-1 max-sm:text-sm md:px-6 md:py-2 text-lg desktop-1500:text-lg  bg-secondary text-white rounded-full flex items-center gap-2 shadow-md desktop-1200:text-sm"
+                    >
                       Donate <Heart className="h-4 w-4" fill="white" />
                     </Link>
                   </div>
@@ -185,18 +194,28 @@ export default function ImpactSection() {
 
           <div className="bg-white rounded-2xl p-2 md:p-4 grid grid-cols-2 gap-4 shadow-md h-[100px] desktop-1200:h-[480px] desktop-1500:h-[520px] md:h-[520px]">
             <div className="bg-[#F4F5F7] p-3 md:p-6 flex flex-col space-y-2 items-center justify-center rounded-xl">
-              <div className="text-3xl desktop-1200:text-4xl desktop-1500:text-5xl md:text-5xl font-bold text-[#f97316]">{activeCard?.stats1?.value}</div>
-              <div className="text-sm md:text-lg desktop-1500:text-lg desktop-1200:text-[16px] text-[#666666]">{activeCard?.stats1?.key}</div>
+              <div className="text-3xl desktop-1200:text-4xl desktop-1500:text-5xl md:text-5xl font-bold text-[#f97316]">
+                {activeCard?.stats1?.value}
+              </div>
+              <div className="text-sm md:text-lg desktop-1500:text-lg desktop-1200:text-[16px] text-[#666666]">
+                {activeCard?.stats1?.key}
+              </div>
             </div>
             <div className="bg-[#F4F5F7] p-3 md:p-6 flex flex-col space-y-2 items-center justify-center rounded-xl">
-              <div className="text-3xl md:text-5xl desktop-1500:text-5xl desktop-1200:text-4xl font-bold text-[#0066FF]">{activeCard?.stats2?.value}</div>
-              <div className="text-sm md:text-lg desktop-1500:text-lg font-normal text-[#666666] desktop-1200:text-[16px]">{activeCard?.stats2?.key}</div>
+              <div className="text-3xl md:text-5xl desktop-1500:text-5xl desktop-1200:text-4xl font-bold text-[#0066FF]">
+                {activeCard?.stats2?.value}
+              </div>
+              <div className="text-sm md:text-lg desktop-1500:text-lg font-normal text-[#666666] desktop-1200:text-[16px]">
+                {activeCard?.stats2?.key}
+              </div>
             </div>
 
             <div className="bg-[#F4F5F7] p-6 flex col-span-2 flex-col space-y-2 items-center justify-center rounded-xl max-sm:hidden">
-              <div className="text-2xl md:text-5xl desktop-1500:text-5xl font-bold text-[#02306A] desktop-1200:text-4xl">{activeCard?.stats3?.value}</div>
+              <div className="text-2xl md:text-5xl desktop-1500:text-5xl font-bold text-[#02306A] desktop-1200:text-4xl">
+                {activeCard?.stats3?.value}
+              </div>
               <div className="text-sm md:text-lg desktop-1500:text-lg text-[#666666] desktop-1200:text-[16px]">
-              {activeCard?.stats3?.key}
+                {activeCard?.stats3?.key}
               </div>
             </div>
             {/* <div className="bg-[#F4F5F7] p-6 flex flex-col space-y-2 items-center justify-center rounded-xl max-sm:hidden">
@@ -245,16 +264,19 @@ export default function ImpactSection() {
                   />
                 </div>
                 {/* <ArrowUpRight className="h-8 w-8 transition-transform duration-300 text-white rounded-full border border-white p-1" /> */}
-                {
-                  
-                      activeCard.id === card.id ?
-                      <Link to="/projects" className="">
-                  <img src={activeArrow} className="h-16 w-16 max-sm:h-10 max-sm:w-10"/>
-                </Link>
-                :
-                      <img src={inactiveArrow} className="h-16 w-16 max-sm:h-10 max-sm:w-10" />
-                      
-                      }
+                {activeCard.id === card.id ? (
+                  <Link to="/projects" className="">
+                    <img
+                      src={activeArrow}
+                      className="h-16 w-16 max-sm:h-10 max-sm:w-10"
+                    />
+                  </Link>
+                ) : (
+                  <img
+                    src={inactiveArrow}
+                    className="h-16 w-16 max-sm:h-10 max-sm:w-10"
+                  />
+                )}
               </div>
             </div>
           </motion.div>
