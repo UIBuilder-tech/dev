@@ -293,7 +293,11 @@ export const EventGettogthers: Event[] = [
     title: "Chitrapur Satsang",
     description:
       "Through monthly satsangs, sadhakas come together to celebrate festivals in alignment with the practices of our Math, integrating bhajans, stotra chanting, anushthans, and cultural activities. These gatherings unite us as a spiritual family, offering an opportunity to stay connected to our roots while building a strong sense of community.",
-    image: ChitrapurMathImg,
+    image: [
+      "https://images.unsplash.com/photo-1600093463592-8e36ae95ef56?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+      "https://images.unsplash.com/photo-1620503374956-c942862f0372?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+      "https://images.unsplash.com/photo-1621847468516-1ed6a8a97533?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    ],
   },
   {
     id: 4,
@@ -314,7 +318,7 @@ export const EventGettogthers: Event[] = [
     id: 6,
     title: "Shivaratri Celebrations",
     description:
-      "In honor of Lord Shiva, Shivaratri is celebrated during satsangs with deep devotion. Inspired by the Math's emphasis on meditation and prayer, the celebrations include stotra chanting, bhajans, and reflections on Lord Shiva’s significance in our lives.",
+      "In honor of Lord Shiva, Shivaratri is celebrated during satsangs with deep devotion. Inspired by the Math's emphasis on meditation and prayer, the celebrations include stotra chanting, bhajans, and reflections on Lord Shiva's significance in our lives.",
     image: ShivarathriImg,
   },
   {
@@ -347,9 +351,9 @@ export const EventGettogthers: Event[] = [
   },
   {
     id: 11,
-    title: "Param Pujya Swamiji’s Janmadivas Celebrations",
+    title: "Param Pujya Swamiji's Janmadivas Celebrations",
     description:
-      "Sadhakas honor Param Pujya Swamiji’s birthday with great reverence by performing samuhik guru pujan and singing bhajans, coming together in a spirit of devotion and gratitude. The celebration is followed by a joyful cake-cutting ceremony on the West Coast.",
+      "Sadhakas honor Param Pujya Swamiji's birthday with great reverence by performing samuhik guru pujan and singing bhajans, coming together in a spirit of devotion and gratitude. The celebration is followed by a joyful cake-cutting ceremony on the West Coast.",
     image: JanmadivasImg,
   },
 ];
@@ -374,14 +378,18 @@ export const EventChildrenEducation: Event[] = [
     title: "Uccharan Training Sessions",
     description:
       "Regular training sessions provide focused guidance for correct stotra pronunciation. These sessions help participants deepen their spiritual connection and refine their chanting skills, preserving traditional recitation techniques.",
-    image: ChitrapurMathImg,
+    image: [lecture],
   },
   {
     id: 4,
     title: "Educational Workshops & Seminars",
     description:
       "These events enhance learning by providing practical experiences and expert mentorship. Students gain exposure to life skills, academic enrichment, and career guidance, fostering holistic personal and professional growth.",
-    image: ChitrapurMathImg,
+    image: [
+      "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+      "https://images.unsplash.com/photo-1544531585-9847b68c8c86?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+      "https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2049&q=80",
+    ],
   },
   {
     id: 5,
@@ -395,6 +403,10 @@ export const EventChildrenEducation: Event[] = [
     title: "Support for Higher Education",
     description:
       "Offering scholarships, financial aid, and mentorship for students pursuing higher education. The initiative focuses on guiding students through admission processes and providing resources to achieve their academic aspirations.",
-    image: ChitrapurMathImg,
+    image: [
+      "https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+      "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+      "https://images.unsplash.com/photo-1627556704290-2b1f5853ff78?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    ],
   },
 ];

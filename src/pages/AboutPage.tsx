@@ -34,12 +34,12 @@ export default function AboutPage() {
     <div className="min-h-screen bg-cream">
       <Hero
         title="Chitrapur Heritage Foundation"
-        desc="Founded in 2005, the Chitrapur Heritage Foundation (CHF) is a nonprofit organization dedicated to fostering sustainable development and preserving the rich cultural heritage of the Chitrapur Saraswat community. With a focus on Heritage, Education,Women's Empowerment and Spiritual Development"
+        desc="Founded in 2005, the Chitrapur Heritage Foundation USA, Inc(CHF) is a nonprofit organization dedicated to fostering sustainable development and preserving the rich cultural heritage of the Chitrapur Saraswat community. With a focus on Heritage, Education,Women's Empowerment and Spiritual Development"
         img={ChitrapurMathImg}
         from="about"
       />
       <Vantiga
-        title="Welcome to the Chitrapur Heritage Foundation (CHF)!"
+        title="Welcome to the Chitrapur Heritage Foundation!"
         description="We are dedicated to promoting sustainable development while preserving the rich cultural and spiritual heritage of the Chitrapur Saraswat community. Through our efforts in education, women's empowerment, heritage preservation, and community development, we create lasting impacts on individual lives and the community as a whole. Join us in our mission to honor the past while building a brighter future rooted in tradition and progress."
       />
       <div id="vision-mission">
