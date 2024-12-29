@@ -1,13 +1,11 @@
-import {  Mail, MapPin, Phone } from "lucide-react";
+import { Mail, MapPin, Phone } from "lucide-react";
 import footerbg from "../../assets/footerbg.svg";
 import logo from "../../assets/chfLogo.png";
 import { Link } from "react-router-dom";
 
 export default function Footer() {
   return (
-    <footer
-      className="relative max-sm:mb-[50px] bg-secondary px-8 py-12 text-white"
-    >
+    <footer className="relative max-sm:mb-[50px] bg-secondary px-8 py-12 text-white">
       {/* Background graphic overlay */}
       <div className="absolute top-14 bottom-0 left-0 right-0 -z-9 overflow-hidden">
         <img
@@ -27,7 +25,8 @@ export default function Footer() {
                 Chitrapur Heritage Foundation USA, Inc.
               </h2>
               <p className="text-sm md:text-sm text-white text-center px-4 md:px-8">
-                IRS certified 501c(3) organization, Tax id: 20-2738955
+                IRS certified 501(c)(3) organization,
+                <br /> Tax Id: 20-2738955
               </p>
             </div>
           </div>
@@ -45,7 +44,8 @@ export default function Footer() {
                   </Link>
                 </li>
                 <li>
-                  <Link to=" /contribute#donation-table"
+                  <Link
+                    to=" /contribute#donation-table"
                     className="hover:underline"
                   >
                     Donate
@@ -57,7 +57,8 @@ export default function Footer() {
                   </Link>
                 </li>
                 <li>
-                  <Link to=" /contribute#donation-table"
+                  <Link
+                    to=" /contribute#donation-table"
                     className="hover:underline"
                   >
                     Sponsor a Student
@@ -172,28 +173,32 @@ export default function Footer() {
             </h3>
             <ul className="space-y-1 max-sm:text-xs">
               <li>
-                <Link to=" /contribute#donation-table"
+                <Link
+                  to=" /contribute#donation-table"
                   className="hover:underline"
                 >
                   Education
                 </Link>
               </li>
               <li>
-                <Link to=" /contribute#donation-table"
+                <Link
+                  to=" /contribute#donation-table"
                   className="hover:underline"
                 >
                   Community Development
                 </Link>
               </li>
               <li>
-                <Link to=" /contribute#donation-table"
+                <Link
+                  to=" /contribute#donation-table"
                   className="hover:underline"
                 >
                   Cultural Preservation
                 </Link>
               </li>
               <li>
-                <Link to=" /contribute#donation-table"
+                <Link
+                  to=" /contribute#donation-table"
                   className="hover:underline"
                 >
                   Religious Activities
