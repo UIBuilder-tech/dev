@@ -1,6 +1,7 @@
-import { Mail, MapPin, Phone } from "lucide-react";
+import {  Mail, MapPin, Phone } from "lucide-react";
 import footerbg from "../../assets/footerbg.svg";
 import logo from "../../assets/chfLogo.png";
+import { Link } from "react-router-dom";
 
 export default function Footer() {
   return (
@@ -40,30 +41,28 @@ export default function Footer() {
               </h3>
               <ul className="space-y-1 max-sm:text-xs">
                 <li>
-                  <a href="/contribute#volunteer" className="hover:underline">
+                  <Link to="/contribute#volunteer" className="hover:underline">
                     Become A Member
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a
-                    href=" /contribute#donation-table"
+                  <Link to=" /contribute#donation-table"
                     className="hover:underline"
                   >
                     Donate
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="/contribute#volunteer" className="hover:underline">
+                  <Link to="/contribute#volunteer" className="hover:underline">
                     Volunteer
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a
-                    href=" /contribute#donation-table"
+                  <Link to=" /contribute#donation-table"
                     className="hover:underline"
                   >
                     Sponsor a Student
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -130,39 +129,39 @@ export default function Footer() {
             </h3>
             <ul className="space-y-1 max-sm:text-xs">
               <li>
-                <a href="/" className="hover:underline">
+                <Link to="/" className="hover:underline">
                   Home
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/about" className="hover:underline">
+                <Link to="/about" className="hover:underline">
                   About CHF
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/projects" className="hover:underline">
+                <Link to="/projects" className="hover:underline">
                   CHF Projects
-                </a>
+                </Link>
               </li>
               <li>
-                <a href=" /contribute" className="hover:underline">
+                <Link to=" /contribute" className="hover:underline">
                   How You can Help
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/events" className="hover:underline">
+                <Link to="/events" className="hover:underline">
                   CHF Events & News
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/about#photo-gallery" className="hover:underline">
+                <Link to="/about#photo-gallery" className="hover:underline">
                   Photo Gallery
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/privacy-policy" className="hover:underline">
+                <Link to="/privacy-policy" className="hover:underline">
                   Privacy Policy
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -174,36 +173,32 @@ export default function Footer() {
             </h3>
             <ul className="space-y-1 max-sm:text-xs">
               <li>
-                <a
-                  href=" /contribute#donation-table"
+                <Link to=" /contribute#donation-table"
                   className="hover:underline"
                 >
                   Education
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href=" /contribute#donation-table"
+                <Link to=" /contribute#donation-table"
                   className="hover:underline"
                 >
                   Community Development
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href=" /contribute#donation-table"
+                <Link to=" /contribute#donation-table"
                   className="hover:underline"
                 >
                   Cultural Preservation
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href=" /contribute#donation-table"
+                <Link to=" /contribute#donation-table"
                   className="hover:underline"
                 >
                   Religious Activities
-                </a>
+                </Link>
               </li>
             </ul>
           </div>

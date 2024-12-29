@@ -13,6 +13,10 @@ interface ImpactCard {
   subtitle?: string;
   description: string;
   image: string;
+  stats1: object;
+  stats2: object;
+  stats3: object;
+
 }
 
 const impactCards: ImpactCard[] = [
@@ -23,6 +27,18 @@ const impactCards: ImpactCard[] = [
     description:
       "CHF contributed over $300K towards the renovation of Shri Chitrapur Math in Shirali, leading up to the Tercentennial of Guru Parampara in 2008. This initiative reflects CHF's commitment to preserving cultural and spiritual heritage.",
     image: ChitrapurMathImg, // Temple image
+    stats1:{
+      key:"Children Educated",
+      value:"10,000+"
+    },
+    stats2:{
+      key:"Schools Connected",
+      value:"100+"
+    },
+    stats3:{
+      key:"Student Graduation Rate",
+      value:"95% - 99%"
+    },
   },
   {
     id: "2",
@@ -31,6 +47,18 @@ const impactCards: ImpactCard[] = [
     description:
       "CHF funded the construction of two school buildings at Srivali High School, supporting education and providing better learning environments for students in the region.",
     image: Srivali, // Education image
+    stats1:{
+      key:"Children Educated",
+      value:"10,000+"
+    },
+    stats2:{
+      key:"Schools Connected",
+      value:"100+"
+    },
+    stats3:{
+      key:"Student Graduation Rate",
+      value:"95% - 99%"
+    },
   },
   {
     id: "3",
@@ -40,6 +68,18 @@ const impactCards: ImpactCard[] = [
       "Samvit Sudha, initiated by SCM, focuses on empowering women by providing them with vocational skills and opportunities for self-reliance, fostering growth and independence.",
     image:
       "https://samvitsudha.com/wp-content/uploads/2023/09/2-Fabric-Unit-training-@-Workplace.jpg", // Food donation image
+      stats1:{
+        key:"Women Empowered",
+        value:"1800+"
+      },
+      stats2:{
+        key:"Families Benefitted",
+        value:"1000+"
+      },
+      stats3:{
+        key:"Women Entrepreneurs",
+        value:"300+"
+      },
   },
 ];
 
@@ -122,7 +162,7 @@ export default function ImpactSection() {
 
         {/* Stats Cards */}
         <div className="space-y-5">
-          <div className="bg-white rounded-2xl desktop-1200:p-8 desktop-1500:p-10 p-6 md:p-10 shadow-md">
+          {/* <div className="bg-white rounded-2xl desktop-1200:p-8 desktop-1500:p-10 p-6 md:p-10 shadow-md">
             <div className="grid grid-cols-7 gap-2 text-center mb-2 md:mb-6">
               {["$", "5", "0", "0", "0", "0", "0"].map((digit, i) => (
                   <h3
@@ -136,27 +176,27 @@ export default function ImpactSection() {
               ))}
             </div>
             <div className="flex justify-between text-lg mx-5">
-              {/* <h5 className="text-[#02306A]">
+              <h5 className="text-[#02306A]">
                 Target Donation <span className="text-[#C7C7C7]">(in $)</span>
-              </h5> */}
+              </h5>
               <span className="text-[#f97316]">1000+ Donors</span>
             </div>
-          </div>
+          </div> */}
 
-          <div className="bg-white rounded-2xl p-2 md:p-4 grid grid-cols-2 gap-4 shadow-md">
+          <div className="bg-white rounded-2xl p-2 md:p-4 grid grid-cols-2 gap-4 shadow-md h-[100px] desktop-1200:h-[480px] desktop-1500:h-[520px] md:h-[520px]">
             <div className="bg-[#F4F5F7] p-3 md:p-6 flex flex-col space-y-2 items-center justify-center rounded-xl">
-              <div className="text-3xl desktop-1200:text-4xl desktop-1500:text-5xl md:text-5xl font-bold text-[#f97316]">10,000+</div>
-              <div className="text-sm md:text-lg desktop-1500:text-lg desktop-1200:text-[16px] text-[#666666]">Children Educated</div>
+              <div className="text-3xl desktop-1200:text-4xl desktop-1500:text-5xl md:text-5xl font-bold text-[#f97316]">{activeCard?.stats1?.value}</div>
+              <div className="text-sm md:text-lg desktop-1500:text-lg desktop-1200:text-[16px] text-[#666666]">{activeCard?.stats1?.key}</div>
             </div>
             <div className="bg-[#F4F5F7] p-3 md:p-6 flex flex-col space-y-2 items-center justify-center rounded-xl">
-              <div className="text-3xl md:text-5xl desktop-1500:text-5xl desktop-1200:text-4xl font-bold text-[#0066FF]">100+</div>
-              <div className="text-sm md:text-lg desktop-1500:text-lg font-normal text-[#666666] desktop-1200:text-[16px]">Schools Connected</div>
+              <div className="text-3xl md:text-5xl desktop-1500:text-5xl desktop-1200:text-4xl font-bold text-[#0066FF]">{activeCard?.stats2?.value}</div>
+              <div className="text-sm md:text-lg desktop-1500:text-lg font-normal text-[#666666] desktop-1200:text-[16px]">{activeCard?.stats2?.key}</div>
             </div>
 
             <div className="bg-[#F4F5F7] p-6 flex col-span-2 flex-col space-y-2 items-center justify-center rounded-xl max-sm:hidden">
-              <div className="text-2xl md:text-5xl desktop-1500:text-5xl font-bold text-[#02306A] desktop-1200:text-4xl">95% - 99%</div>
+              <div className="text-2xl md:text-5xl desktop-1500:text-5xl font-bold text-[#02306A] desktop-1200:text-4xl">{activeCard?.stats3?.value}</div>
               <div className="text-sm md:text-lg desktop-1500:text-lg text-[#666666] desktop-1200:text-[16px]">
-                Student Graduation Rate
+              {activeCard?.stats3?.key}
               </div>
             </div>
             {/* <div className="bg-[#F4F5F7] p-6 flex flex-col space-y-2 items-center justify-center rounded-xl max-sm:hidden">
