@@ -6,6 +6,9 @@ import GuruPurnimaImg from "../assets/festivals/Gurupurnima 2024.jpg";
 import GokulashtamiImg from "../assets/festivals/Gokulashtami Celebrations.jpg";
 import DepavaliImg from "../assets/festivals/Deepa Prajwalana on Deepavali.jpg";
 import NavarathriImg from "../assets/festivals/Kumarika Pujana_Navratri_Celebration_1.jpg";
+import Yuvas from "../assets/Yuvas.png";
+import Yuvas1 from "../assets/Yuvas1.png";
+import hands from "../assets/hands.jpg";
 
 interface Program {
   id: number;
@@ -17,7 +20,7 @@ interface Event {
   id: number;
   title: string;
   description: string;
-  image?: string;
+  image?: string | string[];
   url?: string;
 }
 
@@ -214,64 +217,14 @@ export const HeritagePrograms: Program[] = [
   },
 ];
 
-
 //events page data
 export const EventsFestivals: Event[] = [
   {
     id: 1,
-    title: "Yugadi Celebrations",
-    description:
-      "Sadhakas marked the beginning of the Hindu New Year with a special Yugadi program. The event, rooted in the teachings of our Math, featured cultural performances, stotra chanting, and a message of new beginnings.",
-    image: YugadiImg,
-    url: "",
-  },
-  {
-    id: 2,
-    title: "Shivaratri Celebrations",
-    description:
-      "In honor of Lord Shiva, Shivaratri is celebrated during satsangs with deep devotion. Inspired by the Math's emphasis on meditation and prayer, the celebrations include stotra chanting, bhajans, and reflections on Lord Shiva’s significance in our lives.",
-    image: ShivarathriImg,
-  },
-  {
-    id: 3,
-    title: "Guru Purnima",
-    description:
-      "Guru Purnima, a day dedicated to honoring the Guru, holds special significance for all of us. Sadhakas across the United States participate in samuhik guru pujan, either online or in-person, reaffirming their devotion to Param Pujya Swamiji and our revered Guru parampara.",
-    image: GuruPurnimaImg,
-  },
-  {
-    id: 4,
-    title: "Gokulashtami Celebrations",
-    description:
-      "The West Coast celebrated Gokulashtami with devotion and joy at a park in Fremont, CA. The event included stotra chanting, bhajans, and traditional garba, celebrating the divine leelas of Lord Krishna.",
-    image: GokulashtamiImg,
-  },
-  {
-    id: 5,
-    title: "Navratri Celebrations",
-    description:
-      "During Navratri, sadhakas meet every evening across the West and East Coasts to chant the shlokas of Sadhana Panchakam. This year, the West Coast celebrations were enriched by a dance offering by Yuvadhara and Prarthana, highlighting the divine feminine energy.",
-    image: NavarathriImg,
-  },
-  {
-    id: 6,
-    title: "Diwali Celebrations",
-    description:
-      "As the festival of lights, Diwali is celebrated with great devotion and joy. Sadhakas come together to chant stotras, sing bhajans, and engage in cultural activities, illuminating their hearts and minds with the light of knowledge, unity, and spirituality.",
-    image: DepavaliImg,
-  },
-  {
-    id: 7,
-    title: "Param Pujya Swamiji’s Janmadivas Celebrations",
-    description:
-      "Sadhakas honor Param Pujya Swamiji’s birthday with great reverence by performing samuhik guru pujan and singing bhajans, coming together in a spirit of devotion and gratitude. The celebration is followed by a joyful cake-cutting ceremony on the West Coast.",
-    image: JanmadivasImg,
-  },
-  {
-    id: 8,
     title: "CHF - KSA Mulaqaut",
     description:
       "Mulaqat across the oceans produced by KSA Chitrapur Saraswat Network and Chitrapur Heritage Foundation.",
+    image: hands,
   },
   {
     id: 9,
@@ -308,7 +261,6 @@ export const EventsFestivals: Event[] = [
       " Interview  with Roshni Nirody, US Consulate General Indonesia by Kiran Mundkur on September 11, 2021.",
     url: "https://www.youtube.com/watch?v=E4EMJlZ3WJA",
   },
-
 ];
 
 export const EventGettogthers: Event[] = [
@@ -317,7 +269,7 @@ export const EventGettogthers: Event[] = [
     title: "Chitrapur Yuvadhara",
     description:
       "This program connects young adults (ages 15-35) with the Math and Guru Parampara through workshops, creative forums, and social responsibility activities. It fosters self-expression, skill development, and a strong sense of community.",
-    image: ChitrapurMathImg,
+    image: [Yuvas1, Yuvas],
   },
   {
     id: 2,
@@ -340,14 +292,64 @@ export const EventGettogthers: Event[] = [
       "A Variety Entertainment Program from USA residents, cohosted by the Chitrapur Heritage Foundation and Saraswat Foundation on February 26, 2022.",
     url: "https://www.youtube.com/watch?v=uK2_6w3pqJI",
   },
+  {
+    id: 5,
+    title: "Yugadi Celebrations",
+    description:
+      "Sadhakas marked the beginning of the Hindu New Year with a special Yugadi program. The event, rooted in the teachings of our Math, featured cultural performances, stotra chanting, and a message of new beginnings.",
+    image: YugadiImg,
+    url: "",
+  },
+  {
+    id: 6,
+    title: "Shivaratri Celebrations",
+    description:
+      "In honor of Lord Shiva, Shivaratri is celebrated during satsangs with deep devotion. Inspired by the Math's emphasis on meditation and prayer, the celebrations include stotra chanting, bhajans, and reflections on Lord Shiva’s significance in our lives.",
+    image: ShivarathriImg,
+  },
+  {
+    id: 7,
+    title: "Guru Purnima",
+    description:
+      "Guru Purnima, a day dedicated to honoring the Guru, holds special significance for all of us. Sadhakas across the United States participate in samuhik guru pujan, either online or in-person, reaffirming their devotion to Param Pujya Swamiji and our revered Guru parampara.",
+    image: GuruPurnimaImg,
+  },
+  {
+    id: 8,
+    title: "Gokulashtami Celebrations",
+    description:
+      "The West Coast celebrated Gokulashtami with devotion and joy at a park in Fremont, CA. The event included stotra chanting, bhajans, and traditional garba, celebrating the divine leelas of Lord Krishna.",
+    image: GokulashtamiImg,
+  },
+  {
+    id: 9,
+    title: "Navratri Celebrations",
+    description:
+      "During Navratri, sadhakas meet every evening across the West and East Coasts to chant the shlokas of Sadhana Panchakam. This year, the West Coast celebrations were enriched by a dance offering by Yuvadhara and Prarthana, highlighting the divine feminine energy.",
+    image: NavarathriImg,
+  },
+  {
+    id: 10,
+    title: "Diwali Celebrations",
+    description:
+      "As the festival of lights, Diwali is celebrated with great devotion and joy. Sadhakas come together to chant stotras, sing bhajans, and engage in cultural activities, illuminating their hearts and minds with the light of knowledge, unity, and spirituality.",
+    image: DepavaliImg,
+  },
+  {
+    id: 11,
+    title: "Param Pujya Swamiji’s Janmadivas Celebrations",
+    description:
+      "Sadhakas honor Param Pujya Swamiji’s birthday with great reverence by performing samuhik guru pujan and singing bhajans, coming together in a spirit of devotion and gratitude. The celebration is followed by a joyful cake-cutting ceremony on the West Coast.",
+    image: JanmadivasImg,
+  },
 ];
 
 export const EventChildrenEducation: Event[] = [
   {
     id: 1,
-    title: "World Disability Day",
+    title: "District-level competition, Palghar",
     description:
-      "Designed to impart ancient Hindu spiritual values to children, this program integrates storytelling, Sanskrit lessons, crafts, and nature trails. The sessions aim to build spiritual foundations, fostering pride in cultural and spiritual heritage.",
+      "On December 3, 2024, commemorating World Disability Day, a district-level competition took place in Palghar, with participation from 16 schools. Notably, 11 of these schools catered to students with intellectual disabilities. Our school, Swami Parijnanashram Educational and Vocational Centre in Virar, emerged victorious, securing the overall trophy in this category. We extend warm felicitations to our students, teaching staff, and non-teaching personnel on this achievement.",
     image: ChitrapurMathImg,
   },
   {
@@ -355,7 +357,7 @@ export const EventChildrenEducation: Event[] = [
     title: "Chitrapur Yuvadhara",
     description:
       "This program connects young adults (ages 15-35) with the Math and Guru Parampara through workshops, creative forums, and social responsibility activities. It fosters self-expression, skill development, and a strong sense of community.",
-    image: ChitrapurMathImg,
+    image: [Yuvas, Yuvas1],
   },
   {
     id: 3,

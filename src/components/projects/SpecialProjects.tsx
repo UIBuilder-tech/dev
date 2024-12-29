@@ -104,14 +104,17 @@ const ProjectCard = ({
               </div>
               <div className="flex flex-row cursor-pointer">
                 {/* <ArrowDownLeft className="md:w-6 md:h-6 w-4 h-4 text-white" /> */}
-                <img
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    navigate("/contribute#volunteer");
-                  }}
-                  src={DonateActive}
-                  className="md:w-16 md:h-16 w-8 h-8 "
-                />
+                {from === "projects" && (
+                  <img
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      navigate("/contribute#volunteer");
+                    }}
+                    src={DonateActive}
+                    className="md:w-16 md:h-16 w-8 h-8 "
+                  />
+                )}
+
                 <img
                   onClick={(e) => {
                     e.stopPropagation();
@@ -203,18 +206,20 @@ const ProjectCard = ({
                   </p>
                   <div className="w-12 h-1 bg-orange-500 mb-2 md:mb-4" />
                 </div>
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    navigate("/contribute#volunteer");
-                  }}
-                >
-                  {/* <Heart className="md:w-5 md:h-5 w-3 h-3 text-orange-500" /> */}
-                  <img
-                    src={DonateInctive}
-                    className="md:w-16 md:h-16 w-8 h-8 "
-                  />
-                </button>
+                {from === "projects" && (
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      navigate("/contribute#volunteer");
+                    }}
+                  >
+                    {/* <Heart className="md:w-5 md:h-5 w-3 h-3 text-orange-500" /> */}
+                    <img
+                      src={DonateInctive}
+                      className="md:w-16 md:h-16 w-8 h-8 "
+                    />
+                  </button>
+                )}
               </div>
 
               <div className="mb-4">
