@@ -95,7 +95,7 @@ const ProjectCard = ({
             <div className="flex justify-between items-start">
               <div>
                 <p className={` text-md ${range150 ? "text-lg" : "text-xl"}`}>
-                  {project.title} at
+                  {project.title} {project?.location.length > 0 && "at"}
                 </p>
                 <p className={` text-md ${range150 ? "text-lg" : "text-xl"}`}>
                   {project.location}
