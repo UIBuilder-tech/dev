@@ -49,11 +49,11 @@ const impactCards: ImpactCard[] = [
     image: Srivali, // Education image
     stats1: {
       key: "Children Educated",
-      value: "10,000+",
+      value: "3,000+",
     },
     stats2: {
       key: "Schools Connected",
-      value: "100+",
+      value: "5+",
     },
     stats3: {
       key: "Student Graduation Rate",

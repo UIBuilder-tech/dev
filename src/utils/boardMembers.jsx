@@ -1,19 +1,19 @@
-import m1 from "../assets/boardMember/Arun.jpg";
-import m2 from "../assets/boardMember/Sumant Padbidri.jpg";
-import m3 from "../assets/boardMember/Milindjpg.jpg";
-import m4 from "../assets/boardMember/Ashwin Bijur.jpg";
-import m5 from "../assets/boardMember/Mamta Savkur.jpg";
-import m7 from "../assets/boardMember/Neena Karnad.jpeg";
-import m8 from "../assets/boardMember/Shashank Udyawer.png";
-import m9 from "../assets/boardMember/Sudhir Golikeri.jpg";
-import m10 from "../assets/boardMember/Santosh G.jpg";
-import m11 from "../assets/boardMember/Nandu maam.jpg";
-import m12 from "../assets/boardMember/Ashok Kulkarni.jpg";
-// import m13 from "../assets/boardMember/Kiran Mundkur.jpg";
-import m15 from "../assets/boardMember/Pramod Mavinkurve.jpg";
-import m16 from "../assets/boardMember/Mangesh Hoskote.png";
-import m17 from "../assets/boardMember/Devyani Padubidri.jpg";
-import m18 from "../assets/boardMember/Sanjay Savkur.jpg";
+import m1 from "../assets/boardMembers/Arun.jpg";
+import m2 from "../assets/boardMembers/Sumant Padbidri.jpg";
+import m3 from "../assets/boardMembers/Milindjpg.jpg";
+import m4 from "../assets/boardMembers/Ashwin Bijur.jpg";
+import m5 from "../assets/boardMembers/Mamta Savkur.jpg";
+import m7 from "../assets/boardMembers/Neena Karnad.jpeg";
+import m8 from "../assets/boardMembers/Shashank Udyawer.png";
+import m9 from "../assets/boardMembers/Sudhir Golikeri.jpg";
+import m10 from "../assets/boardMembers/Santosh G.jpg";
+import m11 from "../assets/boardMembers/Nandu maam.jpg";
+import m12 from "../assets/boardMembers/Ashok Kulkarni.jpg";
+// import m13 from "../assets/boardMembers/Kiran Mundkur.jpg";
+import m15 from "../assets/boardMembers/Pramod Mavinkurve.jpg";
+import m16 from "../assets/boardMembers/Mangesh Hoskote.png";
+import m17 from "../assets/boardMembers/Devyani Padubidri.jpg";
+import m18 from "../assets/boardMembers/Sanjay Savkur.jpg";
 import Placeholder from "../assets/Shirali_Math.jpg";
 
 export const boardMember = [
@@ -83,8 +83,8 @@ export const boardMember = [
     img: m15,
   },
   {
-    name: 'Mangesh Hoskote',
-    role: 'Board Advisor',
+    name: "Mangesh Hoskote",
+    role: "Board Advisor",
     img: m16,
   },
   {
@@ -100,8 +100,8 @@ export const boardMember = [
     img: m17,
   },
   {
-    name: 'Sanjay Savkur',
-    role: 'Cultural Activities',
+    name: "Sanjay Savkur",
+    role: "Cultural Activities",
     img: m18,
   },
 ];
