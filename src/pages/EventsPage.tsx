@@ -178,10 +178,10 @@ export default function EventsPage() {
         img={EventsHero}
         from="events"
       />
-      <div id="featured-news">
+      <div id="spotlight">
         <SpecialProjects
-          title="Featured News"
-          projects={FeaturedNews}
+          title="CHF Spotlight"
+          projects={Spotlight}
           from="events"
         />
       </div>
@@ -189,13 +189,6 @@ export default function EventsPage() {
         <ProjectsCategory
           categoryTitle="Chitrapur Talks"
           programs={EventsFestivals}
-        />
-      </div>
-      <div id="spotlight">
-        <SpecialProjects
-          title="CHF Spotlight"
-          projects={Spotlight}
-          from="events"
         />
       </div>
       <div id="children-activities">
@@ -206,6 +199,13 @@ export default function EventsPage() {
       </div>
       <div id="get-togethers">
         <ProjectsCategory categoryTitle="Events" programs={EventGettogthers} />
+      </div>
+      <div id="featured-news">
+        <SpecialProjects
+          title="Featured News"
+          projects={FeaturedNews}
+          from="events"
+        />
       </div>
       <Newsletter />
       <OurTeam />
