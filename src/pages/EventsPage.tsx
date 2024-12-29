@@ -27,6 +27,9 @@ import NeilImg from "../assets/Spotlight_Photos/neil-hattangadi.jpg";
 import NiveditaImg from "../assets/Spotlight_Photos/Nivedita_Bijoor.png";
 import PraskashImg from "../assets/Spotlight_Photos/prakash_nagarkatti.jpg";
 import DipaImg from "../assets/Spotlight_Photos/Dipa_Sashital.png";
+import Heritage2 from "../assets/heritage2.jpg";
+import SamvitSudha from "../assets/photoGallery/img13.png";
+import SamvitSudha1 from "../assets/photoGallery/img12.png";
 
 export default function EventsPage() {
   const location = useLocation();
@@ -60,7 +63,7 @@ export default function EventsPage() {
       location: "New Jersey, USA",
       description:
         "Kanakanjali Utsava started as a small Guru Pujan initiative and grew into a celebration attended by nearly 100 people. It involved seva from community members in decoration, photography, and food planning to honor Paramapujya Swamiji's birthday.",
-      images: [ChitrapurMathImg, ChitrapurMathImg],
+      images: [Heritage2],
     },
     {
       id: 3,
@@ -68,7 +71,7 @@ export default function EventsPage() {
       location: "Shirali, India",
       description:
         "Inspired by the nostalgic charm of Chitrapur village, this project brings the essence of Shirali to community members by celebrating its cultural and spiritual heritage, evoking fond memories of traditional Bhanap life.",
-      images: [ChitrapurMathImg, ChitrapurMathImg],
+      images: [SamvitSudha, SamvitSudha1],
     },
   ];
   const Spotlight = [
