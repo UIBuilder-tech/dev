@@ -1,6 +1,6 @@
 import { Mail, MapPin, Phone } from "lucide-react";
 import footerbg from "../../assets/footerbg.svg";
-import logo from '../../assets/chfLogo.png'
+import logo from "../../assets/chfLogo.png";
 
 export default function Footer() {
   return (
@@ -17,20 +17,20 @@ export default function Footer() {
           style={{ objectFit: "contain" }}
         />
       </div>
-     
+
       <div className="relative z-10 mx-auto max-w-7xl">
         <div className="grid grid-cols-2 gap-x-8 gap-y-12 md:grid-cols-2 lg:grid-cols-5">
-        <div className="space-y-12 items-center justify-center flex">
-        <div className=" flex flex-col  items-center justify-center">
-          <img src={logo} className="w-36"/>
-          <h2 className="font-display text-xl desktop-1500:text-3xl desktop-1200:pt-5 pt-10 md:text-2xl text-white text-center desktop-1900:text-xl">
-                      Chitrapur Heritage Foundation USA, Inc.
-                    </h2>
-                    <p className="text-sm md:text-sm text-white text-center px-4 md:px-8">
-                      IRS certified 501c(3) organization, Tax id: 20-2738955
-                    </p>
-                    </div>
-        </div>
+          <div className="space-y-12 items-center justify-center flex">
+            <div className=" flex flex-col  items-center justify-center">
+              <img src={logo} className="w-36" />
+              <h2 className="font-display text-xl desktop-1500:text-3xl desktop-1200:pt-5 pt-10 md:text-2xl text-white text-center desktop-1900:text-xl">
+                Chitrapur Heritage Foundation USA, Inc.
+              </h2>
+              <p className="text-sm md:text-sm text-white text-center px-4 md:px-8">
+                IRS certified 501c(3) organization, Tax id: 20-2738955
+              </p>
+            </div>
+          </div>
           {/* First Column: Support Us + Useful Links */}
           <div className="space-y-12">
             {/* Support Us Section */}
@@ -45,7 +45,10 @@ export default function Footer() {
                   </a>
                 </li>
                 <li>
-                  <a href=" /contribute#donation-table" className="hover:underline">
+                  <a
+                    href=" /contribute#donation-table"
+                    className="hover:underline"
+                  >
                     Donate
                   </a>
                 </li>
@@ -55,7 +58,10 @@ export default function Footer() {
                   </a>
                 </li>
                 <li>
-                  <a href=" /contribute#donation-table" className="hover:underline">
+                  <a
+                    href=" /contribute#donation-table"
+                    className="hover:underline"
+                  >
                     Sponsor a Student
                   </a>
                 </li>
@@ -69,27 +75,47 @@ export default function Footer() {
               </h3>
               <ul className="space-y-1 max-sm:text-xs">
                 <li>
-                  <a href="https://chitrapurmath.net/" target="_blank" className="hover:underline">
+                  <a
+                    href="https://chitrapurmath.net/"
+                    target="_blank"
+                    className="hover:underline"
+                  >
                     Chitrapur Math Website
                   </a>
                 </li>
                 <li>
-                  <a href="https://www.chitrapurebooks.com/" target="_blank" className="hover:underline">
+                  <a
+                    href="https://www.chitrapurebooks.com/"
+                    target="_blank"
+                    className="hover:underline"
+                  >
                     Chitrapur Ebook
                   </a>
                 </li>
                 <li>
-                  <a href="https://parijnanfoundation.in/" target="_blank" className="hover:underline">
+                  <a
+                    href="https://parijnanfoundation.in/"
+                    target="_blank"
+                    className="hover:underline"
+                  >
                     Parijnan Foundation
                   </a>
                 </li>
                 <li>
-                  <a href="https://samvitsudha.com/" target="_blank" className="hover:underline">
+                  <a
+                    href="https://samvitsudha.com/"
+                    target="_blank"
+                    className="hover:underline"
+                  >
                     Samvit Sudha
                   </a>
                 </li>
                 <li>
-                  <a href="https://parijnanfoundation.in/parimochana/" target="_blank" className="hover:underline">
+                  <a
+                    href="https://parijnanfoundation.in/parimochana/"
+                    target="_blank"
+                    className="hover:underline"
+                  >
                     Parimochan Project
                   </a>
                 </li>
@@ -133,6 +159,11 @@ export default function Footer() {
                   Photo Gallery
                 </a>
               </li>
+              <li>
+                <a href="/privacy-policy" className="hover:underline">
+                  Privacy Policy
+                </a>
+              </li>
             </ul>
           </div>
 
@@ -143,22 +174,34 @@ export default function Footer() {
             </h3>
             <ul className="space-y-1 max-sm:text-xs">
               <li>
-                <a href=" /contribute#donation-table" className="hover:underline">
+                <a
+                  href=" /contribute#donation-table"
+                  className="hover:underline"
+                >
                   Education
                 </a>
               </li>
               <li>
-                <a href=" /contribute#donation-table" className="hover:underline">
+                <a
+                  href=" /contribute#donation-table"
+                  className="hover:underline"
+                >
                   Community Development
                 </a>
               </li>
               <li>
-                <a href=" /contribute#donation-table" className="hover:underline">
+                <a
+                  href=" /contribute#donation-table"
+                  className="hover:underline"
+                >
                   Cultural Preservation
                 </a>
               </li>
               <li>
-                <a href=" /contribute#donation-table" className="hover:underline">
+                <a
+                  href=" /contribute#donation-table"
+                  className="hover:underline"
+                >
                   Religious Activities
                 </a>
               </li>
@@ -173,7 +216,11 @@ export default function Footer() {
             <ul className="space-y-1 max-sm:text-xs max-sm:relative">
               <li className="flex items-center gap-2">
                 <MapPin size={16} className="flex-shrink-0" />
-                <a href="http://www.chfusa.org" target="_blank" className="hover:underline">
+                <a
+                  href="http://www.chfusa.org"
+                  target="_blank"
+                  className="hover:underline"
+                >
                   www.chfusa.org
                 </a>
               </li>
