@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { PencilIcon, UserPlusIcon, XIcon, LogOut, Power } from "lucide-react";
 import { UseDataContext } from "../components/context/DataContext";
 import IconNavLink from "../components/Navbar/IconNavLink";
+import Footer from "../components/Footer/Footer";
 
 interface PersonalDetails {
   FirstName: string;
@@ -331,7 +332,7 @@ export default function Profile() {
       {/* Password Change Button */}
       <div className="flex justify-between">
       {
-                  data?.accessToken ?
+                  JSON.parse(sessionStorage.getItem("user") || "") ?
                     <div className="flex flex-row gap-2 border border-secondary px-4 py-2 rounded-full text-secondary cursor-pointer max-sm:text-sm" onClick={() => { sessionStorage.clear(); window.location.href = "/" }}>
                       {/* <IconNavLink to="javascript:void(0)" icon={LogOut} /> */}
                       <IconNavLink to="javascript:void(0)" icon={Power}/>
@@ -346,6 +347,7 @@ export default function Profile() {
         </button>
       </div>
     </div>
+    <Footer/>
           {/* Family Member Modal */}
           {isFamilyModalOpen && (
         <div className="fixed z-[9999] inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">

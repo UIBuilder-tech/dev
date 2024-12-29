@@ -8,7 +8,7 @@ const PrivacyPolicyPage: React.FC = () => {
       <div className="min-h-screen bg-cream">
         <div className="container mx-auto pt-28 px-4 py-12 sm:px-6 lg:px-8 max-w-[1200px]">
           {/* Header */}
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-center mb-6 text-[#1B365D]">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl text-center mb-6 text-[#1B365D]">
             Privacy Policy
           </h1>
           <p className="text-center text-gray-600 mb-16 max-w-3xl mx-auto">
@@ -23,13 +23,13 @@ const PrivacyPolicyPage: React.FC = () => {
               <div className="flex items-start gap-2">
                 <Asterisk className="w-5 h-5 mt-1.5 text-secondary flex-shrink-0" />
                 <div>
-                  <h2 className="text-2xl font-semibold mb-4 text-gray-900">
+                  <h2 className="text-2xl font-normal mb-4 text-gray-900">
                     1. Information We Collect
                   </h2>
                   <div className="space-y-4 text-gray-600">
-                    <h3 className="text-lg font-semibold text-gray-800">
+                    <p className="text-lg font-normal text-gray-800">
                       a. Personal Information
-                    </h3>
+                    </p>
                     <p>
                       We collect personal information that you voluntarily
                       provide to us, including but not limited to:
@@ -54,7 +54,7 @@ const PrivacyPolicyPage: React.FC = () => {
               <div className="flex items-start gap-2">
                 <Asterisk className="w-5 h-5 mt-1.5 text-secondary flex-shrink-0" />
                 <div>
-                  <h2 className="text-2xl font-semibold mb-4 text-gray-900">
+                  <h2 className="text-2xl font-normal mb-4 text-gray-900">
                     2. How We Use Your Information
                   </h2>
                   <div className="space-y-4 text-gray-600">
@@ -78,13 +78,13 @@ const PrivacyPolicyPage: React.FC = () => {
               <div className="flex items-start gap-2">
                 <Asterisk className="w-5 h-5 mt-1.5 text-secondary flex-shrink-0" />
                 <div>
-                  <h2 className="text-2xl font-semibold mb-4 text-gray-900">
+                  <h2 className="text-2xl font-normal mb-4 text-gray-900">
                     3. How We Share Your Information
                   </h2>
                   <div className="space-y-4 text-gray-600">
-                    <h3 className="text-lg font-semibold text-gray-800">
+                    <p className="text-lg font-normal text-gray-800">
                       a. With Service Providers
-                    </h3>
+                    </p>
                     <p>
                       We may share your information with third-party service
                       providers, including Salesforce for data management and
@@ -92,18 +92,18 @@ const PrivacyPolicyPage: React.FC = () => {
                       behalf.
                     </p>
 
-                    <h3 className="text-lg font-semibold text-gray-800">
+                    <p className="text-lg font-normal text-gray-800">
                       b. As Required by Law
-                    </h3>
+                    </p>
                     <p>
                       We may disclose your information if required to do so by
                       law or in response to valid requests by public
                       authorities.
                     </p>
 
-                    <h3 className="text-lg font-semibold text-gray-800">
+                    <p className="text-lg font-normal text-gray-800">
                       c. Business Transfers
-                    </h3>
+                    </p>
                     <p>
                       In the event of a merger, acquisition, or sale of assets,
                       your information may be transferred to the acquiring
@@ -119,7 +119,7 @@ const PrivacyPolicyPage: React.FC = () => {
               <div className="flex items-start gap-2">
                 <Asterisk className="w-5 h-5 mt-1.5 text-secondary flex-shrink-0" />
                 <div>
-                  <h2 className="text-2xl font-semibold mb-4 text-gray-900">
+                  <h2 className="text-2xl font-normal mb-4 text-gray-900">
                     4. Cookies and Tracking Technologies
                   </h2>
                   <div className="space-y-4 text-gray-600">
@@ -128,9 +128,9 @@ const PrivacyPolicyPage: React.FC = () => {
                       experience on our Site. Cookies allow us to track and
                       analyze usage data to improve functionality.
                     </p>
-                    <h3 className="text-lg font-semibold text-gray-800">
+                    <p className="text-lg font-normal text-gray-800">
                       Managing Cookies:
-                    </h3>
+                    </p>
                     <p>
                       You can adjust your browser settings to refuse cookies or
                       alert you when cookies are being sent. However, some
@@ -147,7 +147,7 @@ const PrivacyPolicyPage: React.FC = () => {
               <div className="flex items-start gap-2">
                 <Asterisk className="w-5 h-5 mt-1.5 text-secondary flex-shrink-0" />
                 <div>
-                  <h2 className="text-2xl font-semibold mb-4 text-gray-900">
+                  <h2 className="text-2xl font-normal mb-4 text-gray-900">
                     10. Contact Us
                   </h2>
                   <div className="space-y-4 text-gray-600">
@@ -170,7 +170,7 @@ const PrivacyPolicyPage: React.FC = () => {
               <div className="flex items-start gap-2">
                 <Asterisk className="w-5 h-5 mt-1.5 text-secondary flex-shrink-0" />
                 <div>
-                  <h2 className="text-2xl font-semibold mb-4 text-gray-900">
+                  <h2 className="text-2xl font-normal mb-4 text-gray-900">
                     Compliance with Stripe
                   </h2>
                   <div className="space-y-4 text-gray-600">

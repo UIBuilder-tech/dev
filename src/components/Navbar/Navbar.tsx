@@ -121,17 +121,12 @@ export default function Navbar() {
                 </button>
                 
                 <button
-                  onClick={e => {
+                   onClick={e => {
                     e.preventDefault();
-                    const element = document.getElementById('footer');
-                    if (element) {
-                      const targetPosition =
-                        element.getBoundingClientRect().bottom;
-                      window.scrollTo({
-                        top: targetPosition,
-                        behavior: 'smooth',
-                      });
-                    }
+                    window.scrollTo({
+                      top: document.body.scrollHeight,
+                      behavior: 'smooth',
+                    });
                   }}
                 >
                   <img
