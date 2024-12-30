@@ -69,7 +69,7 @@ export default function VolunteerSection() {
                 </div>
               </div>
               <div
-                className={`absolute left-8 -bottom-6 md:-bottom-12 ${
+                className={`absolute left-8 -bottom-10 md:-bottom-12 ${
                   range150 ? "-bottom-6" : ""
                 }`}
               >

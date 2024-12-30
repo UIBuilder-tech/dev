@@ -42,14 +42,19 @@ export default function Navbar() {
   const scrollDirection = useScrollDirection();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const navigate = useNavigate()
+  const user = JSON.parse(sessionStorage.getItem("user") || "{}");
+  const [navigateTo, setNavigateTo] = useState(user?.userId ? "/profile" : "#")
+  const navigate = useNavigate();
+
   const ProfileClickHandler = () => {
     console.log("🚀 ~ ProfileClickHandler ~ data:", data)
-    if (data?.accessToken) {
+    if (data?.userData?.userId) {
       navigate("/profile")
+      setNavigateTo("/profile")
     } else {
       console.log("else condition");
       setIsModalOpen(true)
+      setNavigateTo("#")
     }
   };
   return (
@@ -153,7 +158,7 @@ export default function Navbar() {
 
       <AuthModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
       <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
-      <MobileNav profileClick={ProfileClickHandler} />
+      <MobileNav profileClick={ProfileClickHandler} to={navigateTo} />
     </>
   );
 }

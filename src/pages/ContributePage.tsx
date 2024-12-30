@@ -41,11 +41,19 @@ export default function ContributePage() {
       {/* <div id="vantiga">
         <Vantiga />
       </div> */}
+      <div className='relative'>
       <div id='donation-table'>
         <DonationTable setTotalDonationAmount={setTotalDonationAmount} />
       </div>
       <div id='payment'>
         <PaymentForm totalDonationAmount={totalDonationAmount} />
+      </div>
+    <div className="absolute inset-0 bg-cream bg-opacity-75 backdrop-filter backdrop-blur-sm flex items-center justify-center z-10">
+      <div className="text-center">
+        <h2 className="text-5xl md:text-7xl text-gray-800 mb-2">Coming Soon</h2>
+        <p className="text-sm md:text-lg text-gray-600">We're working hard to bring you this feature. Stay tuned!</p>
+      </div>
+    </div>
       </div>
       <div id='chf-grants'>
         <VantigaDetailed />

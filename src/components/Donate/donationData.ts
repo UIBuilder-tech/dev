@@ -31,7 +31,12 @@ export const donationData: DonationCategory[] = [
         id: 'ges',
         name: 'Guruprasad Educational Society, Mallapur',
         amount: 0
-      }
+      },
+      {
+        id: 'samartha-bhanap',
+        name: 'Samartha Bhanap Yojana',
+        amount: 0
+      },
     ]
   },
   {
@@ -89,11 +94,6 @@ export const donationData: DonationCategory[] = [
       {
         id: 'samvit-sudha',
         name: 'Samvit Sudha',
-        amount: 0
-      },
-      {
-        id: 'samartha-bhanap',
-        name: 'Samartha Bhanap Yojana',
         amount: 0
       },
       {

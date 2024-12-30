@@ -121,7 +121,7 @@ export default function FeaturedProjects({ title }: Props) {
   const [hoveredId, setHoveredId] = useState<string | null>(null);
 
   return (
-    <div className="py-8 px-6 md:p-8 md:mx-14 desktop-1900:px-14 desktop-1900:py-14">
+    <div className="py-8 px-4 md:px-6 md:p-8 md:mx-14 desktop-1900:px-14 desktop-1900:py-14">
       <h2 className="mb-8 text-3xl md:text-4xl font-display text-gray-900 desktop-1900:text-5xl desktop-1900:pb-5">
         {title}
       </h2>
@@ -176,7 +176,7 @@ export default function FeaturedProjects({ title }: Props) {
                     </span>
                   </td>
                   <td className="relative">
-                    <div className="flex items-center justify-center md:justify-end gap-1 max-sm:ml-2 max-sm:mx-2 md:mx-4">
+                    <div className="flex items-center justify-center md:justify-end md:gap-1 max-sm md:mx-4">
                       {isHovered && project.images && (
                         <div className="absolute max-sm:hidden right-40 flex items-center">
                           {project.images.map((image, index) => (
@@ -207,12 +207,12 @@ export default function FeaturedProjects({ title }: Props) {
                         {isHovered ? (
                           <img
                             src={activeSideArrow}
-                            className="w-14 h-14 max-sm:w-16 max-sm:h-16"
+                            className="md:w-14 md:h-14 w-20 h-20"
                           />
                         ) : (
                           <img
                             src={inactiveSideArrow}
-                            className="w-14 h-14 max-sm:w-16 max-sm:h-16"
+                            className="md:w-14 md:h-14 w-20 h-20"
                           />
                         )}
                       </Link>
@@ -220,12 +220,12 @@ export default function FeaturedProjects({ title }: Props) {
                         {isHovered ? (
                           <img
                             src={activeDonate}
-                            className="w-14 h-14 max-sm:w-16 max-sm:h-16"
+                            className="md:w-14 md:h-14 w-16 h-16"
                           />
                         ) : (
                           <img
                             src={inactiveDonate}
-                            className="w-14 h-14 max-sm:w-16 max-sm:h-16"
+                            className="md:w-14 md:h-14 w-20 h-20"
                           />
                         )}
                       </Link>
