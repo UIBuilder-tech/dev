@@ -108,14 +108,15 @@ export default function VantigaDetailed() {
                   contributions through the means of Math Maryada.
                 </p>
               </div>
+              <div className="space-y-3">
               <div className="flex gap-3 desktop-1200:gap-4 desktop-1500:gap-5 desktop-1900:gap-6">
                 <img
                   src={grantsIcon}
                   alt="grantsIcon"
                   className="w-5 h-5 text-[#E67E22] flex-shrink-0 mt-1"
                 />
-                <p className="text-sm desktop-1500:text-sm desktop-1200:text-xs sm:text-base text-gray-600 desktop-1900:text-lg ">
-                  <span className="font-semibold">This is relevant for:</span>
+                <p className="text-sm desktop-1500:text-sm desktop-1200:text-xs sm:text-base text-gray-600  ">
+                  <span className="">This is relevant for:</span>
                 </p>
               </div>
               <div className="flex gap-3 ml-6 pl-2 desktop-1200:ml-8 desktop-1200:pl-3 desktop-1500:ml-10 desktop-1500:pl-4 desktop-1900:ml-12 desktop-1900:pl-5">
@@ -130,6 +131,7 @@ export default function VantigaDetailed() {
                   connected with the Math and who look for spiritual connection.
                 </p>
               </div>
+              </div>
             </div>
           </div>
           <div>
@@ -137,13 +139,14 @@ export default function VantigaDetailed() {
               Who can pay Vantigā
             </p>
             <div className="space-y-6 py-4">
+              <div className="space-y-3">
               <div className="flex gap-3 desktop-1200:gap-4 desktop-1500:gap-2 desktop-1900:gap-6">
                 <img
                   src={grantsIcon}
                   alt="grantsIcon"
                   className="w-5 h-5 text-[#E67E22] flex-shrink-0 mt-1"
                 />
-                <p className="text-sm desktop-1500:text-sm desktop-1200:text-xs sm:text-base text-gray-600 desktop-1900:text-lg">
+                <p className="text-sm desktop-1500:text-sm desktop-1200:text-xs sm:text-base text-gray-600">
                   Who can pay Vantigā:
                 </p>
               </div>
@@ -153,13 +156,15 @@ export default function VantigaDetailed() {
                   Adult Bhānap lady, even if married outside the community
                 </li>
               </ul>
+              </div>
+              <div className="space-y-3">
               <div className="flex gap-3 desktop-1200:gap-4 desktop-1500:gap-2 desktop-1900:gap-4">
                 <img
                   src={grantsIcon}
                   alt="grantsIcon"
                   className="w-5 h-5 text-[#E67E22] flex-shrink-0 mt-1"
                 />
-                <p className="text-sm desktop-1500:text-sm desktop-1200:text-xs sm:text-base text-gray-600 desktop-1900:text-lg">
+                <p className="text-sm desktop-1500:text-sm desktop-1200:text-xs sm:text-base text-gray-600">
                   Who can pay Math Maryada (Equivalent to Vantigā )
                   <span className="text-secondary font-semibold">*</span>:
                 </p>
@@ -170,6 +175,7 @@ export default function VantigaDetailed() {
                 <li>Minor (whether Bhānap or not)</li>
                 <li>(on behalf of) a Deceased devotee</li>
               </ul>
+              </div>
             </div>
             <p className="mt-8 text-sm desktop-1500:text-sm desktop-1200:text-xs sm:text-base text-gray-600 desktop-1200:mt-8 desktop-1500:mt-10 desktop-1900:mt-12">
               <span className="text-secondary font-semibold">*</span> However,
