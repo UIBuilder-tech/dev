@@ -6,9 +6,10 @@ interface Props {
   desc: string;
   img: string;
   from?: string;
+  subTitle?: string;
 }
 
-export default function Hero({ title, desc, img, from = "" }: Props) {
+export default function Hero({ title,subTitle,desc, img, from = "" }: Props) {
   return (
     <div className="relative md:min-h-screen">
       <div className="absolute inset-0">
@@ -36,7 +37,7 @@ export default function Hero({ title, desc, img, from = "" }: Props) {
                 {title}
                 {from === "home" && (
                   <p className="text-sm md:text-sm text-white text-left px-1 font-body desktop-1200:text-xs desktop-1500:text-sm desktop-1900:text-sm mt-2">
-                    IRS certified 501(c)(3) organization, Tax Id: 20-2738955
+                    {subTitle}
                   </p>
                 )}
               </h1>

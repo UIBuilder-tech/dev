@@ -1,4 +1,3 @@
-const apiPrefix = import.meta.env.VITE_API_PREFIX;
 const clientId = import.meta.env.VITE_API_SALESFORCE_CLIENT_ID;
 const clientSecret = import.meta.env.VITE_API_SALESFORCE_CLIENT_SECRET;
 const userName = import.meta.env.VITE_API_SALESFORCE_USER_NAME;
@@ -9,8 +8,6 @@ const ApiCalling = async (
   type?: string,
   data?: any = ""
 ): Promise<any> => {
-
-  url = `${apiPrefix}${url}`;
   const myHeaders = new Headers();
   const token = sessionStorage.getItem("accessToken");
 

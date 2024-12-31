@@ -6,7 +6,7 @@ import { useWindowWidth } from "../../hooks/useWindowWidth";
 import { Link } from "react-router-dom";
 import sectionBorder from "../../assets/section-border.svg";
 
-export default function VolunteerSection() {
+export default function VolunteerSection({data}) {
   const windowWidth = useWindowWidth();
   const isMobile = windowWidth < 768; // md breakpoint
   const range150 = windowWidth >= 1200 && windowWidth <= 1500;
@@ -93,16 +93,14 @@ export default function VolunteerSection() {
             {/* Right content */}
             <div className="flex flex-grow flex-col justify-center space-y-6  desktop-1900:space-y-10 md:w-2/3">
               <h2 className="text-3xl md:text-5xl text-white desktop-1900:text-7xl">
-                Volunteer
+                {data.title}
               </h2>
               <p
                 className={`text-sm md:text-lg text-white  md:max-w-[60%] desktop-1900:text-[22px]  ${
                   range150 ? "text-[16px] leading-5 max-w-[75%]" : ""
                 }`}
               >
-                Join us in making a difference. Your skills and enthusiasm can
-                help us achieve our goals in Heritage, Education and Women's
-                Empowerment.
+               {data.description} 
               </p>
               <div className="flex flex-wrap max-sm:flex-row gap-1 md:gap-4">
                 {/* <Link

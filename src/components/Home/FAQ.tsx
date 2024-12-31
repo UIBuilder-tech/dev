@@ -1,79 +1,44 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronRight, ChevronLeft, Plus } from "lucide-react";
 import cloud1 from "../../assets/cloud1.svg";
 import cloud2 from "../../assets/cloud2.svg";
 import cloud3 from "../../assets/cloud3.svg";
 import mountain from "../../assets/mountain.svg";
-
-// Sample FAQ data - you can replace with your actual data
-const faqData = [
-  {
-    id: 1,
-    question:
-      "Are my donations to CHF including Vantiga tax-deductible in the United States?",
-    answer:
-      "Since CHF is recognized by the IRS as a 501(c)(3) not-for-profit organization (EIN 20-2738955), donations and Vantiga to it are tax-deductible. However, please check with your tax consultant for the specific deductions that would apply in your specific case.",
-  },
-  {
-    id: 2,
-    question:
-      "What is the correct amount of Vantiga I need to pay per year to the Math?",
-    answer:
-      "Our revered H.H. Shrimat Anandashram Swamiji said – 'If all paid Vantiga at the rate of 1% of their income, the daily as well as occasional services at the Maths could be performed without any anxiety and the sadhana contemplated by us could be accomplished with peace of mind.' CHF recommends considering donations at the following suggested levels: Vantiga at 1% of your annual income or at a minimum of $1.50/day. Further, donations for special projects in any amount are welcome.",
-  },
-  {
-    id: 3,
-    question:
-      "Do I always have to login (join) CHF when accessing the CHF website?",
-    answer:
-      "Our CHF website at www.chfusa.org has member-specific content available for you. Such content will be of use for any and all Bhanaps in the US. The benefits of enrolling in the CHF USA website include receiving newsletters, getting invites to CHF events, downloading donation receipts, processing donations with minimal data entry, and accessing a directory of members (coming soon). Membership is restricted to Bhanaps for security.",
-  },
-  {
-    id: 4,
-    question:
-      "How do I specify the particular project to which I want to donate?",
-    answer:
-      "The donation page on the CHF website allows you to specify how you want to split the donated amount between various projects, support-a-student, Vantiga, or the general fund. CHF recommends donations at the following levels: Support A Student at $300/year per student supported and Vantiga at 1% of your annual income or at a minimum of $1/day.",
-  },
-  {
-    id: 5,
-    question:
-      "When and how (media) will I receive a receipt for my CHF donation?",
-    answer:
-      "We provide receipts electronically if an email address is provided during login or updated later. If you desire a physical receipt, send your details to contactus@chfusa.org with a postal address, and a hardcopy receipt will be mailed to that address.",
-  },
-  {
-    id: 6,
-    question: "How can I hold a CHF-supported event in my region/city?",
-    answer:
-      "Please contact any CHF Board member or Ambassador. We will be happy to support you with a list of members in the area and ideas for conducting the event. Please reach out to us using contactus@chfusa.org .",
-  },
-  {
-    id: 7,
-    question:
-      "How do I submit a News item (such as articles, photos, and a description of an event in my region) for the CHF website?",
-    answer:
-      "Please choose the location on our website where you would like your details to be published. We will work with the website editorial team to get your content published. Send the details to webmaster@chfusa.org, and volunteers from the web team will get in touch with you.",
-  },
-];
-
 const itemsPerPage = 5;
+const AdminPanelUrl = import.meta.env.VITE_ADMIN_PANEL_API;
 
 export default function FAQSection() {
   const [openQuestion, setOpenQuestion] = useState<number | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
+  const [PageData, setPageData] = useState([]);
 
-  const totalPages = Math.ceil(faqData.length / itemsPerPage);
+  const totalPages = Math.ceil(PageData.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
-  const currentFaqs = faqData.slice(startIndex, startIndex + itemsPerPage);
+  const currentFaqs = PageData.slice(startIndex, startIndex + itemsPerPage);
 
   const toggleQuestion = (id: number) => {
     setOpenQuestion(openQuestion === id ? null : id);
   };
-
+  useEffect(() => {
+    const api = async () => {
+      const requestOptions: any = {
+        method: 'GET',
+        redirect: 'follow'
+      };
+      fetch(`${AdminPanelUrl}/faqs`, requestOptions)
+        .then(response => response.json())
+        .then(result => {
+          if (result?.data) {
+            setPageData(result.data)
+          }
+        })
+        .catch(error => console.log('error', error));
+    }
+    api();
+  }, [])
   return (
     <div className="relative h-[650px] px-4 mt-16 py-12 mb-5 md:px-8">
       {/* Cloud 1 - Top right */}
@@ -107,7 +72,6 @@ export default function FAQSection() {
         <h1 className="mb-12 text-3xl md:text-5xl text-primary desktop-1900:text-6xl">
           FAQ's
         </h1>
-
         <div
           className="space-y-4 max-h-[450px] desktop-1900:max-h-[400px] overflow-y-scroll "
           style={{ scrollbarWidth: "none" }}
@@ -122,7 +86,7 @@ export default function FAQSection() {
                   <Plus className="h-3 w-3 " />
                 </span>
                 <span className="text-gray-700 text-sm md:text-lg dxesktop-1900:text-xl">
-                  {faq.question}
+                  {faq.Question}
                 </span>
               </button>
               <AnimatePresence>
@@ -135,7 +99,7 @@ export default function FAQSection() {
                     className="ml-9 mb-4"
                   >
                     <p className="text-gray-600 desktop-1900:text-lg">
-                      {faq.answer}
+                      {faq.Answer}
                     </p>
                   </motion.div>
                 )}
@@ -160,9 +124,8 @@ export default function FAQSection() {
                 <button
                   key={index}
                   onClick={() => setCurrentPage(index + 1)}
-                  className={`h-2 w-2 rounded-full ${
-                    currentPage === index + 1 ? "bg-[#FF9966]" : "bg-gray-300"
-                  }`}
+                  className={`h-2 w-2 rounded-full ${currentPage === index + 1 ? "bg-[#FF9966]" : "bg-gray-300"
+                    }`}
                 />
               ))}
             </div>
