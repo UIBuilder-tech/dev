@@ -43,7 +43,7 @@ export default function PaymentForm({ totalDonationAmount }: Props) {
     city: '',
     zipCode: '',
     country: '',
-    paymentMethod: 'online',
+    paymentMethod: 'offline',
     rememberMe: false,
     amount: 0
   };
