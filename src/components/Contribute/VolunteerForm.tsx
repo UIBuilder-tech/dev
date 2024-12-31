@@ -1,6 +1,7 @@
 import { useState, FormEvent } from "react";
 import { Check, Phone, Mail } from "lucide-react";
 import volunteerGroup from "../../assets/volunteerGroup.svg";
+import { toast } from "react-toastify";
 
 interface FormData {
   category: string;
@@ -31,6 +32,7 @@ export default function VolunteerForm() {
 
   const [errors, setErrors] = useState<FormErrors>({});
   const [isNameVerified, setIsNameVerified] = useState(true);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const validateForm = (): boolean => {
     const newErrors: FormErrors = {};
@@ -71,10 +73,88 @@ export default function VolunteerForm() {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e: FormEvent) => {
+  const submitToGoogleForms = async () => {
+    const formUrl = 'https://docs.google.com/forms/d/1kjl7hDg18qtbJtpSL5aFJtGSl8G6Zno69bXeShCYo1g/formResponse';
+    
+    // Create URL encoded data
+    const formDataEncoded = new URLSearchParams();
+    formDataEncoded.append('entry.351035147', formData.category);
+    formDataEncoded.append('entry.386116062', formData.name);
+    formDataEncoded.append('entry.1078615357', formData.email);
+    formDataEncoded.append('entry.236924547', formData.phone);
+    formDataEncoded.append('entry.1860523063', formData.address);
+    formDataEncoded.append('entry.1412854759', formData.city);
+    formDataEncoded.append('entry.887718961', formData.country);
+
+    try {
+      // Create a hidden form and submit it
+      const form = document.createElement('form');
+      form.method = 'POST';
+      form.action = formUrl;
+      form.style.display = 'none';
+
+      // Add form fields
+      formDataEncoded.forEach((value, key) => {
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = key;
+        input.value = value;
+        form.appendChild(input);
+      });
+
+      // Add the form to the document
+      document.body.appendChild(form);
+
+      // Create a hidden iframe
+      const iframe = document.createElement('iframe');
+      iframe.name = 'hidden-iframe';
+      iframe.style.display = 'none';
+      document.body.appendChild(iframe);
+
+      // Set form target to the hidden iframe
+      form.target = 'hidden-iframe';
+      
+      // Submit the form
+      form.submit();
+
+      // Clean up
+      setTimeout(() => {
+        document.body.removeChild(form);
+        document.body.removeChild(iframe);
+      }, 500);
+
+      return true;
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      return false;
+    }
+  };
+
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    if (validateForm()) {
-      console.log("Form submitted:", formData);
+    if (validateForm() && !isSubmitting) {
+      setIsSubmitting(true);
+      try {
+        await submitToGoogleForms();
+        // Reset form after successful submission
+        setFormData({
+          category: "",
+          name: "",
+          email: "",
+          phone: "",
+          address: "",
+          city: "",
+          zipCode: "",
+          country: "",
+        });
+        // alert('Form submitted successfully!');
+        toast.success("Submitted successfully!!")
+      } catch (error) {
+        console.error('Error submitting form:', error);
+        alert('There was an error submitting the form. Please try again.');
+      } finally {
+        setIsSubmitting(false);
+      }
     }
   };
 
@@ -93,10 +173,11 @@ export default function VolunteerForm() {
     }
   };
 
+  // Rest of your component remains exactly the same...
   return (
     <div className="bg-white relative">
       <div className="px-6 max-sm:pt-8 max-sm:pb-[150px] md:py-16 max-w-7xl mx-auto">
-        <h1 className=" text-center text-[#02306A] text-3xl md:text-4xl font-display text-gray-900 mb-8 desktop-1900:text-5xl">
+        <h1 className="text-center text-[#02306A] text-3xl md:text-4xl font-display text-gray-900 mb-8 desktop-1900:text-5xl">
           Volunteer
         </h1>
 
@@ -112,7 +193,7 @@ export default function VolunteerForm() {
               <p className="text-[#808080] font-medium leading-6">
                 Become a part of the solution to community's challenges by
                 showing them how even your smallest action can make a
-                significant difference in the lives of others.For more
+                significant difference in the lives of others. For more
                 information on how you can become a CHF Volunteer, please
                 contact us via phone or email as shown below-
               </p>
@@ -122,7 +203,7 @@ export default function VolunteerForm() {
                   href="tel:(215) 666 3200"
                   className="flex items-center gap-2 text-[#516072] hover:text-primary/90"
                 >
-                  <Phone className="h-5 w-5 text-secondary " />
+                  <Phone className="h-5 w-5 text-secondary" />
                   <span className="underline">(215) 666 3200</span>
                 </a>
 
@@ -192,9 +273,9 @@ export default function VolunteerForm() {
                   name="email"
                   value={formData.email}
                   onChange={handleInputChange}
-                  className={` ${
+                  className={`w-full border-b ${
                     errors.email ? "border-red-500" : "border-gray-200"
-                  } w-full border-b border-gray-200 py-3 focus:outline-none focus:border-primary desktop-1200:text-base desktop-1500:text-lg desktop-1900:text-xl`}
+                  } py-3 focus:outline-none focus:border-primary desktop-1200:text-base desktop-1500:text-lg desktop-1900:text-xl`}
                   placeholder="Email Address"
                 />
                 {errors.email && (
@@ -208,9 +289,9 @@ export default function VolunteerForm() {
                   name="phone"
                   value={formData.phone}
                   onChange={handleInputChange}
-                  className={` ${
+                  className={`w-full border-b ${
                     errors.phone ? "border-red-500" : "border-gray-200"
-                  } w-full border-b border-gray-200 py-3 focus:outline-none focus:border-primary desktop-1200:text-base desktop-1500:text-lg desktop-1900:text-xl`}
+                  } py-3 focus:outline-none focus:border-primary desktop-1200:text-base desktop-1500:text-lg desktop-1900:text-xl`}
                   placeholder="Phone Number"
                 />
                 {errors.phone && (
@@ -224,9 +305,9 @@ export default function VolunteerForm() {
                   name="address"
                   value={formData.address}
                   onChange={handleInputChange}
-                  className={` ${
+                  className={`w-full border-b ${
                     errors.address ? "border-red-500" : "border-gray-200"
-                  } w-full border-b border-gray-200 py-3 focus:outline-none focus:border-primary desktop-1200:text-base desktop-1500:text-lg desktop-1900:text-xl`}
+                  } py-3 focus:outline-none focus:border-primary desktop-1200:text-base desktop-1500:text-lg desktop-1900:text-xl`}
                   placeholder="Address"
                 />
                 {errors.address && (
@@ -241,9 +322,9 @@ export default function VolunteerForm() {
                     name="city"
                     value={formData.city}
                     onChange={handleInputChange}
-                    className={` ${
+                    className={`w-full border-b ${
                       errors.city ? "border-red-500" : "border-gray-200"
-                    } w-full border-b border-gray-200 py-3 focus:outline-none focus:border-primary desktop-1200:text-base desktop-1500:text-lg desktop-1900:text-xl`}
+                    } py-3 focus:outline-none focus:border-primary desktop-1200:text-base desktop-1500:text-lg desktop-1900:text-xl`}
                     placeholder="City"
                   />
                   {errors.city && (
@@ -256,15 +337,13 @@ export default function VolunteerForm() {
                     name="zipCode"
                     value={formData.zipCode}
                     onChange={handleInputChange}
-                    className={` ${
+                    className={`w-full border-b ${
                       errors.zipCode ? "border-red-500" : "border-gray-200"
-                    } w-full border-b border-gray-200 py-3 focus:outline-none focus:border-primary desktop-1200:text-base desktop-1500:text-lg desktop-1900:text-xl`}
+                    } py-3 focus:outline-none focus:border-primary desktop-1200:text-base desktop-1500:text-lg desktop-1900:text-xl`}
                     placeholder="Zip Code"
                   />
                   {errors.zipCode && (
-                    <p className="text-red-500 text-sm mt-1">
-                      {errors.zipCode}
-                    </p>
+                    <p className="text-red-500 text-sm mt-1">{errors.zipCode}</p>
                   )}
                 </div>
               </div>
@@ -274,14 +353,13 @@ export default function VolunteerForm() {
                   name="country"
                   value={formData.country}
                   onChange={handleInputChange}
-                  className={`${
+                  className={`w-full border-b ${
                     errors.country ? "border-red-500" : "border-gray-200"
-                  } w-full border-b border-gray-200 py-3 focus:outline-none focus:border-primary desktop-1200:text-base desktop-1500:text-lg desktop-1900:text-xlt`}
+                  } py-3 focus:outline-none focus:border-primary desktop-1200:text-base desktop-1500:text-lg desktop-1900:text-xl`}
                 >
                   <option value="">Country</option>
                   <option value="US">United States</option>
                   <option value="IN">India</option>
-                  {/* Add more countries as needed */}
                 </select>
                 {errors.country && (
                   <p className="text-red-500 text-sm mt-1">{errors.country}</p>
@@ -290,9 +368,10 @@ export default function VolunteerForm() {
 
               <button
                 type="submit"
-                className="w-full bg-secondary text-white rounded-full py-3 hover:bg-primary/90 transition-colors"
+                disabled={isSubmitting}
+                className="w-full bg-secondary text-white rounded-full py-3 hover:bg-primary/90 transition-colors disabled:opacity-50"
               >
-                Submit
+                {isSubmitting ? "Submitting..." : "Submit"}
               </button>
             </form>
           </div>
