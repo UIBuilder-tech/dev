@@ -67,7 +67,7 @@ const projects: Project[] = [
     tag: "Heritage",
     status: "Ongoing",
     images: [Yatri],
-    linkTo: "heritage-preservation",
+    linkTo: "special-projects",
   },
   {
     id: "6",
@@ -88,10 +88,10 @@ const projects: Project[] = [
   {
     id: "11",
     title: "Grid Connected Solar Project",
-    tag: "Education",
+    tag: "Special Project",
     status: "Completed",
     images: [Solar],
-    linkTo: "education",
+    linkTo: "special-projects",
   },
   {
     id: "8",
@@ -147,16 +147,18 @@ export default function FeaturedProjects({ title }: Props) {
                   onMouseLeave={() => setHoveredId(null)}
                 >
                   <td className="md:py-7 py-5 desktop-1900:w-[40%]">
-                    <span
+                    <Link
+                    to={`/projects#${project?.linkTo}`}
                       className={`text-xs md:text-lg desktop-1900:text-2xl font-medium transition-colors duration-200 ${
                         isHovered ? "text-secondary" : "text-gray-900"
                       }`}
                     >
                       {project.title}
-                    </span>
+                    </Link>
                   </td>
                   <td>
-                    <span
+                    <Link
+                    to={`/projects#${project?.linkTo}`}
                       className={`inline-flex rounded-full px-2 md:px-4 py-1 text-xs md:text-sm transition-all duration-200 break-words hyphens-auto max-w-[80%] desktop-1900:text-lg ${
                         isHovered
                           ? "bg-secondary text-white border border-secondary"
@@ -164,16 +166,17 @@ export default function FeaturedProjects({ title }: Props) {
                       }`}
                     >
                       {project.tag}
-                    </span>
+                    </Link>
                   </td>
                   <td>
-                    <span
+                    <Link
+                    to={`/projects#${project?.linkTo}`}
                       className={`text-xs md:text-lg transition-colors desktop-1900:text-xl duration-200 ${
                         isHovered ? "text-secondary" : "text-gray-600"
                       }`}
                     >
                       {project.status}
-                    </span>
+                    </Link>
                   </td>
                   <td className="relative">
                     <div className="flex items-center justify-center md:justify-end md:gap-1 max-sm md:mx-4">

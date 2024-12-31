@@ -25,7 +25,7 @@ export default function Vision() {
     {
       title: "Our Mission",
       content:
-        "The Chitrapur Heritage Foundation (CHF) envisions a thriving community that embraces its cultural and spiritual roots while fostering sustainable progress. By supporting personal growth and collective well-being, CHF aims to preserve heritage and wisdom for future generations, inspiring a fairer and better world.",
+        "Empowering a brighter future, rooted in heritage. The Chitrapur Heritage Foundation supports education for the underprivileged, women's empowerment, and preservation of Chitrapur Saraswat heritage through donations, volunteering, and community engagement",
       image: MissionImg,
     },
     {

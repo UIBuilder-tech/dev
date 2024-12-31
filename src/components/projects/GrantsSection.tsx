@@ -38,7 +38,7 @@ export default function GrantsSection() {
                   religious activities.
                 </p>
               </div>
-              <div className="flex gap-3">
+              {/* <div className="flex gap-3">
                 <img src={grantsPointer} className="w-5 h-5 text-[#E67E22] flex-shrink-0 mt-1" />
                 <p className="text-sm desktop-1500:text-sm desktop-1200:text-xs sm:text-base text-gray-600">
                   We do not provide grants for budget line items labeled as
@@ -46,7 +46,7 @@ export default function GrantsSection() {
                   Fund Private Family Trust/Foundations, or political or
                   religious activities.
                 </p>
-              </div>
+              </div> */}
             </div>
           </div>
 
@@ -136,7 +136,7 @@ export default function GrantsSection() {
                 </li>
                 <li>
                   Grant applicants must demonstrate the potential of
-                  continuing the funded work in a self-renewing manager after
+                  continuing the funded work in a self-renewing manner after
                   funding from Chitrapur Heritage Foundation ceases
                 </li>
               </ul>
