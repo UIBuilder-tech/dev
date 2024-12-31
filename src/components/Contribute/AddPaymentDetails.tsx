@@ -43,7 +43,7 @@ export default function PaymentForm({ totalDonationAmount }: Props) {
     city: '',
     zipCode: '',
     country: '',
-    paymentMethod: 'online',
+    paymentMethod: 'offline',
     rememberMe: false,
     amount: 0
   };
@@ -335,7 +335,7 @@ export default function PaymentForm({ totalDonationAmount }: Props) {
 
             {/* Payment Methods */}
             <div className="grid grid-cols-2 gap-2 md:gap-6">
-              <label className="flex items-center gap-3 rounded-lg cursor-pointer">
+              {/* <label className="flex items-center gap-3 rounded-lg cursor-pointer">
                 <input
                   disabled={IsFormValidate}
                   type="radio"
@@ -352,7 +352,7 @@ export default function PaymentForm({ totalDonationAmount }: Props) {
                     className="w-24 desktop-1200:w-24 desktop-1500:w-28 desktop-1900:w-36"
                   />
                 </div>
-              </label>
+              </label> */}
 
               <label className="flex items-center gap-3 cursor-pointer">
                 <input

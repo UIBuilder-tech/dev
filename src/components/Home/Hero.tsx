@@ -35,7 +35,7 @@ export default function Hero({ title, desc, img, from = "" }: Props) {
               <h1 className="font-display text-3xl md:text-5xl text-white mb-3 md:mb-6 leading-tight desktop-1200:text-4xl desktop-1500:text-[2.75rem] desktop-1900:text-5xl">
                 {title}
                 {from === "home" && (
-                  <p className="text-sm md:text-sm text-white text-left px-1 font-body desktop-1200:text-xs desktop-1500:text-sm desktop-1900:text-sm">
+                  <p className="text-sm md:text-sm text-white text-left px-1 font-body desktop-1200:text-xs desktop-1500:text-sm desktop-1900:text-sm mt-2">
                     IRS certified 501(c)(3) organization, Tax Id: 20-2738955
                   </p>
                 )}

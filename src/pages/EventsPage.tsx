@@ -59,10 +59,10 @@ export default function EventsPage() {
     },
     {
       id: 2,
-      title: "Kanakanjali Utsava",
-      location: "New Jersey, USA",
+      title: "Gīrvāṇapratis̲h̲t̲h̲ā",
+      location: "Shrī Chitrāpur Math",
       description:
-        "Kanakanjali Utsava started as a small Guru Pujan initiative and grew into a celebration attended by nearly 100 people. It involved seva from community members in decoration, photography, and food planning to honor Paramapujya Swamiji's birthday.",
+        "Parama Pūjya Sadyojāt Shaṅkarāshram Swāmījī's love and reverence for Sanskrit is well known. In His pravachanas, Swāmījī often highlights the language's beauty and its capacity to express profound thoughts. Following His directive to make Sanskrit learning easy and accessible, a dedicated group of sādhakas developed a Step by Step learning program.",
       images: [Heritage2],
     },
     {

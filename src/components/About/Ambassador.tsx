@@ -51,9 +51,9 @@ export default function Ambassador() {
             mission and vision. Inspire your friends, family members, colleagues
             and neighbors to support the effort in your neighborhood, at your
             convenience.{" "}
-            <Link to="/contribute#volunteer" className="text-blue-500 underline italic">
+            <a href="https://forms.gle/tdGUm6A38nMyMHwZ8" target="blank" className="text-blue-500 underline italic">
               Join Now
-            </Link>
+            </a>
           </p>
         </div>
 

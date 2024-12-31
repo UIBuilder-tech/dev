@@ -146,7 +146,7 @@ export default function ImpactSection() {
                       {/* <ArrowUpRight className="h-6 w-6  text-white rounded-full rotate-[175deg]" /> */}
                       <img
                         src={activeArrow}
-                        className="h-14 w-14 desktop-1500:h-14 desktop-1500:w-14 desktop-1200:w-12 desktop-1200:h-12"
+                        className="h-16 w-16 max-sm:h-10 max-sm:w-10"
                       />
                     </Link>
                   </div>

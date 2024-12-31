@@ -32,16 +32,8 @@ export const DataProvider: React.FC<DataProviderProps> = ({ children }) => {
   const [data, setData] = useState<Data>(defaultData);
 
   useEffect(() => {
-    const clientSecretData = sessionStorage.getItem("clientSecret");
-    const accessToken = sessionStorage.getItem("accessToken");
     const user = sessionStorage.getItem("user");
 
-    if (clientSecretData) {
-      setData((v) => ({ ...v, clientSecret: clientSecretData }));
-    }
-    if (accessToken) {
-      setData((v) => ({ ...v, accessToken }));
-    }
     if (user) {
       setData((v) => ({ ...v, userData: JSON.parse(user) }));
     }

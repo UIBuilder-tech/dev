@@ -118,6 +118,15 @@ export default function Footer() {
                     Parimochan Project
                   </a>
                 </li>
+                <li>
+                  <a
+                    href="https://samarthbhanap.com/"
+                    target="_blank"
+                    className="hover:underline"
+                  >
+                    Samarth Bhanap Yojana
+                  </a>
+                </li>
               </ul>
             </div>
           </div>

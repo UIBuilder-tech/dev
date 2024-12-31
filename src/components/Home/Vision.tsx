@@ -25,7 +25,7 @@ export default function Vision() {
     {
       title: "Our Mission",
       content:
-        "The Chitrapur Heritage Foundation (CHF) envisions a thriving community that embraces its cultural and spiritual roots while fostering sustainable progress. By supporting personal growth and collective well-being, CHF aims to preserve heritage and wisdom for future generations, inspiring a fairer and better world.",
+        "Empowering a brighter future, rooted in heritage. The Chitrapur Heritage Foundation supports education for the underprivileged, women's empowerment, and preservation of Chitrapur Saraswat heritage through donations, volunteering, and community engagement",
       image: MissionImg,
     },
     {
@@ -61,7 +61,7 @@ export default function Vision() {
                       IRS certified 501c(3) organization, Tax id: 20-2738955
                     </p> */}
                     <div className=" flex max-sm:flex-col items-center justify-between gap-8 desktop-1200:mt-2 mt-8">
-                      <div className="w-[262px] max-sm:w-[100px] desktop-1500:w-[260px] desktop-1200:w-[240px] desktop-1900:w-[400px] shrink-0 ">
+                      <div className="w-[262px] max-sm:w-[150px] desktop-1500:w-[260px] desktop-1200:w-[240px] desktop-1900:w-[400px] shrink-0 ">
                         <img
                           src={slide.image[0]}
                           alt=""
@@ -78,7 +78,7 @@ export default function Vision() {
                         </p>
                       </div>
 
-                      <div className="w-[262px] desktop-1500:w-[260px] desktop-1200:w-[240px] shrink-0 max-sm:w-[100px] desktop-1900:w-[350px] md:block">
+                      <div className="w-[262px] desktop-1500:w-[260px] desktop-1200:w-[240px] shrink-0 max-sm:w-[150px] desktop-1900:w-[350px] md:block">
                         <img
                           src={slide.image[1]}
                           alt=""

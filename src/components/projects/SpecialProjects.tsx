@@ -121,7 +121,7 @@ const ProjectCard = ({
                     // navigate("/contribute#donate-table");
                   }}
                   src={ActiveArrow}
-                  className="md:w-16 md:h-16 w-8 h-8 "
+                  className="md:w-16 md:h-16 w-10 h-10 "
                 />
               </div>
             </div>
