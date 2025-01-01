@@ -102,7 +102,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
                     onClick={() =>
                       handlePageNavigation(key)
                     }
-                     className="capitalize">{key}</span>
+                     className="capitalize w-full">{key}</span>
                     <ChevronRight
                     onClick={() =>
                       setExpandedSection(expandedSection === key ? null : key)

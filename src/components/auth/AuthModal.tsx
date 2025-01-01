@@ -124,6 +124,38 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
           });
   };
 
+  const forgotFormHandler = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setIsDisable(true);
+
+    const payload = {
+      forgot_email: formData.Email,
+    };
+        fetch(`${BASE_URL}/api/auth/check-email`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(payload),
+        }).then(resp=>resp?.json())
+          .then(response => {
+            if (response?.success) {
+                toast.success(response?.message);
+                onClose();
+            } else {
+                toast.error(response?.message);
+            }
+            console.log("RESPONSE__>", response)
+          })
+          .catch(error => {
+            toast.error('Something went wrong. Please try again later.');
+            console.error(error);
+          })
+          .finally(() => {
+            setIsDisable(false);
+          });
+  };
+
   const registerFormHandler = async (
     event: React.FormEvent<HTMLFormElement>
   ) => {
@@ -174,13 +206,13 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
           <>
             <div className='text-center mb-6 desktop-1500:text-xs desktop-1200:text-xs desktop-1900:text-sm'>
               <h2 className='text-2xl text-gray-800'>
-                RESET PASSWORD
+                FORGOT PASSWORD
               </h2>
               <p className='text-gray-500 mt-2'>
                 Forgot your password? Let's get you a new one
               </p>
             </div>
-            <form onSubmit={loginFormHandler} className='space-y-4 desktop-1200:text-xs desktop-1900:text-sm'>
+            <form onSubmit={forgotFormHandler} className='space-y-4 desktop-1200:text-xs desktop-1900:text-sm'>
               <input
                 required
                 onChange={changeHandler}
@@ -190,7 +222,7 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
                 placeholder='Enter your registered email'
                 className='w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-secondary/20'
               />
-              <CustomButton text='RESET PASSWORD' isLoading={isDisable} />
+              <CustomButton text='SUBMIT' isLoading={isDisable} />
             </form>
             <div className='mt-6 text-center desktop-1200:text-xs desktop-1900:text-sm'>
               <p>

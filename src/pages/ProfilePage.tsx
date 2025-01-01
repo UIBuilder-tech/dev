@@ -3,6 +3,9 @@ import { PencilIcon, UserPlusIcon, XIcon, Power } from "lucide-react";
 import IconNavLink from "../components/Navbar/IconNavLink";
 import Footer from "../components/Footer/Footer";
 import { toast } from "react-toastify";
+import heritage1 from "../assets/heritage1.jpg";
+import { Link } from "react-router-dom";
+
 
 interface PersonalDetails {
   FirstName: string;
@@ -245,11 +248,13 @@ export default function Profile() {
   }
 
   return (
-    <>
-    <div className="max-w-4xl mx-auto p-6 pt-48 space-y-8 max-sm:space-y-6 max-sm:py-[80px]">
+    <div className="min-h-screen  bg-cover bg-center bg-no-repeat" style={{ backgroundImage: `url(${heritage1})` }}>
+        <div className="min-h-[200vh] md:min-h-[150vh]   absolute inset-0 bg-black/50"></div>
+
+    <div className="relative z-[9] max-w-4xl mx-auto p-6 pt-48 space-y-8 max-sm:space-y-6 max-sm:py-[80px]">
       {/* Personal Details Section */}
       <div className="flex flex-row justify-between items-center">
-        <h2 className="text-5xl max-sm:text-4xl text-gray-800">My Profile</h2>
+        <h2 className="text-5xl max-sm:text-4xl text-white">My Profile</h2>
       </div>
       <div className="bg-white rounded-lg p-8 max-sm:p-6 shadow-lg border border-gray-200">
         <div className="flex justify-between md:items-center mb-8 max-sm:flex-col">
@@ -526,16 +531,21 @@ export default function Profile() {
       <div className="flex justify-between md:py-6 max-sm:pt-4">
         {JSON.parse(sessionStorage.getItem("user") || "") ? (
           <div
-            className="flex flex-row gap-2 border-2 border-secondary px-6 py-3 rounded-full text-secondary cursor-pointer max-sm:text-sm transition-colors duration-200"
+            className="flex flex-row gap-2 border-2 border-secondary px-6 py-3 rounded-full text-white cursor-pointer max-sm:text-sm transition-colors duration-200 bg-secondary"
             onClick={() => { sessionStorage.clear(); window.location.href = "/" }}
           >
-            <IconNavLink to="javascript:void(0)" icon={Power} />
+            <Link
+                  to="javascript:void(0)"
+                  className={`test-white`}
+                >
+                  <Power className="h-5 w-5" />
+                </Link>
             <p>Logout</p>
           </div>
         ) : null}
         <button
           onClick={() => setIsPasswordModalOpen(true)}
-          className="px-6 py-3 border-2 border-[#1572E8] max-sm:text-sm text-[#1572E8] rounded-full hover:bg-[#1572E8] hover:text-white transition-colors duration-200"
+          className="px-6 py-3 border-2 border-[#1572E8] max-sm:text-sm rounded-full bg-[#1572E8] text-white transition-colors duration-200"
         >
           Change Password
         </button>
@@ -779,6 +789,6 @@ export default function Profile() {
         </div>
       </div>
     )}
-  </>
+  </div>
   );
 }

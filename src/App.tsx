@@ -15,6 +15,8 @@ import CheckoutForm from "./components/payment/CheckoutForm";
 import CompletePage from "./components/payment/CompletePage";
 import Profile from "./pages/ProfilePage";
 import PrivacyPolicyPage from "./pages/PrivacyPolicyPage";
+import EmailVerification from "./pages/EmailVerification";
+import ForgotPassword from "./pages/ForgotPassword";
 const stripePublicKey = import.meta.env.VITE_STRIPE_PUBLIC_KEY;
 interface StripeOptions {
   appearance: {
@@ -80,6 +82,8 @@ function App() {
           <Route path="/donate" element={<ComingSoon />} />
           <Route path="/join" element={<ComingSoon />} />
           <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+          <Route path="/activate/:uidb64/:token" element={<EmailVerification />} />
+          <Route path="/reset-password/:uidb64/:token" element={<ForgotPassword />} />
         </Routes>
       </Router>
     </>
