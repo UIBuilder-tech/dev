@@ -5,17 +5,36 @@ import education from "../../assets/education.svg";
 import { useWindowWidth } from "../../hooks/useWindowWidth";
 import { Link } from "react-router-dom";
 import sectionBorder from "../../assets/section-border.svg";
-
-export default function VolunteerSection({data}) {
+import { useEffect, useState } from "react";
+const AdminPanelUrl = import.meta.env.VITE_ADMIN_PANEL_API;
+export default function VolunteerSection() {
+  const [PageData, setPageData] = useState({});
   const windowWidth = useWindowWidth();
   const isMobile = windowWidth < 768; // md breakpoint
   const range150 = windowWidth >= 1200 && windowWidth <= 1500;
   const range100 = windowWidth >= 1900;
+  useEffect(() => {
+    const api = async () => {
+      const requestOptions: any = {
+        method: 'GET',
+        redirect: 'follow'
+      };
+      fetch(`${AdminPanelUrl}/home-page?populate[Volunteer]=*`, requestOptions)
+        .then(response => response.json())
+        .then(result => {
+          if (result?.data?.Volunteer) {
+            setPageData(result.data.Volunteer)
+          }
+        })
+        .catch(error => console.log('error', error));
+    }
+
+    api();
+  }, [])
   return (
     <section
-      className={`relative bg-[#E67E22] ${
-        range150 ? "py-10 pb-14" : ""
-      } py-16 my-10`}
+      className={`relative bg-[#E67E22] ${range150 ? "py-10 pb-14" : ""
+        } py-16 my-10`}
     >
       <div className="container relative mx-auto px-2 md:px-4 desktop-1200:px-14 desktop-1500:px-14 desktop-1900:px-14">
         <div className="flex flex-row">
@@ -24,11 +43,10 @@ export default function VolunteerSection({data}) {
             <img
               src={volunteer}
               alt="Volunteer illustration"
-              className={`w-full ${
-                range150
+              className={`w-full ${range150
                   ? "max-w-[185px]"
                   : " max-w-[250px] desktop-1900:max-w-[300px]"
-              }`}
+                }`}
             />
           </div>
 
@@ -69,9 +87,8 @@ export default function VolunteerSection({data}) {
                 </div>
               </div>
               <div
-                className={`absolute left-8 -bottom-10 md:-bottom-12 ${
-                  range150 ? "-bottom-6" : ""
-                }`}
+                className={`absolute left-8 -bottom-10 md:-bottom-12 ${range150 ? "-bottom-6" : ""
+                  }`}
               >
                 <div className="flex flex-col items-center">
                   <div className="rounded-full">
@@ -93,14 +110,13 @@ export default function VolunteerSection({data}) {
             {/* Right content */}
             <div className="flex flex-grow flex-col justify-center space-y-6  desktop-1900:space-y-10 md:w-2/3">
               <h2 className="text-3xl md:text-5xl text-white desktop-1900:text-7xl">
-                {data.title}
+                {PageData.title}
               </h2>
               <p
-                className={`text-sm md:text-lg text-white  md:max-w-[60%] desktop-1900:text-[22px]  ${
-                  range150 ? "text-[16px] leading-5 max-w-[75%]" : ""
-                }`}
+                className={`text-sm md:text-lg text-white  md:max-w-[60%] desktop-1900:text-[22px]  ${range150 ? "text-[16px] leading-5 max-w-[75%]" : ""
+                  }`}
               >
-               {data.description} 
+                {PageData.description}
               </p>
               <div className="flex flex-wrap max-sm:flex-row gap-1 md:gap-4">
                 {/* <Link

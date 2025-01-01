@@ -22,7 +22,7 @@ export default function HomePage() {
       redirect: 'follow'
     };
 
-    fetch(`${AdminPanelUrl}/home-page?populate[vision_mission_section][populate]=*&populate[Section_3][populate]=*&populate[Our_Impact_Big_Card][populate]=*&populate[Volunteer][populate]=*&populate[OurTeam][populate]=*`, requestOptions)
+    fetch(`${AdminPanelUrl}/home-page?populate[vision_mission_section][populate]=*&populate[Section_3][populate]=*&populate[Our_Impact_Big_Card][populate]=*`, requestOptions)
       .then(response => response.json())
       .then(result => {
         if (result?.data) {
@@ -58,13 +58,12 @@ export default function HomePage() {
             Section_3 &&
             <Programs data={Section_3} />
           }
-          <FeaturedProjects title="Featured Projects" />{
+          <FeaturedProjects title="Featured Projects" />
+          {
             HomePageData?.Our_Impact_Big_Card &&
             <ImpactSection data={HomePageData?.Our_Impact_Big_Card || []} />
           }
-          {
-            HomePageData?.Volunteer && <VolunteerSection data={HomePageData.Volunteer} />
-          }
+          <VolunteerSection />
           <TeamSection />
           <FAQSection />
           <Footer />

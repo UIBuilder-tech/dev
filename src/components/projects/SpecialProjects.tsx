@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Heart, Plus } from "lucide-react";
 import { useNavigate } from "react-router-dom";
@@ -6,13 +6,14 @@ import { useWindowWidth } from "../../hooks/useWindowWidth";
 import ActiveArrow from "../../assets/arrowActive.svg";
 import DonateActive from "../../assets/projectActiveDonateIcon.svg";
 import DonateInctive from "../../assets/projectInactiveDonateIcon.svg";
+import DataProcess from "../../utils/dataProcess";
 
 interface Project {
   id: number;
   title: string;
   location: string;
   description: string;
-  images: string[];
+  image: string[];
 }
 
 const ProjectCard = ({
@@ -51,31 +52,31 @@ const ProjectCard = ({
       animate={
         isExpanded
           ? {
-              width:
-                window.innerWidth < 768
-                  ? "375px"
-                  : range150
+            width:
+              window.innerWidth < 768
+                ? "375px"
+                : range150
                   ? "520px"
                   : range100
-                  ? "800px"
-                  : "640px",
-              height:
-                window.innerWidth < 768 ? "auto" : range100 ? "500px" : "450px",
-              zIndex: 10,
-            }
+                    ? "800px"
+                    : "640px",
+            height:
+              window.innerWidth < 768 ? "auto" : range100 ? "500px" : "450px",
+            zIndex: 10,
+          }
           : {
-              width:
-                window.innerWidth < 768
-                  ? "180px"
-                  : range150
+            width:
+              window.innerWidth < 768
+                ? "180px"
+                : range150
                   ? "280px"
                   : range100
-                  ? "375px"
-                  : "320px",
-              height:
-                window.innerWidth < 768 ? "auto" : range100 ? "500px" : "450px",
-              zIndex: 0,
-            }
+                    ? "375px"
+                    : "320px",
+            height:
+              window.innerWidth < 768 ? "auto" : range100 ? "500px" : "450px",
+            zIndex: 0,
+          }
       }
       transition={{ duration: 0.3 }}
       onClick={handleClick}
@@ -83,9 +84,8 @@ const ProjectCard = ({
       <AnimatePresence mode="wait">
         {isExpanded ? (
           <motion.div
-            className={`${
-              range150 ? "p-6" : "md:p-8"
-            } p-3 h-full flex flex-col`}
+            className={`${range150 ? "p-6" : "md:p-8"
+              } p-3 h-full flex flex-col`}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -129,9 +129,8 @@ const ProjectCard = ({
             <div className="flex md:gap-8 flex-1">
               <div className="flex-1">
                 <p
-                  className={`text-[#808080] text-sm md:text-md leading-5 ${
-                    range150 ? "text-xs" : ""
-                  }`}
+                  className={`text-[#808080] text-sm md:text-md leading-5 ${range150 ? "text-xs" : ""
+                    }`}
                 >
                   {project.description}
                 </p>
@@ -149,33 +148,30 @@ const ProjectCard = ({
               </div>
               <div className="flex-1 flex flex-col justify-center items-end">
                 <img
-                  src={project.images[currentImageIndex]}
+                  src={project.image[currentImageIndex]}
                   alt={project.title}
-                  className={`${
-                    range150 || range120
+                  className={`${range150 || range120
                       ? "w-[200px] h-[300px]"
                       : "w-full h-[250px] md:h-64"
-                  } object-cover rounded-lg`}
+                    } object-cover rounded-lg`}
                 />
                 <div
-                  className={`${
-                    range150 || range120
+                  className={`${range150 || range120
                       ? "w-[200px] h-[300px]"
                       : "w-full md:h-64"
-                  } flex justify-center gap-2 mt-4`}
+                    } flex justify-center gap-2 mt-4`}
                 >
-                  {project.images.map((_, index) => (
+                  {project.image.map((_, index) => (
                     <button
                       key={index}
                       onClick={(e) => {
                         e.stopPropagation();
                         setCurrentImageIndex(index);
                       }}
-                      className={`w-2 h-2 rounded-full ${
-                        index === currentImageIndex
+                      className={`w-2 h-2 rounded-full ${index === currentImageIndex
                           ? "bg-orange-500"
                           : "bg-gray-300"
-                      }`}
+                        }`}
                     />
                   ))}
                 </div>
@@ -198,9 +194,8 @@ const ProjectCard = ({
                     {project.title}
                   </p>
                   <p
-                    className={`${
-                      range150 ? "text-lg" : "text-xl"
-                    } mb-2 md:mb-4`}
+                    className={`${range150 ? "text-lg" : "text-xl"
+                      } mb-2 md:mb-4`}
                   >
                     {project.location}
                   </p>
@@ -224,7 +219,7 @@ const ProjectCard = ({
 
               <div className="mb-4">
                 <div className="flex justify-left mt-2">
-                  {project.images.map((img, index) => (
+                  {project.image.map((img, index) => (
                     <img
                       key={index}
                       src={img}
@@ -236,9 +231,8 @@ const ProjectCard = ({
               </div>
 
               <p
-                className={`text-[#808080] text-sm md:text-md leading-5 max-sm:line-clamp-5 line-clamp-6 overflow-hidden  ${
-                  range150 ? "text-xs" : ""
-                }`}
+                className={`text-[#808080] text-sm md:text-md leading-5 max-sm:line-clamp-5 line-clamp-6 overflow-hidden  ${range150 ? "text-xs" : ""
+                  }`}
               >
                 {project.description}
               </p>
@@ -253,16 +247,15 @@ const ProjectCard = ({
     </motion.div>
   );
 };
-
+const AdminPanelUrl = import.meta.env.VITE_ADMIN_PANEL_API;
 const SpecialProjects = ({
-  projects,
   title,
   from = "projects",
 }: {
-  projects: Project[];
   title: string;
   from?: string;
 }) => {
+  const [projects, setProjects] = useState([])
   const [currentPage, setCurrentPage] = useState(0);
   const [expandedId, setExpandedId] = useState(1); // Set first card as expanded by default
   const itemsPerPage = 3;
@@ -271,7 +264,25 @@ const SpecialProjects = ({
   const isMobile = windowWidth < 768;
   const range150 = windowWidth >= 1200 && windowWidth <= 1500;
   // const range120 = windowWidth>1500 && windowWidth <=1900;
-
+  useEffect(() => {
+    const api = async () => {
+      const requestOptions: any = {
+        method: 'GET',
+        redirect: 'follow'
+      };
+      fetch(`${AdminPanelUrl}/all-projects?populate=*&filters[category][$eq]=${title}`, requestOptions)
+        .then(response => response.json())
+        .then(result => {
+          if (result?.data) {
+            const newData =DataProcess(result.data);
+            console.log("🚀 ~ harendra ~ result:", newData)
+            setProjects(newData)
+          }
+        })
+        .catch(error => console.log('error', error));
+    }
+    api();
+  }, [title])
   console.log(from);
   const handleExpand = (id: number) => {
     setExpandedId(id === expandedId ? id : id); // Always set to clicked id
@@ -305,9 +316,8 @@ const SpecialProjects = ({
   return (
     <div className="w-full max-w-7xl mx-auto py-12 desktop-1900:max-w-full">
       <h2
-        className={`text-3xl desktop-1200:text-4xl desktop-1900:text-5xl desktop-1900:pl-[160px] desktop-1900:relative mb-4 md:mb-8 max-sm:px-5 ${
-          range150 ? "pl-20" : ""
-        }`}
+        className={`text-3xl desktop-1200:text-4xl desktop-1900:text-5xl desktop-1900:pl-[160px] desktop-1900:relative mb-4 md:mb-8 max-sm:px-5 ${range150 ? "pl-20" : ""
+          }`}
       >
         {title}
       </h2>
@@ -317,9 +327,8 @@ const SpecialProjects = ({
           {!isMobile && (
             <button
               onClick={prevPage}
-              className={` ${
-                range150 ? "p-2" : "p-2 h-10"
-              } rounded-full bg-white shadow-lg hover:bg-gray-50  flex-shrink-0`}
+              className={` ${range150 ? "p-2" : "p-2 h-10"
+                } rounded-full bg-white shadow-lg hover:bg-gray-50  flex-shrink-0`}
             >
               <svg
                 width={range150 ? "18" : "24"}
@@ -337,26 +346,26 @@ const SpecialProjects = ({
           <div className="flex md:flex-row items-center flex-col gap-4 md:gap-6">
             {isMobile
               ? visibleProjects.map(
-                  (project) =>
-                    project.id === expandedId && (
-                      <ProjectCard
-                        from={from}
-                        key={project.id}
-                        project={project}
-                        isExpanded={true}
-                        onExpand={handleExpand}
-                      />
-                    )
-                )
+                (project) =>
+                  project.id === expandedId && (
+                    <ProjectCard
+                      from={from}
+                      key={project.id}
+                      project={project}
+                      isExpanded={true}
+                      onExpand={handleExpand}
+                    />
+                  )
+              )
               : visibleProjects.map((project) => (
-                  <ProjectCard
-                    from={from}
-                    key={project.id}
-                    project={project}
-                    isExpanded={project.id === expandedId}
-                    onExpand={handleExpand}
-                  />
-                ))}
+                <ProjectCard
+                  from={from}
+                  key={project.id}
+                  project={project}
+                  isExpanded={project.id === expandedId}
+                  onExpand={handleExpand}
+                />
+              ))}
             {isMobile && (
               <div className="flex-1 flex flex-row gap-3 md:gap-4">
                 {visibleProjects.map(
@@ -378,9 +387,8 @@ const SpecialProjects = ({
           {!isMobile && (
             <button
               onClick={nextPage}
-              className={` ${
-                range150 ? "p-2" : "p-2 h-10"
-              } rounded-full bg-white shadow-lg hover:bg-gray-50  flex-shrink-0`}
+              className={` ${range150 ? "p-2" : "p-2 h-10"
+                } rounded-full bg-white shadow-lg hover:bg-gray-50  flex-shrink-0`}
             >
               <svg
                 width={range150 ? "18" : "24"}
@@ -408,9 +416,8 @@ const SpecialProjects = ({
                     setExpandedId(firstProjectInNewPage.id);
                   }
                 }}
-                className={`w-2 h-2 rounded-full ${
-                  index === currentPage ? "bg-orange-500" : "bg-gray-300"
-                }`}
+                className={`w-2 h-2 rounded-full ${index === currentPage ? "bg-orange-500" : "bg-gray-300"
+                  }`}
               />
             ))}
           </div>

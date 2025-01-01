@@ -2,28 +2,26 @@ import { useState, useMemo, useEffect } from 'react';
 import { ChevronDown, ChevronUp, Trash2, Info } from 'lucide-react';
 import AmountInput from './AmountInput';
 import FilterSearch from './FilterSearch';
-import { donationData } from './donationData';
-import { DonationCategory, DonationItem, DonationSubcategory } from './types';
+import { DonationItem, DonationSubcategory } from './types';
 import { useWindowWidth } from '../../hooks/useWindowWidth';
 
-interface Props{
-  setTotalDonationAmount:unknown;
+interface Props {
+  setTotalDonationAmount: unknown;
 }
-
-export default function DonationTable({setTotalDonationAmount}:Props) {
-  const [expandedCategories, setExpandedCategories] = useState<string[]>([
-    donationData.length > 0 ? donationData[0].id : ''
-  ]);
+const AdminPanelUrl = import.meta.env.VITE_ADMIN_PANEL_API;
+export default function DonationTable({ setTotalDonationAmount }: Props) {
+  const [donationData, setDonationData] = useState<DonationSubcategory[]>([])
+  const [expandedCategories, setExpandedCategories] = useState<string[]>(['']);
   const [expandedSubcategories, setExpandedSubcategories] = useState<string[]>([]);
   const [amounts, setAmounts] = useState<Record<string, number>>({});
   const [quantities, setQuantities] = useState<Record<string, number>>({});
   const [remarks, setRemarks] = useState<Record<string, string>>({});
   const [useDefaultDonation, setUseDefaultDonation] = useState(false);
-    const windowWidth = useWindowWidth()
-    const isMobile = windowWidth < 768 // md breakpoint
+  const windowWidth = useWindowWidth()
+  const isMobile = windowWidth < 768 // md breakpoint
 
   const toggleCategory = (categoryId: string) => {
-    setExpandedCategories(prev => 
+    setExpandedCategories(prev =>
       prev.includes(categoryId)
         ? prev.filter(id => id !== categoryId)
         : [...prev, categoryId]
@@ -31,7 +29,7 @@ export default function DonationTable({setTotalDonationAmount}:Props) {
   };
 
   const toggleSubcategory = (subcategoryId: string) => {
-    setExpandedSubcategories(prev => 
+    setExpandedSubcategories(prev =>
       prev.includes(subcategoryId)
         ? prev.filter(id => id !== subcategoryId)
         : [...prev, subcategoryId]
@@ -122,127 +120,159 @@ export default function DonationTable({setTotalDonationAmount}:Props) {
 
         return (
           isMobile ?
-          <tr aria-rowspan={3} key={item.id} className="border-t border-gray-300">
-            <tr aria-rowspan={2}>
-            <td className="py-2 px-2 w-[40%] max-sm:text-sm" style={{wordWrap:"break-word"}}>{item.name}{item?.id==="sevas" && <><a target='blank' href='https://chitrapurmath.net/site/rates' className='text-blue-500 cursor-pointer underline font-normal text-xs pl-2'>Know more</a></>}
-            </td>
-            <tr>
-            <td className="py-2">
-              <AmountInput
-                value={itemAmount}
-                onChange={(value) => updateAmount(item.id, value)}
-              />
-            </td>
-            <td className="py-2 w-full text-center flex ">
-              {item.hasQuantity ? (
-                <span className='flex flex-row items-center'>
-                <span className='px-2 text-gray-500'>x</span>
-                <input
-                  type="number"
-                  min="0"
-                  value={itemQuantity}
-                  onChange={(e) => updateQuantity(item.id, Number(e.target.value))}
-                  placeholder="0"
-                  className="w-full text-center border border-gray-200 rounded-lg py-2 focus:outline-none focus:ring-2 focus:ring-primary/20"
-                />
-                </span>
-              ) : (
-                <span className='flex flex-row items-center'>
-                <span className='px-2 text-gray-500'>x</span>
-                <input
-                  type="number"
-                  value={1}
-                  readOnly
-                  className="w-full text-center border border-gray-200 rounded-lg py-2 focus:outline-none focus:ring-2 focus:ring-primary/20"
-                />
-                </span>
-              )}
-            </td>
-            </tr>
-            <tr className="py-2 px-2 text-center w-full">
-              <AmountInput
-                value={Number(totalItemAmount.toFixed(2))}
-                readOnly={true}
-              />
-            </tr>
-            </tr>
-            <tr className="py-2 px-2 flex flex-row items-center justify-center gap-2">
-              <input
-                type="text"
-                placeholder="Write your remarks here"
-                value={remarks[item.id] || ''}
-                onChange={(e) => updateRemarks(item.id, e.target.value)}
-                className="w-full border border-gray-200 rounded-lg px-3 py-2 italic font-light focus:outline-none focus:ring-2 focus:ring-primary/20"
-                style={{fontWeight:"lighter"}}
-              />
-              <button 
-                onClick={() => removeItem(item.id)} 
-                className={`p-1 ${isTrashActive ? "text-black hover:text-red-500" : "text-gray-400 cursor-not-allowed"}`}
-                disabled={!isTrashActive}
-              >
-                <Trash2 className="h-4 w-4" />
-              </button>
-            </tr>
-          </tr>
-          :
-          <tr key={item.id} className="border-t border-gray-300">
-            <td className="relative flex items-center"><div className=''><span className='py-2 px-2 max-w-[50%]' style={{wordWrap:"break-word"}}>{item.name}</span>{item?.id==="sevas" && <><a href='https://chitrapurmath.net/site/rates' target='blank' className='text-blue-500 cursor-pointer underline font-normal text-xs'>Know more</a></>}</div>
-           {item.description && <div className="inline-block ml-2  h-full relative group">
-            <Info className="w-4 h-4 text-gray-500 hover:text-gray-700 cursor-pointer my-auto" />
-            <div className="absolute left-1/2 transform -translate-x-1/2 mt-2 w-[300px] bg-white text-gray-500 text-sm rounded-[20px] p-4 hidden group-hover:block transition-opacity z-10 backdrop-blur-[50px]">
-              {item.description}
-            </div>
-          </div>}</td>
-            <td className="py-2 px-2">
-              <AmountInput
-                value={itemAmount}
-                onChange={(value) => updateAmount(item.id, value)}
-              />
-            </td>
-            <td className="py-2 px-2 text-center flex mx-8">
-              {item.hasQuantity ? (
-                <input
-                  type="number"
-                  min="0"
-                  value={itemQuantity}
-                  onChange={(e) => updateQuantity(item.id, Number(e.target.value))}
-                  placeholder="0"
-                  className="w-full text-center border border-gray-200 rounded-lg py-2 focus:outline-none focus:ring-2 focus:ring-primary/20"
-                />
-              ) : (
-                <td className="py-2 px-2 text-center w-full text-[#9e9e9e]">
-                  -
+            <tr aria-rowspan={3} key={item.id} className="border-t border-gray-300">
+              <tr aria-rowspan={2}>
+                <td className="py-2 px-2 w-[40%] max-sm:text-sm" style={{ wordWrap: "break-word" }}>{item.name}{item?.id === "sevas" && <><a target='blank' href='https://chitrapurmath.net/site/rates' className='text-blue-500 cursor-pointer underline font-normal text-xs pl-2'>Know more</a></>}
                 </td>
-              )}
-            </td>
-            <td className="py-2 px-2 text-center">
-              <AmountInput
-                value={Number(totalItemAmount.toFixed(2))}
-                readOnly={true}
-              />
-            </td>
-            <td className="py-2 px-2 flex flex-row items-center justify-center gap-2">
-              <input
-                type="text"
-                placeholder="Write your remarks here"
-                value={remarks[item.id] || ''}
-                onChange={(e) => updateRemarks(item.id, e.target.value)}
-                className="w-full border border-gray-200 rounded-lg px-3 py-2 italic font-light focus:outline-none focus:ring-2 focus:ring-primary/20"
-                style={{fontWeight:"lighter"}}
-              />
-              <button 
-                onClick={() => removeItem(item.id)} 
-                className={`p-1 ${isTrashActive ? "text-black hover:text-red-500" : "text-gray-400 cursor-not-allowed"}`}
-                disabled={!isTrashActive}
-              >
-                <Trash2 className="h-4 w-4" />
-              </button>
-            </td>
-          </tr>
+                <tr>
+                  <td className="py-2">
+                    <AmountInput
+                      value={itemAmount}
+                      onChange={(value) => updateAmount(item.id, value)}
+                    />
+                  </td>
+                  <td className="py-2 w-full text-center flex ">
+                    {item.hasQuantity ? (
+                      <span className='flex flex-row items-center'>
+                        <span className='px-2 text-gray-500'>x</span>
+                        <input
+                          type="number"
+                          min="0"
+                          value={itemQuantity}
+                          onChange={(e) => updateQuantity(item.id, Number(e.target.value))}
+                          placeholder="0"
+                          className="w-full text-center border border-gray-200 rounded-lg py-2 focus:outline-none focus:ring-2 focus:ring-primary/20"
+                        />
+                      </span>
+                    ) : (
+                      <span className='flex flex-row items-center'>
+                        <span className='px-2 text-gray-500'>x</span>
+                        <input
+                          type="number"
+                          value={1}
+                          readOnly
+                          className="w-full text-center border border-gray-200 rounded-lg py-2 focus:outline-none focus:ring-2 focus:ring-primary/20"
+                        />
+                      </span>
+                    )}
+                  </td>
+                </tr>
+                <tr className="py-2 px-2 text-center w-full">
+                  <AmountInput
+                    value={Number(totalItemAmount.toFixed(2))}
+                    readOnly={true}
+                  />
+                </tr>
+              </tr>
+              <tr className="py-2 px-2 flex flex-row items-center justify-center gap-2">
+                <input
+                  type="text"
+                  placeholder="Write your remarks here"
+                  value={remarks[item.id] || ''}
+                  onChange={(e) => updateRemarks(item.id, e.target.value)}
+                  className="w-full border border-gray-200 rounded-lg px-3 py-2 italic font-light focus:outline-none focus:ring-2 focus:ring-primary/20"
+                  style={{ fontWeight: "lighter" }}
+                />
+                <button
+                  onClick={() => removeItem(item.id)}
+                  className={`p-1 ${isTrashActive ? "text-black hover:text-red-500" : "text-gray-400 cursor-not-allowed"}`}
+                  disabled={!isTrashActive}
+                >
+                  <Trash2 className="h-4 w-4" />
+                </button>
+              </tr>
+            </tr>
+            :
+            <tr key={item.id} className="border-t border-gray-300">
+              <td className="relative flex items-center"><div className=''><span className='py-2 px-2 max-w-[50%]' style={{ wordWrap: "break-word" }}>{item.name}</span>{item?.id === "sevas" && <><a href='https://chitrapurmath.net/site/rates' target='blank' className='text-blue-500 cursor-pointer underline font-normal text-xs'>Know more</a></>}</div>
+                {item.description && <div className="inline-block ml-2  h-full relative group">
+                  <Info className="w-4 h-4 text-gray-500 hover:text-gray-700 cursor-pointer my-auto" />
+                  <div className="absolute left-1/2 transform -translate-x-1/2 mt-2 w-[300px] bg-white text-gray-500 text-sm rounded-[20px] p-4 hidden group-hover:block transition-opacity z-10 backdrop-blur-[50px]">
+                    {item.description}
+                  </div>
+                </div>}</td>
+              <td className="py-2 px-2">
+                <AmountInput
+                  value={itemAmount}
+                  onChange={(value) => updateAmount(item.id, value)}
+                />
+              </td>
+              <td className="py-2 px-2 text-center flex mx-8">
+                {item.hasQuantity ? (
+                  <input
+                    type="number"
+                    min="0"
+                    value={itemQuantity}
+                    onChange={(e) => updateQuantity(item.id, Number(e.target.value))}
+                    placeholder="0"
+                    className="w-full text-center border border-gray-200 rounded-lg py-2 focus:outline-none focus:ring-2 focus:ring-primary/20"
+                  />
+                ) : (
+                  <td className="py-2 px-2 text-center w-full text-[#9e9e9e]">
+                    -
+                  </td>
+                )}
+              </td>
+              <td className="py-2 px-2 text-center">
+                <AmountInput
+                  value={Number(totalItemAmount.toFixed(2))}
+                  readOnly={true}
+                />
+              </td>
+              <td className="py-2 px-2 flex flex-row items-center justify-center gap-2">
+                <input
+                  type="text"
+                  placeholder="Write your remarks here"
+                  value={remarks[item.id] || ''}
+                  onChange={(e) => updateRemarks(item.id, e.target.value)}
+                  className="w-full border border-gray-200 rounded-lg px-3 py-2 italic font-light focus:outline-none focus:ring-2 focus:ring-primary/20"
+                  style={{ fontWeight: "lighter" }}
+                />
+                <button
+                  onClick={() => removeItem(item.id)}
+                  className={`p-1 ${isTrashActive ? "text-black hover:text-red-500" : "text-gray-400 cursor-not-allowed"}`}
+                  disabled={!isTrashActive}
+                >
+                  <Trash2 className="h-4 w-4" />
+                </button>
+              </td>
+            </tr>
         );
       })}
     </tbody>
   );
+  useEffect(() => {
+    const api = async () => {
+      const requestOptions: any = {
+        method: 'GET',
+        redirect: 'follow'
+      };
+      fetch(`${AdminPanelUrl}/donates?pagination[pageSize]=100`, requestOptions)
+        .then(response => response.json())
+        .then(result => {
+          if (result?.data) {
+            const uniqueCategories = [...new Set(result.data.map(item => item.category))];
+            const finalData = uniqueCategories.map(item => {
+              return {
+                id: (item as string).toLowerCase().replace(/ /g, '-'),
+                name: item,
+                items: result.data.filter(data => data.category === item).map(data => ({
+                  id: data.id,
+                  name: data.name,
+                  amount: data.amount,
+                  description: data.description,
+                  hasQuantity: data.hasQuantity,
+                }))
+              }
+            })
+            setExpandedCategories([finalData.length > 0 ? finalData[0].id : ''])
+            setDonationData(finalData)
+          }
+        })
+        .catch(error => console.log('error', error));
+    }
+    api();
+  }, [])
 
   return (
     <div className="bg-cream rounded-lg p-5 md:px-16 mx-auto py-16">
@@ -278,9 +308,9 @@ export default function DonationTable({setTotalDonationAmount}:Props) {
                       <th className="text-left py-2 px-2 w-1/3 font-normal">Remarks</th>
                     </tr>
                   </thead> :
-                  <thead>
-                    <tr className='w-full text-center text-sm text-gray-500'>- Currently there no projects in this category -</tr>
-                  </thead>
+                    <thead>
+                      <tr className='w-full text-center text-sm text-gray-500'>- Currently there no projects in this category -</tr>
+                    </thead>
                   }
                   {category.items && renderDonationItems(category.items, category.name)}
                   {category.subcategories?.map(subcategory => (

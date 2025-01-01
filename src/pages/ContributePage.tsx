@@ -12,11 +12,29 @@ import PhotoGallery from '../components/About/PhotoGallery';
 import Ambassador from '../components/About/Ambassador';
 import VantigaDetailed from '../components/Contribute/VantigaDetailed';
 import { Outlet } from 'react-router-dom';
-
+const AdminPanelUrl = import.meta.env.VITE_ADMIN_PANEL_API;
 export default function ContributePage() {
   const [totalDonationAmount, setTotalDonationAmount] = useState<number>(0.0);
   const location = useLocation();
+  const [PageData, setPageData] = useState({});
+  useEffect(() => {
+    const api = async () => {
+      const requestOptions: any = {
+        method: 'GET',
+        redirect: 'follow'
+      };
+      fetch(`${AdminPanelUrl}/contribute-page?populate[vantigaList][populate]=*`, requestOptions)
+        .then(response => response.json())
+        .then(result => {
+          if (result?.data) {
+            setPageData(result.data)
+          }
+        })
+        .catch(error => console.log('error', error));
+    }
 
+    api();
+  }, [])
   useEffect(() => {
     // Handle initial load with hash
     const hash = location.hash.replace('#', '');
@@ -34,29 +52,22 @@ export default function ContributePage() {
   return (
     <div className='min-h-screen bg-cream'>
       <Hero
-        title='Support Our Mission to Preserve Heritage and Empower Communities'
-        desc='Your contributions enable the Chitrapur Heritage Foundation to sustain its initiatives in heritage preservation, education, women’s empowerment, and community development. Choose from various donation options and be a part of creating lasting positive change for generations to come.'
+        title={PageData.title}
+        desc={PageData.description}
         img={ChitrapurMathImg}
       />
-      {/* <div id="vantiga">
-        <Vantiga />
-      </div> */}
       <div className='relative'>
-      <div id='donation-table'>
-        <DonationTable setTotalDonationAmount={setTotalDonationAmount} />
-      </div>
-      <div id='payment'>
-        <PaymentForm totalDonationAmount={totalDonationAmount} />
-      </div>
-    {/* <div className="absolute inset-0 bg-cream bg-opacity-75 backdrop-filter backdrop-blur-sm flex items-center justify-center z-10">
-      <div className="text-center">
-        <h2 className="text-5xl md:text-7xl text-gray-800 mb-2">Coming Soon</h2>
-        <p className="text-sm md:text-lg text-gray-600">We're working hard to bring you this feature. Stay tuned!</p>
-      </div>
-    </div> */}
+        <div id='donation-table'>
+          <DonationTable setTotalDonationAmount={setTotalDonationAmount} />
+        </div>
+        <div id='payment'>
+          <PaymentForm totalDonationAmount={totalDonationAmount} />
+        </div>
       </div>
       <div id='chf-grants'>
-        <VantigaDetailed />
+        {
+          PageData?.vantigaList && <VantigaDetailed data={PageData} />
+        }
       </div>
       <div id='volunteer'>
         <VolunteerForm />

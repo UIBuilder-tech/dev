@@ -1,9 +1,31 @@
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import newsletter from "../../assets/newsletterImg.png";
-
+const AdminPanelUrl = import.meta.env.VITE_ADMIN_PANEL_API;
 function Newsletter() {
   const [email, setEmail] = useState("");
+  interface PageDataType {
+    title: string;
+    description: string;
+  }
 
+  const [PageData, setPageData] = useState<PageDataType | null>(null);
+  useEffect(() => {
+    const api = async () => {
+      const requestOptions: any = {
+        method: 'GET',
+        redirect: 'follow'
+      };
+      fetch(`${AdminPanelUrl}/newsletter`, requestOptions)
+        .then(response => response.json())
+        .then(result => {
+          if (result?.data) {
+            setPageData(result.data)
+          }
+        })
+        .catch(error => console.log('error', error));
+    }
+    api();
+  }, [])
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     // Add your newsletter signup logic here
@@ -11,7 +33,7 @@ function Newsletter() {
     setEmail("");
   };
   return (
-    <section
+    <>{PageData && <section
       className="relative  flex w-full flex-row items-center justify-center"
       style={{
         backgroundImage: `url(${newsletter})`,
@@ -26,14 +48,11 @@ function Newsletter() {
           <div className="md:h-[460px] desktop-1900:h-[550px] flex flex-col lg:flex-row items-center justify-left md:pl-20">
             <div className="flex flex-col justify-center md:space-y-6 desktop-1200:space-y-2 px-10 md:max-w-[50%] lg:pr-8 max-sm:py-8">
               <h2 className="text-3xl md:text-5xl md:text-6xl text-white mb-4 desktop-1200:text-4xl desktop-1500:text-5xl">
-                Newsletter
+                {PageData.title}
               </h2>
 
               <p className="text-md md:text-xl text-white leading-relaxed max-w-3xl pb-4 md:pb-10 desktop-1200:text-lg desktop-1200:leading-6">
-                Be a catalyst—become a CHF member—and receive updated news about
-                the programmes, events and more. Inspire your friends, family
-                members, colleagues and neighbors to support the effort in your
-                neighborhood, at your convenience.
+                {PageData.description}
               </p>
 
               <form onSubmit={handleSubmit} className="relative md:max-w-xl max-sm:flex max-sm:flex-row max-sm:items-center ">
@@ -67,7 +86,9 @@ function Newsletter() {
           </div>
         </div>
       </div>
-    </section>
+    </section>}
+    </>
+
   );
 }
 

@@ -1,26 +1,20 @@
 import Hero from "../components/Home/Hero";
 import FAQSection from "../components/Home/FAQ";
 import Footer from "../components/Footer/Footer";
-import FeaturedProjects from "../components/Home/FeaturedProjects";
 import Ambassador from "../components/About/Ambassador";
 import Newsletter from "../components/About/Newsletter";
 import OurTeam from "../components/Home/OurTeam";
 import VolunteerSection from "../components/Home/Volunteer";
 import ProjectsCategory from "../components/projects/ProjectsCategory";
-import {
-  EducationPrograms,
-  HeritagePrograms,
-  WomenEmpowermentPrograms,
-} from "../utils/ProjectsCategory";
 import SpecialProjects from "../components/projects/SpecialProjects";
 import GrantsSection from "../components/projects/GrantsSection";
 import { useLocation } from "react-router-dom";
-import { useEffect } from "react";
-import ChitrapurMathImg from "../assets/Shirali_Math.jpg";
+import { useEffect, useState } from "react";
 import Vantiga from "../components/Contribute/Vantiga";
 import HeroImg from "../assets/photoGallery/img11.png";
 import solar from "../assets/solar1.jpg";
 import solar1 from "../assets/solar2.jpg";
+import DataProcess from "../utils/dataProcess";
 
 interface Project {
   id: number;
@@ -29,9 +23,36 @@ interface Project {
   description: string;
   images: string[];
 }
+const AdminPanelUrl = import.meta.env.VITE_ADMIN_PANEL_API;
 export default function ProjectsPage() {
   const location = useLocation();
+  const [PageData, setPageData] = useState(null);
+  useEffect(() => {
+    const api = async () => {
+      const requestOptions: any = {
+        method: 'GET',
+        redirect: 'follow'
+      };
+      fetch(`${AdminPanelUrl}/project-page?populate[heroSection][populate]=*&populate[Section_3][populate]=*`, requestOptions)
+        .then(response => response.json())
+        .then(result => {
+          if (result?.data) {
+            if (result?.data?.heroSection) {
+              setPageData(v => ({ ...v, heroSection: result.data.heroSection }))
+            } if (result?.data?.Section_2) {
+              setPageData(v => ({ ...v, Section_2: DataProcess(result.data.Section_2) }))
+            } if (result?.data?.HeritagePreservation) {
+              setPageData(v => ({ ...v, HeritagePreservation: DataProcess(result.data.HeritagePreservation) }))
+            } if (result?.data?.Section_3) {
+              setPageData(v => ({ ...v, Section_3: result.data.Section_3 }))
+            }
 
+          }
+        })
+        .catch(error => console.log('error', error));
+    }
+    api();
+  }, [])
   useEffect(() => {
     // Handle initial load with hash
     const hash = location.hash.replace("#", "");
@@ -81,30 +102,30 @@ export default function ProjectsPage() {
 
   return (
     <div className="min-h-screen bg-cream">
-      <Hero
-        title="Empowering Progress through Impactful Projects"
-        desc="Explore our transformative initiatives that preserve heritage, empower communities, and promote education. From sustainable development to women's empowerment, our projects reflect a commitment to creating a brighter future rooted in tradition and progress."
-        img={HeroImg}
-        from="projects"
-      />
+      {
+        PageData?.heroSection && <Hero
+          title={PageData.heroSection.title}
+          desc={PageData.heroSection.description}
+          img={HeroImg}
+          from="projects"
+        />
+      }
+
       <div id="vantiga">
-        <Vantiga />
+        <Vantiga title={PageData?.Section_3?.title || ""} description={PageData?.Section_3?.description || ""} />
       </div>
       {/* <div id="our-projects">
         <FeaturedProjects title="Our Projects" />
       </div> */}
       <div id="heritage-preservation">
         <ProjectsCategory
-          categoryTitle="Heritage Preservation"
-          programs={HeritagePrograms}
-        />
+          categoryTitle="Heritage Preservation" />
       </div>
       <VolunteerSection />
 
       <div id="education">
         <ProjectsCategory
           categoryTitle="Education"
-          programs={EducationPrograms}
         />
       </div>
       <div id="chf-ambassador">
@@ -113,12 +134,11 @@ export default function ProjectsPage() {
       <div id="women-empowerment">
         <ProjectsCategory
           categoryTitle="Women Empowerment"
-          programs={WomenEmpowermentPrograms}
         />
       </div>
 
       <div id="special-projects">
-        <SpecialProjects title="Special Projects" projects={projects} />
+        <SpecialProjects title="Special Projects"  />
       </div>
       <div id="chf-grants" className="bg-white">
         <GrantsSection />

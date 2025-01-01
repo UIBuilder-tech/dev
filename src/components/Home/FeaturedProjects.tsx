@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import activeDonate from "../../assets/projectActiveDonateIcon.svg";
 import inactiveDonate from "../../assets/projectInactiveDonateIcon.svg";
 import activeSideArrow from "../../assets/activeSideArrow.svg";
@@ -28,98 +28,131 @@ interface Project {
   linkTo?: string;
 }
 
-const projects: Project[] = [
-  {
-    id: "1",
-    title: "Vantiga",
-    tag: "Heritage",
-    status: "Ongoing",
-    images: [vantiga],
-    linkTo: "heritage-preservation",
-  },
-  {
-    id: "2",
-    title: "Samvit Sudha",
-    tag: "Women Empowerment",
-    status: "Ongoing",
-    images: [SamvitSudha, SamvitSudha1],
-    linkTo: "women-empowerment",
-  },
-  {
-    id: "3",
-    title: "SPEVC School",
-    tag: "Education",
-    status: "Ongoing",
-    images: [spevc1, spevc2],
-    linkTo: "education",
-  },
-  {
-    id: "4",
-    title: "Parijanashram Vidyalaya",
-    tag: "Education",
-    status: "Ongoing",
-    images: [Parijnanashram],
-    linkTo: "education",
-  },
-  {
-    id: "5",
-    title: "Yatri Nivas Varanasi",
-    tag: "Heritage",
-    status: "Ongoing",
-    images: [Yatri],
-    linkTo: "special-projects",
-  },
-  {
-    id: "6",
-    title: "Goshala Maintenance",
-    tag: "Heritage",
-    status: "Ongoing",
-    images: [cows],
-    linkTo: "heritage-preservation",
-  },
-  {
-    id: "9",
-    title: "Kotekar Project",
-    tag: "Education",
-    status: "Completed",
-    images: [Kotekar, Kotekar1],
-    linkTo: "education",
-  },
-  {
-    id: "11",
-    title: "Grid Connected Solar Project",
-    tag: "Special Project",
-    status: "Completed",
-    images: [Solar],
-    linkTo: "special-projects",
-  },
-  {
-    id: "8",
-    title: "Sponsor-A-Student (Srivali School)",
-    tag: "Education",
-    status: "Ongoing",
-    images: [Srivali],
-    linkTo: "education",
-  },
-  // {
-  //   id: "7",
-  //   title: "Meditation Centre at Tiruvannamalai",
-  //   tag: "Heritage",
-  //   status: "Planned",
-  //   images: [
-  //     "https://images.unsplash.com/photo-1547354225-3e5a5f001d24?w=500&auto=format&fit=crop&q=60",
-  //   ],
-  //   linkTo: "heritage-preservation",
-  // },
-];
+// const projects: Project[] = [
+//   {
+//     id: "1",
+//     title: "Vantiga",
+//     tag: "Heritage",
+//     status: "Ongoing",
+//     images: [vantiga],
+//     linkTo: "heritage-preservation",
+//   },
+//   {
+//     id: "2",
+//     title: "Samvit Sudha",
+//     tag: "Women Empowerment",
+//     status: "Ongoing",
+//     images: [SamvitSudha, SamvitSudha1],
+//     linkTo: "women-empowerment",
+//   },
+//   {
+//     id: "3",
+//     title: "SPEVC School",
+//     tag: "Education",
+//     status: "Ongoing",
+//     images: [spevc1, spevc2],
+//     linkTo: "education",
+//   },
+//   {
+//     id: "4",
+//     title: "Parijanashram Vidyalaya",
+//     tag: "Education",
+//     status: "Ongoing",
+//     images: [Parijnanashram],
+//     linkTo: "education",
+//   },
+//   {
+//     id: "5",
+//     title: "Yatri Nivas Varanasi",
+//     tag: "Heritage",
+//     status: "Ongoing",
+//     images: [Yatri],
+//     linkTo: "special-projects",
+//   },
+//   {
+//     id: "6",
+//     title: "Goshala Maintenance",
+//     tag: "Heritage",
+//     status: "Ongoing",
+//     images: [cows],
+//     linkTo: "heritage-preservation",
+//   },
+//   {
+//     id: "9",
+//     title: "Kotekar Project",
+//     tag: "Education",
+//     status: "Completed",
+//     images: [Kotekar, Kotekar1],
+//     linkTo: "education",
+//   },
+//   {
+//     id: "11",
+//     title: "Grid Connected Solar Project",
+//     tag: "Special Project",
+//     status: "Completed",
+//     images: [Solar],
+//     linkTo: "special-projects",
+//   },
+//   {
+//     id: "8",
+//     title: "Sponsor-A-Student (Srivali School)",
+//     tag: "Education",
+//     status: "Ongoing",
+//     images: [Srivali],
+//     linkTo: "education",
+//   },
+//   // {
+//   //   id: "7",
+//   //   title: "Meditation Centre at Tiruvannamalai",
+//   //   tag: "Heritage",
+//   //   status: "Planned",
+//   //   images: [
+//   //     "https://images.unsplash.com/photo-1547354225-3e5a5f001d24?w=500&auto=format&fit=crop&q=60",
+//   //   ],
+//   //   linkTo: "heritage-preservation",
+//   // },
+// ];
 
 interface Props {
   title: string;
 }
+// 
 
+const AdminPanelUrl = import.meta.env.VITE_ADMIN_PANEL_API;
 export default function FeaturedProjects({ title }: Props) {
   const [hoveredId, setHoveredId] = useState<string | null>(null);
+  const [projects, setProjects] = useState(null);
+  useEffect(() => {
+    const api = async () => {
+      const requestOptions: any = {
+        method: 'GET',
+        redirect: 'follow'
+      };
+      fetch(`${AdminPanelUrl}/featured-projects?populate=*`, requestOptions)
+        .then(response => response.json())
+        .then(result => {
+        console.log("🚀 ~ api ~ result:", result)
 
+          if (result?.data) {
+            const newData = result.data.map(v => {
+              const path =  v.Image.map(a=>AdminPanelUrl.replace("/api", "") +a.url)
+              return {
+                id: v.id,
+                title: v.title,
+                tag: v.tag,
+                status: v.statusType,
+                images: path,
+                linkTo: v.tag.toLowerCase().replace(" ", "_"),
+              }
+            })
+            setProjects(newData)
+          }
+        })
+        .catch(error => console.log('error', error));
+    }
+
+    api();
+  }, [])
   return (
     <div className="py-8 px-4 md:px-6 md:p-8 md:mx-14 desktop-1900:px-14 desktop-1900:py-14">
       <h2 className="mb-8 text-3xl md:text-4xl font-display text-gray-900 desktop-1900:text-5xl desktop-1900:pb-5">
@@ -136,7 +169,7 @@ export default function FeaturedProjects({ title }: Props) {
             </tr>
           </thead>
           <tbody>
-            {projects.map((project) => {
+            {projects && projects.map((project) => {
               const isHovered = project.id === hoveredId;
 
               return (
@@ -148,32 +181,29 @@ export default function FeaturedProjects({ title }: Props) {
                 >
                   <td className="md:py-7 py-5 desktop-1900:w-[40%]">
                     <Link
-                    to={`/projects#${project?.linkTo}`}
-                      className={`text-xs md:text-lg desktop-1900:text-2xl font-medium transition-colors duration-200 ${
-                        isHovered ? "text-secondary" : "text-gray-900"
-                      }`}
+                      to={`/projects#${project?.linkTo}`}
+                      className={`text-xs md:text-lg desktop-1900:text-2xl font-medium transition-colors duration-200 ${isHovered ? "text-secondary" : "text-gray-900"
+                        }`}
                     >
                       {project.title}
                     </Link>
                   </td>
                   <td>
                     <Link
-                    to={`/projects#${project?.linkTo}`}
-                      className={`inline-flex rounded-full px-2 md:px-4 py-1 text-xs md:text-sm transition-all duration-200 break-words hyphens-auto max-w-[80%] desktop-1900:text-lg ${
-                        isHovered
-                          ? "bg-secondary text-white border border-secondary"
-                          : "border border-gray-500 text-gray-600"
-                      }`}
+                      to={`/projects#${project?.linkTo}`}
+                      className={`inline-flex rounded-full px-2 md:px-4 py-1 text-xs md:text-sm transition-all duration-200 break-words hyphens-auto max-w-[80%] desktop-1900:text-lg ${isHovered
+                        ? "bg-secondary text-white border border-secondary"
+                        : "border border-gray-500 text-gray-600"
+                        }`}
                     >
                       {project.tag}
                     </Link>
                   </td>
                   <td>
                     <Link
-                    to={`/projects#${project?.linkTo}`}
-                      className={`text-xs md:text-lg transition-colors desktop-1900:text-xl duration-200 ${
-                        isHovered ? "text-secondary" : "text-gray-600"
-                      }`}
+                      to={`/projects#${project?.linkTo}`}
+                      className={`text-xs md:text-lg transition-colors desktop-1900:text-xl duration-200 ${isHovered ? "text-secondary" : "text-gray-600"
+                        }`}
                     >
                       {project.status}
                     </Link>
