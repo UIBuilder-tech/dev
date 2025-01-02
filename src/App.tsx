@@ -17,6 +17,8 @@ import Profile from "./pages/ProfilePage";
 import PrivacyPolicyPage from "./pages/PrivacyPolicyPage";
 import EmailVerification from "./pages/EmailVerification";
 import ForgotPassword from "./pages/ForgotPassword";
+import { ImagePreviewProvider } from "./context/ImagePreviewContext";
+import ImagePreview from "./components/ImagePreview";
 const stripePublicKey = import.meta.env.VITE_STRIPE_PUBLIC_KEY;
 interface StripeOptions {
   appearance: {
@@ -51,40 +53,49 @@ function App() {
   return (
     <>
       <Router>
-        <ToastContainer />
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/projects" element={<ProjectsPage />} />
-          <Route path="/contribute" element={<ContributePage />} />
-          <Route path="/donate" element={<ContributePage />} />
-          <Route path="/contribute" element={<ContributePage />}>
-            {stripeOptions?.clientSecret ? (
-              <Route
-                element={
-                  <ElementsWrapper
-                    stripePromise={stripePromise}
-                    options={stripeOptions}
-                  />
-                }
-              >
-                <Route path="checkout" element={<CheckoutForm />} />
-                <Route path="complete" element={<CompletePage />} />
-              </Route>
+        <ImagePreviewProvider>
+          <ToastContainer />
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/projects" element={<ProjectsPage />} />
+            <Route path="/contribute" element={<ContributePage />} />
+            <Route path="/donate" element={<ContributePage />} />
+            <Route path="/contribute" element={<ContributePage />}>
+              {stripeOptions?.clientSecret ? (
+                <Route
+                  element={
+                    <ElementsWrapper
+                      stripePromise={stripePromise}
+                      options={stripeOptions}
+                    />
+                  }
+                >
+                  <Route path="checkout" element={<CheckoutForm />} />
+                  <Route path="complete" element={<CompletePage />} />
+                </Route>
+              ) : null}
+            </Route>
+            <Route path="/events" element={<EventsPage />} />
+            {showPrivateRoute ? (
+              <Route path="/profile" element={<Profile />} />
             ) : null}
-          </Route>
-          <Route path="/events" element={<EventsPage />} />
-          {showPrivateRoute ? (
-            <Route path="/profile" element={<Profile />} />
-          ) : null}
-          <Route path="/contact" element={<ComingSoon />} />
-          <Route path="/donate" element={<ComingSoon />} />
-          <Route path="/join" element={<ComingSoon />} />
-          <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
-          <Route path="/activate/:uidb64/:token" element={<EmailVerification />} />
-          <Route path="/reset-password/:uidb64/:token" element={<ForgotPassword />} />
-        </Routes>
+            <Route path="/contact" element={<ComingSoon />} />
+            <Route path="/donate" element={<ComingSoon />} />
+            <Route path="/join" element={<ComingSoon />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+            <Route
+              path="/activate/:uidb64/:token"
+              element={<EmailVerification />}
+            />
+            <Route
+              path="/reset-password/:uidb64/:token"
+              element={<ForgotPassword />}
+            />
+          </Routes>
+          <ImagePreview />
+        </ImagePreviewProvider>
       </Router>
     </>
   );
