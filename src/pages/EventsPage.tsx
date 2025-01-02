@@ -12,10 +12,10 @@ import {
 import SpecialProjects from "../components/projects/SpecialProjects";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import ChitrapurMathImg from "../assets/Shirali_Math.jpg";
-import EventsHero from "../assets/eventsHero.png";
-import Yuvas from "../assets/Yuvas.png";
-import Yuvas1 from "../assets/Yuvas1.png";
+import ChitrapurMathImg from "../assets/Shirali_Math.webp";
+import EventsHero from "../assets/eventsHero.webp";
+import Yuvas from "../assets/Yuvas.webp";
+import Yuvas1 from "../assets/Yuvas1.webp";
 import RohitImg from "../assets/Spotlight_Photos/rohit-kalyanpur-600x800.jpg";
 import JayshreeImg from "../assets/Spotlight_Photos/Jayshree Ullal.jpg";
 import JasmineImg from "../assets/Spotlight_Photos/Jasmine-Nirody.jpg";
@@ -27,9 +27,9 @@ import NeilImg from "../assets/Spotlight_Photos/neil-hattangadi.jpg";
 import NiveditaImg from "../assets/Spotlight_Photos/Nivedita_Bijoor.png";
 import PraskashImg from "../assets/Spotlight_Photos/prakash_nagarkatti.jpg";
 import DipaImg from "../assets/Spotlight_Photos/Dipa_Sashital.png";
-import Heritage2 from "../assets/heritage2.jpg";
-import SamvitSudha from "../assets/photoGallery/img13.png";
-import SamvitSudha1 from "../assets/photoGallery/img12.png";
+import Heritage2 from "../assets/heritage2.webp";
+import SamvitSudha from "../assets/photoGallery/img13.webp";
+import SamvitSudha1 from "../assets/photoGallery/img12.webp";
 
 export default function EventsPage() {
   const location = useLocation();

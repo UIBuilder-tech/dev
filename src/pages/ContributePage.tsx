@@ -1,17 +1,17 @@
-import { useEffect, useMemo, useState } from 'react';
-import { useLocation } from 'react-router-dom';
-import DonationTable from '../components/Donate/DonationTable';
-import Hero from '../components/Home/Hero';
+import { useEffect, useMemo, useState } from "react";
+import { useLocation } from "react-router-dom";
+import DonationTable from "../components/Donate/DonationTable";
+import Hero from "../components/Home/Hero";
 // import Vantiga from "../components/Contribute/Vantiga";
-import PaymentForm from '../components/Contribute/AddPaymentDetails';
-import VolunteerForm from '../components/Contribute/VolunteerForm';
-import FAQSection from '../components/Home/FAQ';
-import Footer from '../components/Footer/Footer';
-import ChitrapurMathImg from '../assets/Shirali_Math.jpg';
-import PhotoGallery from '../components/About/PhotoGallery';
-import Ambassador from '../components/About/Ambassador';
-import VantigaDetailed from '../components/Contribute/VantigaDetailed';
-import { Outlet } from 'react-router-dom';
+import PaymentForm from "../components/Contribute/AddPaymentDetails";
+import VolunteerForm from "../components/Contribute/VolunteerForm";
+import FAQSection from "../components/Home/FAQ";
+import Footer from "../components/Footer/Footer";
+import ChitrapurMathImg from "../assets/Shirali_Math.webp";
+import PhotoGallery from "../components/About/PhotoGallery";
+import Ambassador from "../components/About/Ambassador";
+import VantigaDetailed from "../components/Contribute/VantigaDetailed";
+import { Outlet } from "react-router-dom";
 
 interface SelectedProject {
   id?:string;
@@ -34,23 +34,23 @@ export default function ContributePage() {
 
   useEffect(() => {
     // Handle initial load with hash
-    const hash = location.hash.replace('#', '');
+    const hash = location.hash.replace("#", "");
     if (hash) {
       // Add a small delay to ensure the content is rendered
       setTimeout(() => {
         const element = document.getElementById(hash);
         if (element) {
-          element.scrollIntoView({ behavior: 'smooth' });
+          element.scrollIntoView({ behavior: "smooth" });
         }
       }, 100);
     }
   }, [location.hash]); // Only run when hash changes
 
   return (
-    <div className='min-h-screen bg-cream'>
+    <div className="min-h-screen bg-cream">
       <Hero
-        title='Support Our Mission to Preserve Heritage and Empower Communities'
-        desc='Your contributions enable the Chitrapur Heritage Foundation to sustain its initiatives in heritage preservation, education, women’s empowerment, and community development. Choose from various donation options and be a part of creating lasting positive change for generations to come.'
+        title="Support Our Mission to Preserve Heritage and Empower Communities"
+        desc="Your contributions enable the Chitrapur Heritage Foundation to sustain its initiatives in heritage preservation, education, women’s empowerment, and community development. Choose from various donation options and be a part of creating lasting positive change for generations to come."
         img={ChitrapurMathImg}
       />
       {/* <div id="vantiga">
@@ -70,10 +70,10 @@ export default function ContributePage() {
       </div>
     </div> */}
       </div>
-      <div id='chf-grants'>
+      <div id="chf-grants">
         <VantigaDetailed />
       </div>
-      <div id='volunteer'>
+      <div id="volunteer">
         <VolunteerForm />
       </div>
       <PhotoGallery />

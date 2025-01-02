@@ -10,7 +10,7 @@ export default function Vision() {
   useEffect(() => {
     const interval = setInterval(() => {
       setActiveSlide((prevSlide) => (prevSlide + 1) % 3);
-    }, 5000); // Change slide every 3 seconds
+    }, 7000); // Change slide every 5 seconds
 
     return () => clearInterval(interval); // Cleanup interval on component unmount
   }, []);
@@ -44,7 +44,7 @@ export default function Vision() {
       <div className="mx-auto bg-white rounded-3xl px-4 md:px-[80px] py-10 md:py-10 relative desktop-1200:px-[50px]">
         <div className="relative overflow-hidden">
           <div
-            className="flex transition-all duration-700 ease-in-out"
+            className="flex transition-all duration-1000 ease-in-out"
             style={{ transform: `translateX(-${activeSlide * 100}%)` }}
           >
             {slides.map((slide, index) => (

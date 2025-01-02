@@ -16,7 +16,7 @@ import GrantsSection from "../components/projects/GrantsSection";
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import Vantiga from "../components/Contribute/Vantiga";
-import HeroImg from "../assets/photoGallery/img11.png";
+import HeroImg from "../assets/photoGallery/img11.webp";
 import solar from "../assets/solar1.jpg";
 import solar1 from "../assets/solar2.jpg";
 

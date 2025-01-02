@@ -24,7 +24,7 @@ function Marquee({
     "flex",
     "overflow-hidden",
     "p-2",
-    "[--duration:40s]",
+    "[--duration:90s]",
     "[--gap:1rem]",
     "gap-[var(--gap)]",
     vertical ? "flex-col" : "flex-row",

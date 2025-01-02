@@ -11,7 +11,7 @@ import PhotoGallery from "../components/About/PhotoGallery";
 import Newsletter from "../components/About/Newsletter";
 import OurTeamAbout from "../components/About/OurTeamAbout";
 import ImpactSection from "../components/Home/OurImpact";
-import ChitrapurMathImg from "../assets/Shirali_Math.jpg";
+import ChitrapurMathImg from "../assets/Shirali_Math.webp";
 
 export default function AboutPage() {
   const location = useLocation();

@@ -6,6 +6,7 @@ import { useWindowWidth } from "../../hooks/useWindowWidth";
 import ActiveArrow from "../../assets/arrowActive.svg";
 import DonateActive from "../../assets/projectActiveDonateIcon.svg";
 import DonateInctive from "../../assets/projectInactiveDonateIcon.svg";
+import { useImagePreviewTrigger } from "../../utils/imagePreviewUtils";
 
 interface Project {
   id: number;
@@ -34,6 +35,7 @@ const ProjectCard = ({
   const range150 = windowWidth >= 1200 && windowWidth <= 1500;
   const range120 = windowWidth > 1500 && windowWidth <= 1900;
   const range100 = windowWidth >= 1900;
+  const triggerImagePreview = useImagePreviewTrigger();
 
   const handleClick = (e: React.MouseEvent) => {
     if (
@@ -157,6 +159,7 @@ const ProjectCard = ({
                       ? "w-[200px] h-[300px]"
                       : "w-full h-[250px] md:h-64"
                   } object-cover rounded-lg`}
+                  onClick={() => triggerImagePreview(project.images[currentImageIndex])}
                 />
                 <div
                   className={`${

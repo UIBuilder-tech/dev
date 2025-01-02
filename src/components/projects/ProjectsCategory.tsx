@@ -5,7 +5,8 @@ import { useWindowWidth } from "../../hooks/useWindowWidth";
 import { Link, useLocation } from "react-router-dom";
 import activeArrow from "../../assets/arrowActive.svg";
 import inactiveArrrow from "../../assets/arrowInactive.svg";
-import ChitrapurMathImg from "../../assets/Shirali_Math.jpg";
+import ChitrapurMathImg from "../../assets/Shirali_Math.webp";
+import { useImagePreviewTrigger } from "../../utils/imagePreviewUtils";
 
 interface Program {
   id: number;
@@ -35,6 +36,8 @@ export default function ProjectsCategory({
 
   const itemsPerPage = 3; // Changed to 3 items per page
   const totalPages = Math.ceil(programs.length / itemsPerPage);
+
+  const triggerImagePreview = useImagePreviewTrigger();
 
   const scrollToPage = (page: number) => {
     if (page >= 0 && page < totalPages) {
@@ -216,6 +219,15 @@ transform: scale(1.2);
                   }
                   alt={programs[currentProgram].title}
                   className="w-full h-[250px] desktop-1200:h-[175px] desktop-1500:h-[225px] object-cover rounded-tr-xl rounded-bl-xl"
+                  onClick={() =>
+                    triggerImagePreview(
+                      programs[currentProgram]?.image
+                        ? typeof programs[currentProgram]?.image === "string"
+                          ? programs[currentProgram]?.image
+                          : programs[currentProgram]?.image[0]
+                        : ChitrapurMathImg
+                    )
+                  }
                 />
               </div>
               <div className="max-sm:hidden flex flex-wrap w-full">
@@ -235,6 +247,15 @@ transform: scale(1.2);
                     }
                     alt="Sub image 1"
                     className="w-full h-[250px] desktop-1200:h-[175px] desktop-1500:h-[225px] object-cover rounded-tl-xl rounded-br-xl"
+                    onClick={() =>
+                      triggerImagePreview(
+                        programs[currentProgram]?.image
+                          ? typeof programs[currentProgram]?.image === "string"
+                            ? programs[currentProgram]?.image
+                            : programs[currentProgram]?.image[1]
+                          : ChitrapurMathImg
+                      )
+                    }
                   />
                 </div>
                 <div className="w-1/2 desktop-1200:w-[225px] desktop-1500:w-[250px]  desktop-1900:w-[300px]">
@@ -253,6 +274,13 @@ transform: scale(1.2);
                     }
                     alt="Sub image 2"
                     className="w-full h-[250px] desktop-1200:h-[175px] desktop-1500:h-[225px]  object-cover rounded-tl-xl rounded-br-xl"
+                    onClick={() =>
+                      triggerImagePreview(programs[currentProgram]?.image
+                        ? typeof programs[currentProgram]?.image === "string"
+                          ? programs[currentProgram]?.image
+                          : programs[currentProgram]?.image[2]
+                        : ChitrapurMathImg)
+                    }
                   />
                 </div>
               </div>
