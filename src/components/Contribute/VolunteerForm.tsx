@@ -74,17 +74,17 @@ export default function VolunteerForm() {
   };
 
   const submitToGoogleForms = async () => {
-    const formUrl = 'https://docs.google.com/forms/d/1kjl7hDg18qtbJtpSL5aFJtGSl8G6Zno69bXeShCYo1g/formResponse';
+    const formUrl = 'https://docs.google.com/forms/d/1au5bKnT9xyD2IlIHZuc8aBd5VcC-bZU8KcjiRNTWwl0/formResponse';
     
     // Create URL encoded data
     const formDataEncoded = new URLSearchParams();
-    formDataEncoded.append('entry.351035147', formData.category);
-    formDataEncoded.append('entry.386116062', formData.name);
-    formDataEncoded.append('entry.1078615357', formData.email);
-    formDataEncoded.append('entry.236924547', formData.phone);
-    formDataEncoded.append('entry.1860523063', formData.address);
-    formDataEncoded.append('entry.1412854759', formData.city);
-    formDataEncoded.append('entry.887718961', formData.country);
+    formDataEncoded.append('entry.816547937', formData.category);
+    formDataEncoded.append('entry.2042403985', formData.name);
+    formDataEncoded.append('entry.1735881500', formData.email);
+    formDataEncoded.append('entry.1870600312', formData.phone);
+    formDataEncoded.append('entry.1097309659', formData.address);
+    formDataEncoded.append('entry.571495182', formData.city);
+    formDataEncoded.append('entry.925553067', formData.country);
 
     try {
       // Create a hidden form and submit it
