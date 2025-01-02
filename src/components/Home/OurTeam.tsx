@@ -117,7 +117,7 @@ export default function TeamSection() {
                       {review.name}
                     </figcaption>
                     <span
-                      className=" font-[100] italic text-white"
+                      className=" font-[100] italic text-white text-center"
                       style={{ fontWeight: 100 }}
                     >
                       {review.role}
@@ -142,7 +142,7 @@ export default function TeamSection() {
                     <figcaption className="text-lg font-medium text-white">
                       {review.name}
                     </figcaption>
-                    <span className=" font-thin italic text-white">
+                    <span className=" font-thin italic text-white text-center">
                       {review.role}
                     </span>
                   </div>
