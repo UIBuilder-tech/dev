@@ -1,14 +1,18 @@
 import { useState, FormEvent, useEffect } from 'react'
+import { motion } from 'framer-motion';
 import stripe from '../../assets/stripe.svg'
 import { UseDataContext } from '../context/DataContext'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
-import paypal from "../../assets/paypal.svg";
+import { Loader } from 'lucide-react';
+import PaymentModal from './PaymentModal';
+
 const apiBaseurl = import.meta.env.VITE_RETURN_BACKEND_API;
 
 interface FormErrors {
   [key: string]: string
 }
+
 interface FormType {
   id: number; // A unique identifier (e.g., timestamp)
   FirstName: string; // Name of the user
@@ -18,19 +22,32 @@ interface FormType {
   address: string; // Address line
   city: string; // City name
   zipCode: string; // Zip/postal code
+  state: string; // State name
   country: string; // Country name
   paymentMethod: string; // Payment method (e.g., 'online', 'offline')
   rememberMe: boolean; // Whether the user opts for "remember me"
   amount: number | null; // Total amount
 }
 
+interface SelectedProject {
+  id?:string;
+  projectName: string;
+  unitAmount: number;
+  quantity: number;
+  remark: string;
+}
 
 interface Props {
   totalDonationAmount: number;
+  baseDonationId: string;
+  selectedProjects: SelectedProject[];
 }
 
 
-export default function PaymentForm({ totalDonationAmount }: Props) {
+export default function PaymentForm({ totalDonationAmount, baseDonationId, selectedProjects }: Props) {
+
+  const BASE_URL = import.meta.env.VITE_RETURN_BACKEND_API;
+
   const { data } = UseDataContext();
   // Usage
   const defaultForm: FormType = {
@@ -42,15 +59,17 @@ export default function PaymentForm({ totalDonationAmount }: Props) {
     address: '',
     city: '',
     zipCode: '',
+    state:'',
     country: '',
-    paymentMethod: 'offline',
+    paymentMethod: 'zelle',
     rememberMe: false,
     amount: 0
   };
   const [formData, setFormData] = useState<FormType>(defaultForm)
-
   const [errors, setErrors] = useState<FormErrors>({})
   const [IsFormValidate, setIsFormValidate] = useState<boolean>(false)
+  const [showModal, setShowModal] = useState(false);
+  const [modalContent, setModalContent] = useState('');
   const navigation = useNavigate();
   const { setData } = UseDataContext();
   const validateForm = (): boolean => {
@@ -96,7 +115,49 @@ export default function PaymentForm({ totalDonationAmount }: Props) {
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     if (validateForm()) {
-      if (formData.paymentMethod === 'online') {
+      if (formData.paymentMethod === 'cheque' || formData.paymentMethod === 'zelle')
+       {
+        setIsFormValidate(true)
+        const payload = {
+          donAmt : totalDonationAmount, // Total donation amount
+          donorName : `${formData?.FirstName} ${formData?.LastName}`, // Full name of the donor
+          displayName : `${baseDonationId}-${formData?.FirstName}-${formData?.LastName}`, // Display name for the donation record
+          donorEmail : formData?.Email, // Donor's email
+          donorMobile : formData?.Phone, // Donor's mobile number
+          donorBillSt : formData?.address, // Donor's billing street
+          donorCity : formData?.city, // Donor's billing city
+          donorState : formData?.state, // Donor's billing state
+          donorZip : formData?.zipCode, // Donor's billing zip/postal code
+          donorCountry : formData?.country, // Donor's billing country
+          tnxId : formData?.paymentMethod, // Transaction ID or payment mode
+          donationCategories : selectedProjects, // Array of donation category objects
+        }
+
+        fetch(`${BASE_URL}/api/donate/create`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(payload),
+        }).then(resp=>resp?.json())
+          .then(response => {
+            if (response?.success) {
+                // toast.success(response?.message);
+                setModalContent(formData.paymentMethod);
+                setShowModal(true);
+            } else {
+                toast.error(response?.message);
+            }
+          })
+          .catch(error => {
+            setIsFormValidate(false)
+            toast.error('Something went wrong. Please try again later.');
+            console.error(error);
+          })
+          .finally(() => {
+            setIsFormValidate(false);
+          });
+      } else if (formData.paymentMethod === 'online'){
         setIsFormValidate(true)
         fetch(`${apiBaseurl}/create-payment-intent`, {
           method: "POST",
@@ -113,9 +174,9 @@ export default function PaymentForm({ totalDonationAmount }: Props) {
           }).catch((err) => {
             setIsFormValidate(false)
             toast.error(err.message)
+          }).finally(() => {
+            setIsFormValidate(false);
           });
-      } else {
-        toast.info("Please contact us for offline payment")
       }
     }
   };
@@ -155,7 +216,7 @@ export default function PaymentForm({ totalDonationAmount }: Props) {
       >
         {/* Left Column - Personal Details */}
         <div className="bg-white rounded-3xl p-6 md:p-12 shadow-sm md:text-xl w-full md:w-1/2 desktop-1200:p-8 desktop-1500:p-10 desktop-1900:p-14">
-          <div className="space-y-8 desktop-1200:space-y-4">
+          <div className="space-y-8 desktop-1200:space-y-4 desktop-1900:space-y-6">
             {/* Name Field with Verification Check */}
             <div className="relative">
               <input
@@ -277,6 +338,70 @@ export default function PaymentForm({ totalDonationAmount }: Props) {
               <select
 
                 disabled={IsFormValidate}
+                name="state"
+                value={formData.state}
+                onChange={handleInputChange}
+                className={`w-48 border-b ${
+                  errors.country ? "border-red-500" : "border-gray-200"
+                } py-3 focus:outline-none focus:border-primary bg-transparent desktop-1200:text-base desktop-1500:text-lg desktop-1900:text-xl`}
+              >
+                <option value="">Select State</option>
+                   <option value="Alabama">Alabama</option>
+                   <option value="Alaska">Alaska</option>
+                   <option value="Arizona">Arizona</option>
+                   <option value="Arkansas">Arkansas</option>
+                   <option value="California">California</option>
+                   <option value="Colorado">Colorado</option>
+                   <option value="Connecticut">Connecticut</option>
+                   <option value="Delaware">Delaware</option>
+                   <option value="Florida">Florida</option>
+                   <option value="Georgia">Georgia</option>
+                   <option value="Hawaii">Hawaii</option>
+                   <option value="Idaho">Idaho</option>
+                   <option value="Illinois">Illinois</option>
+                   <option value="Indiana">Indiana</option>
+                   <option value="Iowa">Iowa</option>
+                   <option value="Kansas">Kansas</option>
+                   <option value="Kentucky">Kentucky</option>
+                   <option value="Louisiana">Louisiana</option>
+                   <option value="Maine">Maine</option>
+                   <option value="Maryland">Maryland</option>
+                   <option value="Massachusetts">Massachusetts</option>
+                   <option value="Michigan">Michigan</option>
+                   <option value="Minnesota">Minnesota</option>
+                   <option value="Mississippi">Mississippi</option>
+                   <option value="Missouri">Missouri</option>
+                   <option value="Montana">Montana</option>
+                   <option value="Nebraska">Nebraska</option>
+                   <option value="Nevada">Nevada</option>
+                   <option value="New Hampshire">New Hampshire</option>
+                   <option value="New Jersey">New Jersey</option>
+                   <option value="New Mexico">New Mexico</option>
+                   <option value="New York">New York</option>
+                   <option value="North Carolina">North Carolina</option>
+                   <option value="North Dakota">North Dakota</option>
+                   <option value="Ohio">Ohio</option>
+                   <option value="Oklahoma">Oklahoma</option>
+                   <option value="Oregon">Oregon</option>
+                   <option value="Pennsylvania">Pennsylvania</option>
+                   <option value="Rhode Island">Rhode Island</option>
+                   <option value="South Carolina">South Carolina</option>
+                   <option value="South Dakota">South Dakota</option>
+                   <option value="Tennessee">Tennessee</option>
+                   <option value="Texas">Texas</option>
+                   <option value="Utah">Utah</option>
+                   <option value="Vermont">Vermont</option>
+                   <option value="Virginia">Virginia</option>
+                   <option value="Washington">Washington</option>
+                   <option value="West Virginia">West Virginia</option>
+                   <option value="Wisconsin">Wisconsin</option>
+                   <option value="Wyoming">Wyoming</option>
+                {/* Add more countries as needed */}
+              </select>
+              
+              <select
+
+                disabled={IsFormValidate}
                 name="country"
                 value={formData.country}
                 onChange={handleInputChange}
@@ -284,13 +409,12 @@ export default function PaymentForm({ totalDonationAmount }: Props) {
                   errors.country ? "border-red-500" : "border-gray-200"
                 } py-3 focus:outline-none focus:border-primary bg-transparent desktop-1200:text-base desktop-1500:text-lg desktop-1900:text-xl`}
               >
-                <option value="">Country</option>
+                <option value="">Select Country</option>
                 <option value="US">United States</option>
-                <option value="IN">India</option>
                 {/* Add more countries as needed */}
               </select>
 
-              <label className="flex items-center gap-2 cursor-pointer">
+              {/* <label className="flex items-center gap-2 cursor-pointer">
                 <input
                   disabled={IsFormValidate}
                   type="checkbox"
@@ -302,7 +426,7 @@ export default function PaymentForm({ totalDonationAmount }: Props) {
                 <span className="text-xs md:text-sm text-gray-600 italic desktop-1200:text-sm desktop-1500:text-base desktop-1900:text-lg">
                   Remember me
                 </span>
-              </label>
+              </label> */}
             </div>
           </div>
         </div>
@@ -335,32 +459,13 @@ export default function PaymentForm({ totalDonationAmount }: Props) {
 
             {/* Payment Methods */}
             <div className="grid grid-cols-2 gap-2 md:gap-6">
-              {/* <label className="flex items-center gap-3 rounded-lg cursor-pointer">
-                <input
-                  disabled={IsFormValidate}
-                  type="radio"
-                  name="paymentMethod"
-                  value="online"
-                  checked={formData.paymentMethod === 'online'}
-                  onChange={handleInputChange}
-                  className="w-6 h-6 text-primary"
-                />
-                <div className="bg-white rounded-md w-full p-3 md:p-6 desktop-1200:p-4 desktop-1500:p-5 desktop-1900:p-7">
-                  <img
-                    src={paypal}
-                    alt="PayPal"
-                    className="w-24 desktop-1200:w-24 desktop-1500:w-28 desktop-1900:w-36"
-                  />
-                </div>
-              </label> */}
-
               <label className="flex items-center gap-3 cursor-pointer">
                 <input
                   disabled={IsFormValidate}
                   type="radio"
                   name="paymentMethod"
-                  value="offline"
-                  checked={formData.paymentMethod === 'offline'}
+                  value="cheque"
+                  checked={formData.paymentMethod === 'cheque'}
                   onChange={handleInputChange}
                   className="w-6 h-6 text-primary"
                 />
@@ -376,8 +481,8 @@ export default function PaymentForm({ totalDonationAmount }: Props) {
                   disabled={IsFormValidate}
                   type="radio"
                   name="paymentMethod"
-                  value="offline"
-                  checked={formData.paymentMethod === 'offline'}
+                  value="zelle"
+                  checked={formData.paymentMethod === 'zelle'}
                   onChange={handleInputChange}
                   className="w-6 h-6 text-primary"
                 />
@@ -409,11 +514,36 @@ export default function PaymentForm({ totalDonationAmount }: Props) {
                 type="submit"
                 className="w-full bg-secondary text-white rounded-full py-3 md:py-4 md:text-xl hover:bg-primary/90 transition-colors desktop-1200:text-base desktop-1200:py-3 desktop-1500:text-lg desktop-1500:py-3 desktop-1900:text-2xl desktop-1900:py-5"
               >
-                Continue
+                {IsFormValidate ? (
+        <motion.div
+          className='flex items-center justify-center'
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.3 }}
+        >
+          <Loader className='w-5 h-5 animate-spin text-white' />
+          <span className='ml-2'>Loading...</span>
+        </motion.div>
+      ) : (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.3 }}
+        >
+          Continue
+        </motion.div>
+      )}
               </button>
           </div>
         </div>
       </form>
+      {showModal && (
+        <PaymentModal
+          isOpen={showModal}
+          onClose={() => setShowModal(false)}
+          paymentMethod={modalContent}
+        />
+      )}
     </div>
   );
 }

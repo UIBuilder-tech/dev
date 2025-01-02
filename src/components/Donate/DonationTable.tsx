@@ -1,19 +1,60 @@
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo, useEffect, useRef } from 'react';
 import { ChevronDown, ChevronUp, Trash2, Info } from 'lucide-react';
 import AmountInput from './AmountInput';
 import FilterSearch from './FilterSearch';
 import { donationData } from './donationData';
-import { DonationCategory, DonationItem, DonationSubcategory } from './types';
+import { DonationItem } from './types';
 import { useWindowWidth } from '../../hooks/useWindowWidth';
 
 interface Props{
-  setTotalDonationAmount:unknown;
+  setTotalDonationAmount: (amount: number) => void;
+  setSelectedProjects: (projects: SelectedProject[]) => void;
+  setBaseDonationId: (id:string)=>void;
 }
 
-export default function DonationTable({setTotalDonationAmount}:Props) {
+interface SelectedProject {
+  projectName: string;
+  unitAmount: number;
+  quantity: number;
+  remark: string;
+}
+
+// function that takes special projects with id
+// const generateDonationId = (selectedProjects: SelectedProject[]) => {
+//   const currentYear = new Date().getFullYear();
+//   const projectIds = selectedProjects
+//     .filter(project => project.unitAmount > 0)
+//     .map(project => project.id)
+//     .sort()
+//     .join('-');
+  
+//   return projectIds ? `${currentYear}-Donation-${projectIds}` : '';
+// };
+
+
+const generateDonationId = (selectedProjects: SelectedProject[]) => {
+  const currentYear = new Date().getFullYear();
+  const projectIds = donationData
+    .flatMap(category => [
+      ...(category.items || []),
+      ...(category.subcategories?.flatMap(sub => sub.items) || [])
+    ])
+    .filter(item => selectedProjects.some(
+      project => project.projectName === item.name && project.unitAmount > 0
+    ))
+    .map(item => item.id)
+    .sort()
+    .join('-');
+
+  return projectIds ? `${currentYear}-Donation-${projectIds}` : '';
+};
+
+
+export default function DonationTable({setTotalDonationAmount, setSelectedProjects, setBaseDonationId}:Props) {
   const [expandedCategories, setExpandedCategories] = useState<string[]>([
     donationData.length > 0 ? donationData[0].id : ''
   ]);
+  // const [expandedCategories, setExpandedCategories] = useState<string[]>([]);
   const [expandedSubcategories, setExpandedSubcategories] = useState<string[]>([]);
   const [amounts, setAmounts] = useState<Record<string, number>>({});
   const [quantities, setQuantities] = useState<Record<string, number>>({});
@@ -37,6 +78,102 @@ export default function DonationTable({setTotalDonationAmount}:Props) {
         : [...prev, subcategoryId]
     );
   };
+
+  const categoryRefs = useRef<Record<string, HTMLDivElement>>({});
+  const itemRefs = useRef<Record<string, HTMLTableRowElement>>({});
+  const initialScrollDone = useRef(false);
+
+  const scrollToElement = (element: HTMLElement | null) => {
+    if (!element) return;
+    
+    const offset = isMobile ? 100 : 300; // Adjust this value based on your header height
+    const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+    window.scrollTo({
+      top: elementPosition - offset,
+      behavior: 'smooth'
+    });
+  };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (initialScrollDone.current) return;
+      
+      const hash = window.location.hash.split('#')[2];
+      if (!hash) return;
+
+      let targetCategory = donationData.find(cat => cat.id === hash);
+      let targetItem;
+
+      if (!targetCategory) {
+        for (const category of donationData) {
+          const item = category.items?.find(item => item.id === hash);
+          if (item) {
+            targetCategory = category;
+            targetItem = item;
+            break;
+          }
+        }
+      }
+
+      if (targetCategory) {
+        setExpandedCategories(prev => 
+          prev.includes(targetCategory.id) ? prev : [...prev, targetCategory.id]
+        );
+
+        // Wait for category expansion and DOM update
+        setTimeout(() => {
+          if (targetItem) {
+            scrollToElement(itemRefs.current[hash]);
+          } else {
+            scrollToElement(categoryRefs.current[targetCategory.id]);
+          }
+          initialScrollDone.current = true;
+        }, 300); // Increased timeout for DOM updates
+      }
+    };
+
+    handleScroll();
+    window.addEventListener('hashchange', () => {
+      initialScrollDone.current = false;
+      handleScroll();
+    });
+    
+    return () => window.removeEventListener('hashchange', handleScroll);
+  }, []);
+
+    // Update selected projects whenever relevant state changes
+    useEffect(() => {
+      const selectedProjects: SelectedProject[] = [];
+      
+      donationData.forEach(category => {
+        const processItems = (items: DonationItem[]) => {
+          items.forEach(item => {
+            const amount = amounts[item.id] || 0;
+            const quantity = item.hasQuantity ? (quantities[item.id] || 0) : 1;
+            
+            if (amount > 0) {
+              selectedProjects.push({
+                projectName: item.name,
+                unitAmount: amount,
+                quantity: quantity,
+                remark: remarks[item.id] || ''
+              });
+            }
+          });
+        };
+    
+        if (category.items) processItems(category.items);
+        if (category.subcategories) {
+          category.subcategories.forEach(subcategory => {
+            if (subcategory.items) processItems(subcategory.items);
+          });
+        }
+      });
+    
+      const baseDonationId = generateDonationId(selectedProjects);
+      setSelectedProjects(selectedProjects);
+      setBaseDonationId(baseDonationId);
+    }, [amounts, quantities, remarks, setSelectedProjects, setBaseDonationId]);
 
   const updateAmount = (itemId: string, value: number) => {
     setAmounts(prev => ({ ...prev, [itemId]: value }));
@@ -87,18 +224,19 @@ export default function DonationTable({setTotalDonationAmount}:Props) {
   };
 
   // Calculate total amounts across all categories
+  // Update total amount calculation to use the same logic
   const totalAmount = useMemo(() => {
     return donationData.reduce((categoryTotal, category) => {
       const categoryItemsTotal = category.items ? category.items.reduce((itemTotal, item) => {
-        const itemAmount = amounts[item.id] ?? item.amount;
-        const itemQuantity = item.hasQuantity ? (quantities[item.id] ?? 0) : 1; // Change this line
+        const itemAmount = useDefaultDonation ? (amounts[item.id] ?? item.amount) : (amounts[item.id] ?? 0);
+        const itemQuantity = item.hasQuantity ? (quantities[item.id] ?? 0) : 1;
         return itemTotal + (itemAmount * itemQuantity);
       }, 0) : 0;
 
       const subcategoriesTotal = category.subcategories ? category.subcategories.reduce((subcategoryTotal, subcategory) => {
         const subcategoryItemsTotal = subcategory.items ? subcategory.items.reduce((itemTotal, item) => {
-          const itemAmount = amounts[item.id] ?? item.amount;
-          const itemQuantity = item.hasQuantity ? (quantities[item.id] ?? 0) : 1; // Change this line
+          const itemAmount = useDefaultDonation ? (amounts[item.id] ?? item.amount) : (amounts[item.id] ?? 0);
+          const itemQuantity = item.hasQuantity ? (quantities[item.id] ?? 0) : 1;
           return itemTotal + (itemAmount * itemQuantity);
         }, 0) : 0;
         return subcategoryTotal + subcategoryItemsTotal;
@@ -106,7 +244,7 @@ export default function DonationTable({setTotalDonationAmount}:Props) {
 
       return categoryTotal + categoryItemsTotal + subcategoriesTotal;
     }, 0);
-  }, [amounts, quantities, donationData]);
+  }, [amounts, quantities, donationData, useDefaultDonation]);
 
   useEffect(() => {
     setTotalDonationAmount(totalAmount)
@@ -115,7 +253,7 @@ export default function DonationTable({setTotalDonationAmount}:Props) {
   const renderDonationItems = (items: DonationItem[], categoryName: string) => (
     <tbody className=''>
       {items.map(item => {
-        const itemAmount = amounts[item.id] ?? item.amount;
+        const itemAmount = useDefaultDonation ? (amounts[item.id] ?? item.amount) : (amounts[item.id] ?? 0);
         const itemQuantity = item.hasQuantity ? (quantities[item.id] ?? 0) : 1; // Change this line
         const totalItemAmount = itemAmount * itemQuantity;
         const isTrashActive = totalItemAmount > 0;
@@ -185,7 +323,9 @@ export default function DonationTable({setTotalDonationAmount}:Props) {
             </tr>
           </tr>
           :
-          <tr key={item.id} className="border-t border-gray-300">
+          <tr key={item.id} ref={el => {
+            if (el) itemRefs.current[item.id] = el;
+          }} className="border-t border-gray-300">
             <td className="relative flex items-center"><div className=''><span className='py-2 px-2 max-w-[50%]' style={{wordWrap:"break-word"}}>{item.name}</span>{item?.id==="sevas" && <><a href='https://chitrapurmath.net/site/rates' target='blank' className='text-blue-500 cursor-pointer underline font-normal text-xs'>Know more</a></>}</div>
            {item.description && <div className="inline-block ml-2  h-full relative group">
             <Info className="w-4 h-4 text-gray-500 hover:text-gray-700 cursor-pointer my-auto" />
@@ -253,7 +393,9 @@ export default function DonationTable({setTotalDonationAmount}:Props) {
 
       <div className="space-y-4">
         {donationData.map(category => (
-          <div key={category.id} className="border-b border-gray-300">
+          <div key={category.id} className="border-b border-gray-300" ref={el => {
+            if (el) categoryRefs.current[category.id] = el;
+          }}>
             <button
               onClick={() => toggleCategory(category.id)}
               className="w-full flex items-center justify-between py-4 text-left"

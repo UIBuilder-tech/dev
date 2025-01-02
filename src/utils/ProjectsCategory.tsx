@@ -49,6 +49,7 @@ interface Program {
   description: string;
   image?: string | string[];
   url?: string;
+  linkTo?:string;
 }
 interface Event {
   id: number;
@@ -70,6 +71,7 @@ export const EducationPrograms: Program[] = [
       "https://chitrapurmath.net/myAssets/images/report1/cutting1.jpg",
       "https://chitrapurmath.net/myAssets/images/srivali_trust/school%203.jpg",
     ],
+    linkTo:`education`
   },
   {
     id: 2,
@@ -81,6 +83,7 @@ export const EducationPrograms: Program[] = [
       "https://chitrapurmath.net/myAssets/images/report1/shelfWithStoreBoughtSteelBrackets.jpg",
       "https://chitrapurmath.net/myAssets/images/report1/preparingWireUp.jpg",
     ],
+    linkTo:`education`
   },
   {
     id: 3,
@@ -92,6 +95,7 @@ export const EducationPrograms: Program[] = [
       infrastruture,
       infrastruture1,
     ],
+    linkTo:`shs`
   },
   {
     id: 4,
@@ -103,6 +107,7 @@ export const EducationPrograms: Program[] = [
       "https://chitrapurmath.net/documents/upload/23.png",
       "https://chitrapurmath.net/documents/upload/27.png",
     ],
+    linkTo:`education`
   },
   {
     id: 5,
@@ -114,6 +119,7 @@ export const EducationPrograms: Program[] = [
       "https://chitrapurmath.net/myAssets/images/report1/testingTheChairAndTable2.jpg",
       "https://chitrapurmath.net/documents/upload/1690618078Carpentry_sessions_by_Harin_Hattangady_Maam.jpg",
     ],
+    linkTo:`education`
   },
   {
     id: 6,
@@ -125,6 +131,7 @@ export const EducationPrograms: Program[] = [
       "https://chitrapurmath.net/documents/gallery/Inauguration_of_Computer_Lab_and_Robotics_Lab_at_Parjnanashram_Vidyalaya_Karla_2_Dec_2024/Karla%2020240202%20(35).jpg",
       "https://chitrapurmath.net/documents/gallery/Inauguration_of_Computer_Lab_and_Robotics_Lab_at_Parjnanashram_Vidyalaya_Karla_2_Dec_2024/Karla%2020240202%20(27).jpg",
     ],
+    linkTo:`education`
   },
   {
     id: 7,
@@ -136,6 +143,7 @@ export const EducationPrograms: Program[] = [
       "https://chitrapurmath.net/documents/gallery/Inauguration_of_Computer_Lab_and_Robotics_Lab_at_Parjnanashram_Vidyalaya_Karla_2_Dec_2024/Karla%2020240202%20(7).jpg",
       "https://chitrapurmath.net/documents/gallery/Inauguration_of_Computer_Lab_and_Robotics_Lab_at_Parjnanashram_Vidyalaya_Karla_2_Dec_2024/Karla%2020240202%20(4).jpg",
     ],
+    linkTo:`education`
   },
   {
     id: 8,
@@ -147,6 +155,7 @@ export const EducationPrograms: Program[] = [
       "https://chitrapurmath.net/documents/upload/1690618116Interaction_with_HH_Swamiji.jpg",
       "https://chitrapurmath.net/documents/upload/1690701288Group_photo_of_shibirarthis_and_sanchalaks_with_HH_Swamiji.jpg",
     ],
+    linkTo:`education`
   },
   {
     id: 9,
@@ -158,6 +167,7 @@ export const EducationPrograms: Program[] = [
       scholarship,
       scholarship1,
     ],
+    linkTo:`education`
   },
   {
     id: 10,
@@ -169,6 +179,7 @@ export const EducationPrograms: Program[] = [
       "https://chitrapurmath.net/documents/upload/Pari-1_Feb_2018-Flagging_off_the_Swachh_Mangaluru_Mssion_on_9th_October_2017_at_the_Parijnan_PU_College,_Someshwar-Kotekar.jpg",
       "https://chitrapurmath.net/documents/upload/Pari-2-Feb_2018-_Dr._Sheetal_Savur,_Assoc._Prof.jpg",
     ],
+    linkTo:`education`
   },
 ];
 
@@ -183,6 +194,7 @@ export const WomenEmpowermentPrograms: Program[] = [
       "https://samvitsudha.com/wp-content/uploads/2023/09/2-Fabric-Unit-training-@-Workplace-565x377.jpg",
       "https://samvitsudha.com/wp-content/uploads/2023/09/4-Fabric-Unit-Working-at-home-565x377.jpg",
     ],
+    linkTo:`women-empowerment`
   },
   {
     id: 2,
@@ -194,6 +206,7 @@ export const WomenEmpowermentPrograms: Program[] = [
       "https://samvitsudha.com/wp-content/uploads/2023/09/1-HH-Mothers-working-565x438.jpg",
       training1,
     ],
+    linkTo:`women-empowerment`
   },
   {
     id: 3,
@@ -201,6 +214,7 @@ export const WomenEmpowermentPrograms: Program[] = [
     description:
       "Workshops focused on financial literacy, teaching women how to manage their finances, save for the future, and make informed financial decisions.",
     image: [financeTraining, financeTraining1, financeTraining2],
+    linkTo:`women-empowerment`
   },
   {
     id: 4,
@@ -208,6 +222,7 @@ export const WomenEmpowermentPrograms: Program[] = [
     description:
       " Formation of self-help groups where women can come together to save, invest, and provide loans to one another. Microfinance initiatives help these groups fund small business ventures and improve their financial independence.",
     url: "https://youtu.be/oSyl-EUzFX0?si=KVAkaHGeJQnN-LDo",
+    linkTo:`pari`
   },
   {
     id: 5,
@@ -215,6 +230,7 @@ export const WomenEmpowermentPrograms: Program[] = [
     description:
       "Leadership training to empower women to take on community leadership roles and mentors them to build confidence and skills in areas like communication, decision-making, and management.",
     image: [selfHelp, selfHelp1, selfHelp2],
+    linkTo:`women-empowerment`
   },
   {
     id: 6,
@@ -222,6 +238,7 @@ export const WomenEmpowermentPrograms: Program[] = [
     description:
       "Help women revive traditional crafts, providing training in producing and marketing these crafts for local and international markets.",
     url: "https://youtu.be/pTsJnc2erfQ?si=W_tT61DewZh-E4B1",
+    linkTo:`women-empowerment`
   },
   {
     id: 7,
@@ -229,6 +246,7 @@ export const WomenEmpowermentPrograms: Program[] = [
     description:
       "Awareness programs that focus on women's health, hygiene, and wellness, helping women access important healthcare services and encouraging them to prioritize their physical and mental wellbeing.",
     image: [health1, health, health2],
+    linkTo:`women-empowerment`
   },
   {
     id: 8,
@@ -236,6 +254,7 @@ export const WomenEmpowermentPrograms: Program[] = [
     description:
       "Community support systems where women can share knowledge, resources, and experiences, creating a strong network that encourages collective growth and empowerment.",
     image: [networking1, networking, networking2],
+    linkTo:`women-empowerment`
   },
 ];
 
@@ -246,6 +265,7 @@ export const HeritagePrograms: Program[] = [
     description:
       "Vantiga is the annual contributions made by the Chitrapur Saraswat community to support the Shri Chitrapur Math's spiritual, cultural, and community welfare initiatives, reflecting their commitment to their heritage.",
     image: [heritage1, heritage2, heritage3],
+    linkTo:`vantiga`
   },
   {
     id: 2,
@@ -257,6 +277,7 @@ export const HeritagePrograms: Program[] = [
       "https://chitrapurmath.net/documents/gallery/Shashtyabdapurti_Utsava_-_Karla_-_Day_3_11_Nov_2024/Day%203%20(3).jpg",
       "https://chitrapurmath.net/documents/gallery/Shashtyabdapurti_Utsava_-_Karla_-_Day_3_11_Nov_2024/Day%203%20(12).jpg",
     ],
+    linkTo:`heritage`
   },
   {
     id: 3,
@@ -268,6 +289,7 @@ export const HeritagePrograms: Program[] = [
       "https://chitrapurmath.net/documents/gallery/Shashtyabdapurti_Utsava_-_Karla_-_Day_9_17_Nov_2024/SPU%20Day%209%20(7).jpg",
       "https://chitrapurmath.net/documents/gallery/Shashtyabdapurti_Utsava_-_Karla_-_Day_9_17_Nov_2024/SPU%20Day%209%20(18).jpg",
     ],
+    linkTo:`heritage`
   },
   {
     id: 4,
@@ -279,6 +301,7 @@ export const HeritagePrograms: Program[] = [
       "https://chitrapurmath.net/documents/gallery/Datta_Jayanti,_Palki_Utsava_at_Shri_Satchidananda_Dattatraya_Temple,_Kundapur_14-15_Dec_2024/Datta%20Jayanti%20and%20Palki%20Utsava%20at%20SDT,%20Kundapur%20(21).jpg",
       "https://chitrapurmath.net/documents/gallery/Kartik_Deepotsava_at_Shri_Uma_Maheshwar_Devasthan,_Mangaluru_18_Nov_2024/Kartik%20Deepotsava%20UMD%20MGL%20(1).jpg",
     ],
+    linkTo:`heritage`
   },
   {
     id: 5,
@@ -290,6 +313,7 @@ export const HeritagePrograms: Program[] = [
       "https://chitrapurmath.net/documents/gallery/HH_Swamijis_visit_to_Maharshi_Karve_Stree_Shikshan_Saunsthas_Anudanith_Madhyamik_Ashram_Shala,_Kamshet_28_Nov_2024/22.jpg",
       "https://chitrapurmath.net/documents/gallery/Shashtyabdapurti_Utsava_-_Karla_-_Day_5_13_Nov_2024/Day%205%20(1).jpg",
     ],
+    linkTo:`heritage`
   },
 
   {
@@ -302,6 +326,7 @@ export const HeritagePrograms: Program[] = [
       "https://chitrapurmath.net/documents/gallery/Bengaluru_Camp,_Day_1_evening_-_Kalarpanam_by_Girvanapratishtha_23_June_2024/Bangalore%20Camp,%20Day%201%20(evening)%2023%20June%202024%20(6).jpg",
       "https://chitrapurmath.net/documents/gallery/Bengaluru_Camp,_Day_1_evening_-_Kalarpanam_by_Girvanapratishtha_23_June_2024/Bangalore%20Camp,%20Day%201%20(evening)%2023%20June%202024%20(12).jpg",
     ],
+    linkTo:`heritage`
   },
   {
     id: 7,
@@ -313,6 +338,7 @@ export const HeritagePrograms: Program[] = [
       "https://chitrapurmath.net/documents/gallery/HH_Swamijis_visit_to_Shri_Seetharama_Temple,_Bantwal_21_Sep_2024/Shree%20Seetharama%20Temple%20Bantwal%20(10).jpg",
       "https://chitrapurmath.net/documents/gallery/Tiruvannamalai_Camp_-_July_2024/15.jpg",
     ],
+    linkTo:`heritage`
   },
   {
     id: 8,
@@ -320,6 +346,7 @@ export const HeritagePrograms: Program[] = [
     description:
       "CHF organizes retreats and workshops that focus on various aspects of spiritual growth, meditation, and self-discovery. These events provide participants with the opportunity to reflect, learn, and deepen their spiritual practice in a supportive environment.",
     url: "https://youtu.be/goUtfPoeuWk?si=YKIUQoYiHiBnBROq",
+    linkTo:`heritage`
   },
 ];
 

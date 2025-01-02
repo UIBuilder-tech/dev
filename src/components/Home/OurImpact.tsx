@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import activeArrow from "../../assets/arrowActive.svg";
 import inactiveArrow from "../../assets/arrowInactive.svg";
 import Srivali from "../../assets/Srivali High School.png";
-import ChitrapurMathImg from "../../assets/Shirali_Math.jpg";
 import solar1 from "../../assets/solar1.jpg";
 
 interface ImpactCard {
@@ -18,6 +17,7 @@ interface ImpactCard {
   stats2: { key: string; value: string };
   stats3: { key: string; value: string };
   linkTo: string;
+  donationLink?:string;
 }
 
 const impactCards: ImpactCard[] = [
@@ -41,6 +41,8 @@ const impactCards: ImpactCard[] = [
       value: "₹ 7,42,000+",
     },
     linkTo: "heritage-preservation",
+    donationLink: "heritage"
+
   },
   {
     id: "2",
@@ -62,6 +64,7 @@ const impactCards: ImpactCard[] = [
       value: "95% - 99%",
     },
     linkTo: "education",
+    donationLink: "education",
   },
   {
     id: "3",
@@ -84,6 +87,7 @@ const impactCards: ImpactCard[] = [
       value: "300+",
     },
     linkTo: "women-empowerment",
+    donationLink: "women-empowerment",
   },
 ];
 
@@ -161,7 +165,7 @@ export default function ImpactSection() {
                       {activeCard.description}
                     </p>
                     <Link
-                      to="/contribute#donation-table"
+                      to={`/contribute#donation-table#${activeCard?.donationLink}`}
                       className="float-right px-3 py-1 max-sm:text-sm md:px-6 md:py-2 text-lg desktop-1500:text-lg  bg-secondary text-white rounded-full flex items-center gap-2 shadow-md desktop-1200:text-sm"
                     >
                       Donate <Heart className="h-4 w-4" fill="white" />

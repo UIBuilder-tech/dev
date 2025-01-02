@@ -13,7 +13,6 @@ import SamvitSudha from "../../assets/photoGallery/img13.png";
 import SamvitSudha1 from "../../assets/photoGallery/img12.png";
 import Kotekar from "../../assets/Exit.jpg";
 import Kotekar1 from "../../assets/PPUC Annday (2).jpg";
-import Kotekar2 from "../../assets/Assembly.jpg";
 import Yatri from "../../assets/Shirali_Math.jpg";
 import cows from "../../assets/Cows in Rath Gadde 2.jpg";
 
@@ -26,6 +25,7 @@ interface Project {
   status: string;
   images?: string[];
   linkTo?: string;
+  donationLink?:string;
 }
 
 const projects: Project[] = [
@@ -36,6 +36,7 @@ const projects: Project[] = [
     status: "Ongoing",
     images: [vantiga],
     linkTo: "heritage-preservation",
+    donationLink: "vantiga"
   },
   {
     id: "2",
@@ -44,6 +45,7 @@ const projects: Project[] = [
     status: "Ongoing",
     images: [SamvitSudha, SamvitSudha1],
     linkTo: "women-empowerment",
+    donationLink: "women-empowerment"
   },
   {
     id: "3",
@@ -52,6 +54,7 @@ const projects: Project[] = [
     status: "Ongoing",
     images: [spevc1, spevc2],
     linkTo: "education",
+    donationLink:"education"
   },
   {
     id: "4",
@@ -60,6 +63,7 @@ const projects: Project[] = [
     status: "Ongoing",
     images: [Parijnanashram],
     linkTo: "education",
+    donationLink:"education"
   },
   {
     id: "5",
@@ -68,6 +72,7 @@ const projects: Project[] = [
     status: "Ongoing",
     images: [Yatri],
     linkTo: "special-projects",
+    donationLink:"heritage"
   },
   {
     id: "6",
@@ -76,6 +81,7 @@ const projects: Project[] = [
     status: "Ongoing",
     images: [cows],
     linkTo: "heritage-preservation",
+    donationLink:"heritage"
   },
   {
     id: "9",
@@ -84,6 +90,7 @@ const projects: Project[] = [
     status: "Completed",
     images: [Kotekar, Kotekar1],
     linkTo: "education",
+    donationLink:"education"
   },
   {
     id: "11",
@@ -92,6 +99,7 @@ const projects: Project[] = [
     status: "Completed",
     images: [Solar],
     linkTo: "special-projects",
+    donationLink:"education"
   },
   {
     id: "8",
@@ -100,6 +108,7 @@ const projects: Project[] = [
     status: "Ongoing",
     images: [Srivali],
     linkTo: "education",
+    donationLink:"education"
   },
   // {
   //   id: "7",
@@ -219,7 +228,7 @@ export default function FeaturedProjects({ title }: Props) {
                           />
                         )}
                       </Link>
-                      <Link to="/contribute#donation-table">
+                      <Link to={`/contribute#donation-table#${project?.donationLink}`}>
                         {isHovered ? (
                           <img
                             src={activeDonate}

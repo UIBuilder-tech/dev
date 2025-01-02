@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import DonationTable from '../components/Donate/DonationTable';
 import Hero from '../components/Home/Hero';
@@ -13,9 +13,24 @@ import Ambassador from '../components/About/Ambassador';
 import VantigaDetailed from '../components/Contribute/VantigaDetailed';
 import { Outlet } from 'react-router-dom';
 
+interface SelectedProject {
+  id?:string;
+  projectName: string;
+  unitAmount: number;
+  quantity: number;
+  remark: string;
+}
+
+
+
 export default function ContributePage() {
   const [totalDonationAmount, setTotalDonationAmount] = useState<number>(0.0);
+  const [selectedProjects, setSelectedProjects] = useState<SelectedProject[]>([]);
+  const [baseDonationId, setBaseDonationId] = useState('')
   const location = useLocation();
+
+  console.log("selectedProjects--->",selectedProjects)
+  console.log("baseDonationId-->",baseDonationId)
 
   useEffect(() => {
     // Handle initial load with hash
@@ -43,10 +58,10 @@ export default function ContributePage() {
       </div> */}
       <div className='relative'>
       <div id='donation-table'>
-        <DonationTable setTotalDonationAmount={setTotalDonationAmount} />
+        <DonationTable setTotalDonationAmount={setTotalDonationAmount}  setSelectedProjects={setSelectedProjects} setBaseDonationId={setBaseDonationId}/>
       </div>
       <div id='payment'>
-        <PaymentForm totalDonationAmount={totalDonationAmount} />
+        <PaymentForm totalDonationAmount={totalDonationAmount} baseDonationId={baseDonationId} selectedProjects={selectedProjects}/>
       </div>
     {/* <div className="absolute inset-0 bg-cream bg-opacity-75 backdrop-filter backdrop-blur-sm flex items-center justify-center z-10">
       <div className="text-center">

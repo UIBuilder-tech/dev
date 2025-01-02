@@ -1,7 +1,6 @@
 import Hero from "../components/Home/Hero";
 import FAQSection from "../components/Home/FAQ";
 import Footer from "../components/Footer/Footer";
-import FeaturedProjects from "../components/Home/FeaturedProjects";
 import Ambassador from "../components/About/Ambassador";
 import Newsletter from "../components/About/Newsletter";
 import OurTeam from "../components/Home/OurTeam";
@@ -16,7 +15,6 @@ import SpecialProjects from "../components/projects/SpecialProjects";
 import GrantsSection from "../components/projects/GrantsSection";
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
-import ChitrapurMathImg from "../assets/Shirali_Math.jpg";
 import Vantiga from "../components/Contribute/Vantiga";
 import HeroImg from "../assets/photoGallery/img11.png";
 import solar from "../assets/solar1.jpg";
@@ -28,6 +26,7 @@ interface Project {
   location: string;
   description: string;
   images: string[];
+  linkTo?: string;
 }
 export default function ProjectsPage() {
   const location = useLocation();
@@ -57,6 +56,7 @@ export default function ProjectsPage() {
         "https://chitrapurmath.net/documents/upload/1588069798C_(2).png",
         "https://chitrapurmath.net/documents/upload/1588074364A_(1).png",
       ],
+      linkTo:"heritage"
     },
     {
       id: 2,
@@ -65,6 +65,7 @@ export default function ProjectsPage() {
       description:
         "The Solar Plant in Karla project involves installing a 16kW grid-tied solar system at the Parijnan PU College and Parijnan Vidyalaya in Kotekar to reduce reliance on non-renewable energy, lower operational costs, and promote sustainability.",
       images: [solar, solar1],
+      linkTo:"education"
     },
     {
       id: 3,
@@ -76,6 +77,7 @@ export default function ProjectsPage() {
         "https://images.unsplash.com/photo-1584466990297-7e8ab67a5eb0?q=80&w=1965&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         "https://images.unsplash.com/photo-1585282284319-e38fb6c29dd1?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mjd8fGNvdmlkfGVufDB8fDB8fHwy",
       ],
+      linkTo:"education"
     },
   ];
 

@@ -13,6 +13,7 @@ interface Program {
   description: string;
   image: string;
   url?: string | undefined;
+  linkTo?:string;
 }
 
 interface ProjectsCategoryProps {
@@ -107,7 +108,7 @@ export default function ProjectsCategory({
                     Join Us
                   </Link>
                   <Link
-                    to="/contribute#donation-table"
+                    to={`/contribute#donation-table#${programs[currentProgram]?.linkTo}`}
                     className="px-3 md:px-6 md:py-2.5 bg-[#e67e22] text-white rounded-full text-sm md:text-xl font-medium hover:bg-orange-600 transition-colors flex items-center gap-2 desktop-1200:px-4 desktop-1200:py-2 desktop-1500:text-[18px] desktop-1200:text-[16px]"
                   >
                     Donate <span className="text-white text-lg">❤</span>

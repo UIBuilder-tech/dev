@@ -19,7 +19,7 @@ export default function Vantiga({
 
   return (
     <section className="relative bg-[#E67E22] py-16 desktop-1900:mb-10">
-      <div className="container absolute z-[10] -top-[70px] md:-top-[150px] right-0 left-0 mx-auto bg-white rounded-[30px] md:rounded-[50px] p-2 md:p-10 max-w-[90%] md:max-w-[75%] desktop-1200:p-6 desktop-1500:p-10 desktop-1900:p-12 desktop-1200:max-w-[80%]">
+      <div className="container absolute z-[10] -top-[50px] md:-top-[150px] right-0 left-0 mx-auto bg-white rounded-[30px] md:rounded-[50px] p-2 md:p-10 max-w-[90%] md:max-w-[75%] desktop-1200:p-6 desktop-1500:p-10 desktop-1900:p-12 desktop-1200:max-w-[80%]">
         <div className=" z-[9999] relative flex flex-row justify-around md:gap-6 item-center text-center w-full desktop-1900:gap-[100px]">
           <div className="flex flex-col space-y-2 md:space-y-4 items-start p-2 md:p-4">
             <img
@@ -71,7 +71,7 @@ export default function Vantiga({
         </div>
       </div>
       <div className="container relative z-[10] mx-auto px-4 w-full py-14 md:py-20 desktop-1200:py-10 desktop-1500:py-16 mt-12 desktop-1900:mt-28">
-        <div className="flex flex-col justify-center item-center text-center space-y-10 w-full">
+        <div className="flex flex-col justify-center item-center text-center space-y-5 md:space-y-10 w-full">
           <h2 className="text-3xl md:text-5xl text-white desktop-1500:text-4xl desktop-1200:text-3xl desktop-1900:text-5xl">
             {title}
           </h2>
