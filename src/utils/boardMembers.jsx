@@ -1,20 +1,20 @@
-import m1 from "../assets/boardMembers/Arun.jpg";
-import m2 from "../assets/boardMembers/Sumant Padbidri.jpg";
-import m3 from "../assets/boardMembers/Milindjpg.jpg";
-import m4 from "../assets/boardMembers/Ashwin Bijur.jpg";
-import m5 from "../assets/boardMembers/Mamta Savkur.jpg";
-import m7 from "../assets/boardMembers/Neena Karnad.jpeg";
-import m8 from "../assets/boardMembers/Shashank Udyawer.png";
-import m9 from "../assets/boardMembers/Sudhir Golikeri.jpg";
-import m10 from "../assets/boardMembers/Santosh G.jpg";
-import m11 from "../assets/boardMembers/Nandu maam.jpg";
-import m12 from "../assets/boardMembers/Ashok Kulkarni.jpg";
-// import m13 from "../assets/boardMembers/Kiran Mundkur.jpg";
-import m15 from "../assets/boardMembers/Pramod Mavinkurve.jpg";
-import m16 from "../assets/boardMembers/Mangesh Hoskote.png";
-import m17 from "../assets/boardMembers/Devyani Padubidri.jpg";
-import m18 from "../assets/boardMembers/Sanjay Savkur.jpg";
-import Placeholder from "../assets/Shirali_Math.jpg";
+import m1 from "../assets/boardMembers/Arun.webp";
+import m2 from "../assets/boardMembers/Sumant Padbidri.webp";
+import m3 from "../assets/boardMembers/Milindjpg.webp";
+import m4 from "../assets/boardMembers/Ashwin Bijur.webp";
+import m5 from "../assets/boardMembers/Mamta Savkur.webp";
+import m7 from "../assets/boardMembers/Neena Karnad.webp";
+import m8 from "../assets/boardMembers/Shashank Udyawer.webp";
+import m9 from "../assets/boardMembers/Sudhir Golikeri.webp";
+import m10 from "../assets/boardMembers/Santosh G.webp";
+import m11 from "../assets/boardMembers/Nandu maam.webp";
+import m12 from "../assets/boardMembers/Ashok Kulkarni.webp";
+// import m13 from "../assets/boardMembers/Kiran Mundkur.webp";
+import m15 from "../assets/boardMembers/Pramod Mavinkurve.webp";
+import m16 from "../assets/boardMembers/Mangesh Hoskote.webp";
+import m17 from "../assets/boardMembers/Devyani Padubidri.webp";
+import m18 from "../assets/boardMembers/Sanjay Savkur.webp";
+import Placeholder from "../assets/Shirali_Math.webp";
 
 export const boardMembers = [
   // Board Officer

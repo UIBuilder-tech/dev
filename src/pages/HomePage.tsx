@@ -7,7 +7,7 @@ import VolunteerSection from "../components/Home/Volunteer";
 import TeamSection from "../components/Home/OurTeam";
 import FAQSection from "../components/Home/FAQ";
 import Footer from "../components/Footer/Footer";
-import ChitrapurMathImg from "../assets/Shirali_Math.jpg";
+import ChitrapurMathImg from "../assets/Shirali_Math.webp";
 
 export default function HomePage() {
   return (

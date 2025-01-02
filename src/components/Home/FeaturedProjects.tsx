@@ -3,19 +3,19 @@ import activeDonate from "../../assets/projectActiveDonateIcon.svg";
 import inactiveDonate from "../../assets/projectInactiveDonateIcon.svg";
 import activeSideArrow from "../../assets/activeSideArrow.svg";
 import inactiveSideArrow from "../../assets/inactiveSideArrow.svg";
-import vantiga from "../../assets/Shirali_Math.jpg";
-import spevc1 from "../../assets/photoGallery/img1.jpg";
-import spevc2 from "../../assets/photoGallery/img6.jpg";
-import Srivali from "../../assets/Srivali High School.png";
-import Parijnanashram from "../../assets/parijnan vidyalaya.jpg";
-import Solar from "../../assets/solar.jpg";
-import SamvitSudha from "../../assets/photoGallery/img13.png";
-import SamvitSudha1 from "../../assets/photoGallery/img12.png";
-import Kotekar from "../../assets/Exit.jpg";
-import Kotekar1 from "../../assets/PPUC Annday (2).jpg";
-import Kotekar2 from "../../assets/Assembly.jpg";
-import Yatri from "../../assets/Shirali_Math.jpg";
-import cows from "../../assets/Cows in Rath Gadde 2.jpg";
+import vantiga from "../../assets/Shirali_Math.webp";
+import spevc1 from "../../assets/photoGallery/img1.webp";
+import spevc2 from "../../assets/photoGallery/img6.webp";
+import Srivali from "../../assets/Srivali High School.webp";
+import Parijnanashram from "../../assets/parijnan vidyalaya.webp";
+import Solar from "../../assets/solar.webp";
+import SamvitSudha from "../../assets/photoGallery/img13.webp";
+import SamvitSudha1 from "../../assets/photoGallery/img12.webp";
+import Kotekar from "../../assets/Exit.webp";
+import Kotekar1 from "../../assets/PPUC Annday (2).webp";
+// import Kotekar2 from "../../assets/Assembly.jpg";
+import Yatri from "../../assets/Shirali_Math.webp";
+import cows from "../../assets/Cows in Rath Gadde 2.webp";
 
 import { Link } from "react-router-dom";
 
@@ -148,7 +148,7 @@ export default function FeaturedProjects({ title }: Props) {
                 >
                   <td className="md:py-7 py-5 desktop-1900:w-[40%]">
                     <Link
-                    to={`/projects#${project?.linkTo}`}
+                      to={`/projects#${project?.linkTo}`}
                       className={`text-xs md:text-lg desktop-1900:text-2xl font-medium transition-colors duration-200 ${
                         isHovered ? "text-secondary" : "text-gray-900"
                       }`}
@@ -158,7 +158,7 @@ export default function FeaturedProjects({ title }: Props) {
                   </td>
                   <td>
                     <Link
-                    to={`/projects#${project?.linkTo}`}
+                      to={`/projects#${project?.linkTo}`}
                       className={`inline-flex rounded-full px-2 md:px-4 py-1 text-xs md:text-sm transition-all duration-200 break-words hyphens-auto max-w-[80%] desktop-1900:text-lg ${
                         isHovered
                           ? "bg-secondary text-white border border-secondary"
@@ -170,7 +170,7 @@ export default function FeaturedProjects({ title }: Props) {
                   </td>
                   <td>
                     <Link
-                    to={`/projects#${project?.linkTo}`}
+                      to={`/projects#${project?.linkTo}`}
                       className={`text-xs md:text-lg transition-colors desktop-1900:text-xl duration-200 ${
                         isHovered ? "text-secondary" : "text-gray-600"
                       }`}

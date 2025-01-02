@@ -5,7 +5,7 @@ import { useWindowWidth } from "../../hooks/useWindowWidth";
 import { Link, useLocation } from "react-router-dom";
 import activeArrow from "../../assets/arrowActive.svg";
 import inactiveArrrow from "../../assets/arrowInactive.svg";
-import ChitrapurMathImg from "../../assets/Shirali_Math.jpg";
+import ChitrapurMathImg from "../../assets/Shirali_Math.webp";
 import { useImagePreviewTrigger } from "../../utils/imagePreviewUtils";
 
 interface Program {

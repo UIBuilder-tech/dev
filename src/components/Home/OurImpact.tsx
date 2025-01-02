@@ -4,9 +4,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 import activeArrow from "../../assets/arrowActive.svg";
 import inactiveArrow from "../../assets/arrowInactive.svg";
-import Srivali from "../../assets/Srivali High School.png";
-import ChitrapurMathImg from "../../assets/Shirali_Math.jpg";
-import solar1 from "../../assets/solar1.jpg";
+import Srivali from "../../assets/Srivali High School.webp";
+import ChitrapurMathImg from "../../assets/Shirali_Math.webp";
+import solar1 from "../../assets/solar1.webp";
 
 interface ImpactCard {
   id: string;

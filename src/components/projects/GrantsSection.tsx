@@ -1,5 +1,5 @@
 import { Mail } from "lucide-react";
-import grantsPointer from "../../assets/grantsPointer.svg"
+import grantsPointer from "../../assets/grantsPointer.svg";
 
 export default function GrantsSection() {
   return (
@@ -22,14 +22,17 @@ export default function GrantsSection() {
             </p>
             <div className="space-y-6 py-4">
               <div className="flex gap-3">
-                <img src={grantsPointer} className="w-5 h-5 text-[#E67E22] flex-shrink-0 mt-1" />
+                <img
+                  src={grantsPointer}
+                  className="w-5 h-5 text-[#E67E22] flex-shrink-0 mt-1"
+                />
                 <p className="text-sm desktop-1500:text-sm desktop-1200:text-xs sm:text-base text-gray-600">
                   CHF supports community service organizations in India whose
                   goals and objectives closely match one of CHF's thematic
                   areas.
                 </p>
               </div>
-              <div className="flex gap-3">
+              {/* <div className="flex gap-3">
                 <img src={grantsPointer} className="w-5 h-5 text-[#E67E22] flex-shrink-0 mt-1" />
                 <p className="text-sm desktop-1500:text-sm desktop-1200:text-xs sm:text-base text-gray-600">
                   We do not provide grants for budget line items labeled as
@@ -37,7 +40,7 @@ export default function GrantsSection() {
                   Fund Private Family Trust/Foundations, or political or
                   religious activities.
                 </p>
-              </div>
+              </div> */}
               {/* <div className="flex gap-3">
                 <img src={grantsPointer} className="w-5 h-5 text-[#E67E22] flex-shrink-0 mt-1" />
                 <p className="text-sm desktop-1500:text-sm desktop-1200:text-xs sm:text-base text-gray-600">
@@ -55,49 +58,56 @@ export default function GrantsSection() {
             <p className="text-xl font-semibold mb-6  desktop-1500:text-xl desktop-1200:text-[16px]">
               Conditions for Grants
             </p>
-              <div className="flex items-start gap-3 py-4">
-            <img src={grantsPointer} className="w-5 h-5 text-[#E67E22] flex-shrink-0 " />
-            <div className="  space-y-2 rounded-sm">
-            
-            
-              <p className="list-disc text-sm desktop-1500:text-sm desktop-1200:text-xs sm:text-base text-gray-600">
-                The beneficiary organization must provide:
-              </p>
-              <ul className="list-none desktop-1500:text-sm desktop-1200:text-xs space-y-2 text-sm sm:text-base text-gray-600">
-                <li>
-                  Official receipt of the grant in the name of Chitrapur
-                  Heritage Foundation
-                </li>
-                <li>
-                  Progress reports, photographs, press cuttings, and video, or
-                  other such material for our records.
-                </li>
-                <li>
-                  Chitrapur Heritage Foundation's name prominently displayed
-                  on any equipment sent by us.
-                </li>
-                <li>
-                  For Sponsor-A- Student scheme and cash grants, appropriate
-                  recognition, media publicity, and inclusion in annual reports.
-                </li>
-                <li>A copy of the beneficiary's annual report.</li>
-                <li>
-                  Audited financial statement of the beneficiary organization
-                </li>
-                <li>
-                  A copy of the Current and Valid Tax Exemption Certificate
-                </li>
-              </ul>
+            <div className="flex items-start gap-3 py-4">
+              <img
+                src={grantsPointer}
+                className="w-5 h-5 text-[#E67E22] flex-shrink-0 "
+              />
+              <div className="  space-y-2 rounded-sm">
+                <p className="list-disc text-sm desktop-1500:text-sm desktop-1200:text-xs sm:text-base text-gray-600">
+                  The beneficiary organization must provide:
+                </p>
+                <ul className="list-none desktop-1500:text-sm desktop-1200:text-xs space-y-2 text-sm sm:text-base text-gray-600">
+                  <li>
+                    Official receipt of the grant in the name of Chitrapur
+                    Heritage Foundation
+                  </li>
+                  <li>
+                    Progress reports, photographs, press cuttings, and video, or
+                    other such material for our records.
+                  </li>
+                  <li>
+                    Chitrapur Heritage Foundation's name prominently displayed
+                    on any equipment sent by us.
+                  </li>
+                  <li>
+                    For Sponsor-A- Student scheme and cash grants, appropriate
+                    recognition, media publicity, and inclusion in annual
+                    reports.
+                  </li>
+                  <li>A copy of the beneficiary's annual report.</li>
+                  <li>
+                    Audited financial statement of the beneficiary organization
+                  </li>
+                  <li>
+                    A copy of the Current and Valid Tax Exemption Certificate
+                  </li>
+                </ul>
               </div>
             </div>
           </div>
 
           {/* Selection Criteria */}
           <div>
-            <p className="text-xl font-semibold mb-6  desktop-1500:text-xl desktop-1200:text-[16px]">Selection Criteria</p>
+            <p className="text-xl font-semibold mb-6  desktop-1500:text-xl desktop-1200:text-[16px]">
+              Selection Criteria
+            </p>
             <div className="space-y-4 py-4">
               <div className="flex gap-3">
-              <img src={grantsPointer} className="w-5 h-5 text-[#E67E22] flex-shrink-0 mt-1" />
+                <img
+                  src={grantsPointer}
+                  className="w-5 h-5 text-[#E67E22] flex-shrink-0 mt-1"
+                />
                 <p className="text-sm desktop-1500:text-sm desktop-1200:text-xs sm:text-base text-gray-600">
                   In general, Chitrapur Heritage Foundation gives priority to
                   applications from our core community trusts and foundations.
@@ -105,17 +115,15 @@ export default function GrantsSection() {
               </div>
               <ul className="space-y-2 text-sm desktop-1500:text-sm desktop-1200:text-xs sm:text-base text-gray-600 ml-8">
                 <li>
-                  The organization has to have existed for a minimum of one
-                  (1) year from the date of registration.
+                  The organization has to have existed for a minimum of one (1)
+                  year from the date of registration.
                 </li>
                 <li>
                   The organization must be registered as a non-profit that
                   implements social development projects in India, with no
                   political affiliations.
                 </li>
-                <li>
-                  The organization's physical address must be verifiable.
-                </li>
+                <li>The organization's physical address must be verifiable.</li>
                 <li>
                   All registration documents such as 80G, FCRA, etc., must be
                   available upon request.
@@ -131,13 +139,13 @@ export default function GrantsSection() {
                   government regulations and labor laws.
                 </li>
                 <li>
-                  The organization must have defined indicators that measure
-                  its performance against its stated objectives.
+                  The organization must have defined indicators that measure its
+                  performance against its stated objectives.
                 </li>
                 <li>
-                  Grant applicants must demonstrate the potential of
-                  continuing the funded work in a self-renewing manner after
-                  funding from Chitrapur Heritage Foundation ceases
+                  Grant applicants must demonstrate the potential of continuing
+                  the funded work in a self-renewing manner after funding from
+                  Chitrapur Heritage Foundation ceases
                 </li>
               </ul>
             </div>

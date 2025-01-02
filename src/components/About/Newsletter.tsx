@@ -1,5 +1,5 @@
 import { FormEvent, useState } from "react";
-import newsletter from "../../assets/newsletterImg.png";
+import newsletter from "../../assets/newsletterImg.webp";
 
 function Newsletter() {
   const [email, setEmail] = useState("");
@@ -36,7 +36,10 @@ function Newsletter() {
                 neighborhood, at your convenience.
               </p>
 
-              <form onSubmit={handleSubmit} className="relative md:max-w-xl max-sm:flex max-sm:flex-row max-sm:items-center ">
+              <form
+                onSubmit={handleSubmit}
+                className="relative md:max-w-xl max-sm:flex max-sm:flex-row max-sm:items-center "
+              >
                 <input
                   type="email"
                   value={email}

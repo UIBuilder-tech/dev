@@ -1,9 +1,8 @@
-import { useState, useEffect, useRef } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import { Loader } from 'lucide-react';
-import { toast } from 'react-toastify';
-import heritage1 from "../assets/heritage1.jpg";
-
+import { useState, useEffect, useRef } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { Loader } from "lucide-react";
+import { toast } from "react-toastify";
+import heritage1 from "../assets/heritage1.webp";
 
 const EmailVerification = () => {
   const [isVerifying, setIsVerifying] = useState(true);
@@ -24,13 +23,13 @@ const EmailVerification = () => {
 
         if (data?.data?.userId) {
           toast.success(data.message);
-          navigate('/');
+          navigate("/");
         } else {
           toast.error(data.message);
         }
         console.log("RESPONSE__>", data);
       } catch (error) {
-        toast.error('Something went wrong. Please try again later.');
+        toast.error("Something went wrong. Please try again later.");
         console.error(error);
       } finally {
         setIsVerifying(false);
@@ -41,8 +40,11 @@ const EmailVerification = () => {
   }, [BASE_URL, uidb64, token, navigate]);
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: `url(${heritage1})` }}>
-        <div className="absolute inset-0 bg-black/50"></div>
+    <div
+      className="flex flex-col items-center justify-center min-h-screen bg-gray-100 bg-cover bg-center bg-no-repeat"
+      style={{ backgroundImage: `url(${heritage1})` }}
+    >
+      <div className="absolute inset-0 bg-black/50"></div>
       <div className="relative z-[9] p-8 bg-white rounded-lg shadow-md text-center">
         <h1 className="text-2xl font-bold mb-4">Email Verification</h1>
         {isVerifying ? (
@@ -59,4 +61,3 @@ const EmailVerification = () => {
 };
 
 export default EmailVerification;
-
