@@ -36,7 +36,7 @@ const faqData = [
     question:
       "How do I specify the particular project to which I want to donate?",
     answer:
-      "The donation page on the CHF website allows you to specify how you want to split the donated amount between various projects, support-a-student, Vantiga, or the general fund. CHF recommends donations at the following levels: Support A Student at $300/year per student supported and Vantiga at 1% of your annual income or at a minimum of $1/day.",
+      "The donation page on the CHF website allows you to specify the manner in which you want to split the donated amount between various projects, support-a- student, vantiga or general fund. CHF recommends that you consider donations at the following suggested levels. Support A Student at $300/year per student supported. Vantiga at 1% of your Annual Income or at a minimum of $1.50/day",
   },
   {
     id: 5,
