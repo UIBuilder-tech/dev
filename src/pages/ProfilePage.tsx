@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { PencilIcon, UserPlusIcon, XIcon, Power, Loader } from "lucide-react";
+import { PencilIcon, XIcon, Power, Loader } from "lucide-react";
 import Footer from "../components/Footer/Footer";
 import { toast } from "react-toastify";
 import heritage1 from "../assets/heritage1.webp";
@@ -241,6 +241,7 @@ export default function Profile() {
             billingState: response?.billingState,
             billingZipCode: response?.billingPostalCode,
           });
+          setIsBillingSame(response?.sameAddress)
         } else {
           console.error("error fetching response");
         }
@@ -300,11 +301,11 @@ export default function Profile() {
       billingPostalCode: isBillingSame ? address?.zipCode : address?.billingZipCode,
       billingState: isBillingSame ? address?.state : address?.billingState,
       billingStreet: isBillingSame ? address?.street : address?.billingStreet,
-      ShippingCity: address?.city,
-      ShippingCountry: address?.country,
-      ShippingPostalCode: address?.zipCode,
-      ShippingState: address?.state,
-      ShippingStreet: address?.street,
+      shippingCity: address?.city,
+      shippingCountry: address?.country,
+      shippingPostalCode: address?.zipCode,
+      shippingState: address?.state,
+      shippingStreet: address?.street,
     };
     setIsFormValidate(true)
     fetch(`${BASE_URL}/api/profile/address`, {
@@ -374,6 +375,16 @@ export default function Profile() {
         <div className="h-8 w-32 bg-gray-200 rounded animate-pulse"></div>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="md:col-span-2">
+          <div className="h-4 w-24 bg-gray-200 rounded animate-pulse mb-2"></div>
+          <div className="h-8 w-full bg-gray-200 rounded animate-pulse"></div>
+        </div>
+        {[1, 2, 3, 4].map((item) => (
+          <div key={item} className="space-y-3">
+            <div className="h-4 w-24 bg-gray-200 rounded animate-pulse"></div>
+            <div className="h-8 w-full bg-gray-200 rounded animate-pulse"></div>
+          </div>
+        ))}
         <div className="md:col-span-2">
           <div className="h-4 w-24 bg-gray-200 rounded animate-pulse mb-2"></div>
           <div className="h-8 w-full bg-gray-200 rounded animate-pulse"></div>
@@ -867,6 +878,7 @@ export default function Profile() {
               </div>
             </div>
           ) : (
+            <>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div className="md:col-span-2">
                 <label className="block text-sm text-gray-500">
@@ -901,6 +913,44 @@ export default function Profile() {
                 </p>
               </div>
             </div>
+            <p className="text-2xl md:text-3xl font-semibold text-gray-700 py-8">
+              Billing Address
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className="md:col-span-2">
+                <label className="block text-sm text-gray-500">
+                  Street Address
+                </label>
+                <p className="text-xl max-sm:text-lg text-gray-800">
+                  {address.billingStreet || "Not provided"}
+                </p>
+              </div>
+              <div>
+                <label className="block text-sm text-gray-500">City</label>
+                <p className="text-xl max-sm:text-lg text-gray-800">
+                  {address.billingCity || "Not provided"}
+                </p>
+              </div>
+              <div>
+                <label className="block text-sm text-gray-500">State</label>
+                <p className="text-xl max-sm:text-lg text-gray-800">
+                  {address.billingState || "Not provided"}
+                </p>
+              </div>
+              <div>
+                <label className="block text-sm text-gray-500">Zip Code</label>
+                <p className="text-xl max-sm:text-lg text-gray-800">
+                  {address.billingZipCode || "Not provided"}
+                </p>
+              </div>
+              <div>
+                <label className="block text-sm text-gray-500">Country</label>
+                <p className="text-xl max-sm:text-lg text-gray-800">
+                  {address.billingCountry}
+                </p>
+              </div>
+            </div>
+            </>
           )}
         </div>
 

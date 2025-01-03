@@ -17,7 +17,7 @@ export default function Footer() {
       </div>
 
       <div className="relative z-10 mx-auto max-w-7xl">
-        <div className="grid grid-cols-2 gap-x-8 gap-y-12 md:grid-cols-2 lg:grid-cols-5">
+        <div className="grid grid-cols-2 gap-x-8 gap-y-12 max-[1099px]:grid-cols-2 lg:grid-cols-5">
           <div className="space-y-12 items-center justify-center flex">
             <div className=" flex flex-col  items-center justify-center">
               <img src={logo} className="w-36" />

@@ -117,13 +117,23 @@ export default function Navbar() {
                     alt='Home'
                   />
                 </Link>
-                <button onClick={ProfileClickHandler} type='button'>
-                  <img
-                    src={ProfileIcon}
-                    className='desktop-1200:w-5 desktop-1200:h-6 desktop-1500:w-6 desktop-1500:h-6 desktop-1900:w-7 desktop-1900:h-7 w-7 h-7'
-                    alt='Profile'
-                  />
-                </button>
+                <div className='relative group'>
+  <button onClick={ProfileClickHandler} type='button'>
+    <img
+      src={ProfileIcon}
+      className='desktop-1200:w-5 desktop-1200:h-6 desktop-1500:w-6 desktop-1500:h-6 desktop-1900:w-7 desktop-1900:h-7 w-7 h-7'
+      alt='Profile'
+    />
+  </button>
+  <span
+    className='absolute left-1/2 -translate-x-1/2 bottom-full mb-2 
+                bg-black text-white text-center text-sm px-2 py-1 rounded opacity-0
+                group-hover:opacity-100 transition-opacity duration-200'
+                style={{maxWidth:"200px",minWidth:"60px"}}
+  >
+    {user?.userId ? `Hello ${user?.firstName}!` : `Login`}
+  </span>
+</div>
                 
                 <button
                    onClick={e => {

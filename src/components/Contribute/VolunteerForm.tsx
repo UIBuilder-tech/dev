@@ -1,5 +1,5 @@
-import { useState, FormEvent } from "react";
-import { Check, Phone, Mail } from "lucide-react";
+import { useState, FormEvent, useEffect } from "react";
+import {  Phone, Mail } from "lucide-react";
 import volunteerGroup from "../../assets/volunteerGroup.svg";
 import { toast } from "react-toastify";
 
@@ -14,11 +14,31 @@ interface FormData {
   country: string;
 }
 
+interface FormType {
+  id: number; // A unique identifier (e.g., timestamp)
+  FirstName: string; // Name of the user
+  LastName: string; // Email address
+  Email: string; // Email address
+  Phone: string; // Phone number
+  address: string; // Address line
+  city: string; // City name
+  zipCode: string; // Zip/postal code
+  state: string; // State name
+  country: string; // Country name
+  paymentMethod: string; // Payment method (e.g., 'online', 'offline')
+  rememberMe: boolean; // Whether the user opts for "remember me"
+  amount: number | null; // Total amount
+}
+
+interface Props{
+  initialFormData: FormType
+}
+
 interface FormErrors {
   [key: string]: string;
 }
 
-export default function VolunteerForm() {
+export default function VolunteerForm({initialFormData}:Props) {
   const [formData, setFormData] = useState<FormData>({
     category: "",
     name: "",
@@ -31,8 +51,22 @@ export default function VolunteerForm() {
   });
 
   const [errors, setErrors] = useState<FormErrors>({});
-  const [isNameVerified, setIsNameVerified] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+
+    // Synchronize formData with initialFormData
+    useEffect(() => {
+      setFormData({
+        category: "",
+        name: initialFormData?.FirstName ? `${initialFormData?.FirstName} ${initialFormData?.LastName}` : '',
+        email: initialFormData?.Email,
+        phone: initialFormData?.Phone,
+        address: initialFormData?.address,
+        city: initialFormData?.city,
+        zipCode: initialFormData?.zipCode,
+        country: initialFormData?.country,
+      });
+    }, [initialFormData]);
 
   const validateForm = (): boolean => {
     const newErrors: FormErrors = {};
@@ -262,9 +296,9 @@ export default function VolunteerForm() {
                   className="w-full border-b border-gray-200 py-3 focus:outline-none focus:border-primary desktop-1200:text-base desktop-1500:text-lg desktop-1900:text-xl"
                   placeholder="Full Name"
                 />
-                {isNameVerified && (
+                {/* {isNameVerified && (
                   <Check className="absolute right-2 top-1/2 -translate-y-1/2 text-green-500 h-5 w-5" />
-                )}
+                )} */}
               </div>
 
               <div>
