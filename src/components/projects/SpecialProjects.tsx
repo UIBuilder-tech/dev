@@ -272,8 +272,9 @@ const SpecialProjects = ({
   const itemsPerPage = 3;
   const totalPages = Math.ceil(projects.length / itemsPerPage);
   const windowWidth = useWindowWidth();
-  const isMobile = windowWidth < 768;
+  const isMobile = windowWidth < 699;
   const range150 = windowWidth >= 1200 && windowWidth <= 1500;
+  const isTablet = windowWidth >= 700 && windowWidth <= 1099 // md breakpoint
   // const range120 = windowWidth>1500 && windowWidth <=1900;
 
   console.log(from);
@@ -318,7 +319,7 @@ const SpecialProjects = ({
 
       <div className="relative">
         <div className="flex items-center justify-center gap-6 mb-8">
-          {!isMobile && (
+          {(!isMobile || !isTablet) && (
             <button
               onClick={prevPage}
               className={` ${
@@ -339,7 +340,7 @@ const SpecialProjects = ({
           )}
 
           <div className="flex md:flex-row items-center flex-col gap-4 md:gap-6">
-            {isMobile
+            {(isMobile || isTablet)
               ? visibleProjects.map(
                   (project) =>
                     project.id === expandedId && (
@@ -361,7 +362,7 @@ const SpecialProjects = ({
                     onExpand={handleExpand}
                   />
                 ))}
-            {isMobile && (
+            {(isMobile || isTablet) && (
               <div className="flex-1 flex flex-row gap-3 md:gap-4">
                 {visibleProjects.map(
                   (project) =>
@@ -379,7 +380,7 @@ const SpecialProjects = ({
             )}
           </div>
 
-          {!isMobile && (
+          {(!isMobile || !isTablet) && (
             <button
               onClick={nextPage}
               className={` ${

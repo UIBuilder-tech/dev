@@ -61,7 +61,8 @@ export default function DonationTable({setTotalDonationAmount, setSelectedProjec
   const [remarks, setRemarks] = useState<Record<string, string>>({});
   const [useDefaultDonation, setUseDefaultDonation] = useState(false);
     const windowWidth = useWindowWidth()
-    const isMobile = windowWidth < 768 // md breakpoint
+    const isMobile = windowWidth < 700 // md breakpoint
+    const isTablet = windowWidth >= 700 && windowWidth <= 1099 // md breakpoint
 
   const toggleCategory = (categoryId: string) => {
     setExpandedCategories(prev => 
@@ -259,12 +260,13 @@ export default function DonationTable({setTotalDonationAmount, setSelectedProjec
         const isTrashActive = totalItemAmount > 0;
 
         return (
-          isMobile ?
+          isMobile || isTablet ?
           <tr aria-rowspan={3} key={item.id} className="border-t border-gray-300">
-            <tr aria-rowspan={2}>
-            <td className="py-2 px-2 w-[40%] max-sm:text-sm" style={{wordWrap:"break-word"}}>{item.name}{item?.id==="sevas" && <><a target='blank' href='https://chitrapurmath.net/site/rates' className='text-blue-500 cursor-pointer underline font-normal text-xs pl-2'>Know more</a></>}
+            <tr aria-rowspan={2} className='flex flex-col'>
+            <td className="py-4 px-2 w-full max-sm:text-sm" style={{wordWrap:"break-word"}}>{item.name}{item?.id==="sevas" && <><a target='blank' href='https://chitrapurmath.net/site/rates' className='text-blue-500 cursor-pointer underline font-normal text-xs pl-2'>Know more</a></>}
             </td>
-            <tr>
+            <div className='flex flex-row'>
+            <tr className=' flex flex-row'>
             <td className="py-2">
               <AmountInput
                 value={itemAmount}
@@ -297,12 +299,14 @@ export default function DonationTable({setTotalDonationAmount, setSelectedProjec
               )}
             </td>
             </tr>
-            <tr className="py-2 px-2 text-center w-full">
+            <tr className="py-2 px-2 text-center w-full flex flex-row items-center">
+              <span className='px-2 font-bold text-primary'>{"=>"}</span>
               <AmountInput
                 value={Number(totalItemAmount.toFixed(2))}
                 readOnly={true}
               />
             </tr>
+            </div>
             </tr>
             <tr className="py-2 px-2 flex flex-row items-center justify-center gap-2">
               <input

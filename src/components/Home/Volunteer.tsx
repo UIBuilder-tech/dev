@@ -8,9 +8,10 @@ import sectionBorder from "../../assets/section-border.svg";
 
 export default function VolunteerSection() {
   const windowWidth = useWindowWidth();
-  const isMobile = windowWidth < 768; // md breakpoint
+  const isMobile = windowWidth < 699; // md breakpoint
   const range150 = windowWidth >= 1200 && windowWidth <= 1500;
   const range100 = windowWidth >= 1900;
+  const isTablet = windowWidth >= 700 && windowWidth <= 1099
   return (
     <section
       className={`relative bg-[#E67E22] ${
@@ -43,10 +44,10 @@ export default function VolunteerSection() {
                       src={heritage}
                       alt="Heritage"
                       width={
-                        isMobile ? 80 : range150 ? 100 : range100 ? 160 : 140
+                        (isMobile || isTablet) ? 80 : range150 ? 100 : range100 ? 160 : 140
                       }
                       height={
-                        isMobile ? 60 : range150 ? 80 : range100 ? 140 : 120
+                        (isMobile || isTablet) ? 60 : range150 ? 80 : range100 ? 140 : 120
                       }
                     />
                   </div>
@@ -59,10 +60,10 @@ export default function VolunteerSection() {
                       src={spirituality}
                       alt="Spirituality"
                       width={
-                        isMobile ? 90 : range150 ? 120 : range100 ? 200 : 160
+                        (isMobile || isTablet) ? 90 : range150 ? 120 : range100 ? 200 : 160
                       }
                       height={
-                        isMobile ? 80 : range150 ? 110 : range100 ? 190 : 150
+                        (isMobile || isTablet) ? 80 : range150 ? 110 : range100 ? 190 : 150
                       }
                     />
                   </div>
@@ -79,10 +80,10 @@ export default function VolunteerSection() {
                       src={education}
                       alt="Education"
                       width={
-                        isMobile ? 110 : range150 ? 140 : range100 ? 230 : 180
+                        (isMobile || isTablet) ? 110 : range150 ? 140 : range100 ? 230 : 180
                       }
                       height={
-                        isMobile ? 90 : range150 ? 120 : range100 ? 110 : 160
+                        (isMobile || isTablet) ? 90 : range150 ? 120 : range100 ? 110 : 160
                       }
                     />
                   </div>

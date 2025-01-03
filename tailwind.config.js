@@ -53,10 +53,10 @@ export default {
         'desktop-1500': '1500px', // Custom breakpoint for 125%
         // '125-range': { min: '1501', max: '1900' },
         // '150-range': { min: '1200px', max: '1500px' },
-        'sm': '640px',
+        'sm': '1099px',
       // => @media (min-width: 640px) { ... }
 
-      'md': '768px',
+      'md': '1100px',
       // => @media (min-width: 768px) { ... }
 
       'lg': '1024px',

@@ -48,9 +48,9 @@ export default function FilterSearch({
   };
 
   return (
-    <div className="mb-6">
+    <div className="">
       <div className="flex flex-col md:flex-row justify-end items-center gap-2 md:gap-4">
-        <button
+        {/* <button
           onClick={() => setIsModalOpen(true)}
           className="flex items-center gap-2 px-4 py-2 italic max-sm:text-sm text-gray-600"
         >
@@ -58,7 +58,7 @@ export default function FilterSearch({
             <img src={filter} className="h-5 w-5" />
           </span>{" "}
           Filter & Search
-        </button>
+        </button> */}
         <button
           className="text-gray-600 hover:text-primary flex items-center gap-2 max-sm:text-sm"
           onClick={handleDefaultDonationChange}

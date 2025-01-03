@@ -36,7 +36,13 @@ export default function MobileNav({profileClick, to}: {profileClick: () => void;
           <span className='text-xs mt-1.5'>Profile</span>
         </Link>
         <button
-          onClick={scrollToFooter}
+          onClick={e => {
+            e.preventDefault();
+            window.scrollTo({
+              top: document.body.scrollHeight,
+              behavior: 'smooth',
+            });
+          }}
           className='flex flex-col items-center text-white'
         >
           <Phone className='h-6 w-6' />

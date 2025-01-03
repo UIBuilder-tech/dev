@@ -19,6 +19,11 @@ interface Address {
   state: string;
   zipCode: string;
   country: string;
+  billingStreet: string;
+  billingCity: string;
+  billingState: string;
+  billingZipCode: string;
+  billingCountry: string;
 }
 
 interface FamilyMember {
@@ -39,6 +44,7 @@ export default function Profile() {
   const [isEditingPersonal, setIsEditingPersonal] = useState(false);
   const [isEditingAddress, setIsEditingAddress] = useState(false);
   const [IsFormValidate, setIsFormValidate] = useState<boolean>(false)
+  const [isLoading, setIsLoading] = useState(true);
   const [personalDetails, setPersonalDetails] =
     useState<PersonalDetails | null>(null);
   const [address, setAddress] = useState<Address>({
@@ -47,6 +53,11 @@ export default function Profile() {
     state: "",
     zipCode: "",
     country: "United States",
+    billingStreet: "",
+    billingCity: "",
+    billingState: "",
+    billingZipCode: "",
+    billingCountry: "United States",
   });
   const [isBillingSame, setIsBillingSame] = useState(true);
   const [passwords, setPasswords] = useState({ old: "", new: "", confirm: "" });
@@ -59,6 +70,71 @@ export default function Profile() {
     mobile: "",
     createAccount: false,
   });
+
+  const isPasswordValid = () => {
+    const hasRequiredFields = passwords.old && passwords.new && passwords.confirm;
+    const passwordsMatch = passwords.new === passwords.confirm;
+    const meetsComplexity = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/.test(passwords.new);
+    
+    return hasRequiredFields && passwordsMatch && meetsComplexity;
+  };
+
+  const isPersonalDetailsValid = () => {
+    if (!personalDetails) return false;
+    
+    return (
+      personalDetails.FirstName?.trim().length >= 2 &&
+      personalDetails.LastName?.trim().length >= 2 &&
+      /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/.test(personalDetails.Phone)
+    );
+  };
+
+  const isAddressValid = () => {
+    // Basic shipping address validation
+    const isShippingValid = Boolean(
+      address.street?.trim() &&
+      address.city?.trim() &&
+      address.state?.trim() &&
+      address.zipCode?.trim() &&
+      /^\d{5}(-\d{4})?$/.test(address.zipCode)
+    );
+  
+    // If billing is same as shipping, we only need shipping to be valid
+    if (isBillingSame) {
+      return isShippingValid;
+    }
+  
+    // If billing is different, validate billing address too
+    const isBillingValid = Boolean(
+      address.billingStreet?.trim() &&
+      address.billingCity?.trim() &&
+      address.billingState?.trim() &&
+      address.billingZipCode?.trim() &&
+      /^\d{5}(-\d{4})?$/.test(address.billingZipCode)
+    );
+  
+    return isShippingValid && isBillingValid;
+  };
+
+  const isFamilyMemberValid = () => {
+    const {
+      relation,
+      dateOfBirth,
+      firstName,
+      lastName,
+      email,
+      mobile
+    } = newFamilyMember;
+  
+    return (
+      relation?.trim().length > 0 &&
+      dateOfBirth?.trim().length > 0 &&
+      firstName?.trim().length >= 2 &&
+      lastName?.trim().length >= 2 &&
+      /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) &&
+      /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/.test(mobile)
+    );
+  };
 
   const handlePasswordSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -142,7 +218,8 @@ export default function Profile() {
       });
   };
 
-  useEffect(() => {
+  const initalApi = () => {
+    setIsLoading(true);
     fetch(`${BASE_URL}/api/contact?email=${user?.email}`)
       .then((resp) => resp?.json())
       .then((response) => {
@@ -155,10 +232,14 @@ export default function Profile() {
           });
           setAddress({
             ...address,
-            street: response?.billingStreet,
-            city: response?.billingCity,
-            state: response?.billingState,
-            zipCode: response?.billingPostalCode,
+            street: response?.shippingStreet,
+            city: response?.shippingCity,
+            state: response?.shippingState,
+            zipCode: response?.shippingPostalCode,
+            billingStreet: response?.billingStreet,
+            billingCity: response?.billingCity,
+            billingState: response?.billingState,
+            billingZipCode: response?.billingPostalCode,
           });
         } else {
           console.error("error fetching response");
@@ -169,8 +250,12 @@ export default function Profile() {
         console.error(error);
       })
       .finally(() => {
-        // setIsDisable(false);
+        setIsLoading(false);
       });
+    }
+
+  useEffect(() => {
+    initalApi()
   }, []);
 
   const onPersonalDetailsSubmit = () => {
@@ -210,11 +295,11 @@ export default function Profile() {
   const onAddressSubmit = () => {
     const payload = {
       contactId: user?.userId,
-      billingCity: address?.city,
-      billingCountry: address?.country,
-      billingPostalCode: address?.zipCode,
-      billingState: address?.state,
-      billingStreet: address?.street,
+      billingCity: isBillingSame ? address?.city : address?.billingCity,
+      billingCountry: isBillingSame ? address?.country : address?.billingCountry,
+      billingPostalCode: isBillingSame ? address?.zipCode : address?.billingZipCode,
+      billingState: isBillingSame ? address?.state : address?.billingState,
+      billingStreet: isBillingSame ? address?.street : address?.billingStreet,
       ShippingCity: address?.city,
       ShippingCountry: address?.country,
       ShippingPostalCode: address?.zipCode,
@@ -258,9 +343,57 @@ export default function Profile() {
       className="min-h-screen  bg-cover bg-center bg-no-repeat"
       style={{ backgroundImage: `url(${heritage1})` }}
     >
-      <div className="min-h-[200vh] md:min-h-[150vh]   absolute inset-0 bg-black/50"></div>
+      <div className="min-h-[200vh] md:min-h-[170vh]  absolute inset-0 bg-black/50"></div>
 
-      <div className="relative z-[9] max-w-4xl mx-auto p-6 pt-48 space-y-8 max-sm:space-y-6 max-sm:py-[80px]">
+     {isLoading ? (
+  <div className="relative z-[9] max-w-4xl mx-auto p-6 pt-48 space-y-8 max-sm:space-y-6 max-sm:py-[80px]">
+    <div className="flex flex-row justify-between items-center">
+          <h2 className="text-5xl max-sm:text-4xl text-white">My Profile</h2>
+        </div>
+    
+    {/* Personal Details Skeleton */}
+    <div className="bg-white rounded-lg p-8 max-sm:p-6 shadow-lg border border-gray-200">
+      <div className="flex justify-between md:items-center mb-8 max-sm:flex-col">
+        <div className="h-8 w-48 bg-gray-200 rounded animate-pulse"></div>
+        <div className="h-8 w-32 bg-gray-200 rounded animate-pulse mt-4 md:mt-0"></div>
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {[1, 2, 3, 4].map((item) => (
+          <div key={item} className="space-y-3">
+            <div className="h-4 w-24 bg-gray-200 rounded animate-pulse"></div>
+            <div className="h-8 w-full bg-gray-200 rounded animate-pulse"></div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    {/* Address Skeleton */}
+    <div className="bg-white rounded-lg p-8 max-sm:p-6 shadow-lg border border-gray-200">
+      <div className="flex justify-between items-center mb-8">
+        <div className="h-8 w-48 bg-gray-200 rounded animate-pulse"></div>
+        <div className="h-8 w-32 bg-gray-200 rounded animate-pulse"></div>
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="md:col-span-2">
+          <div className="h-4 w-24 bg-gray-200 rounded animate-pulse mb-2"></div>
+          <div className="h-8 w-full bg-gray-200 rounded animate-pulse"></div>
+        </div>
+        {[1, 2, 3, 4].map((item) => (
+          <div key={item} className="space-y-3">
+            <div className="h-4 w-24 bg-gray-200 rounded animate-pulse"></div>
+            <div className="h-8 w-full bg-gray-200 rounded animate-pulse"></div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    {/* Buttons Skeleton */}
+    <div className="flex justify-between md:py-6 max-sm:pt-4">
+      <div className="h-12 w-32 bg-gray-200 rounded-full animate-pulse"></div>
+      <div className="h-12 w-40 bg-gray-200 rounded-full animate-pulse"></div>
+    </div>
+  </div>
+): <div className="relative z-[9] max-w-4xl mx-auto p-6 pt-48 space-y-8 max-sm:space-y-6 max-sm:py-[80px]">
         {/* Personal Details Section */}
         <div className="flex flex-row justify-between items-center">
           <h2 className="text-5xl max-sm:text-4xl text-white">My Profile</h2>
@@ -278,13 +411,13 @@ export default function Profile() {
                 <PencilIcon className="w-5 h-5 md:mr-2" />
                 Edit Info
               </button>
-              <button
+              {/* <button
                 className="flex items-center px-4 max-sm:px-3 max-sm:text-sm py-2 border-2 border-[#E67E22] rounded-full text-[#E67E22] hover:bg-[#E67E22] hover:text-white transition-colors duration-200"
                 onClick={() => setIsFamilyModalOpen(true)}
               >
                 <UserPlusIcon className="w-5 h-5 mr-2" />
                 Add Member
-              </button>
+              </button> */}
             </div>
           </div>
 
@@ -341,11 +474,15 @@ export default function Profile() {
                 </div>
                 <div className="md:col-span-2 flex gap-4 mt-4">
                   <button
-              disabled={IsFormValidate}
+              disabled={!isPersonalDetailsValid() || IsFormValidate}
                     onClick={() => {
                       onPersonalDetailsSubmit();
                     }}
-                    className="px-6 py-3 bg-[#E67E22] text-white rounded-full hover:bg-[#E67E22]/90 transition-colors duration-200"
+                    className={`px-6 py-3 bg-[#E67E22] text-white rounded-full ${
+                      !isPersonalDetailsValid() || IsFormValidate 
+                        ? 'bg-gray-400 cursor-not-allowed' 
+                        : 'bg-[#E67E22] hover:bg-[#E67E22]/90'
+                    } transition-colors duration-200`}
                   >
                     {IsFormValidate ? (
         <motion.div
@@ -368,7 +505,7 @@ export default function Profile() {
       )} 
                   </button>
                   <button
-                    onClick={() => setIsEditingPersonal(false)}
+                    onClick={() =>{initalApi(); setIsEditingPersonal(false)}}
                     className="px-6 py-3 bg-gray-200 text-gray-700 rounded-full hover:bg-gray-300 transition-colors duration-200"
                   >
                     Cancel
@@ -569,11 +706,137 @@ export default function Profile() {
                   Billing Address is same as Home Address
                 </label>
               </div>
+             {!isBillingSame && <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="md:col-span-2">
+                  <label className="block text-sm font-medium text-gray-600">
+                    Street Address
+                  </label>
+                  <input
+                    type="text"
+                    value={address.billingStreet}
+                    onChange={(e) =>
+                      setAddress((prev) => ({
+                        ...prev,
+                        billingStreet: e.target.value,
+                      }))
+                    }
+                    className="w-full p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1572E8] transition-all duration-200"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-600">
+                    City
+                  </label>
+                  <input
+                    type="text"
+                    value={address.billingCity}
+                    onChange={(e) =>
+                      setAddress((prev) => ({ ...prev, billingCity: e.target.value }))
+                    }
+                    className="w-full p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1572E8] transition-all duration-200"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-600">
+                    State
+                  </label>
+                  <select
+                    value={address.billingState}
+                    onChange={(e) =>
+                      setAddress((prev) => ({ ...prev, billingState: e.target.value }))
+                    }
+                    className="w-full p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1572E8] transition-all duration-200"
+                  >
+                    <option value="">Select</option>
+                    <option value="Alabama">Alabama</option>
+                    <option value="Alaska">Alaska</option>
+                    <option value="Arizona">Arizona</option>
+                    <option value="Arkansas">Arkansas</option>
+                    <option value="California">California</option>
+                    <option value="Colorado">Colorado</option>
+                    <option value="Connecticut">Connecticut</option>
+                    <option value="Delaware">Delaware</option>
+                    <option value="Florida">Florida</option>
+                    <option value="Georgia">Georgia</option>
+                    <option value="Hawaii">Hawaii</option>
+                    <option value="Idaho">Idaho</option>
+                    <option value="Illinois">Illinois</option>
+                    <option value="Indiana">Indiana</option>
+                    <option value="Iowa">Iowa</option>
+                    <option value="Kansas">Kansas</option>
+                    <option value="Kentucky">Kentucky</option>
+                    <option value="Louisiana">Louisiana</option>
+                    <option value="Maine">Maine</option>
+                    <option value="Maryland">Maryland</option>
+                    <option value="Massachusetts">Massachusetts</option>
+                    <option value="Michigan">Michigan</option>
+                    <option value="Minnesota">Minnesota</option>
+                    <option value="Mississippi">Mississippi</option>
+                    <option value="Missouri">Missouri</option>
+                    <option value="Montana">Montana</option>
+                    <option value="Nebraska">Nebraska</option>
+                    <option value="Nevada">Nevada</option>
+                    <option value="New Hampshire">New Hampshire</option>
+                    <option value="New Jersey">New Jersey</option>
+                    <option value="New Mexico">New Mexico</option>
+                    <option value="New York">New York</option>
+                    <option value="North Carolina">North Carolina</option>
+                    <option value="North Dakota">North Dakota</option>
+                    <option value="Ohio">Ohio</option>
+                    <option value="Oklahoma">Oklahoma</option>
+                    <option value="Oregon">Oregon</option>
+                    <option value="Pennsylvania">Pennsylvania</option>
+                    <option value="Rhode Island">Rhode Island</option>
+                    <option value="South Carolina">South Carolina</option>
+                    <option value="South Dakota">South Dakota</option>
+                    <option value="Tennessee">Tennessee</option>
+                    <option value="Texas">Texas</option>
+                    <option value="Utah">Utah</option>
+                    <option value="Vermont">Vermont</option>
+                    <option value="Virginia">Virginia</option>
+                    <option value="Washington">Washington</option>
+                    <option value="West Virginia">West Virginia</option>
+                    <option value="Wisconsin">Wisconsin</option>
+                    <option value="Wyoming">Wyoming</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-600">
+                    Zip Code
+                  </label>
+                  <input
+                    type="text"
+                    value={address.billingZipCode}
+                    onChange={(e) =>
+                      setAddress((prev) => ({
+                        ...prev,
+                        billingZipCode: e.target.value,
+                      }))
+                    }
+                    className="w-full p-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1572E8] transition-all duration-200"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-600">
+                    Country
+                  </label>
+                  <input
+                    type="text"
+                    value={address.billingCountry}
+                    disabled
+                    className="w-full p-3 border-2 rounded-lg bg-gray-100 text-gray-600"
+                  />
+                </div>
+              </div>}
               <div className="flex gap-4">
                 <button
-                disabled={IsFormValidate}
+                disabled={!isAddressValid() || IsFormValidate}
                   onClick={() => onAddressSubmit()}
-                  className="px-6 py-3 bg-[#E67E22] text-white rounded-full hover:bg-[#E67E22]/90 transition-colors duration-200"
+                  className={`px-6 py-3 bg-[#E67E22] text-white rounded-full ${
+                    !isAddressValid() || IsFormValidate 
+                      ? 'bg-gray-400 cursor-not-allowed' 
+                      : 'bg-[#E67E22] hover:bg-[#E67E22]/90'
+                  } transition-colors duration-200`}
                 >
                   {IsFormValidate ? (
         <motion.div
@@ -596,7 +859,7 @@ export default function Profile() {
       )} 
                 </button>
                 <button
-                  onClick={() => setIsEditingAddress(false)}
+                  onClick={() =>{initalApi(); setIsEditingAddress(false)}}
                   className="px-6 py-3 bg-gray-200 text-gray-700 rounded-full hover:bg-gray-300 transition-colors duration-200"
                 >
                   Cancel
@@ -664,7 +927,7 @@ export default function Profile() {
             Change Password
           </button>
         </div>
-      </div>
+      </div>}
       <Footer />
 
       {/* Family Member Modal */}
@@ -830,7 +1093,12 @@ export default function Profile() {
               <div className="flex gap-4">
                 <button
                   type="submit"
-                  className="px-6 py-3 bg-[#E67E22] text-white rounded-full hover:bg-[#E67E22]/90 transition-colors duration-200"
+                  disabled={!isFamilyMemberValid()}
+                  className={`px-6 py-3 bg-[#E67E22] text-white rounded-full ${
+                    !isFamilyMemberValid() 
+                      ? 'bg-gray-400 cursor-not-allowed' 
+                      : 'bg-[#E67E22] hover:bg-[#E67E22]/90'
+                  } transition-colors duration-200`}
                 >
                   Save
                 </button>
@@ -911,7 +1179,12 @@ export default function Profile() {
               </div>
               <button
                 type="submit"
-                className="w-full px-6 py-3 bg-[#E67E22] text-white rounded-full hover:bg-[#E67E22]/90 transition-colors duration-200"
+                disabled={!isPasswordValid()}
+                className={`w-full px-6 py-3 bg-[#E67E22] text-white rounded-full ${
+                  !isPasswordValid() 
+                    ? 'bg-gray-400 cursor-not-allowed' 
+                    : 'bg-[#E67E22] hover:bg-[#E67E22]/90'
+                } transition-colors duration-200`}
               >
                 Update Password
               </button>
