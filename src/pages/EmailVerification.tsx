@@ -6,6 +6,7 @@ import heritage1 from "../assets/heritage1.webp";
 
 const EmailVerification = () => {
   const [isVerifying, setIsVerifying] = useState(true);
+  const [isVerified, setIsVerified] = useState(true);
   const navigate = useNavigate();
   const { uidb64, token } = useParams();
 
@@ -21,15 +22,18 @@ const EmailVerification = () => {
         const response = await fetch(`${BASE_URL}/activate/${uidb64}/${token}`);
         const data = await response.json();
 
-        if (data?.data?.userId) {
+        if (data?.success) {
           toast.success(data.message);
           navigate("/");
+          setIsVerified(true)
         } else {
+          setIsVerified(false)
           toast.error(data.message);
         }
         console.log("RESPONSE__>", data);
       } catch (error) {
         toast.error("Something went wrong. Please try again later.");
+        setIsVerified(false)
         console.error(error);
       } finally {
         setIsVerifying(false);
@@ -52,7 +56,9 @@ const EmailVerification = () => {
             <Loader className="animate-spin h-10 w-10 text-blue-500 mb-4" />
             <p>Verifying your email...</p>
           </div>
-        ) : (
+        ) : (isVerified ?
+          <p>Verification Successful!!.</p>
+:
           <p>Verification failed. Please try again or contact support.</p>
         )}
       </div>

@@ -46,6 +46,7 @@ interface Props {
 export default function PaymentForm({ totalDonationAmount, baseDonationId, selectedProjects }: Props) {
 
   const BASE_URL = import.meta.env.VITE_RETURN_BACKEND_API;
+  const user = JSON.parse(sessionStorage.getItem("user") || "{}");
 
   const { data } = UseDataContext();
   // Usage
@@ -202,6 +203,35 @@ export default function PaymentForm({ totalDonationAmount, baseDonationId, selec
       setFormData((v: FormType) => ({ ...v, FirstName, LastName, Email, Phone }))
     }
   }, [data])
+
+  
+
+  useEffect(() => {
+    if(Object.keys(user)?.length >0){
+    fetch(`${BASE_URL}/api/contact?email=${user?.email}`)
+      .then((resp) => resp?.json())
+      .then((response) => {
+        if (response) {
+      const { firstName, lastName, email, mobile, billingStreet, billingCity , billingState, billingPostalCode, billingCountry} = response;
+      setFormData((v: FormType) => ({ ...v, FirstName:firstName, LastName:lastName, Email: email,
+        Phone: mobile,
+        address: billingStreet,
+        city: billingCity,
+        zipCode: billingPostalCode,
+        state: billingState,
+        country: billingCountry, }))
+        } else {
+          console.error("error fetching response");
+        }
+        console.log("RESPONSE__>", response);
+      })
+      .catch((error) => {
+        console.error(error);   
+      })
+      .finally(() => {
+        // setIsDisable(false);
+      });}
+  }, []);
 
   return (
     <div className="md:mx-8 p-6 md:p-12 py-16 desktop-1200:p-14 desktop-1500:p-16 desktop-1900:p-24">
@@ -409,7 +439,7 @@ export default function PaymentForm({ totalDonationAmount, baseDonationId, selec
                 } py-3 focus:outline-none focus:border-primary bg-transparent desktop-1200:text-base desktop-1500:text-lg desktop-1900:text-xl`}
               >
                 <option value="">Select Country</option>
-                <option value="US">United States</option>
+                <option value="United States">United States</option>
                 {/* Add more countries as needed */}
               </select>
 
