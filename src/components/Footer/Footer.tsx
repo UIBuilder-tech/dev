@@ -45,7 +45,7 @@ export default function Footer() {
                 </li>
                 <li>
                   <Link
-                    to=" /contribute#donation-table"
+                    to="/contribute#donation-table"
                     className="hover:underline"
                   >
                     Donate
@@ -58,7 +58,7 @@ export default function Footer() {
                 </li>
                 <li>
                   <Link
-                    to=" /contribute#donation-table"
+                    to="/contribute#donation-table"
                     className="hover:underline"
                   >
                     Sponsor a Student
@@ -153,7 +153,7 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link to=" /contribute" className="hover:underline">
+                <Link to="/contribute" className="hover:underline">
                   How You can Help
                 </Link>
               </li>
@@ -183,7 +183,7 @@ export default function Footer() {
             <ul className="space-y-1 max-sm:text-xs">
               <li>
                 <Link
-                  to=" /contribute#donation-table"
+                  to="/contribute#donation-table"
                   className="hover:underline"
                 >
                   Education
@@ -191,7 +191,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  to=" /contribute#donation-table"
+                  to="/contribute#donation-table"
                   className="hover:underline"
                 >
                   Community Development
@@ -199,7 +199,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  to=" /contribute#donation-table"
+                  to="/contribute#donation-table"
                   className="hover:underline"
                 >
                   Cultural Preservation
@@ -207,7 +207,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  to=" /contribute#donation-table"
+                  to="/contribute#donation-table"
                   className="hover:underline"
                 >
                   Religious Activities

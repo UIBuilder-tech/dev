@@ -358,7 +358,11 @@ export const EventsFestivals: Event[] = [
     title: "CHF - KSA Mulaqaut",
     description:
       "Mulaqat across the oceans produced by KSA Chitrapur Saraswat Network and Chitrapur Heritage Foundation.",
-    image: [satsang, chf_logo, ksa_logo],
+    image: [
+      ksa_logo,
+      chf_logo,
+      "https://images.unsplash.com/photo-1521790797524-b2497295b8a0?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8aGFuZHNoYWtlfGVufDB8fDB8fHwy",
+    ],
   },
   {
     id: 9,
@@ -433,7 +437,7 @@ export const EventGettogthers: Event[] = [
       "Sadhakas marked the beginning of the Hindu New Year with a special Yugadi program. The event, rooted in the teachings of our Math, featured cultural performances, stotra chanting, and a message of new beginnings.",
     image: [
       YugadiImg,
-      "https://chitrapurmath.net/documents/gallery/Yugadi_2024_at_SCM_Shirali_9_April_2024/thumb/01_thumb.jpg",
+      "https://chitrapurmath.net/documents/gallery/Yugadi_2024_at_SCM_Shirali_9_April_2024/01.jpg",
       "https://chitrapurmath.net/documents/gallery/Yugadi_2024_at_SCM_Shirali_9_April_2024/thumb/10_thumb.jpg",
     ],
     url: "",

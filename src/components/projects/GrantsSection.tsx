@@ -32,15 +32,16 @@ export default function GrantsSection() {
                   areas.
                 </p>
               </div>
-              {/* <div className="flex gap-3">
-                <img src={grantsPointer} className="w-5 h-5 text-[#E67E22] flex-shrink-0 mt-1" />
+              <div className="flex gap-3">
+                <img
+                  src={grantsPointer}
+                  className="w-5 h-5 text-[#E67E22] flex-shrink-0 mt-1"
+                />
                 <p className="text-sm desktop-1500:text-sm desktop-1200:text-xs sm:text-base text-gray-600">
-                  We do not provide grants for budget line items labeled as
-                  "Operational Expenses," "Endowments" or for individuals; and
-                  Fund Private Family Trust/Foundations, or political or
-                  religious activities.
+                  We do not provide grants to charities for expenses incurred in
+                  the past or to political parties or political advocacy groups.
                 </p>
-              </div> */}
+              </div>
               {/* <div className="flex gap-3">
                 <img src={grantsPointer} className="w-5 h-5 text-[#E67E22] flex-shrink-0 mt-1" />
                 <p className="text-sm desktop-1500:text-sm desktop-1200:text-xs sm:text-base text-gray-600">
