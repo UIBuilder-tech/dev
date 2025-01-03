@@ -7,7 +7,6 @@ import { toast } from 'react-toastify'
 import { Loader } from 'lucide-react';
 import PaymentModal from './PaymentModal';
 
-const apiBaseurl = import.meta.env.VITE_RETURN_BACKEND_API;
 
 interface FormErrors {
   [key: string]: string
@@ -159,7 +158,7 @@ export default function PaymentForm({ totalDonationAmount, baseDonationId, selec
           });
       } else if (formData.paymentMethod === 'online'){
         setIsFormValidate(true)
-        fetch(`${apiBaseurl}/create-payment-intent`, {
+        fetch(`${BASE_URL}/create-payment-intent`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ items: [{ ...formData }] }),
