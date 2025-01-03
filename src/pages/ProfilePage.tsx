@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { PencilIcon, UserPlusIcon, XIcon, Power } from "lucide-react";
-import IconNavLink from "../components/Navbar/IconNavLink";
+import { PencilIcon, UserPlusIcon, XIcon, Power, Loader } from "lucide-react";
 import Footer from "../components/Footer/Footer";
 import { toast } from "react-toastify";
 import heritage1 from "../assets/heritage1.webp";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 interface PersonalDetails {
   FirstName: string;
@@ -38,6 +38,7 @@ export default function Profile() {
   const [isFamilyModalOpen, setIsFamilyModalOpen] = useState(false);
   const [isEditingPersonal, setIsEditingPersonal] = useState(false);
   const [isEditingAddress, setIsEditingAddress] = useState(false);
+  const [IsFormValidate, setIsFormValidate] = useState<boolean>(false)
   const [personalDetails, setPersonalDetails] =
     useState<PersonalDetails | null>(null);
   const [address, setAddress] = useState<Address>({
@@ -179,6 +180,7 @@ export default function Profile() {
       lastName: personalDetails?.LastName,
       mobile: personalDetails?.Phone,
     };
+    setIsFormValidate(true)
     fetch(`${BASE_URL}/api/profile/update`, {
       method: "POST",
       headers: {
@@ -200,7 +202,7 @@ export default function Profile() {
         // sessionStorage.removeItem('accessToken');
       })
       .finally(() => {
-        // setIsDisable(false);
+        setIsFormValidate(false);
         setIsEditingPersonal(false);
       });
   };
@@ -219,6 +221,7 @@ export default function Profile() {
       ShippingState: address?.state,
       ShippingStreet: address?.street,
     };
+    setIsFormValidate(true)
     fetch(`${BASE_URL}/api/profile/address`, {
       method: "PATCH",
       headers: {
@@ -240,7 +243,7 @@ export default function Profile() {
         // sessionStorage.removeItem('accessToken');
       })
       .finally(() => {
-        // setIsDisable(false);
+        setIsFormValidate(false)
         setIsEditingAddress(false);
       });
   };
@@ -338,12 +341,31 @@ export default function Profile() {
                 </div>
                 <div className="md:col-span-2 flex gap-4 mt-4">
                   <button
+              disabled={IsFormValidate}
                     onClick={() => {
                       onPersonalDetailsSubmit();
                     }}
                     className="px-6 py-3 bg-[#E67E22] text-white rounded-full hover:bg-[#E67E22]/90 transition-colors duration-200"
                   >
-                    Save
+                    {IsFormValidate ? (
+        <motion.div
+          className='flex items-center justify-center'
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.3 }}
+        >
+          <Loader className='w-5 h-5 animate-spin text-white' />
+          <span className='ml-2'>Loading...</span>
+        </motion.div>
+      ) : (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.3 }}
+        >
+          Save
+        </motion.div>
+      )} 
                   </button>
                   <button
                     onClick={() => setIsEditingPersonal(false)}
@@ -549,10 +571,29 @@ export default function Profile() {
               </div>
               <div className="flex gap-4">
                 <button
+                disabled={IsFormValidate}
                   onClick={() => onAddressSubmit()}
                   className="px-6 py-3 bg-[#E67E22] text-white rounded-full hover:bg-[#E67E22]/90 transition-colors duration-200"
                 >
-                  Save
+                  {IsFormValidate ? (
+        <motion.div
+          className='flex items-center justify-center'
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.3 }}
+        >
+          <Loader className='w-5 h-5 animate-spin text-white' />
+          <span className='ml-2'>Loading...</span>
+        </motion.div>
+      ) : (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.3 }}
+        >
+          Save
+        </motion.div>
+      )} 
                 </button>
                 <button
                   onClick={() => setIsEditingAddress(false)}
