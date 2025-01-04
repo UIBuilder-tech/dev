@@ -52,7 +52,7 @@ const generateDonationId = (selectedProjects: SelectedProject[]) => {
     .sort()
     .join("-");
 
-  return projectIds ? `${currentYear}-Donation-${projectIds}` : "";
+  return projectIds ? `${currentYear}-Donation-${projectIds.toUpperCase()}` : "";
 };
 
 export default function DonationTable({
