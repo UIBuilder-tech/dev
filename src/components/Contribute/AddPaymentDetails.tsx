@@ -1,15 +1,14 @@
-import { useState, FormEvent, useEffect } from 'react'
-import { motion } from 'framer-motion';
-import stripe from '../../assets/stripe.svg'
-import { UseDataContext } from '../context/DataContext'
-import { useNavigate } from 'react-router-dom'
-import { toast } from 'react-toastify'
-import { Loader } from 'lucide-react';
-import PaymentModal from './PaymentModal';
-
+import { useState, FormEvent, useEffect } from "react";
+import { motion } from "framer-motion";
+import stripe from "../../assets/stripe.svg";
+import { UseDataContext } from "../context/DataContext";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { Loader } from "lucide-react";
+import PaymentModal from "./PaymentModal";
 
 interface FormErrors {
-  [key: string]: string
+  [key: string]: string;
 }
 
 interface FormType {
@@ -29,7 +28,7 @@ interface FormType {
 }
 
 interface SelectedProject {
-  id?:string;
+  id?: string;
   projectName: string;
   unitAmount: number;
   quantity: number;
@@ -43,48 +42,52 @@ interface Props {
   initialFormData: FormType;
 }
 
-
-export default function PaymentForm({ totalDonationAmount, baseDonationId, selectedProjects,initialFormData }: Props) {
+export default function PaymentForm({
+  totalDonationAmount,
+  baseDonationId,
+  selectedProjects,
+  initialFormData,
+}: Props) {
   const BASE_URL = import.meta.env.VITE_RETURN_BACKEND_API;
 
   const { data } = UseDataContext();
   const defaultForm: FormType = {
     id: Date.now(),
-    FirstName: '',
+    FirstName: "",
     LastName: "",
-    Email: '',
-    Phone: '',
-    address: '',
-    city: '',
-    zipCode: '',
-    state:'',
-    country: '',
-    paymentMethod: 'zelle',
+    Email: "",
+    Phone: "",
+    address: "",
+    city: "",
+    zipCode: "",
+    state: "",
+    country: "",
+    paymentMethod: "zelle",
     rememberMe: false,
-    amount: 0
+    amount: 0,
   };
-  const [formData, setFormData] = useState<FormType>(defaultForm)
-  const [errors, setErrors] = useState<FormErrors>({})
-  const [IsFormValidate, setIsFormValidate] = useState<boolean>(false)
+  const [formData, setFormData] = useState<FormType>(defaultForm);
+  const [errors, setErrors] = useState<FormErrors>({});
+  const [IsFormValidate, setIsFormValidate] = useState<boolean>(false);
   const [showModal, setShowModal] = useState(false);
-  const [modalContent, setModalContent] = useState('');
+  const [modalContent, setModalContent] = useState("");
   const navigation = useNavigate();
   const { setData } = UseDataContext();
   const validateForm = (): boolean => {
-    const newErrors: FormErrors = {}
+    const newErrors: FormErrors = {};
     if (!formData.FirstName) {
-      newErrors.FirstName = 'First Name is required'
+      newErrors.FirstName = "First Name is required";
     }
     if (!formData.Email) {
-      newErrors.Email = 'Email is required'
+      newErrors.Email = "Email is required";
     } else if (!/\S+@\S+\.\S+/.test(formData.Email)) {
-      newErrors.Email = 'Invalid email format'
+      newErrors.Email = "Invalid email format";
     }
 
     if (!formData.Phone) {
-      newErrors.Phone = 'Phone number is required'
+      newErrors.Phone = "Phone number is required";
     } else if (!/^\+?[\d\s-]{10,}$/.test(formData.Phone)) {
-      newErrors.Phone = 'Invalid phone number'
+      newErrors.Phone = "Invalid phone number";
     }
 
     if (!formData.address) {
@@ -103,93 +106,101 @@ export default function PaymentForm({ totalDonationAmount, baseDonationId, selec
       newErrors.country = "Country is required";
     }
 
-    setErrors(newErrors)
-    return Object.keys(newErrors).length === 0
-  }
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
-    // Synchronize formData with initialFormData
-    useEffect(() => {
-      setFormData({
-        ...formData,
-        FirstName: initialFormData?.FirstName ? initialFormData?.FirstName : '',
-        LastName: initialFormData?.LastName ? initialFormData?.LastName : '',
-        Email: initialFormData?.Email,
-        Phone: initialFormData?.Phone,
-        address: initialFormData?.address,
-        city: initialFormData?.city,
-        zipCode: initialFormData?.zipCode,
-        country: initialFormData?.country,
-        state: initialFormData?.state
-      });
-    }, [initialFormData]);
+  // Synchronize formData with initialFormData
+  useEffect(() => {
+    setFormData({
+      ...formData,
+      FirstName: initialFormData?.FirstName ? initialFormData?.FirstName : "",
+      LastName: initialFormData?.LastName ? initialFormData?.LastName : "",
+      Email: initialFormData?.Email,
+      Phone: initialFormData?.Phone,
+      address: initialFormData?.address,
+      city: initialFormData?.city,
+      zipCode: initialFormData?.zipCode,
+      country: initialFormData?.country,
+      state: initialFormData?.state,
+    });
+  }, [initialFormData]);
 
   useEffect(() => {
-    setFormData((v: FormType) => ({ ...v, amount: totalDonationAmount }))
-  }, [totalDonationAmount])
+    setFormData((v: FormType) => ({ ...v, amount: totalDonationAmount }));
+  }, [totalDonationAmount]);
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     if (validateForm()) {
-      if (formData.paymentMethod === 'cheque' || formData.paymentMethod === 'zelle')
-       {
-        setIsFormValidate(true)
+      if (
+        formData.paymentMethod === "cheque" ||
+        formData.paymentMethod === "zelle"
+      ) {
+        setIsFormValidate(true);
         const payload = {
-          donAmt : totalDonationAmount, // Total donation amount
-          donorName : `${formData?.FirstName} ${formData?.LastName}`, // Full name of the donor
-          displayName : `${baseDonationId}-${formData?.FirstName}-${formData?.LastName}`, // Display name for the donation record
-          donorEmail : formData?.Email, // Donor's email
-          donorMobile : formData?.Phone, // Donor's mobile number
-          donorBillSt : formData?.address, // Donor's billing street
-          donorCity : formData?.city, // Donor's billing city
-          donorState : formData?.state, // Donor's billing state
-          donorZip : formData?.zipCode, // Donor's billing zip/postal code
-          donorCountry : formData?.country, // Donor's billing country
-          tnxId : formData?.paymentMethod, // Transaction ID or payment mode
-          donationCategories : selectedProjects, // Array of donation category objects
-        }
+          donAmt: totalDonationAmount, // Total donation amount
+          donorName: `${formData?.FirstName} ${formData?.LastName}`, // Full name of the donor
+          displayName: `${baseDonationId}-${formData?.FirstName}-${
+            formData?.LastName
+          }-${formData.paymentMethod === "cheque" ? "Check" : "Zelle"}`, // Display name for the donation record
+          donorEmail: formData?.Email, // Donor's email
+          donorMobile: formData?.Phone, // Donor's mobile number
+          donorBillSt: formData?.address, // Donor's billing street
+          donorCity: formData?.city, // Donor's billing city
+          donorState: formData?.state, // Donor's billing state
+          donorZip: formData?.zipCode, // Donor's billing zip/postal code
+          donorCountry: formData?.country, // Donor's billing country
+          tnxId: formData?.paymentMethod, // Transaction ID or payment mode
+          donationCategories: selectedProjects, // Array of donation category objects
+        };
 
         fetch(`${BASE_URL}/api/donate/create`, {
-          method: 'POST',
+          method: "POST",
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
           body: JSON.stringify(payload),
-        }).then(resp=>resp?.json())
-          .then(response => {
+        })
+          .then((resp) => resp?.json())
+          .then((response) => {
             if (response?.success) {
-                // toast.success(response?.message);
-                setModalContent(formData.paymentMethod);
-                setShowModal(true);
+              // toast.success(response?.message);
+              setModalContent(formData.paymentMethod);
+              setShowModal(true);
             } else {
-                toast.error(response?.message);
+              toast.error(response?.message);
             }
           })
-          .catch(error => {
-            setIsFormValidate(false)
-            toast.error('Something went wrong. Please try again later.');
+          .catch((error) => {
+            setIsFormValidate(false);
+            toast.error("Something went wrong. Please try again later.");
             console.error(error);
           })
           .finally(() => {
             setIsFormValidate(false);
           });
-      } else if (formData.paymentMethod === 'online'){
-        setIsFormValidate(true)
+      } else if (formData.paymentMethod === "online") {
+        setIsFormValidate(true);
         fetch(`${BASE_URL}/create-payment-intent`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ items: [{ ...formData }] }),
-        }).then((res) => res.json())
+        })
+          .then((res) => res.json())
           .then((data) => {
-            setData((v) => ({ ...v, clientSecret: data.clientSecret }))
-            sessionStorage.setItem('clientSecret', data.clientSecret)
+            setData((v) => ({ ...v, clientSecret: data.clientSecret }));
+            sessionStorage.setItem("clientSecret", data.clientSecret);
             // Save data to sessionStorage
-            sessionStorage.setItem('formdata', JSON.stringify(formData));
+            sessionStorage.setItem("formdata", JSON.stringify(formData));
 
-            navigation("checkout")
-          }).catch((err) => {
-            setIsFormValidate(false)
-            toast.error(err.message)
-          }).finally(() => {
+            navigation("checkout");
+          })
+          .catch((err) => {
+            setIsFormValidate(false);
+            toast.error(err.message);
+          })
+          .finally(() => {
             setIsFormValidate(false);
           });
       }
@@ -211,20 +222,25 @@ export default function PaymentForm({ totalDonationAmount, baseDonationId, selec
     if (errors[name]) {
       setErrors((prev) => ({ ...prev, [name]: "" }));
     }
-  }
+  };
   useEffect(() => {
     if (data?.userData) {
       const { FirstName, LastName, Email, Phone } = data.userData;
-      setFormData((v: FormType) => ({ ...v, FirstName, LastName, Email, Phone }))
+      setFormData((v: FormType) => ({
+        ...v,
+        FirstName,
+        LastName,
+        Email,
+        Phone,
+      }));
     }
-  }, [data])
-
+  }, [data]);
 
   return (
     <div className="md:mx-8 p-6 md:p-12 py-16 desktop-1200:p-14 desktop-1500:p-16 desktop-1900:p-24">
       <h2 className="text-3xl md:text-4xl font-display text-gray-900 mb-8 desktop-1900:text-5xl">
         Add Details & Pay
-</h2>
+      </h2>
 
       <form
         onSubmit={handleSubmit}
@@ -238,14 +254,14 @@ export default function PaymentForm({ totalDonationAmount, baseDonationId, selec
               <input
                 type="text"
                 name="FirstName"
-
                 value={formData.FirstName}
                 onChange={handleInputChange}
                 className="w-full border-b border-gray-200 py-3 focus:outline-none focus:border-primary desktop-1200:text-base desktop-1500:text-lg desktop-1900:text-xl"
                 placeholder="First Name"
               />
-              {errors.FirstName && <p className="text-red-500 text-sm mt-1">{errors.FirstName}</p>}
-
+              {errors.FirstName && (
+                <p className="text-red-500 text-sm mt-1">{errors.FirstName}</p>
+              )}
             </div>
             <div className="relative">
               <input
@@ -261,7 +277,6 @@ export default function PaymentForm({ totalDonationAmount, baseDonationId, selec
             {/* Email Field */}
             <div>
               <input
-
                 type="email"
                 name="Email"
                 value={formData.Email}
@@ -272,13 +287,14 @@ export default function PaymentForm({ totalDonationAmount, baseDonationId, selec
                 } py-3 focus:outline-none focus:border-primary desktop-1200:text-base desktop-1500:text-lg desktop-1900:text-xl`}
                 placeholder="Email Address"
               />
-              {errors.Email && <p className="text-red-500 text-sm mt-1">{errors.Email}</p>}
+              {errors.Email && (
+                <p className="text-red-500 text-sm mt-1">{errors.Email}</p>
+              )}
             </div>
 
             {/* Phone Field */}
             <div>
               <input
-
                 disabled={IsFormValidate}
                 type="tel"
                 name="Phone"
@@ -289,13 +305,14 @@ export default function PaymentForm({ totalDonationAmount, baseDonationId, selec
                 } py-3 focus:outline-none focus:border-primary desktop-1200:text-base desktop-1500:text-lg desktop-1900:text-xl`}
                 placeholder="Phone Number"
               />
-              {errors.Phone && <p className="text-red-500 text-sm mt-1">{errors.Phone}</p>}
+              {errors.Phone && (
+                <p className="text-red-500 text-sm mt-1">{errors.Phone}</p>
+              )}
             </div>
 
             {/* Address Field */}
             <div>
               <input
-
                 disabled={IsFormValidate}
                 type="text"
                 name="address"
@@ -315,7 +332,6 @@ export default function PaymentForm({ totalDonationAmount, baseDonationId, selec
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <input
-
                   disabled={IsFormValidate}
                   type="text"
                   name="city"
@@ -332,7 +348,6 @@ export default function PaymentForm({ totalDonationAmount, baseDonationId, selec
               </div>
               <div>
                 <input
-
                   disabled={IsFormValidate}
                   type="text"
                   name="zipCode"
@@ -352,7 +367,6 @@ export default function PaymentForm({ totalDonationAmount, baseDonationId, selec
             {/* Country and Remember Me Row */}
             <div className="flex items-center justify-between">
               <select
-
                 disabled={IsFormValidate}
                 name="state"
                 value={formData.state}
@@ -362,61 +376,60 @@ export default function PaymentForm({ totalDonationAmount, baseDonationId, selec
                 } py-3 focus:outline-none focus:border-primary bg-transparent desktop-1200:text-base desktop-1500:text-lg desktop-1900:text-xl`}
               >
                 <option value="">Select State</option>
-                   <option value="Alabama">Alabama</option>
-                   <option value="Alaska">Alaska</option>
-                   <option value="Arizona">Arizona</option>
-                   <option value="Arkansas">Arkansas</option>
-                   <option value="California">California</option>
-                   <option value="Colorado">Colorado</option>
-                   <option value="Connecticut">Connecticut</option>
-                   <option value="Delaware">Delaware</option>
-                   <option value="Florida">Florida</option>
-                   <option value="Georgia">Georgia</option>
-                   <option value="Hawaii">Hawaii</option>
-                   <option value="Idaho">Idaho</option>
-                   <option value="Illinois">Illinois</option>
-                   <option value="Indiana">Indiana</option>
-                   <option value="Iowa">Iowa</option>
-                   <option value="Kansas">Kansas</option>
-                   <option value="Kentucky">Kentucky</option>
-                   <option value="Louisiana">Louisiana</option>
-                   <option value="Maine">Maine</option>
-                   <option value="Maryland">Maryland</option>
-                   <option value="Massachusetts">Massachusetts</option>
-                   <option value="Michigan">Michigan</option>
-                   <option value="Minnesota">Minnesota</option>
-                   <option value="Mississippi">Mississippi</option>
-                   <option value="Missouri">Missouri</option>
-                   <option value="Montana">Montana</option>
-                   <option value="Nebraska">Nebraska</option>
-                   <option value="Nevada">Nevada</option>
-                   <option value="New Hampshire">New Hampshire</option>
-                   <option value="New Jersey">New Jersey</option>
-                   <option value="New Mexico">New Mexico</option>
-                   <option value="New York">New York</option>
-                   <option value="North Carolina">North Carolina</option>
-                   <option value="North Dakota">North Dakota</option>
-                   <option value="Ohio">Ohio</option>
-                   <option value="Oklahoma">Oklahoma</option>
-                   <option value="Oregon">Oregon</option>
-                   <option value="Pennsylvania">Pennsylvania</option>
-                   <option value="Rhode Island">Rhode Island</option>
-                   <option value="South Carolina">South Carolina</option>
-                   <option value="South Dakota">South Dakota</option>
-                   <option value="Tennessee">Tennessee</option>
-                   <option value="Texas">Texas</option>
-                   <option value="Utah">Utah</option>
-                   <option value="Vermont">Vermont</option>
-                   <option value="Virginia">Virginia</option>
-                   <option value="Washington">Washington</option>
-                   <option value="West Virginia">West Virginia</option>
-                   <option value="Wisconsin">Wisconsin</option>
-                   <option value="Wyoming">Wyoming</option>
+                <option value="Alabama">Alabama</option>
+                <option value="Alaska">Alaska</option>
+                <option value="Arizona">Arizona</option>
+                <option value="Arkansas">Arkansas</option>
+                <option value="California">California</option>
+                <option value="Colorado">Colorado</option>
+                <option value="Connecticut">Connecticut</option>
+                <option value="Delaware">Delaware</option>
+                <option value="Florida">Florida</option>
+                <option value="Georgia">Georgia</option>
+                <option value="Hawaii">Hawaii</option>
+                <option value="Idaho">Idaho</option>
+                <option value="Illinois">Illinois</option>
+                <option value="Indiana">Indiana</option>
+                <option value="Iowa">Iowa</option>
+                <option value="Kansas">Kansas</option>
+                <option value="Kentucky">Kentucky</option>
+                <option value="Louisiana">Louisiana</option>
+                <option value="Maine">Maine</option>
+                <option value="Maryland">Maryland</option>
+                <option value="Massachusetts">Massachusetts</option>
+                <option value="Michigan">Michigan</option>
+                <option value="Minnesota">Minnesota</option>
+                <option value="Mississippi">Mississippi</option>
+                <option value="Missouri">Missouri</option>
+                <option value="Montana">Montana</option>
+                <option value="Nebraska">Nebraska</option>
+                <option value="Nevada">Nevada</option>
+                <option value="New Hampshire">New Hampshire</option>
+                <option value="New Jersey">New Jersey</option>
+                <option value="New Mexico">New Mexico</option>
+                <option value="New York">New York</option>
+                <option value="North Carolina">North Carolina</option>
+                <option value="North Dakota">North Dakota</option>
+                <option value="Ohio">Ohio</option>
+                <option value="Oklahoma">Oklahoma</option>
+                <option value="Oregon">Oregon</option>
+                <option value="Pennsylvania">Pennsylvania</option>
+                <option value="Rhode Island">Rhode Island</option>
+                <option value="South Carolina">South Carolina</option>
+                <option value="South Dakota">South Dakota</option>
+                <option value="Tennessee">Tennessee</option>
+                <option value="Texas">Texas</option>
+                <option value="Utah">Utah</option>
+                <option value="Vermont">Vermont</option>
+                <option value="Virginia">Virginia</option>
+                <option value="Washington">Washington</option>
+                <option value="West Virginia">West Virginia</option>
+                <option value="Wisconsin">Wisconsin</option>
+                <option value="Wyoming">Wyoming</option>
                 {/* Add more countries as needed */}
               </select>
-              
-              <select
 
+              <select
                 disabled={IsFormValidate}
                 name="country"
                 value={formData.country}
@@ -481,7 +494,7 @@ export default function PaymentForm({ totalDonationAmount, baseDonationId, selec
                   type="radio"
                   name="paymentMethod"
                   value="cheque"
-                  checked={formData.paymentMethod === 'cheque'}
+                  checked={formData.paymentMethod === "cheque"}
                   onChange={handleInputChange}
                   className="w-6 h-6 text-primary"
                 />
@@ -498,7 +511,7 @@ export default function PaymentForm({ totalDonationAmount, baseDonationId, selec
                   type="radio"
                   name="paymentMethod"
                   value="zelle"
-                  checked={formData.paymentMethod === 'zelle'}
+                  checked={formData.paymentMethod === "zelle"}
                   onChange={handleInputChange}
                   className="w-6 h-6 text-primary"
                 />
@@ -511,45 +524,46 @@ export default function PaymentForm({ totalDonationAmount, baseDonationId, selec
             </div>
           </div>
           <div className="space-y-8">
-              {/* Powered by Stripe */}
-            {formData.paymentMethod === 'online' ?
-                <div className="flex justify-center items-center gap-2">
-                  <span className="italic text-[#516072] text-sm desktop-1200:text-sm desktop-1500:text-base desktop-1900:text-xl">
-                Payment by
-              </span>
-                  <img
-                src={stripe}
-                alt="Powered by Stripe"
-                className="h-6 desktop-1200:h-6 desktop-1500:h-7 desktop-1900:h-9"
-              />
-                </div> : null}
+            {/* Powered by Stripe */}
+            {formData.paymentMethod === "online" ? (
+              <div className="flex justify-center items-center gap-2">
+                <span className="italic text-[#516072] text-sm desktop-1200:text-sm desktop-1500:text-base desktop-1900:text-xl">
+                  Payment by
+                </span>
+                <img
+                  src={stripe}
+                  alt="Powered by Stripe"
+                  className="h-6 desktop-1200:h-6 desktop-1500:h-7 desktop-1900:h-9"
+                />
+              </div>
+            ) : null}
 
-              {/* Submit Button */}
-              <button
+            {/* Submit Button */}
+            <button
               disabled={IsFormValidate}
-                type="submit"
-                className="w-full bg-secondary text-white rounded-full py-3 md:py-4 md:text-xl hover:bg-primary/90 transition-colors desktop-1200:text-base desktop-1200:py-3 desktop-1500:text-lg desktop-1500:py-3 desktop-1900:text-2xl desktop-1900:py-5"
-              >
-                {IsFormValidate ? (
-        <motion.div
-          className='flex items-center justify-center'
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.3 }}
-        >
-          <Loader className='w-5 h-5 animate-spin text-white' />
-          <span className='ml-2'>Loading...</span>
-        </motion.div>
-      ) : (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.3 }}
-        >
-          Continue
-        </motion.div>
-      )}
-              </button>
+              type="submit"
+              className="w-full bg-secondary text-white rounded-full py-3 md:py-4 md:text-xl hover:bg-primary/90 transition-colors desktop-1200:text-base desktop-1200:py-3 desktop-1500:text-lg desktop-1500:py-3 desktop-1900:text-2xl desktop-1900:py-5"
+            >
+              {IsFormValidate ? (
+                <motion.div
+                  className="flex items-center justify-center"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <Loader className="w-5 h-5 animate-spin text-white" />
+                  <span className="ml-2">Loading...</span>
+                </motion.div>
+              ) : (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  Continue
+                </motion.div>
+              )}
+            </button>
           </div>
         </div>
       </form>

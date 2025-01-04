@@ -266,7 +266,7 @@ export const HeritagePrograms: Program[] = [
     description:
       "Vantiga is the annual contributions made by the Chitrapur Saraswat community to support the Shri Chitrapur Math's spiritual, cultural, and community welfare initiatives, reflecting their commitment to their heritage.",
     image: [heritage1, heritage2, heritage3],
-    linkTo: `vantiga`,
+    linkTo: `vtg`,
   },
   {
     id: 2,

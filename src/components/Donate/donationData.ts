@@ -1,4 +1,4 @@
-import { DonationCategory } from './types';
+import { DonationCategory } from "./types";
 
 export const donationData: DonationCategory[] = [
   {
@@ -40,36 +40,36 @@ export const donationData: DonationCategory[] = [
     name: "HERITAGE",
     items: [
       {
-        id: "vantiga",
+        id: "vtg",
         name: "Vantiga",
         amount: 500,
         description: "Annual Vantiga contribution",
       },
       {
-        id: "mathamaryada",
+        id: "mm",
         name: "Mathamaryada",
         amount: 0,
         description: "Mathamaryada contribution",
       },
 
       {
-        id: "gurukanika",
+        id: "gk",
         name: "Gurukanika / Padakanika at the Lotus Feet",
         amount: 0,
       },
       {
-        id: "anandashraya",
+        id: "ands",
         name: "Anandashraya",
         amount: 150,
       },
       {
-        id: "vaidika",
+        id: "vp",
         name: "Vaidika Pathashala",
         amount: 100,
         description: "Support for Vaidika Pathashala",
       },
       {
-        id: "goshala",
+        id: "gm",
         name: "Goshala Maintenance",
         amount: 150,
         description: "Support for Goshala Maintenance",
@@ -88,7 +88,7 @@ export const donationData: DonationCategory[] = [
     name: "WOMEN EMPOWERMENT",
     items: [
       {
-        id: "samvit-sudha",
+        id: "ss",
         name: "Samvit Sudha",
         amount: 0,
       },
@@ -103,7 +103,7 @@ export const donationData: DonationCategory[] = [
         amount: 0,
       },
       {
-        id: "holding-hands",
+        id: "hh",
         name: "Mother & Child Holding Hands SPEVC, Virar",
         amount: 100,
       },

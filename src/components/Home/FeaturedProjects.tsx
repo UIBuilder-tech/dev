@@ -36,7 +36,7 @@ const projects: Project[] = [
     status: "Ongoing",
     images: [vantiga],
     linkTo: "heritage-preservation",
-    donationLink: "vantiga"
+    donationLink: "vtg"
   },
   {
     id: "2",
@@ -45,7 +45,7 @@ const projects: Project[] = [
     status: "Ongoing",
     images: [SamvitSudha, SamvitSudha1],
     linkTo: "women-empowerment",
-    donationLink: "women-empowerment"
+    donationLink: "ss"
   },
   {
     id: "3",
@@ -81,7 +81,7 @@ const projects: Project[] = [
     status: "Ongoing",
     images: [cows],
     linkTo: "heritage-preservation",
-    donationLink:"heritage"
+    donationLink:"gm"
   },
   {
     id: "9",
