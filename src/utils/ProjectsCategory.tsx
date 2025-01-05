@@ -280,18 +280,18 @@ export const HeritagePrograms: Program[] = [
     ],
     linkTo: `heritage`,
   },
-  {
-    id: 3,
-    title: "Lectures and Discourses",
-    description:
-      "Regular lectures and discourses are held featuring spiritual leaders, scholars, and practitioners who share insights on spirituality, philosophy, and the teachings of the Chitrapur Saraswat community. These sessions aim to inspire and educate participants on their spiritual journeys.",
-    image: [
-      "https://chitrapurmath.net/documents/gallery/Shashtyabdapurti_Utsava_-_Karla_-_Day_9_17_Nov_2024/SPU%20Day%209%20(2).jpg",
-      "https://chitrapurmath.net/documents/gallery/Shashtyabdapurti_Utsava_-_Karla_-_Day_9_17_Nov_2024/SPU%20Day%209%20(7).jpg",
-      "https://chitrapurmath.net/documents/gallery/Shashtyabdapurti_Utsava_-_Karla_-_Day_9_17_Nov_2024/SPU%20Day%209%20(18).jpg",
-    ],
-    linkTo: `heritage`,
-  },
+  // {
+  //   id: 3,
+  //   title: "Lectures and Discourses",
+  //   description:
+  //     "Regular lectures and discourses are held featuring spiritual leaders, scholars, and practitioners who share insights on spirituality, philosophy, and the teachings of the Chitrapur Saraswat community. These sessions aim to inspire and educate participants on their spiritual journeys.",
+  //   image: [
+  //     "https://chitrapurmath.net/documents/gallery/Shashtyabdapurti_Utsava_-_Karla_-_Day_9_17_Nov_2024/SPU%20Day%209%20(2).jpg",
+  //     "https://chitrapurmath.net/documents/gallery/Shashtyabdapurti_Utsava_-_Karla_-_Day_9_17_Nov_2024/SPU%20Day%209%20(7).jpg",
+  //     "https://chitrapurmath.net/documents/gallery/Shashtyabdapurti_Utsava_-_Karla_-_Day_9_17_Nov_2024/SPU%20Day%209%20(18).jpg",
+  //   ],
+  //   linkTo: `heritage`,
+  // },
   {
     id: 4,
     title: "Community Worship and Festivals",
