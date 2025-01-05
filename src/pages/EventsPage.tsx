@@ -182,13 +182,13 @@ export default function EventsPage() {
         img={EventsHero}
         from="events"
       />
-      {/* <div id="spotlight">
+      <div id="spotlight">
         <SpecialProjects
           title="CHF Spotlight"
           projects={Spotlight}
           from="events"
         />
-      </div> */}
+      </div>
       <div id="festivals">
         <ProjectsCategory
           categoryTitle="Chitrapur Talks"
