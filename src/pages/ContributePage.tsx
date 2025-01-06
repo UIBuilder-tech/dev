@@ -14,7 +14,7 @@ import VantigaDetailed from "../components/Contribute/VantigaDetailed";
 import { Outlet } from "react-router-dom";
 
 interface SelectedProject {
-  id?:string;
+  id?: string;
   projectName: string;
   unitAmount: number;
   quantity: number;
@@ -42,27 +42,29 @@ export default function ContributePage() {
   const apiCalledRef = useRef(false);
   const user = JSON.parse(sessionStorage.getItem("user") || "{}");
   const [totalDonationAmount, setTotalDonationAmount] = useState<number>(0.0);
-  const [selectedProjects, setSelectedProjects] = useState<SelectedProject[]>([]);
-  const [baseDonationId, setBaseDonationId] = useState('')
+  const [selectedProjects, setSelectedProjects] = useState<SelectedProject[]>(
+    []
+  );
+  const [baseDonationId, setBaseDonationId] = useState("");
   const [initialFormData, setInitialFormData] = useState<FormType>({
     id: Date.now(),
-    FirstName: '',
+    FirstName: "",
     LastName: "",
-    Email: '',
-    Phone: '',
-    address: '',
-    city: '',
-    zipCode: '',
-    state:'',
-    country: '',
-    paymentMethod: 'zelle',
+    Email: "",
+    Phone: "",
+    address: "",
+    city: "",
+    zipCode: "",
+    state: "",
+    country: "",
+    paymentMethod: "zelle",
     rememberMe: false,
-    amount: 0
-  })
+    amount: 0,
+  });
   const location = useLocation();
 
-  console.log("selectedProjects--->",selectedProjects)
-  console.log("baseDonationId-->",baseDonationId)
+  console.log("selectedProjects--->", selectedProjects);
+  console.log("baseDonationId-->", baseDonationId);
 
   useEffect(() => {
     // Handle initial load with hash
@@ -78,39 +80,54 @@ export default function ContributePage() {
     }
   }, [location.hash]); // Only run when hash changes
 
+  useEffect(() => {
+    const initialApi = async () => {
+      if (apiCalledRef.current) return; // Skip if API has already been called
+      apiCalledRef.current = true; // Mark API as called
 
-    useEffect(() => {
-      const initialApi = async () => {
-        if (apiCalledRef.current) return; // Skip if API has already been called
-        apiCalledRef.current = true; // Mark API as called
-  
-      if(Object.keys(user)?.length >0){
-      fetch(`${BASE_URL}/api/contact?email=${user?.email}`)
-        .then((resp) => resp?.json())
-        .then((response) => {
-          if (response) {
-        const { firstName, lastName, email, mobile, billingStreet, billingCity , billingState, billingPostalCode, billingCountry} = response;
-        setInitialFormData((v: FormType) => ({ ...v, FirstName:firstName, LastName:lastName, Email: email,
-          Phone: mobile,
-          address: billingStreet,
-          city: billingCity,
-          zipCode: billingPostalCode,
-          state: billingState,
-          country: billingCountry, }))
-          } else {
-            console.error("error fetching response");
-          }
-          console.log("RESPONSE__>", response);
-        })
-        .catch((error) => {
-          console.error(error);   
-        })
-        .finally(() => {
-          // setIsDisable(false);
-        });}
+      if (Object.keys(user)?.length > 0) {
+        fetch(`${BASE_URL}/api/contact?email=${user?.email}`)
+          .then((resp) => resp?.json())
+          .then((response) => {
+            if (response) {
+              const {
+                firstName,
+                lastName,
+                email,
+                mobile,
+                billingStreet,
+                billingCity,
+                billingState,
+                billingPostalCode,
+                billingCountry,
+              } = response;
+              setInitialFormData((v: FormType) => ({
+                ...v,
+                FirstName: firstName,
+                LastName: lastName,
+                Email: email,
+                Phone: mobile,
+                address: billingStreet,
+                city: billingCity,
+                zipCode: billingPostalCode,
+                state: billingState,
+                country: billingCountry,
+              }));
+            } else {
+              console.error("error fetching response");
+            }
+            console.log("RESPONSE__>", response);
+          })
+          .catch((error) => {
+            console.error(error);
+          })
+          .finally(() => {
+            // setIsDisable(false);
+          });
       }
-      initialApi()
-    }, []);
+    };
+    initialApi();
+  }, []);
 
   return (
     <div className="min-h-screen bg-cream">
@@ -122,14 +139,23 @@ export default function ContributePage() {
       {/* <div id="vantiga">
         <Vantiga />
       </div> */}
-      <div className='relative'>
-      <div id='donation-table'>
-        <DonationTable setTotalDonationAmount={setTotalDonationAmount}  setSelectedProjects={setSelectedProjects} setBaseDonationId={setBaseDonationId} />
-      </div>
-      <div id='payment'>
-        <PaymentForm totalDonationAmount={totalDonationAmount} baseDonationId={baseDonationId} selectedProjects={selectedProjects} initialFormData={initialFormData}/>
-      </div>
-    {/* <div className="absolute inset-0 bg-cream bg-opacity-75 backdrop-filter backdrop-blur-sm flex items-center justify-center z-10">
+      <div className="relative">
+        <div id="donation-table">
+          <DonationTable
+            setTotalDonationAmount={setTotalDonationAmount}
+            setSelectedProjects={setSelectedProjects}
+            setBaseDonationId={setBaseDonationId}
+          />
+        </div>
+        <div id="payment">
+          <PaymentForm
+            totalDonationAmount={totalDonationAmount}
+            baseDonationId={baseDonationId}
+            selectedProjects={selectedProjects}
+            initialFormData={initialFormData}
+          />
+        </div>
+        {/* <div className="absolute inset-0 bg-cream bg-opacity-75 backdrop-filter backdrop-blur-sm flex items-center justify-center z-10">
       <div className="text-center">
         <h2 className="text-5xl md:text-7xl text-gray-800 mb-2">Coming Soon</h2>
         <p className="text-sm md:text-lg text-gray-600">We're working hard to bring you this feature. Stay tuned!</p>

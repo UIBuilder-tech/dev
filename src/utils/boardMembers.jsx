@@ -9,12 +9,11 @@ import m9 from "../assets/boardMembers/Sudhir Golikeri.webp";
 import m10 from "../assets/boardMembers/Santosh G.webp";
 import m11 from "../assets/boardMembers/Nandu maam.webp";
 import m12 from "../assets/boardMembers/Ashok Kulkarni.webp";
-// import m13 from "../assets/boardMembers/Kiran Mundkur.webp";
+import m13 from "../assets/boardMembers/Kiran M.jpg";
 import m15 from "../assets/boardMembers/Pramod Mavinkurve.webp";
 import m16 from "../assets/boardMembers/Mangesh Hoskote.webp";
 import m17 from "../assets/boardMembers/Devyani Padubidri.webp";
 import m18 from "../assets/boardMembers/Sanjay Savkur.webp";
-import Placeholder from "../assets/Shirali_Math.webp";
 
 export const boardMembers = [
   // Board Officer
@@ -63,7 +62,7 @@ export const boardMembers = [
   {
     name: "Kiran Mundkur",
     role: "Board Member - Communications / Social activities",
-    img: Placeholder,
+    img: m13,
   },
   {
     name: "Mamta Savkur",
