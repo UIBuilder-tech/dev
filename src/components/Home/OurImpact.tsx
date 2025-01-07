@@ -4,8 +4,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 import activeArrow from "../../assets/arrowActive.svg";
 import inactiveArrow from "../../assets/arrowInactive.svg";
-import Srivali from "../../assets/Srivali High School.webp";
-import solar1 from "../../assets/solar1.webp";
 
 interface ImpactCard {
   id: string;
@@ -17,111 +15,49 @@ interface ImpactCard {
   stats2: { Name: string; values: string } | null;
   stats3: { Name: string; values: string } | null;
   linkTo: string;
-  donationLink?:string;
+  donationLink?: string;
 }
-
 const AdminPanelUrl = import.meta.env.VITE_ADMIN_PANEL_API;
-
-const impactCards: ImpactCard[] = [
-  {
-    id: "1",
-    title: "Karla Solar plant",
-    subtitle: "Community & Heritage",
-    description:
-      "The Solar Plant in Karla project involves installing a 16kW grid-tied solar system at the Parijnan PU College and Parijnan Vidyalaya in Kotekar to reduce reliance on non-renewable energy, lower operational costs, and promote sustainability.",
-    image: solar1, // Temple image
-    stats1: {
-      key: "Generated units",
-      value: "94574+",
-    },
-    stats2: {
-      key: "Exported units",
-      value: "51312+",
-    },
-    stats3: {
-      key: "Total Savings (Since installation)",
-      value: "₹ 7,42,000+",
-    },
-    linkTo: "heritage-preservation",
-    donationLink: "heritage"
-
-  },
-  {
-    id: "2",
-    title: "CHF funded Schools",
-    subtitle: "Education",
-    description:
-      "CHF funded 5+ schools with over 3000 students and the construction of two school buildings at Srivali High School, supporting education and providing better learning environments for students in the region.",
-    image: Srivali, // Education image
-    stats3: {
-      key: "Funds raised",
-      value: "$ 1,000,000+",
-    },
-    stats1: {
-      key: "Students Supported in 5+ schools",
-      value: "3000+",
-    },
-    stats2: {
-      key: "Student Graduation Rate",
-      value: "95% - 99%",
-    },
-    linkTo: "education",
-    donationLink: "education",
-  },
-  {
-    id: "3",
-    title: "Samvit Sudha",
-    subtitle: "Women Empowerment",
-    description:
-      "Samvit Sudha, initiated by SCM, focuses on empowering women by providing them with vocational skills and opportunities for self-reliance, fostering growth and independence.",
-    image:
-      "https://samvitsudha.com/wp-content/uploads/2023/09/2-Fabric-Unit-training-@-Workplace.jpg", // Food donation image
-    stats1: {
-      key: "Women Empowered",
-      value: "1800+",
-    },
-    stats2: {
-      key: "Families Benefitted",
-      value: "1000+",
-    },
-    stats3: {
-      key: "Women Entrepreneurs",
-      value: "300+",
-    },
-    linkTo: "women-empowerment",
-    donationLink: "women-empowerment",
-  },
-];
-
-export default function ImpactSection({ data }) {
+export default function ImpactSection() {
   const [impactCards, setImpactCards] = useState<ImpactCard[] | null>(null);
-  const [activeCard, setActiveCard] = useState(impactCards[0]);
+  const [activeCard, setActiveCard] = useState({});
 
   const handleCardClick = (card: ImpactCard) => {
     if (card.id !== activeCard?.id) {
       setActiveCard(card);
     }
   };
-
   useEffect(() => {
-    if (!data) return;
-    const newData = data.map((item: any) => {
-      const id = item.SubTitle.replace(" ", "_").toLowerCase();
-      return {
-        id: id,
-        title: item.Title,
-        subtitle: item.SubTitle,
-        description: item.Description,
-        linkTo: id,
-        stats1: item?.stats?.[0] || null,
-        stats2: item?.stats?.[1] || null,
-        stats3: item?.stats?.[2] || null,
-        image: AdminPanelUrl.replace("/api", "") + item.image.url,
-      };
-    });
-    setActiveCard(newData[0]);
-    setImpactCards(newData);
-  }, [data]);
+    const requestOptions: RequestInit = {
+      method: 'GET',
+      redirect: 'follow'
+    };
+
+    fetch(`${AdminPanelUrl}/home-page?populate[Our_Impact_Big_Card][populate]=*`, requestOptions)
+      .then(response => response.json())
+      .then(result => {
+        if (result?.data?.Our_Impact_Big_Card) {
+          const data = result.data?.Our_Impact_Big_Card
+          const newData = data.map((item: any) => {
+            const id = item.SubTitle.replace(" ", "_").toLowerCase();
+            return {
+              id: id,
+              title: item.Title,
+              subtitle: item.SubTitle,
+              description: item.Description,
+              linkTo: id,
+              stats1: item?.stats?.[0] || null,
+              stats2: item?.stats?.[1] || null,
+              stats3: item?.stats?.[2] || null,
+              image: AdminPanelUrl.replace("/api", "") + item.image.url,
+            };
+          });
+          setActiveCard(newData[0]);
+          setImpactCards(newData);
+        }
+      }).catch(error => console.log('error', error));
+  }, [])
+
 
   return (
     <div className="py-8 px-4 md:p-8 bg-cream md:mx-14 desktop-1900:mx-16">
@@ -216,11 +152,10 @@ export default function ImpactSection({ data }) {
                 {activeCard?.stats2 && (
                   <div className="bg-[#F4F5F7] p-3 md:p-6 flex flex-col space-y-2 items-center justify-center rounded-xl">
                     <div
-                      className={`font-bold text-[#0066FF] ${
-                        activeCard?.stats2?.values?.includes("%")
+                      className={`font-bold text-[#0066FF] ${activeCard?.stats2?.values?.includes("%")
                           ? "text-2xl md:text-4xl desktop-1500:text-4xl desktop-1200:text-3xl desktop-1200:-mx-5"
                           : "text-3xl md:text-5xl desktop-1500:text-5xl desktop-1200:text-4xl"
-                      }`}
+                        }`}
                     >
                       {activeCard?.stats2?.values}
                     </div>
@@ -248,9 +183,8 @@ export default function ImpactSection({ data }) {
             {impactCards.map((card) => (
               <motion.div
                 key={card.id}
-                className={`relative h-[200px] desktop-1200:h-[300px] md:h-[350px] desktop-1500:h-[350px] rounded-xl md:rounded-3xl overflow-hidden cursor-pointer ${
-                  activeCard?.id === card.id ? "ring-2 ring-primary" : ""
-                }`}
+                className={`relative h-[200px] desktop-1200:h-[300px] md:h-[350px] desktop-1500:h-[350px] rounded-xl md:rounded-3xl overflow-hidden cursor-pointer ${activeCard?.id === card.id ? "ring-2 ring-primary" : ""
+                  }`}
                 onClick={() => handleCardClick(card)}
                 whileHover={{ scale: 1.02 }}
               >
@@ -275,9 +209,8 @@ export default function ImpactSection({ data }) {
                         )}
                       </div>
                       <div
-                        className={`h-0.5 bg-white transition-all duration-500 ${
-                          activeCard?.id === card.id ? "w-[80%]" : "w-10 md:w-24"
-                        }`}
+                        className={`h-0.5 bg-white transition-all duration-500 ${activeCard?.id === card.id ? "w-[80%]" : "w-10 md:w-24"
+                          }`}
                       />
                     </div>
                     {activeCard?.id === card.id ? (

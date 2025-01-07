@@ -15,7 +15,7 @@ interface Program {
   description: string;
   image: string;
   url?: string | undefined;
-  linkTo?:string;
+  linkTo?: string;
 }
 
 interface ProjectsCategoryProps {
@@ -118,18 +118,22 @@ export default function ProjectsCategory({ categoryTitle, }: ProjectsCategoryPro
                 <div className="flex gap-4 md:pt-4">
                   {location?.pathname.includes("project") ? (
                     <>
-                      <Link
-                        to="/contribute#volunteer"
-                        className="md:px-6 px-3 py-2 md:py-2.5 border-2 border-blue-600 text-blue-600 rounded-full text-sm md:text-xl font-medium hover:bg-blue-700 hover:text-white transition-colors flex items-center desktop-1200:px-4 desktop-1200:py-2 desktop-1500:text-[18px] desktop-1200:text-[16px]"
-                      >
-                        Join Us
-                      </Link>
-                      <Link
+                      {
+                        programs[currentProgram].Button1 && <Link
+                          to="/contribute#volunteer"
+                          className="md:px-6 px-3 py-2 md:py-2.5 border-2 border-blue-600 text-blue-600 rounded-full text-sm md:text-xl font-medium hover:bg-blue-700 hover:text-white transition-colors flex items-center desktop-1200:px-4 desktop-1200:py-2 desktop-1500:text-[18px] desktop-1200:text-[16px]"
+                        >
+                          {programs[currentProgram].Button1}
+                        </Link>
+                      }
+
+                      {programs[currentProgram].Button2 && <Link
                         to={`/contribute#donation-table#${programs[currentProgram]?.linkTo}`}
                         className="px-3 md:px-6 md:py-2.5 bg-[#e67e22] text-white rounded-full text-sm md:text-xl font-medium hover:bg-orange-600 transition-colors flex items-center gap-2 desktop-1200:px-4 desktop-1200:py-2 desktop-1500:text-[18px] desktop-1200:text-[16px]"
                       >
-                        Donate <span className="text-white text-lg">❤</span>
-                      </Link>
+                        {programs[currentProgram].Button2} <span className="text-white text-lg">❤</span>
+                      </Link>}
+
                     </>
                   ) : (
                     <>

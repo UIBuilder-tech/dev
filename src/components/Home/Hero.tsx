@@ -7,9 +7,11 @@ interface Props {
   img: string;
   from?: string;
   subTitle?: string;
+  button1?: string;
+  button2?: string;
 }
 
-export default function Hero({ title,subTitle,desc, img, from = "" }: Props) {
+export default function Hero({ title, subTitle, desc, img, from = "",button2='',button1='' }: Props) {
   return (
     <div className="relative md:min-h-screen">
       <div className="absolute inset-0">
@@ -24,11 +26,10 @@ export default function Hero({ title,subTitle,desc, img, from = "" }: Props) {
       </div>
 
       <div
-        className={`relative ${
-          from !== "projects" && from !== "about"
+        className={`relative ${from !== "projects" && from !== "about"
             ? "h-[100vh]"
             : "h-full desktop-1500:pt-12 desktop-1900:pt-28"
-        } flex flex-col justify-between`}
+          } flex flex-col justify-between`}
       >
         <div className="flex-grow flex items-center">
           <div className="max-w-7xl mx-auto px-4 w-full desktop-1200:max-w-5xl desktop-1500:max-w-6xl desktop-1900:max-w-7xl">
@@ -49,14 +50,14 @@ export default function Hero({ title,subTitle,desc, img, from = "" }: Props) {
                   to="/contribute#volunteer"
                   className="text-white border-[1px] border-r-0 border-[#fbf3e8] md:px-8 md:py-3 rounded-l-full hover:bg-white/20 transition max-sm:text-sm px-4 py-2 desktop-1200:px-6 desktop-1200:py-2 desktop-1500:px-7 desktop-1500:py-2.5 desktop-1900:px-8 desktop-1900:py-3"
                 >
-                  Join Us
+                  {button1 || ''}
                 </Link>
                 <div className="border-[1px] border-l-0 rounded-r-full border-[#fbf3e8]">
                   <Link
                     to="/contribute#donation-table"
                     className="bg-[#fbf3e8] text-secondary font-[450] md:px-8 md:py-3 rounded-full hover:bg-opacity-90 flex items-center gap-2 max-sm:text-sm px-4 py-2 desktop-1200:px-6 desktop-1200:py-2 desktop-1500:px-7 desktop-1500:py-2.5 desktop-1900:px-8 desktop-1900:py-3"
                   >
-                    Donate <Heart className="h-5 w-5" fill="#e67e22" />
+                     {button2 || ''} <Heart className="h-5 w-5" fill="#e67e22" />
                   </Link>
                 </div>
               </div>
