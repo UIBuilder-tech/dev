@@ -36,7 +36,7 @@ interface FormType {
   rememberMe: boolean; // Whether the user opts for "remember me"
   amount: number | null; // Total amount
 }
-
+const AdminPanelUrl = import.meta.env.VITE_ADMIN_PANEL_API;
 export default function ContributePage() {
   const BASE_URL = import.meta.env.VITE_RETURN_BACKEND_API;
   const apiCalledRef = useRef(false);
@@ -65,7 +65,25 @@ export default function ContributePage() {
 
   console.log("selectedProjects--->", selectedProjects);
   console.log("baseDonationId-->", baseDonationId);
+  const [PageData, setPageData] = useState({});
+  useEffect(() => {
+    const api = async () => {
+      const requestOptions: any = {
+        method: 'GET',
+        redirect: 'follow'
+      };
+      fetch(`${AdminPanelUrl}/contribute-page?populate[vantigaList][populate]=*`, requestOptions)
+        .then(response => response.json())
+        .then(result => {
+          if (result?.data) {
+            setPageData(result.data)
+          }
+        })
+        .catch(error => console.log('error', error));
+    }
 
+    api();
+  }, [])
   useEffect(() => {
     // Handle initial load with hash
     const hash = location.hash.replace("#", "");
@@ -132,8 +150,8 @@ export default function ContributePage() {
   return (
     <div className="min-h-screen bg-cream">
       <Hero
-        title="Support Our Mission to Preserve Heritage and Empower Communities"
-        desc="Your contributions enable the Chitrapur Heritage Foundation to sustain its initiatives in heritage preservation, education, women’s empowerment, and community development. Choose from various donation options and be a part of creating lasting positive change for generations to come."
+        title={PageData.title}
+        desc={PageData.description}
         img={ChitrapurMathImg}
       />
       {/* <div id="vantiga">
@@ -162,8 +180,10 @@ export default function ContributePage() {
       </div>
     </div> */}
       </div>
-      <div id="chf-grants">
-        <VantigaDetailed />
+      <div id='chf-grants'>
+        {
+          PageData?.vantigaList && <VantigaDetailed data={PageData} />
+        }
       </div>
       <div id="volunteer">
         <VolunteerForm initialFormData={initialFormData} />

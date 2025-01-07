@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import activeDonate from "../../assets/projectActiveDonateIcon.svg";
 import inactiveDonate from "../../assets/projectInactiveDonateIcon.svg";
 import activeSideArrow from "../../assets/activeSideArrow.svg";
@@ -125,10 +125,43 @@ const projects: Project[] = [
 interface Props {
   title: string;
 }
+// 
 
+const AdminPanelUrl = import.meta.env.VITE_ADMIN_PANEL_API;
 export default function FeaturedProjects({ title }: Props) {
   const [hoveredId, setHoveredId] = useState<string | null>(null);
+  const [projects, setProjects] = useState(null);
+  useEffect(() => {
+    const api = async () => {
+      const requestOptions: any = {
+        method: 'GET',
+        redirect: 'follow'
+      };
+      fetch(`${AdminPanelUrl}/featured-projects?populate=*`, requestOptions)
+        .then(response => response.json())
+        .then(result => {
+        console.log("🚀 ~ api ~ result:", result)
 
+          if (result?.data) {
+            const newData = result.data.map(v => {
+              const path =  v.Image.map(a=>AdminPanelUrl.replace("/api", "") +a.url)
+              return {
+                id: v.id,
+                title: v.title,
+                tag: v.tag,
+                status: v.statusType,
+                images: path,
+                linkTo: v.tag.toLowerCase().replace(" ", "_"),
+              }
+            })
+            setProjects(newData)
+          }
+        })
+        .catch(error => console.log('error', error));
+    }
+
+    api();
+  }, [])
   return (
     <div className="py-8 px-4 md:px-6 md:p-8 md:mx-14 desktop-1900:px-14 desktop-1900:py-14">
       <h2 className="mb-8 text-3xl md:text-4xl font-display text-gray-900 desktop-1900:text-5xl desktop-1900:pb-5">
@@ -145,7 +178,7 @@ export default function FeaturedProjects({ title }: Props) {
             </tr>
           </thead>
           <tbody>
-            {projects.map((project) => {
+            {projects && projects.map((project) => {
               const isHovered = project.id === hoveredId;
 
               return (

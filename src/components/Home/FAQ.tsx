@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronRight, ChevronLeft, Plus } from "lucide-react";
 import cloud1 from "../../assets/cloud1.svg";
@@ -61,19 +61,37 @@ const faqData = [
 ];
 
 const itemsPerPage = 5;
+const AdminPanelUrl = import.meta.env.VITE_ADMIN_PANEL_API;
 
 export default function FAQSection() {
   const [openQuestion, setOpenQuestion] = useState<number | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
+  const [PageData, setPageData] = useState([]);
 
-  const totalPages = Math.ceil(faqData.length / itemsPerPage);
+  const totalPages = Math.ceil(PageData.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
-  const currentFaqs = faqData.slice(startIndex, startIndex + itemsPerPage);
+  const currentFaqs = PageData.slice(startIndex, startIndex + itemsPerPage);
 
   const toggleQuestion = (id: number) => {
     setOpenQuestion(openQuestion === id ? null : id);
   };
-
+  useEffect(() => {
+    const api = async () => {
+      const requestOptions: any = {
+        method: 'GET',
+        redirect: 'follow'
+      };
+      fetch(`${AdminPanelUrl}/faqs`, requestOptions)
+        .then(response => response.json())
+        .then(result => {
+          if (result?.data) {
+            setPageData(result.data)
+          }
+        })
+        .catch(error => console.log('error', error));
+    }
+    api();
+  }, [])
   return (
     <div className="relative h-[650px] px-4 mt-16 py-12 mb-5 md:px-8">
       {/* Cloud 1 - Top right */}
@@ -107,7 +125,6 @@ export default function FAQSection() {
         <h1 className="mb-12 text-3xl md:text-5xl text-primary desktop-1900:text-6xl">
           FAQ's
         </h1>
-
         <div
           className="space-y-4 max-h-[450px] desktop-1900:max-h-[400px] overflow-y-scroll "
           style={{ scrollbarWidth: "none" }}
@@ -122,7 +139,7 @@ export default function FAQSection() {
                   <Plus className="h-3 w-3 " />
                 </span>
                 <span className="text-gray-700 text-sm md:text-lg dxesktop-1900:text-xl">
-                  {faq.question}
+                  {faq.Question}
                 </span>
               </button>
               <AnimatePresence>
@@ -135,7 +152,7 @@ export default function FAQSection() {
                     className="ml-9 mb-4"
                   >
                     <p className="text-gray-600 desktop-1900:text-lg">
-                      {faq.answer}
+                      {faq.Answer}
                     </p>
                   </motion.div>
                 )}
@@ -160,9 +177,8 @@ export default function FAQSection() {
                 <button
                   key={index}
                   onClick={() => setCurrentPage(index + 1)}
-                  className={`h-2 w-2 rounded-full ${
-                    currentPage === index + 1 ? "bg-[#FF9966]" : "bg-gray-300"
-                  }`}
+                  className={`h-2 w-2 rounded-full ${currentPage === index + 1 ? "bg-[#FF9966]" : "bg-gray-300"
+                    }`}
                 />
               ))}
             </div>

@@ -2,8 +2,47 @@ import { Mail, MapPin, Phone } from "lucide-react";
 import footerbg from "../../assets/footerbg.svg";
 import logo from "../../assets/chfLogo.png";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+const AdminPanelUrl = import.meta.env.VITE_ADMIN_PANEL_API;
 
 export default function Footer() {
+  const [PageData, setPageData] = useState(null);
+  const [Contact, setContact] = useState(null);
+  useEffect(() => {
+    const api = async () => {
+      const requestOptions: any = {
+        method: 'GET',
+        redirect: 'follow'
+      };
+      fetch(`${AdminPanelUrl}/contect`, requestOptions)
+        .then(response => response.json())
+        .then(result => {
+          if (result?.data) {
+            setContact(result.data)
+          }
+        })
+        .catch(error => console.log('error', error));
+    }
+    const api2 = async () => {
+      const requestOptions: any = {
+        method: 'GET',
+        redirect: 'follow'
+      };
+      fetch(`${AdminPanelUrl}/footer?populate=Image`, requestOptions)
+        .then(response => response.json())
+        .then(result => {
+        console.log("🚀 ~ api2 ~ result:", result)
+
+          if (result?.data) {
+            const newData = {...result.data, image: AdminPanelUrl.replace("/api", "") + result.data.Image.url}
+            setPageData(newData)
+          }
+        })
+        .catch(error => console.log('error', error));
+    }
+    api();
+    api2();
+  }, [])
   return (
     <footer className="relative max-sm:mb-[50px] bg-secondary px-8 py-12 text-white">
       {/* Background graphic overlay */}
@@ -18,18 +57,19 @@ export default function Footer() {
 
       <div className="relative z-10 mx-auto max-w-7xl">
         <div className="grid grid-cols-2 gap-x-8 gap-y-12 max-[1099px]:grid-cols-2 lg:grid-cols-5">
-          <div className="space-y-12 items-center justify-center flex">
+          {PageData && <div className="space-y-12 items-center justify-center flex">
             <div className=" flex flex-col  items-center justify-center">
-              <img src={logo} className="w-36" />
+              <img src={PageData.image} className="w-36" />
               <h2 className="font-display text-xl desktop-1500:text-3xl desktop-1200:pt-5 pt-10 md:text-2xl text-white text-center desktop-1900:text-xl">
-                Chitrapur Heritage Foundation USA, Inc.
+                {PageData.Title}
               </h2>
               <p className="text-sm md:text-sm text-white text-center px-4 md:px-8">
-                IRS certified 501(c)(3) organization,
-                <br /> Tax Id: 20-2738955
+              {PageData.Title}
               </p>
             </div>
           </div>
+          }
+
           {/* First Column: Support Us + Useful Links */}
           <div className="space-y-12">
             {/* Support Us Section */}
@@ -216,74 +256,71 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Contact Us Column */}
-          <div className="space-y-4">
-            <h3 className="border-b border-white pb-2  text-md md:text-3xl font-light">
-              Contact Us
-            </h3>
-            <ul className="space-y-1 max-sm:text-xs max-sm:relative">
-              <li className="flex items-center gap-2">
-                <MapPin size={16} className="flex-shrink-0" />
-                <a
-                  href="http://www.chfusa.org"
-                  target="_blank"
-                  className="hover:underline"
-                >
-                  www.chfusa.org
-                </a>
-              </li>
-              <li className="flex items-center gap-2">
-                <Phone size={16} className="flex-shrink-0" />
-                <a href="tel:+12156663200" className="hover:underline">
-                  (215) 666-3200
-                </a>
-              </li>
-              <li className="flex items-center gap-2">
-                <Mail size={16} className="flex-shrink-0" />
-                <a
-                  href="mailto:contactus@chfusa.org"
-                  className="hover:underline"
-                >
-                  contactus@chfusa.org
-                </a>
-              </li>
-              <li className="flex items-start gap-2">
-                <MapPin size={16} className="mt-1 flex-shrink-0" />
-                <span className="text-sm">
-                  Chitrapur Heritage Foundation USA, Inc. 711 Daylily Drive,
-                  Langhorne, PA 19047
-                </span>
-              </li>
-              <div className="max-sm:relative max:sm:right-0 max-sm:w-full">
-                <li className="mt-6 pt-6">
-                  <p className="font-normal">Mailing Address</p>
-                  <p className=" text-sm">
-                    Chitrapur Heritage Foundation
-                    <br />
-                    PO Box 1253,
-                    <br />
-                    Langhorne PA 19047
-                  </p>
+          {
+            Contact && <div className="space-y-4">
+              <h3 className="border-b border-white pb-2  text-md md:text-3xl font-light">
+                Contact Us
+              </h3>
+              <ul className="space-y-1 max-sm:text-xs max-sm:relative">
+                <li className="flex items-center gap-2">
+                  <MapPin size={16} className="flex-shrink-0" />
+                  <a
+                    href={Contact.website}
+                    target="_blank"
+                    className="hover:underline"
+                  >
+                   {Contact.website}
+                  </a>
                 </li>
-                <li className="pt-6">
-                  <p className="mb-2">Subscribe to our newsletter</p>
-                  <form className="flex items-center bg-white rounded-full">
-                    <input
-                      type="email"
-                      placeholder="Enter Your Email Address"
-                      className="flex-1 rounded-l-full max-sm:px-4 px-2 bg-white py-2 text-sm font-thin text-gray-800 placeholder:text-gray-400 hover:border-none"
-                    />
-                    <button
-                      type="submit"
-                      className="rounded-r-full bg-white h-10 max-sm:h-9 w-10 p-3 flex text-secondary items-center justify-center hover:bg-white/20"
-                    >
-                      →
-                    </button>
-                  </form>
+                <li className="flex items-center gap-2">
+                  <Phone size={16} className="flex-shrink-0" />
+                  <a href={`tel:${Contact.phone}`} className="hover:underline">
+                  {Contact.phone}
+                  </a>
                 </li>
-              </div>
-            </ul>
-          </div>
+                <li className="flex items-center gap-2">
+                  <Mail size={16} className="flex-shrink-0" />
+                  <a
+                    href={`mailto:${Contact.email}`}
+                    className="hover:underline"
+                  >
+                    {Contact.email}
+                  </a>
+                </li>
+                <li className="flex items-start gap-2">
+                  <MapPin size={16} className="mt-1 flex-shrink-0" />
+                  <span className="text-sm">
+                   {Contact.address}
+                  </span>
+                </li>
+                <div className="max-sm:relative max:sm:right-0 max-sm:w-full">
+                  <li className="mt-6 pt-6">
+                    <p className="font-normal">Mailing Address</p>
+                    <p className=" text-sm">
+                    {Contact.mailingAddress}
+                    </p>
+                  </li>
+                  <li className="pt-6">
+                    <p className="mb-2">Subscribe to our newsletter</p>
+                    <form className="flex items-center bg-white rounded-full">
+                      <input
+                        type="email"
+                        placeholder="Enter Your Email Address"
+                        className="flex-1 rounded-l-full max-sm:px-4 px-2 bg-white py-2 text-sm font-thin text-gray-800 placeholder:text-gray-400 hover:border-none"
+                      />
+                      <button
+                        type="submit"
+                        className="rounded-r-full bg-white h-10 max-sm:h-9 w-10 p-3 flex text-secondary items-center justify-center hover:bg-white/20"
+                      >
+                        →
+                      </button>
+                    </form>
+                  </li>
+                </div>
+              </ul>
+            </div>
+          }
+
         </div>
       </div>
     </footer>

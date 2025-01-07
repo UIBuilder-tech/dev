@@ -8,7 +8,7 @@ import {
 import AmountInput from "./AmountInput";
 import FilterSearch from "./FilterSearch";
 import { donationData } from "./donationData";
-import { DonationItem } from "./types";
+import { DonationItem,DonationSubcategory } from "./types";
 import { useWindowWidth } from "../../hooks/useWindowWidth";
 
 interface Props {
@@ -55,6 +55,8 @@ const generateDonationId = (selectedProjects: SelectedProject[]) => {
   return projectIds ? `${currentYear}-Donation-${projectIds.toUpperCase()}` : "";
 };
 
+const AdminPanelUrl = import.meta.env.VITE_ADMIN_PANEL_API;
+
 export default function DonationTable({
   setTotalDonationAmount,
   setSelectedProjects,
@@ -71,6 +73,8 @@ export default function DonationTable({
   const [quantities, setQuantities] = useState<Record<string, number>>({});
   const [remarks, setRemarks] = useState<Record<string, string>>({});
   const [useDefaultDonation, setUseDefaultDonation] = useState(false);
+  const [donationData, setDonationData] = useState<DonationSubcategory[]>([])
+
   const windowWidth = useWindowWidth();
   const isMobile = windowWidth < 700; // md breakpoint
   const isTablet = windowWidth >= 700 && windowWidth <= 1099; // md breakpoint
@@ -84,7 +88,7 @@ export default function DonationTable({
   };
 
   const toggleSubcategory = (subcategoryId: string) => {
-    setExpandedSubcategories((prev) =>
+    setExpandedSubcategories(prev =>
       prev.includes(subcategoryId)
         ? prev.filter((id) => id !== subcategoryId)
         : [...prev, subcategoryId]
@@ -489,6 +493,38 @@ export default function DonationTable({
       })}
     </tbody>
   );
+  useEffect(() => {
+    const api = async () => {
+      const requestOptions: any = {
+        method: 'GET',
+        redirect: 'follow'
+      };
+      fetch(`${AdminPanelUrl}/donates?pagination[pageSize]=100`, requestOptions)
+        .then(response => response.json())
+        .then(result => {
+          if (result?.data) {
+            const uniqueCategories = [...new Set(result.data.map(item => item.category))];
+            const finalData = uniqueCategories.map(item => {
+              return {
+                id: (item as string).toLowerCase().replace(/ /g, '-'),
+                name: item,
+                items: result.data.filter(data => data.category === item).map(data => ({
+                  id: data.id,
+                  name: data.name,
+                  amount: data.amount,
+                  description: data.description,
+                  hasQuantity: data.hasQuantity,
+                }))
+              }
+            })
+            setExpandedCategories([finalData.length > 0 ? finalData[0].id : ''])
+            setDonationData(finalData)
+          }
+        })
+        .catch(error => console.log('error', error));
+    }
+    api();
+  }, [])
 
   return (
     <div className="bg-cream rounded-lg p-5 md:px-16 mx-auto py-16">
