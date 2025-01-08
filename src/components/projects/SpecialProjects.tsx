@@ -319,7 +319,7 @@ const SpecialProjects = ({
 
       <div className="relative">
         <div className="flex items-center justify-center gap-6 mb-8">
-          {(!isMobile || !isTablet) && (
+          {(!isMobile && !isTablet) && (
             <button
               onClick={prevPage}
               className={` ${
@@ -380,7 +380,7 @@ const SpecialProjects = ({
             )}
           </div>
 
-          {(!isMobile || !isTablet) && (
+          {(!isMobile && !isTablet) && (
             <button
               onClick={nextPage}
               className={` ${

@@ -8,6 +8,9 @@ import TeamSection from "../components/Home/OurTeam";
 import FAQSection from "../components/Home/FAQ";
 import Footer from "../components/Footer/Footer";
 import ChitrapurMathImg from "../assets/Shirali_Math.webp";
+import heritage1 from "../assets/heritage1.webp";
+import heritage2 from "../assets/heritage2.webp";
+import heritage3 from "../assets/heritage3.webp";
 
 export default function HomePage() {
   return (
@@ -16,6 +19,7 @@ export default function HomePage() {
         title="Chitrapur Heritage Foundation"
         desc="Founded in 2005, the Chitrapur Heritage Foundation (CHF) is a nonprofit organization dedicated to fostering sustainable development and preserving the rich cultural heritage of the Chitrapur Saraswat community. With a focus on Heritage, Education,Women's Empowerment and Spiritual Development"
         img={ChitrapurMathImg}
+        images={[heritage1,heritage2, heritage3]}
         from="home"
       />
       <Vision />

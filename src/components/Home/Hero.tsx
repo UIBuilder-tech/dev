@@ -1,22 +1,57 @@
 import { Heart } from "lucide-react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 interface Props {
   title: string;
   desc: string;
-  img: string;
+  img?: string;
   from?: string;
+  images?:string[];
 }
 
-export default function Hero({ title, desc, img, from = "" }: Props) {
+export default function Hero({ title, desc, img,images, from = "" }: Props) {
+  const [currentIndex, setCurrentIndex] = useState(0)
+
+  useEffect(() => {
+    if(images && images?.length){
+    const timer = setInterval(() => {
+      setCurrentIndex((prevIndex) => 
+        prevIndex === images.length - 1 ? 0 : prevIndex + 1
+      )
+    }, 5000) // Change image every 5 seconds
+
+    return () => clearInterval(timer)}
+  }, [images])
+
+  const goToSlide = (index: number) => {
+    setCurrentIndex(index)
+  }
+
   return (
     <div className="relative md:min-h-screen">
       <div className="absolute inset-0">
-        <img
+        {/* <img
           src={img}
           alt="Heritage Building"
           className="w-full h-full object-cover hero-bg"
-        />
+        /> */}
+        {images && images?.length>0 ?
+        images.map((img, index) => (
+          <img
+            key={index}
+            src={img}
+            alt={`Hero Image ${index + 1}`}
+            className={`absolute w-full h-full object-cover transition-opacity duration-500 hero-bg ${
+              index === currentIndex ? 'block' : 'hidden'
+            }`}
+          />))
+          :
+          <img
+          src={img}
+          alt="Heritage Building"
+          className="w-full h-full object-cover hero-bg"
+        />}
         {from !== "events" && (
           <div className="absolute inset-0 bg-black/50"></div>
         )}
@@ -61,6 +96,19 @@ export default function Hero({ title, desc, img, from = "" }: Props) {
               </div>
             </div>
           </div>
+        </div>
+        {/* Carousel Navigation */}
+        <div className="absolute bottom-28 md:bottom-14 left-0 right-0 flex justify-center gap-2">
+          {images && images.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => goToSlide(index)}
+              className={`w-2 h-2 md:w-3 md:h-3 rounded-full transition-all ${
+                index === currentIndex ? 'bg-secondary scale-125' : 'bg-[#D3D3D3]'
+              }`}
+              aria-label={`Go to slide ${index + 1}`}
+            />
+          ))}
         </div>
         <div className="h-16 desktop-1200:h-24 desktop-1500:h-20 desktop-1900:h-16"></div>
       </div>
