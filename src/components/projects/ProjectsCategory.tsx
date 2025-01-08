@@ -26,7 +26,7 @@ export default function ProjectsCategory({ categoryTitle, }: ProjectsCategoryPro
   const [currentProgram, setCurrentProgram] = useState(0);
   const [currentPage, setCurrentPage] = useState(0);
   const [currentItems, setCurrentItems] = useState<Program[]>([]);
-  const carouselRef = useRef<HTMLDivElement>(null);
+  const carouselRef = useRef(null);
   const windowWidth = useWindowWidth();
   const isMobile = windowWidth < 768;
   const location = useLocation();

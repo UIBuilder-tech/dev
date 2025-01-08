@@ -24,6 +24,7 @@ interface Project {
   images: string[];
   linkTo?: string;
 }
+
 const AdminPanelUrl = import.meta.env.VITE_ADMIN_PANEL_API;
 export default function ProjectsPage() {
   const location = useLocation();
@@ -55,19 +56,30 @@ export default function ProjectsPage() {
     api();
   }, [])
   useEffect(() => {
-    // Handle initial load with hash
+    // Get the hash from the URL
     const hash = location.hash.replace("#", "");
     if (hash) {
-      // Add a small delay to ensure the content is rendered
-      setTimeout(() => {
+      const scrollToElement = () => {
         const element = document.getElementById(hash);
         if (element) {
           element.scrollIntoView({ behavior: "smooth" });
         }
-      }, 100);
-    }
-  }, [location.hash]); // Only run when hash changes
+      };
 
+      // Ensure content is rendered before scrolling
+      const observer = new MutationObserver(() => {
+        scrollToElement();
+        observer.disconnect(); // Stop observing after scrolling
+      });
+
+      observer.observe(document.body, { childList: true, subtree: true });
+
+      // Fallback in case observer isn't enough
+      setTimeout(scrollToElement, 800);
+
+      return () => observer.disconnect(); // Clean up the observer
+    }
+  }, [location.hash]);
   return (
     <div className="min-h-screen bg-cream">
       {

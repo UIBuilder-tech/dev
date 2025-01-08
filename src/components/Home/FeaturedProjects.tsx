@@ -151,7 +151,7 @@ export default function FeaturedProjects({ title }: Props) {
                 tag: v.tag,
                 status: v.statusType,
                 images: path,
-                linkTo: v.tag.toLowerCase().replace(" ", "_"),
+                linkTo: v.tag.toLowerCase().replace(" ", "-"),
               }
             })
             setProjects(newData)

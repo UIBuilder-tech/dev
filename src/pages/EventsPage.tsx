@@ -53,6 +53,8 @@ export default function EventsPage() {
         PageData && <Hero
           title={PageData.title}
           desc={PageData.description}
+          button1={PageData.Button1}
+          button2={PageData.Button2}
           img={EventsHero}
           from="events"
         />

@@ -60,6 +60,8 @@ export default function HomePage() {
             desc={HomePageData.Hero_Description}
             img={ChitrapurMathImg}
             subTitle={HomePageData.SubTitle}
+            button1={HomePageData.Button1}
+            button2={HomePageData.Button2}
             from="home" />
           <Vision />
           {

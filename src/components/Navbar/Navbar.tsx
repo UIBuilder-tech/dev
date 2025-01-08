@@ -47,12 +47,10 @@ export default function Navbar() {
   const navigate = useNavigate();
 
   const ProfileClickHandler = () => {
-    console.log("🚀 ~ ProfileClickHandler ~ data:", data)
     if (data?.userData?.userId) {
       navigate("/profile")
       setNavigateTo("/profile")
     } else {
-      console.log("else condition");
       setIsModalOpen(true)
       setNavigateTo("#")
     }

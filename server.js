@@ -6,7 +6,6 @@ require('dotenv').config();
 // Sign in to see your own test API key embedded in code samples.
 const stripe = require("stripe")(`${process.env.VITE_STRIPE_CLIENT_SECRET}`);
 // const stripe = require("stripe")('sk_test_51QX2EjD1HGHWO4740PkSZeF6kW0QpepPxc8BNFLpEDEZXuIXdABA9sTEs0zAWKFJyLmNSnEPatPGqx9TlzW49gKU00UmX8e3aw');
-console.log("VITE_STRIPE_CLIENT_SECRET", process.env.VITE_STRIPE_CLIENT_SECRET);
 
 app.use(express.static("public"));
 app.use(express.json());
@@ -23,7 +22,6 @@ const calculateOrderAmount = (items) => {
 
 app.post("/create-payment-intent", async (req, res) => {
   const { items } = req.body;
-  console.log("🚀 ~ app.post ~ items:", items)
 
   // Create a PaymentIntent with the order amount and currency
   try {
