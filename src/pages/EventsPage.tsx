@@ -7,24 +7,7 @@ import ProjectsCategory from "../components/projects/ProjectsCategory";
 import SpecialProjects from "../components/projects/SpecialProjects";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import ChitrapurMathImg from "../assets/Shirali_Math.webp";
 import EventsHero from "../assets/eventsHero.webp";
-import Yuvas from "../assets/Yuvas.webp";
-import Yuvas1 from "../assets/Yuvas1.webp";
-import RohitImg from "../assets/Spotlight_Photos/rohit-kalyanpur-600x800.jpg";
-import JayshreeImg from "../assets/Spotlight_Photos/Jayshree Ullal.jpg";
-import JasmineImg from "../assets/Spotlight_Photos/Jasmine-Nirody.jpg";
-import seemantiniImg from "../assets/Spotlight_Photos/seemantininadkarni.jpg";
-import swathiImg from "../assets/Spotlight_Photos/Swathi_Arur.jpg";
-import MohitImg from "../assets/Spotlight_Photos/Mohit_Kallianpur.png";
-import aditiImg from "../assets/Spotlight_Photos/Aditi_Gurkar_2.png";
-import NeilImg from "../assets/Spotlight_Photos/neil-hattangadi.jpg";
-import NiveditaImg from "../assets/Spotlight_Photos/Nivedita_Bijoor.png";
-import PraskashImg from "../assets/Spotlight_Photos/prakash_nagarkatti.jpg";
-import DipaImg from "../assets/Spotlight_Photos/Dipa_Sashital.png";
-import Heritage2 from "../assets/heritage2.webp";
-import SamvitSudha from "../assets/photoGallery/img13.webp";
-import SamvitSudha1 from "../assets/photoGallery/img12.webp";
 const AdminPanelUrl = import.meta.env.VITE_ADMIN_PANEL_API;
 
 
@@ -70,6 +53,8 @@ export default function EventsPage() {
         PageData && <Hero
           title={PageData.title}
           desc={PageData.description}
+          button1={PageData.Button1}
+          button2={PageData.Button2}
           img={EventsHero}
           from="events"
         />

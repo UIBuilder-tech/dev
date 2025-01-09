@@ -63,8 +63,6 @@ export default function ContributePage() {
   });
   const location = useLocation();
 
-  console.log("selectedProjects--->", selectedProjects);
-  console.log("baseDonationId-->", baseDonationId);
   const [PageData, setPageData] = useState({});
   useEffect(() => {
     const api = async () => {
@@ -153,6 +151,8 @@ export default function ContributePage() {
         title={PageData.title}
         desc={PageData.description}
         img={ChitrapurMathImg}
+        button1={PageData.Button1}
+        button2={PageData.Button2}
       />
       {/* <div id="vantiga">
         <Vantiga />

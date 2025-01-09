@@ -2,9 +2,6 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Minus, Plus } from "lucide-react";
 import { useWindowWidth } from "../../hooks/useWindowWidth";
-import educationImg from "../../assets/photoGallery/img8.webp";
-import womenImg from "../../assets/photoGallery/img4.webp";
-import heritageImg from "../../assets/photoGallery/img9.webp";
 import InactiveArrow from "../../assets/arrowInactive.svg";
 import ActiveArrow from "../../assets/arrowActive.svg";
 import { Link } from "react-router-dom";
@@ -31,7 +28,7 @@ export default function Programs({ data }) {
     setOrderedCards(newOrder);
   }, [expandedId, isMobile, data]);
 
-  const handleExpand = (id) => {
+  const handleExpand = (id:any) => {
     setExpandedId(id === expandedId ? "" : id);
   };
 
@@ -42,7 +39,7 @@ export default function Programs({ data }) {
   return (
     <>
       <div className="hidden p-4 space-y-4 md:p-6 md:space-y-0 md:flex md:gap-10 md:justify-center desktop-1500:gap-8 desktop-1200:gap-6">
-        {orderedCards.map((card) => (
+        {orderedCards.map((card:any) => (
           <motion.div
             key={card?.id || Math.random()}
             className={`programs-card relative overflow-hidden rounded-3xl transition-all duration-500 ease-in-out ${
@@ -265,7 +262,7 @@ export default function Programs({ data }) {
 
         {/* Collapsed Cards Container */}
         <div className="grid grid-cols-2 gap-4 md:flex md:gap-6">
-          {orderedCards.slice(1).map((card) => (
+          {orderedCards.slice(1).map((card:any) => (
             <div
               key={card.id}
               className="programs-card relative overflow-hidden rounded-3xl transition-all duration-500 ease-in-out cursor-pointer w-full md:w-[380px]"

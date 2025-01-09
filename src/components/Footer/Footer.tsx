@@ -31,7 +31,6 @@ export default function Footer() {
       fetch(`${AdminPanelUrl}/footer?populate=Image`, requestOptions)
         .then(response => response.json())
         .then(result => {
-        console.log("🚀 ~ api2 ~ result:", result)
 
           if (result?.data) {
             const newData = {...result.data, image: AdminPanelUrl.replace("/api", "") + result.data.Image.url}

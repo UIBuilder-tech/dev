@@ -280,7 +280,6 @@ const SpecialProjects = ({
         .then(result => {
           if (result?.data) {
             const newData =DataProcess(result.data);
-            console.log("🚀 ~ harendra ~ result:", newData)
             setProjects(newData)
           }
         })
@@ -288,7 +287,6 @@ const SpecialProjects = ({
     }
     api();
   }, [title])
-  console.log(from);
   const handleExpand = (id: number) => {
     setExpandedId(id === expandedId ? id : id); // Always set to clicked id
   };

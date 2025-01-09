@@ -7,7 +7,6 @@ import {
 } from "lucide-react";
 import AmountInput from "./AmountInput";
 import FilterSearch from "./FilterSearch";
-import { donationData } from "./donationData";
 import { DonationItem,DonationSubcategory } from "./types";
 import { useWindowWidth } from "../../hooks/useWindowWidth";
 
@@ -24,19 +23,7 @@ interface SelectedProject {
   remark: string;
 }
 
-// function that takes special projects with id
-// const generateDonationId = (selectedProjects: SelectedProject[]) => {
-//   const currentYear = new Date().getFullYear();
-//   const projectIds = selectedProjects
-//     .filter(project => project.unitAmount > 0)
-//     .map(project => project.id)
-//     .sort()
-//     .join('-');
-
-//   return projectIds ? `${currentYear}-Donation-${projectIds}` : '';
-// };
-
-const generateDonationId = (selectedProjects: SelectedProject[]) => {
+const generateDonationId = (selectedProjects: SelectedProject[],donationData:any) => {
   const currentYear = new Date().getFullYear();
   const projectIds = donationData
     .flatMap((category) => [
@@ -62,9 +49,7 @@ export default function DonationTable({
   setSelectedProjects,
   setBaseDonationId,
 }: Props) {
-  const [expandedCategories, setExpandedCategories] = useState<string[]>([
-    donationData.length > 0 ? donationData[0].id : "",
-  ]);
+  const [expandedCategories, setExpandedCategories] = useState<string[]>([]);
   // const [expandedCategories, setExpandedCategories] = useState<string[]>([]);
   const [expandedSubcategories, setExpandedSubcategories] = useState<string[]>(
     []
@@ -187,10 +172,10 @@ export default function DonationTable({
       }
     });
 
-    const baseDonationId = generateDonationId(selectedProjects);
+    const baseDonationId = generateDonationId(selectedProjects,donationData);
     setSelectedProjects(selectedProjects);
     setBaseDonationId(baseDonationId);
-  }, [amounts, quantities, remarks, setSelectedProjects, setBaseDonationId]);
+  }, [donationData,amounts, quantities, remarks, setSelectedProjects, setBaseDonationId]);
 
   const updateAmount = (itemId: string, value: number) => {
     setAmounts((prev) => ({ ...prev, [itemId]: value }));

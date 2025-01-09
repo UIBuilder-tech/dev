@@ -16,20 +16,29 @@ const AdminPanelUrl = import.meta.env.VITE_ADMIN_PANEL_API;
 
 
 export default function HomePage() {
-  const [HomePageData, setHomePageData] = useState([]);
+  interface HomePageDataType {
+    HeroTitle: string;
+    Hero_Description: string;
+    SubTitle: string;
+    vision_mission_section: string[];
+    Our_Impact_Big_Card: string[];
+    Section_3: string[];
+  }
+  
+  const [HomePageData, setHomePageData] = useState<HomePageDataType | null>(null);
   const [Section_3, setSection_3] = useState([])
 
   useEffect(() => {
-    const requestOptions: any = {
+    const requestOptions: RequestInit = {
       method: 'GET',
       redirect: 'follow'
     };
 
-    fetch(`${AdminPanelUrl}/home-page?populate[vision_mission_section][populate]=*&populate[Section_3][populate]=*&populate[Our_Impact_Big_Card][populate]=*`, requestOptions)
+    fetch(`${AdminPanelUrl}/home-page?populate[Section_3][populate]=*&populate[Our_Impact_Big_Card][populate]=*`, requestOptions)
       .then(response => response.json())
       .then(result => {
         if (result?.data) {
-          const newData = result.data.Section_3.map((item: any) => {
+          const newData = result.data.Section_3.map((item: { Title: string; Description: string; image: { url: string } }) => {
             const id = item.Title.replace(" ", "_").toLowerCase()
             return {
               id: id,
@@ -42,8 +51,7 @@ export default function HomePage() {
           setHomePageData(result.data)
           setSection_3(newData)
         }
-      })
-      .catch(error => console.log('error', error));
+      }).catch(error => console.log('error', error));
   }, [])
 
   return (
@@ -55,18 +63,17 @@ export default function HomePage() {
             desc={HomePageData.Hero_Description}
             img={ChitrapurMathImg}
             subTitle={HomePageData.SubTitle}
+            button1={HomePageData.Button1}
+            button2={HomePageData.Button2}
             images={[heritage1,heritage2, heritage3]}
             from="home" />
-          <Vision data={HomePageData?.vision_mission_section || []} />
+          <Vision />
           {
             Section_3 &&
             <Programs data={Section_3} />
           }
           <FeaturedProjects title="Featured Projects" />
-          {
-            HomePageData?.Our_Impact_Big_Card &&
-            <ImpactSection data={HomePageData?.Our_Impact_Big_Card || []} />
-          }
+          <ImpactSection/>
           <VolunteerSection />
           <TeamSection />
           <FAQSection />

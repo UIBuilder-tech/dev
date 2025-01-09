@@ -24,6 +24,7 @@ interface Project {
   images: string[];
   linkTo?: string;
 }
+
 const AdminPanelUrl = import.meta.env.VITE_ADMIN_PANEL_API;
 export default function ProjectsPage() {
   const location = useLocation();
@@ -55,55 +56,30 @@ export default function ProjectsPage() {
     api();
   }, [])
   useEffect(() => {
-    // Handle initial load with hash
+    // Get the hash from the URL
     const hash = location.hash.replace("#", "");
     if (hash) {
-      // Add a small delay to ensure the content is rendered
-      setTimeout(() => {
+      const scrollToElement = () => {
         const element = document.getElementById(hash);
         if (element) {
           element.scrollIntoView({ behavior: "smooth" });
         }
-      }, 100);
+      };
+
+      // Ensure content is rendered before scrolling
+      const observer = new MutationObserver(() => {
+        scrollToElement();
+        observer.disconnect(); // Stop observing after scrolling
+      });
+
+      observer.observe(document.body, { childList: true, subtree: true });
+
+      // Fallback in case observer isn't enough
+      setTimeout(scrollToElement, 800);
+
+      return () => observer.disconnect(); // Clean up the observer
     }
-  }, [location.hash]); // Only run when hash changes
-
-  const projects: Project[] = [
-    {
-      id: 1,
-      title: "Yatri Nivas",
-      location: "Raj Ghat, Varanasi",
-      description:
-        "Chitrapur Saraswat community at the proposed center for yoga, meditation, and yatri nivas in Varanasi on the banks of River Ganga at Raja Ghat.",
-      images: [
-        "https://chitrapurmath.net/documents/upload/1588069798C_(2).png",
-        "https://chitrapurmath.net/documents/upload/1588074364A_(1).png",
-      ],
-      linkTo:"heritage"
-    },
-    {
-      id: 2,
-      title: "Solar plant",
-      location: "Karla",
-      description:
-        "The Solar Plant in Karla project involves installing a 16kW grid-tied solar system at the Parijnan PU College and Parijnan Vidyalaya in Kotekar to reduce reliance on non-renewable energy, lower operational costs, and promote sustainability.",
-      images: [solar, solar1],
-      linkTo:"education"
-    },
-    {
-      id: 3,
-      title: "Pandemic Relief",
-      location: "",
-      description:
-        "CHF’s pandemic relief efforts included funding the salaries of school teachers of the 9 SCM-affiliated schools supported by CHF.",
-      images: [
-        "https://images.unsplash.com/photo-1584466990297-7e8ab67a5eb0?q=80&w=1965&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        "https://images.unsplash.com/photo-1585282284319-e38fb6c29dd1?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mjd8fGNvdmlkfGVufDB8fDB8fHwy",
-      ],
-      linkTo:"education"
-    },
-  ];
-
+  }, [location.hash]);
   return (
     <div className="min-h-screen bg-cream">
       {
@@ -112,6 +88,8 @@ export default function ProjectsPage() {
           desc={PageData.heroSection.description}
           img={HeroImg}
           from="projects"
+          button1={PageData.heroSection.Button1}
+          button2={PageData.heroSection.Button2}
         />
       }
 
