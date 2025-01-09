@@ -66,7 +66,7 @@ export default function Vantiga({ title = "", description = "",
           />
         </div>
       </div>
-      <div className="container relative z-[10] mx-auto px-4 w-full py-14 md:py-20 desktop-1200:py-10 desktop-1500:py-16 mt-12 desktop-1900:mt-28">
+      <div className="container relative z-[10] mx-auto px-4 w-full py-14 md:py-20 desktop-1200:py-10 desktop-1500:py-16 mt-14 desktop-1900:mt-28">
         <div className="flex flex-col justify-center item-center text-center space-y-5 md:space-y-10 w-full">
           <h2 className="text-3xl md:text-5xl text-white desktop-1500:text-4xl desktop-1200:text-3xl desktop-1900:text-5xl">
             {title}

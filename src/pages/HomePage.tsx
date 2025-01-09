@@ -8,6 +8,9 @@ import TeamSection from "../components/Home/OurTeam";
 import FAQSection from "../components/Home/FAQ";
 import Footer from "../components/Footer/Footer";
 import ChitrapurMathImg from "../assets/Shirali_Math.webp";
+import heritage1 from "../assets/heritage1.webp";
+import heritage2 from "../assets/heritage2.webp";
+import heritage3 from "../assets/heritage3.webp";
 import { useEffect, useState } from "react";
 const AdminPanelUrl = import.meta.env.VITE_ADMIN_PANEL_API;
 
@@ -52,6 +55,7 @@ export default function HomePage() {
             desc={HomePageData.Hero_Description}
             img={ChitrapurMathImg}
             subTitle={HomePageData.SubTitle}
+            images={[heritage1,heritage2, heritage3]}
             from="home" />
           <Vision data={HomePageData?.vision_mission_section || []} />
           {

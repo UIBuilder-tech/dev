@@ -329,7 +329,7 @@ const SpecialProjects = ({
 
       <div className="relative">
         <div className="flex items-center justify-center gap-6 mb-8">
-          {(!isMobile || !isTablet) && (
+          {(!isMobile && !isTablet) && (
             <button
               onClick={prevPage}
               className={` ${range150 ? "p-2" : "p-2 h-10"
@@ -389,7 +389,7 @@ const SpecialProjects = ({
             )}
           </div>
 
-          {(!isMobile || !isTablet) && (
+          {(!isMobile && !isTablet) && (
             <button
               onClick={nextPage}
               className={` ${range150 ? "p-2" : "p-2 h-10"
