@@ -24,11 +24,10 @@ export default function HomePage() {
     Our_Impact_Big_Card: string[];
     Section_3: string[];
   }
-
-  const [HomePageData, setHomePageData] = useState<HomePageDataType | null>(
-    null
-  );
-  const [Section_3, setSection_3] = useState([]);
+  
+  const [HomePageData, setHomePageData] = useState<HomePageDataType | null>(null);
+  const [Section_3, setSection_3] = useState([])
+  const [HomeSlideData, setHomeSlideData] = useState([])
 
   useEffect(() => {
     const requestOptions: RequestInit = {
@@ -62,24 +61,27 @@ export default function HomePage() {
           setHomePageData(result.data);
           setSection_3(newData);
         }
-      })
-      .catch((error) => console.log("error", error));
-  }, []);
+      }).catch(error => console.log('error', error));
+      fetch(`${AdminPanelUrl}/home-slides?populate=*`, requestOptions)
+      .then(response => response.json())
+      .then(result => {
+        if (result?.data) {
+          const newData = result.data.map((item:any) => {
+            return {...item,image:AdminPanelUrl.replace("/api", "") + item?.image?.url}
+          })
+          setHomeSlideData(newData)
+        }
+      }).catch(error => console.log('error', error));
+      
+  }, [])
 
   return (
     <div className="min-h-screen bg-cream">
       {HomePageData && (
         <>
-          <Hero
-            title={HomePageData.HeroTitle}
-            desc={HomePageData.Hero_Description}
-            img={ChitrapurMathImg}
-            subTitle={HomePageData.SubTitle}
-            button1={HomePageData.Button1}
-            button2={HomePageData.Button2}
-            images={[heritage1, heritage2, heritage3]}
-            from="home"
-          />
+          <Hero 
+            data={HomeSlideData}
+            from="home" />
           <Vision />
           {Section_3 && <Programs data={Section_3} />}
           <FeaturedProjects title="Featured Projects" />
