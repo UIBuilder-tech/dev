@@ -13,7 +13,7 @@ import heritage2 from "../assets/heritage2.webp";
 import heritage3 from "../assets/heritage3.webp";
 import { useEffect, useState } from "react";
 const AdminPanelUrl = import.meta.env.VITE_ADMIN_PANEL_API;
-
+// const AdminPanelUrl = import.meta.env.VITE_ADMIN_PANEL_API;
 
 export default function HomePage() {
   interface HomePageDataType {
@@ -24,61 +24,72 @@ export default function HomePage() {
     Our_Impact_Big_Card: string[];
     Section_3: string[];
   }
-  
-  const [HomePageData, setHomePageData] = useState<HomePageDataType | null>(null);
-  const [Section_3, setSection_3] = useState([])
+
+  const [HomePageData, setHomePageData] = useState<HomePageDataType | null>(
+    null
+  );
+  const [Section_3, setSection_3] = useState([]);
 
   useEffect(() => {
     const requestOptions: RequestInit = {
-      method: 'GET',
-      redirect: 'follow'
+      method: "GET",
+      redirect: "follow",
     };
 
-    fetch(`${AdminPanelUrl}/home-page?populate[Section_3][populate]=*&populate[Our_Impact_Big_Card][populate]=*`, requestOptions)
-      .then(response => response.json())
-      .then(result => {
+    fetch(
+      `${AdminPanelUrl}/home-page?populate[Section_3][populate]=*&populate[Our_Impact_Big_Card][populate]=*`,
+      requestOptions
+    )
+      .then((response) => response.json())
+      .then((result) => {
         if (result?.data) {
-          const newData = result.data.Section_3.map((item: { Title: string; Description: string; image: { url: string } }) => {
-            const id = item.Title.replace(" ", "_").toLowerCase()
-            return {
-              id: id,
-              title: item.Title,
-              description: item.Description,
-              linkTo: id,
-              image: AdminPanelUrl.replace("/api", "") + item?.image?.url
+          const newData = result.data.Section_3.map(
+            (item: {
+              Title: string;
+              Description: string;
+              image: { url: string };
+            }) => {
+              const id = item.Title.replace(" ", "_").toLowerCase();
+              return {
+                id: id,
+                title: item.Title,
+                description: item.Description,
+                linkTo: id,
+                image: AdminPanelUrl.replace("/api", "") + item?.image?.url,
+              };
             }
-          })
-          setHomePageData(result.data)
-          setSection_3(newData)
+          );
+          setHomePageData(result.data);
+          setSection_3(newData);
         }
-      }).catch(error => console.log('error', error));
-  }, [])
+      })
+      .catch((error) => console.log("error", error));
+  }, []);
 
   return (
     <div className="min-h-screen bg-cream">
-      {
-        HomePageData &&
+      {HomePageData && (
         <>
-          <Hero title={HomePageData.HeroTitle}
+          <Hero
+            title={HomePageData.HeroTitle}
             desc={HomePageData.Hero_Description}
             img={ChitrapurMathImg}
             subTitle={HomePageData.SubTitle}
             button1={HomePageData.Button1}
             button2={HomePageData.Button2}
-            images={[heritage1,heritage2, heritage3]}
-            from="home" />
+            images={[heritage1, heritage2, heritage3]}
+            from="home"
+          />
           <Vision />
-          {
-            Section_3 &&
-            <Programs data={Section_3} />
-          }
+          {Section_3 && <Programs data={Section_3} />}
           <FeaturedProjects title="Featured Projects" />
-          <ImpactSection/>
+          <ImpactSection />
           <VolunteerSection />
           <TeamSection />
           <FAQSection />
           <Footer />
-        </>}
+        </>
+      )}
     </div>
   );
 }
