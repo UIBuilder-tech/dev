@@ -12,12 +12,15 @@ import Newsletter from "../components/About/Newsletter";
 import OurTeamAbout from "../components/About/OurTeamAbout";
 import ImpactSection from "../components/Home/OurImpact";
 import ChitrapurMathImg from "../assets/Shirali_Math.webp";
+import { UseDataContext } from "../components/context/DataContext";
 const AdminPanelUrl = import.meta.env.VITE_ADMIN_PANEL_API;
 export default function AboutPage() {
   const location = useLocation();
+  const { setData } = UseDataContext();
   const [PageData, setPageData] = useState({});
   useEffect(() => {
     const api = async () => {
+      setData(v => ({ ...v, isLoading: true}))
       const requestOptions: any = {
         method: 'GET',
         redirect: 'follow'
@@ -29,7 +32,9 @@ export default function AboutPage() {
             setPageData(result.data)
           }
         })
-        .catch(error => console.log('error', error));
+        .catch(error => console.log('error', error)).finally(() => {
+          setData(v => ({ ...v, isLoading: false}))
+        });
     }
 
     api();
@@ -50,7 +55,7 @@ export default function AboutPage() {
 
   return (<>
     {
-      PageData && 
+      PageData &&
       <div className="min-h-screen bg-cream">
         <Hero
           title={PageData.title}
@@ -61,7 +66,7 @@ export default function AboutPage() {
           button2={PageData.Button2}
         />
         <Vantiga
-          title={PageData.title} 
+          title={PageData.title}
           description={PageData.description}
         />
         <div id="vision-mission">

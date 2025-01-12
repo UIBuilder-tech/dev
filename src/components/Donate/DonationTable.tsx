@@ -60,7 +60,6 @@ export default function DonationTable({
   const [remarks, setRemarks] = useState<Record<string, string>>({});
   const [useDefaultDonation, setUseDefaultDonation] = useState(false);
   const [donationData, setDonationData] = useState<DonationSubcategory[]>([])
-const location = useLocation();
   const windowWidth = useWindowWidth();
 
   const isMobile = windowWidth < 700; // md breakpoint
@@ -105,7 +104,7 @@ const location = useLocation();
       const hash = window.location.hash.split("#")[2];
       if (!hash) return;
 
-      let targetCategory = donationData.find((cat) => cat.id === hash);
+      let targetCategory = donationData.find((cat:any) => cat.id === hash);
       let targetItem;
 
       if (!targetCategory) {
@@ -143,7 +142,7 @@ const location = useLocation();
     });
 
     return () => window.removeEventListener("hashchange", handleScroll);
-  }, [location]);
+  }, [donationData]);
 
   // Update selected projects whenever relevant state changes
   useEffect(() => {
@@ -495,8 +494,8 @@ const location = useLocation();
               return {
                 id: (item as string).toLowerCase().replace(/ /g, '-'),
                 name: item,
-                items: result.data.filter(data => data.category === item).map(data => ({
-                  id: data.id,
+                items: result.data.filter((data:any) => data.category === item).map(data => ({
+                  id: data.donationId,
                   name: data.name,
                   amount: data.amount,
                   description: data.description,

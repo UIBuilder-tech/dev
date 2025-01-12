@@ -247,7 +247,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  to="/contribute#donation-table#education"
+                  to="/contribute#donation-table"
                   className="hover:underline"
                 >
                   Community Development
@@ -255,7 +255,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  to="/contribute#donation-table#women-empowerment"
+                  to="/contribute#donation-table"
                   className="hover:underline"
                 >
                   Cultural Preservation

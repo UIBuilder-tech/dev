@@ -12,19 +12,7 @@ import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Vantiga from "../components/Contribute/Vantiga";
 import HeroImg from "../assets/photoGallery/img11.webp";
-import solar from "../assets/solar1.jpg";
-import solar1 from "../assets/solar2.jpg";
 import DataProcess from "../utils/dataProcess";
-
-interface Project {
-  id: number;
-  title: string;
-  location: string;
-  description: string;
-  images: string[];
-  linkTo?: string;
-}
-
 const AdminPanelUrl = import.meta.env.VITE_ADMIN_PANEL_API;
 export default function ProjectsPage() {
   const location = useLocation();

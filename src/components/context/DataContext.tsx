@@ -6,6 +6,7 @@ export interface Data {
   paymentData: any | null; // Replace 'PaymentDataType' with the actual type
   accessToken: string | null;
   userData: any | null;
+  isLoading: boolean | true;
 }
 
 // Define the context type
@@ -27,6 +28,7 @@ const defaultData: Data = {
   paymentData: null,
   accessToken: null,
   userData: null,
+  isLoading: true,
 };
 export const DataProvider: React.FC<DataProviderProps> = ({ children }) => {
   const [data, setData] = useState<Data>(defaultData);

@@ -12,6 +12,7 @@ import PhotoGallery from "../components/About/PhotoGallery";
 import Ambassador from "../components/About/Ambassador";
 import VantigaDetailed from "../components/Contribute/VantigaDetailed";
 import { Outlet } from "react-router-dom";
+import { UseDataContext } from "../components/context/DataContext";
 
 interface SelectedProject {
   id?: string;
@@ -63,9 +64,11 @@ export default function ContributePage() {
   });
   const location = useLocation();
 
+  const { setData } = UseDataContext();
   const [PageData, setPageData] = useState({});
   useEffect(() => {
     const api = async () => {
+      setData(v => ({ ...v, isLoading: true}))
       const requestOptions: any = {
         method: 'GET',
         redirect: 'follow'
@@ -77,24 +80,24 @@ export default function ContributePage() {
             setPageData(result.data)
           }
         })
-        .catch(error => console.log('error', error));
+        .catch(error => console.log('error', error)).finally(() => {
+          setData(v => ({ ...v, isLoading: false}))
+        });
     }
 
     api();
   }, [])
   useEffect(() => {
     // Handle initial load with hash
-    const hash = location.hash.split("#").filter(v=>v!=='' && v!==null)
-    console.log("🚀 ~ useEffect ~ hash:", hash)
+    const hash = location.hash.split("#").filter(v => v !== '' && v !== null)
     if (hash) {
-      hash.forEach((h,i) => {
-        console.log("🚀 ~ hash.forEach ~ h:", h)
+      hash.forEach((h, i) => {
         setTimeout(() => {
           const element = document.getElementById(h);
           if (element) {
             element.scrollIntoView({ behavior: "smooth" });
           }
-        }, 100*i);
+        }, 100 * i);
       })
     }
   }, [location.hash]); // Only run when hash changes
@@ -105,6 +108,7 @@ export default function ContributePage() {
       apiCalledRef.current = true; // Mark API as called
 
       if (Object.keys(user)?.length > 0) {
+        setData(v => ({ ...v, isLoading: true}))
         fetch(`${BASE_URL}/api/contact?email=${user?.email}`)
           .then((resp) => resp?.json())
           .then((response) => {
@@ -142,6 +146,7 @@ export default function ContributePage() {
           })
           .finally(() => {
             // setIsDisable(false);
+            setData(v => ({ ...v,isLoading: false}))
           });
       }
     };
