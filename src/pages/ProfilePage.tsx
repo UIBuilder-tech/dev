@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import heritage1 from "../assets/heritage1.webp";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { UseDataContext } from "../components/context/DataContext";
 
 interface PersonalDetails {
   FirstName: string;
@@ -70,18 +71,19 @@ export default function Profile() {
     mobile: "",
     createAccount: false,
   });
+  const { setData } = UseDataContext()
 
   const isPasswordValid = () => {
     const hasRequiredFields = passwords.old && passwords.new && passwords.confirm;
     const passwordsMatch = passwords.new === passwords.confirm;
     const meetsComplexity = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/.test(passwords.new);
-    
+
     return hasRequiredFields && passwordsMatch && meetsComplexity;
   };
 
   const isPersonalDetailsValid = () => {
     if (!personalDetails) return false;
-    
+
     return (
       personalDetails.FirstName?.trim().length >= 2 &&
       personalDetails.LastName?.trim().length >= 2 &&
@@ -98,12 +100,12 @@ export default function Profile() {
       address.zipCode?.trim() &&
       /^\d{5}(-\d{4})?$/.test(address.zipCode)
     );
-  
+
     // If billing is same as shipping, we only need shipping to be valid
     if (isBillingSame) {
       return isShippingValid;
     }
-  
+
     // If billing is different, validate billing address too
     const isBillingValid = Boolean(
       address.billingStreet?.trim() &&
@@ -112,7 +114,7 @@ export default function Profile() {
       address.billingZipCode?.trim() &&
       /^\d{5}(-\d{4})?$/.test(address.billingZipCode)
     );
-  
+
     return isShippingValid && isBillingValid;
   };
 
@@ -125,7 +127,7 @@ export default function Profile() {
       email,
       mobile
     } = newFamilyMember;
-  
+
     return (
       relation?.trim().length > 0 &&
       dateOfBirth?.trim().length > 0 &&
@@ -139,6 +141,7 @@ export default function Profile() {
   const handlePasswordSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // Handle password update logic here
+    setData(v => ({ ...v, isLoading: true }))
     const payload = {
       email: user?.email,
       newPassword: passwords?.new,
@@ -166,6 +169,7 @@ export default function Profile() {
       })
       .finally(() => {
         // setIsDisable(false);
+        setData(v => ({ ...v, isLoading: false }))
         setIsPasswordModalOpen(false);
         setPasswords({ old: "", new: "", confirm: "" });
       });
@@ -183,10 +187,11 @@ export default function Profile() {
       memMobile: newFamilyMember?.mobile,
       memCreateAcc: newFamilyMember?.createAccount,
       memDOB: newFamilyMember?.dateOfBirth,
-      useremail: userData?.email||'',
-      contactId:userData?.userId
+      useremail: userData?.email || '',
+      contactId: userData?.userId
     };
 
+    setData(v => ({ ...v, isLoading: true }))
     fetch(`${BASE_URL}/api/member/add`, {
       method: "POST",
       headers: {
@@ -208,6 +213,7 @@ export default function Profile() {
         // sessionStorage.removeItem('accessToken');
       })
       .finally(() => {
+        setData(v => ({ ...v, isLoading: false }))
         // setIsDisable(false);
         setIsFamilyModalOpen(false);
         setNewFamilyMember({
@@ -224,6 +230,7 @@ export default function Profile() {
 
   const initalApi = () => {
     setIsLoading(true);
+    setData(v => ({ ...v, isLoading: true }))
     fetch(`${BASE_URL}/api/contact?email=${user?.email}`)
       .then((resp) => resp?.json())
       .then((response) => {
@@ -249,15 +256,15 @@ export default function Profile() {
         } else {
           console.error("error fetching response");
         }
-        console.log("RESPONSE__>", response);
       })
       .catch((error) => {
         console.error(error);
       })
       .finally(() => {
+        setData(v => ({ ...v, isLoading: false }))
         setIsLoading(false);
       });
-    }
+  }
 
   useEffect(() => {
     initalApi()
@@ -270,6 +277,7 @@ export default function Profile() {
       lastName: personalDetails?.LastName,
       mobile: personalDetails?.Phone,
     };
+    setData(v => ({ ...v, isLoading: true }))
     setIsFormValidate(true)
     fetch(`${BASE_URL}/api/profile/update`, {
       method: "POST",
@@ -292,6 +300,7 @@ export default function Profile() {
         // sessionStorage.removeItem('accessToken');
       })
       .finally(() => {
+        setData(v => ({ ...v, isLoading: false }))
         setIsFormValidate(false);
         setIsEditingPersonal(false);
       });
@@ -312,6 +321,7 @@ export default function Profile() {
       shippingStreet: address?.street,
     };
     setIsFormValidate(true)
+    setData(v => ({ ...v, isLoading: true }))
     fetch(`${BASE_URL}/api/profile/address`, {
       method: "PATCH",
       headers: {
@@ -333,6 +343,7 @@ export default function Profile() {
         // sessionStorage.removeItem('accessToken');
       })
       .finally(() => {
+        setData(v => ({ ...v, isLoading: false }))
         setIsFormValidate(false)
         setIsEditingAddress(false);
       });
@@ -350,65 +361,65 @@ export default function Profile() {
     >
       <div className="min-h-[200vh] md:min-h-[170vh]  absolute inset-0 bg-black/50"></div>
 
-     {isLoading ? (
-  <div className="relative z-[9] max-w-4xl mx-auto p-6 pt-48 space-y-8 max-sm:space-y-6 max-sm:py-[80px]">
-    <div className="flex flex-row justify-between items-center">
-          <h2 className="text-5xl max-sm:text-4xl text-white">My Profile</h2>
-        </div>
-    
-    {/* Personal Details Skeleton */}
-    <div className="bg-white rounded-lg p-8 max-sm:p-6 shadow-lg border border-gray-200">
-      <div className="flex justify-between md:items-center mb-8 max-sm:flex-col">
-        <div className="h-8 w-48 bg-gray-200 rounded animate-pulse"></div>
-        <div className="h-8 w-32 bg-gray-200 rounded animate-pulse mt-4 md:mt-0"></div>
-      </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        {[1, 2, 3, 4].map((item) => (
-          <div key={item} className="space-y-3">
-            <div className="h-4 w-24 bg-gray-200 rounded animate-pulse"></div>
-            <div className="h-8 w-full bg-gray-200 rounded animate-pulse"></div>
+      {isLoading ? (
+        <div className="relative z-[9] max-w-4xl mx-auto p-6 pt-48 space-y-8 max-sm:space-y-6 max-sm:py-[80px]">
+          <div className="flex flex-row justify-between items-center">
+            <h2 className="text-5xl max-sm:text-4xl text-white">My Profile</h2>
           </div>
-        ))}
-      </div>
-    </div>
 
-    {/* Address Skeleton */}
-    <div className="bg-white rounded-lg p-8 max-sm:p-6 shadow-lg border border-gray-200">
-      <div className="flex justify-between items-center mb-8">
-        <div className="h-8 w-48 bg-gray-200 rounded animate-pulse"></div>
-        <div className="h-8 w-32 bg-gray-200 rounded animate-pulse"></div>
-      </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="md:col-span-2">
-          <div className="h-4 w-24 bg-gray-200 rounded animate-pulse mb-2"></div>
-          <div className="h-8 w-full bg-gray-200 rounded animate-pulse"></div>
-        </div>
-        {[1, 2, 3, 4].map((item) => (
-          <div key={item} className="space-y-3">
-            <div className="h-4 w-24 bg-gray-200 rounded animate-pulse"></div>
-            <div className="h-8 w-full bg-gray-200 rounded animate-pulse"></div>
+          {/* Personal Details Skeleton */}
+          <div className="bg-white rounded-lg p-8 max-sm:p-6 shadow-lg border border-gray-200">
+            <div className="flex justify-between md:items-center mb-8 max-sm:flex-col">
+              <div className="h-8 w-48 bg-gray-200 rounded animate-pulse"></div>
+              <div className="h-8 w-32 bg-gray-200 rounded animate-pulse mt-4 md:mt-0"></div>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {[1, 2, 3, 4].map((item) => (
+                <div key={item} className="space-y-3">
+                  <div className="h-4 w-24 bg-gray-200 rounded animate-pulse"></div>
+                  <div className="h-8 w-full bg-gray-200 rounded animate-pulse"></div>
+                </div>
+              ))}
+            </div>
           </div>
-        ))}
-        <div className="md:col-span-2">
-          <div className="h-4 w-24 bg-gray-200 rounded animate-pulse mb-2"></div>
-          <div className="h-8 w-full bg-gray-200 rounded animate-pulse"></div>
-        </div>
-        {[1, 2, 3, 4].map((item) => (
-          <div key={item} className="space-y-3">
-            <div className="h-4 w-24 bg-gray-200 rounded animate-pulse"></div>
-            <div className="h-8 w-full bg-gray-200 rounded animate-pulse"></div>
-          </div>
-        ))}
-      </div>
-    </div>
 
-    {/* Buttons Skeleton */}
-    <div className="flex justify-between md:py-6 max-sm:pt-4">
-      <div className="h-12 w-32 bg-gray-200 rounded-full animate-pulse"></div>
-      <div className="h-12 w-40 bg-gray-200 rounded-full animate-pulse"></div>
-    </div>
-  </div>
-): <div className="relative z-[9] max-w-4xl mx-auto p-6 pt-48 space-y-8 max-sm:space-y-6 max-sm:py-[80px]">
+          {/* Address Skeleton */}
+          <div className="bg-white rounded-lg p-8 max-sm:p-6 shadow-lg border border-gray-200">
+            <div className="flex justify-between items-center mb-8">
+              <div className="h-8 w-48 bg-gray-200 rounded animate-pulse"></div>
+              <div className="h-8 w-32 bg-gray-200 rounded animate-pulse"></div>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className="md:col-span-2">
+                <div className="h-4 w-24 bg-gray-200 rounded animate-pulse mb-2"></div>
+                <div className="h-8 w-full bg-gray-200 rounded animate-pulse"></div>
+              </div>
+              {[1, 2, 3, 4].map((item) => (
+                <div key={item} className="space-y-3">
+                  <div className="h-4 w-24 bg-gray-200 rounded animate-pulse"></div>
+                  <div className="h-8 w-full bg-gray-200 rounded animate-pulse"></div>
+                </div>
+              ))}
+              <div className="md:col-span-2">
+                <div className="h-4 w-24 bg-gray-200 rounded animate-pulse mb-2"></div>
+                <div className="h-8 w-full bg-gray-200 rounded animate-pulse"></div>
+              </div>
+              {[1, 2, 3, 4].map((item) => (
+                <div key={item} className="space-y-3">
+                  <div className="h-4 w-24 bg-gray-200 rounded animate-pulse"></div>
+                  <div className="h-8 w-full bg-gray-200 rounded animate-pulse"></div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Buttons Skeleton */}
+          <div className="flex justify-between md:py-6 max-sm:pt-4">
+            <div className="h-12 w-32 bg-gray-200 rounded-full animate-pulse"></div>
+            <div className="h-12 w-40 bg-gray-200 rounded-full animate-pulse"></div>
+          </div>
+        </div>
+      ) : <div className="relative z-[9] max-w-4xl mx-auto p-6 pt-48 space-y-8 max-sm:space-y-6 max-sm:py-[80px]">
         {/* Personal Details Section */}
         <div className="flex flex-row justify-between items-center">
           <h2 className="text-5xl max-sm:text-4xl text-white">My Profile</h2>
@@ -489,38 +500,37 @@ export default function Profile() {
                 </div>
                 <div className="md:col-span-2 flex gap-4 mt-4">
                   <button
-              disabled={!isPersonalDetailsValid() || IsFormValidate}
+                    disabled={!isPersonalDetailsValid() || IsFormValidate}
                     onClick={() => {
                       onPersonalDetailsSubmit();
                     }}
-                    className={`px-6 py-3 bg-[#E67E22] text-white rounded-full ${
-                      !isPersonalDetailsValid() || IsFormValidate 
-                        ? 'bg-gray-400 cursor-not-allowed' 
-                        : 'bg-[#E67E22] hover:bg-[#E67E22]/90'
-                    } transition-colors duration-200`}
+                    className={`px-6 py-3 bg-[#E67E22] text-white rounded-full ${!isPersonalDetailsValid() || IsFormValidate
+                      ? 'bg-gray-400 cursor-not-allowed'
+                      : 'bg-[#E67E22] hover:bg-[#E67E22]/90'
+                      } transition-colors duration-200`}
                   >
                     {IsFormValidate ? (
-        <motion.div
-          className='flex items-center justify-center'
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.3 }}
-        >
-          <Loader className='w-5 h-5 animate-spin text-white' />
-          <span className='ml-2'>Loading...</span>
-        </motion.div>
-      ) : (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.3 }}
-        >
-          Save
-        </motion.div>
-      )} 
+                      <motion.div
+                        className='flex items-center justify-center'
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        <Loader className='w-5 h-5 animate-spin text-white' />
+                        <span className='ml-2'>Loading...</span>
+                      </motion.div>
+                    ) : (
+                      <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        Save
+                      </motion.div>
+                    )}
                   </button>
                   <button
-                    onClick={() =>{initalApi(); setIsEditingPersonal(false)}}
+                    onClick={() => { initalApi(); setIsEditingPersonal(false) }}
                     className="px-6 py-3 bg-gray-200 text-gray-700 rounded-full hover:bg-gray-300 transition-colors duration-200"
                   >
                     Cancel
@@ -721,7 +731,7 @@ export default function Profile() {
                   Billing Address is same as Home Address
                 </label>
               </div>
-             {!isBillingSame && <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {!isBillingSame && <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="md:col-span-2">
                   <label className="block text-sm font-medium text-gray-600">
                     Street Address
@@ -845,36 +855,35 @@ export default function Profile() {
               </div>}
               <div className="flex gap-4">
                 <button
-                disabled={!isAddressValid() || IsFormValidate}
+                  disabled={!isAddressValid() || IsFormValidate}
                   onClick={() => onAddressSubmit()}
-                  className={`px-6 py-3 bg-[#E67E22] text-white rounded-full ${
-                    !isAddressValid() || IsFormValidate 
-                      ? 'bg-gray-400 cursor-not-allowed' 
-                      : 'bg-[#E67E22] hover:bg-[#E67E22]/90'
-                  } transition-colors duration-200`}
+                  className={`px-6 py-3 bg-[#E67E22] text-white rounded-full ${!isAddressValid() || IsFormValidate
+                    ? 'bg-gray-400 cursor-not-allowed'
+                    : 'bg-[#E67E22] hover:bg-[#E67E22]/90'
+                    } transition-colors duration-200`}
                 >
                   {IsFormValidate ? (
-        <motion.div
-          className='flex items-center justify-center'
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.3 }}
-        >
-          <Loader className='w-5 h-5 animate-spin text-white' />
-          <span className='ml-2'>Loading...</span>
-        </motion.div>
-      ) : (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.3 }}
-        >
-          Save
-        </motion.div>
-      )} 
+                    <motion.div
+                      className='flex items-center justify-center'
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <Loader className='w-5 h-5 animate-spin text-white' />
+                      <span className='ml-2'>Loading...</span>
+                    </motion.div>
+                  ) : (
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      Save
+                    </motion.div>
+                  )}
                 </button>
                 <button
-                  onClick={() =>{initalApi(); setIsEditingAddress(false)}}
+                  onClick={() => { initalApi(); setIsEditingAddress(false) }}
                   className="px-6 py-3 bg-gray-200 text-gray-700 rounded-full hover:bg-gray-300 transition-colors duration-200"
                 >
                   Cancel
@@ -883,77 +892,77 @@ export default function Profile() {
             </div>
           ) : (
             <>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div className="md:col-span-2">
-                <label className="block text-sm text-gray-500">
-                  Street Address
-                </label>
-                <p className="text-xl max-sm:text-lg text-gray-800">
-                  {address.street || "Not provided"}
-                </p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="md:col-span-2">
+                  <label className="block text-sm text-gray-500">
+                    Street Address
+                  </label>
+                  <p className="text-xl max-sm:text-lg text-gray-800">
+                    {address.street || "Not provided"}
+                  </p>
+                </div>
+                <div>
+                  <label className="block text-sm text-gray-500">City</label>
+                  <p className="text-xl max-sm:text-lg text-gray-800">
+                    {address.city || "Not provided"}
+                  </p>
+                </div>
+                <div>
+                  <label className="block text-sm text-gray-500">State</label>
+                  <p className="text-xl max-sm:text-lg text-gray-800">
+                    {address.state || "Not provided"}
+                  </p>
+                </div>
+                <div>
+                  <label className="block text-sm text-gray-500">Zip Code</label>
+                  <p className="text-xl max-sm:text-lg text-gray-800">
+                    {address.zipCode || "Not provided"}
+                  </p>
+                </div>
+                <div>
+                  <label className="block text-sm text-gray-500">Country</label>
+                  <p className="text-xl max-sm:text-lg text-gray-800">
+                    {address.country}
+                  </p>
+                </div>
               </div>
-              <div>
-                <label className="block text-sm text-gray-500">City</label>
-                <p className="text-xl max-sm:text-lg text-gray-800">
-                  {address.city || "Not provided"}
-                </p>
+              <p className="text-2xl md:text-3xl font-semibold text-gray-700 py-8">
+                Billing Address
+              </p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="md:col-span-2">
+                  <label className="block text-sm text-gray-500">
+                    Street Address
+                  </label>
+                  <p className="text-xl max-sm:text-lg text-gray-800">
+                    {address.billingStreet || "Not provided"}
+                  </p>
+                </div>
+                <div>
+                  <label className="block text-sm text-gray-500">City</label>
+                  <p className="text-xl max-sm:text-lg text-gray-800">
+                    {address.billingCity || "Not provided"}
+                  </p>
+                </div>
+                <div>
+                  <label className="block text-sm text-gray-500">State</label>
+                  <p className="text-xl max-sm:text-lg text-gray-800">
+                    {address.billingState || "Not provided"}
+                  </p>
+                </div>
+                <div>
+                  <label className="block text-sm text-gray-500">Zip Code</label>
+                  <p className="text-xl max-sm:text-lg text-gray-800">
+                    {address.billingZipCode || "Not provided"}
+                  </p>
+                </div>
+                <div>
+                  <label className="block text-sm text-gray-500">Country</label>
+                  <p className="text-xl max-sm:text-lg text-gray-800">
+                    {address.billingCountry}
+                  </p>
+                </div>
               </div>
-              <div>
-                <label className="block text-sm text-gray-500">State</label>
-                <p className="text-xl max-sm:text-lg text-gray-800">
-                  {address.state || "Not provided"}
-                </p>
-              </div>
-              <div>
-                <label className="block text-sm text-gray-500">Zip Code</label>
-                <p className="text-xl max-sm:text-lg text-gray-800">
-                  {address.zipCode || "Not provided"}
-                </p>
-              </div>
-              <div>
-                <label className="block text-sm text-gray-500">Country</label>
-                <p className="text-xl max-sm:text-lg text-gray-800">
-                  {address.country}
-                </p>
-              </div>
-            </div>
-            <p className="text-2xl md:text-3xl font-semibold text-gray-700 py-8">
-              Billing Address
-            </p>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div className="md:col-span-2">
-                <label className="block text-sm text-gray-500">
-                  Street Address
-                </label>
-                <p className="text-xl max-sm:text-lg text-gray-800">
-                  {address.billingStreet || "Not provided"}
-                </p>
-              </div>
-              <div>
-                <label className="block text-sm text-gray-500">City</label>
-                <p className="text-xl max-sm:text-lg text-gray-800">
-                  {address.billingCity || "Not provided"}
-                </p>
-              </div>
-              <div>
-                <label className="block text-sm text-gray-500">State</label>
-                <p className="text-xl max-sm:text-lg text-gray-800">
-                  {address.billingState || "Not provided"}
-                </p>
-              </div>
-              <div>
-                <label className="block text-sm text-gray-500">Zip Code</label>
-                <p className="text-xl max-sm:text-lg text-gray-800">
-                  {address.billingZipCode || "Not provided"}
-                </p>
-              </div>
-              <div>
-                <label className="block text-sm text-gray-500">Country</label>
-                <p className="text-xl max-sm:text-lg text-gray-800">
-                  {address.billingCountry}
-                </p>
-              </div>
-            </div>
             </>
           )}
         </div>
@@ -1148,11 +1157,10 @@ export default function Profile() {
                 <button
                   type="submit"
                   disabled={!isFamilyMemberValid()}
-                  className={`px-6 py-3 bg-[#E67E22] text-white rounded-full ${
-                    !isFamilyMemberValid() 
-                      ? 'bg-gray-400 cursor-not-allowed' 
-                      : 'bg-[#E67E22] hover:bg-[#E67E22]/90'
-                  } transition-colors duration-200`}
+                  className={`px-6 py-3 bg-[#E67E22] text-white rounded-full ${!isFamilyMemberValid()
+                    ? 'bg-gray-400 cursor-not-allowed'
+                    : 'bg-[#E67E22] hover:bg-[#E67E22]/90'
+                    } transition-colors duration-200`}
                 >
                   Save
                 </button>
@@ -1234,11 +1242,10 @@ export default function Profile() {
               <button
                 type="submit"
                 disabled={!isPasswordValid()}
-                className={`w-full px-6 py-3 bg-[#E67E22] text-white rounded-full ${
-                  !isPasswordValid() 
-                    ? 'bg-gray-400 cursor-not-allowed' 
-                    : 'bg-[#E67E22] hover:bg-[#E67E22]/90'
-                } transition-colors duration-200`}
+                className={`w-full px-6 py-3 bg-[#E67E22] text-white rounded-full ${!isPasswordValid()
+                  ? 'bg-gray-400 cursor-not-allowed'
+                  : 'bg-[#E67E22] hover:bg-[#E67E22]/90'
+                  } transition-colors duration-200`}
               >
                 Update Password
               </button>

@@ -1,12 +1,15 @@
 import Marquee from "../Marquee";
 import { useEffect, useState } from "react";
 import { useImagePreviewTrigger } from "../../utils/imagePreviewUtils";
+import { UseDataContext } from "../context/DataContext";
 const AdminPanelUrl = import.meta.env.VITE_ADMIN_PANEL_API;
 function PhotoGallery() {
   const triggerImagePreview = useImagePreviewTrigger();
   const [PageData, setPageData] = useState([]);
+      const { setData } = UseDataContext();
   useEffect(() => {
     const api = async () => {
+          setData(v => ({ ...v, isLoading: true }))
       const requestOptions: any = {
         method: 'GET',
         redirect: 'follow'
@@ -21,7 +24,10 @@ function PhotoGallery() {
             setPageData(images);
           }
         })
-        .catch(error => console.log('error', error));
+        .catch(error => console.log('error', error))
+        .finally(() => {
+          setData(v => ({ ...v, isLoading: false }))
+        });;
     }
 
     api();

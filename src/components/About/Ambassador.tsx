@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import DataProcess from "../../utils/dataProcess";
+import { UseDataContext } from "../context/DataContext";
 const AdminPanelUrl = import.meta.env.VITE_ADMIN_PANEL_API;
 interface pageDataInteraction {
   ambassadorTitle: string;
@@ -11,9 +12,12 @@ interface pageDataInteraction {
   }
 }
 export default function Ambassador() {
+
+  const { setData } = UseDataContext();
   const [pageData, setPageData] = useState<pageDataInteraction | null>(null)
   useEffect(() => {
     const api = async () => {
+      setData(v => ({ ...v, isLoading: true }))
       const requestOptions: any = {
         method: 'GET',
         redirect: 'follow'
@@ -26,7 +30,10 @@ export default function Ambassador() {
             setPageData(newData)
           }
         })
-        .catch(error => console.log('error', error));
+        .catch(error => console.log('error', error))
+        .finally(() => {
+          setData(v => ({ ...v, isLoading: false }))
+        });;
     }
     api();
   }, [])

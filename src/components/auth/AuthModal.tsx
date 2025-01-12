@@ -66,8 +66,8 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
   const [isDisable, setIsDisable] = useState<boolean>(false);
   const [formData, setFormData] = useState<FormDataType>({});
   const [view, setView] = useState<ViewType>('login');
-  const { setData } = UseDataContext();
   const navigate = useNavigate();
+  const { setData } = UseDataContext();
   const modalVariants = {
     hidden: { opacity: 0, y: -20 },
     visible: { opacity: 1, y: 0 },
@@ -95,63 +95,67 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
       email: formData.Email,
       password: formData.Password__c,
     };
-        fetch(`${BASE_URL}/api/auth/login`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(payload),
-        }).then(resp=>resp?.json())
-          .then(response => {
-            if (response?.data?.userId) {
-                toast.success(response?.message);
-                navigate('/profile');
-                onClose();
-                setData(v => ({ ...v, userData: response?.data }))
-                sessionStorage.setItem('user', JSON.stringify(response?.data));
-            } else {
-                toast.error(response?.message);
-            }
-          })
-          .catch(error => {
-            toast.error('Something went wrong. Please try again later.');
-            console.error(error);
-            sessionStorage.removeItem('accessToken');
-          })
-          .finally(() => {
-            setIsDisable(false);
-          });
+    setData(v => ({ ...v, isLoading: true }))
+    fetch(`${BASE_URL}/api/auth/login`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+    }).then(resp => resp?.json())
+      .then(response => {
+        if (response?.data?.userId) {
+          toast.success(response?.message);
+          navigate('/profile');
+          onClose();
+          setData(v => ({ ...v, userData: response?.data }))
+          sessionStorage.setItem('user', JSON.stringify(response?.data));
+        } else {
+          toast.error(response?.message);
+        }
+      })
+      .catch(error => {
+        toast.error('Something went wrong. Please try again later.');
+        console.error(error);
+        sessionStorage.removeItem('accessToken');
+      })
+      .finally(() => {
+        setIsDisable(false);
+        setData(v => ({ ...v, isLoading: false }))
+      });
   };
 
   const forgotFormHandler = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setIsDisable(true);
 
+    setData(v => ({ ...v, isLoading: true }))
     const payload = {
       forgot_email: formData.Email,
     };
-        fetch(`${BASE_URL}/api/auth/check-email`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(payload),
-        }).then(resp=>resp?.json())
-          .then(response => {
-            if (response?.success) {
-                toast.success(response?.message);
-                onClose();
-            } else {
-                toast.error(response?.message);
-            }
-          })
-          .catch(error => {
-            toast.error('Something went wrong. Please try again later.');
-            console.error(error);
-          })
-          .finally(() => {
-            setIsDisable(false);
-          });
+    fetch(`${BASE_URL}/api/auth/check-email`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+    }).then(resp => resp?.json())
+      .then(response => {
+        if (response?.success) {
+          toast.success(response?.message);
+          onClose();
+        } else {
+          toast.error(response?.message);
+        }
+      })
+      .catch(error => {
+        toast.error('Something went wrong. Please try again later.');
+        console.error(error);
+      })
+      .finally(() => {
+        setIsDisable(false);
+        setData(v => ({ ...v, isLoading: false }))
+      });
   };
 
   const registerFormHandler = async (
@@ -165,36 +169,38 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
 
     setIsDisable(true);
 
-        const payload = {
-          firstname: formData.FirstName,
-          lastname: formData.LastName,
-          usernumber: formData.Phone,
-          emailid: formData.Email,
-          userpwd: formData.Password__c,
-          userconfirmPassword: formData.confirmPassword
-        };
-        fetch(`${BASE_URL}/api/auth/register`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(payload),
-        }).then(resp=>resp?.json())
-          .then(res => {
-            if (res.success) {
-              toast.success(res?.message);
-              setView('login');
-            } else {
-              toast.error(res?.message);
-            }
-          })
-          .catch(error => {
-            toast.error('Something went wrong. Please try again later');
-            console.error(error);
-          })
-          .finally(() => {
-            setIsDisable(false);
-          });
+    const payload = {
+      firstname: formData.FirstName,
+      lastname: formData.LastName,
+      usernumber: formData.Phone,
+      emailid: formData.Email,
+      userpwd: formData.Password__c,
+      userconfirmPassword: formData.confirmPassword
+    };
+    setData(v => ({ ...v, isLoading: true }))
+    fetch(`${BASE_URL}/api/auth/register`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+    }).then(resp => resp?.json())
+      .then(res => {
+        if (res.success) {
+          toast.success(res?.message);
+          setView('login');
+        } else {
+          toast.error(res?.message);
+        }
+      })
+      .catch(error => {
+        toast.error('Something went wrong. Please try again later');
+        console.error(error);
+      })
+      .finally(() => {
+        setData(v => ({ ...v, isLoading: false }))
+        setIsDisable(false);
+      });
   };
 
   const renderContent = () => {

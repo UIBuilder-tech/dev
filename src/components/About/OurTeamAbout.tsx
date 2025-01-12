@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { useImagePreviewTrigger } from "../../utils/imagePreviewUtils";
+import { UseDataContext } from "../context/DataContext";
 
 interface Member {
   name: string;
@@ -15,8 +16,10 @@ export default function OurTeamAbout() {
   const [totalPages, setTotalPages] = useState(0)
   const animationRef = useRef<number | null>(null);
   const triggerImagePreview = useImagePreviewTrigger();
+      const { setData } = UseDataContext();
   useEffect(() => {
     const api2 = async () => {
+          setData(v => ({ ...v, isLoading: true }))
       const requestOptions: any = {
         method: 'GET',
         redirect: 'follow'
@@ -37,7 +40,10 @@ export default function OurTeamAbout() {
             setTeamMembers(teams)
           }
         })
-        .catch(error => console.log('error', error));
+        .catch(error => console.log('error', error))
+        .finally(() => {
+          setData(v => ({ ...v, isLoading: false }))
+        });;
     }
     api2();
   }, [])

@@ -2,11 +2,13 @@ import { FormEvent, useEffect, useState } from "react";
 import newsletter from "../../assets/newsletterImg.webp";
 import ApiCalling from "../api/ApiCalling";
 import { toast } from "react-toastify";
+import { UseDataContext } from "../context/DataContext";
 const AdminPanelUrl = import.meta.env.VITE_ADMIN_PANEL_API;
 const BASE_URL = import.meta.env.VITE_RETURN_BACKEND_API;
 function Newsletter() {
   const [email, setEmail] = useState("");
   const [IsDisable, setIsDisable] = useState(false);
+    const { setData } = UseDataContext();
   interface PageDataType {
     title: string;
     description: string;
@@ -15,6 +17,7 @@ function Newsletter() {
   const [PageData, setPageData] = useState<PageDataType | null>(null);
   useEffect(() => {
     const api = async () => {
+    setData(v => ({ ...v, isLoading: true }))
       const requestOptions: any = {
         method: 'GET',
         redirect: 'follow'
@@ -26,21 +29,24 @@ function Newsletter() {
             setPageData(result.data)
           }
         })
-        .catch(error => console.log('error', error));
+        .catch(error => console.log('error', error))
+        .finally(() => {
+          setData(v => ({ ...v, isLoading: false }))
+        });
+        ;
     }
     api();
   }, [])
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = (e: any) => {
     e.preventDefault();
+    setData(v => ({ ...v, isLoading: true }))
     setIsDisable(true);
     ApiCalling(`${BASE_URL}/api/newsletter`, "POST", { SubscriberEmail: email }).then(res => {
       toast.success("Subscribed Successfully")
-    console.log("🚀 ~ ApiCalling ~ res:", res)
     }).catch((e) => {
-      console.log("🚀 ~ ApiCalling ~ e:", e)
-      
-     }).finally(() => {
+    }).finally(() => {
       setEmail("");
+      setData(v => ({ ...v, isLoading: false }))
       setIsDisable(false);
     })
   };

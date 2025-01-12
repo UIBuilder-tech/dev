@@ -13,16 +13,19 @@ import { useEffect, useState } from "react";
 import Vantiga from "../components/Contribute/Vantiga";
 import HeroImg from "../assets/photoGallery/img11.webp";
 import DataProcess from "../utils/dataProcess";
+import { UseDataContext } from "../components/context/DataContext";
 const AdminPanelUrl = import.meta.env.VITE_ADMIN_PANEL_API;
 export default function ProjectsPage() {
   const location = useLocation();
   const [PageData, setPageData] = useState(null);
+  const { setData } = UseDataContext();
   useEffect(() => {
     const api = async () => {
       const requestOptions: any = {
         method: 'GET',
         redirect: 'follow'
       };
+      setData(v => ({ ...v, isLoading: true }))
       fetch(`${AdminPanelUrl}/project-page?populate[heroSection][populate]=*&populate[Section_3][populate]=*`, requestOptions)
         .then(response => response.json())
         .then(result => {
@@ -39,7 +42,10 @@ export default function ProjectsPage() {
 
           }
         })
-        .catch(error => console.log('error', error));
+        .catch(error => console.log('error', error))
+        .finally(() => {
+          setData(v => ({ ...v, isLoading: false }))
+        });;
     }
     api();
   }, [])
@@ -108,7 +114,7 @@ export default function ProjectsPage() {
       </div>
 
       <div id="special-projects">
-        <SpecialProjects title="Special Projects"  />
+        <SpecialProjects title="Special Projects" />
       </div>
       <div id="chf-grants" className="bg-white">
         <GrantsSection />

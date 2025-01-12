@@ -12,6 +12,7 @@ import heritage1 from "../assets/heritage1.webp";
 import heritage2 from "../assets/heritage2.webp";
 import heritage3 from "../assets/heritage3.webp";
 import { useEffect, useState } from "react";
+import { UseDataContext } from "../components/context/DataContext";
 const AdminPanelUrl = import.meta.env.VITE_ADMIN_PANEL_API;
 // const AdminPanelUrl = import.meta.env.VITE_ADMIN_PANEL_API;
 
@@ -24,17 +25,17 @@ export default function HomePage() {
     Our_Impact_Big_Card: string[];
     Section_3: string[];
   }
-  
+
   const [HomePageData, setHomePageData] = useState<HomePageDataType | null>(null);
   const [Section_3, setSection_3] = useState([])
   const [HomeSlideData, setHomeSlideData] = useState([])
-
+  const { setData } = UseDataContext()
   useEffect(() => {
     const requestOptions: RequestInit = {
       method: "GET",
       redirect: "follow",
     };
-
+    setData(v => ({ ...v, isLoading: true }))
     fetch(
       `${AdminPanelUrl}/home-page?populate[Section_3][populate]=*&populate[Our_Impact_Big_Card][populate]=*`,
       requestOptions
@@ -61,25 +62,30 @@ export default function HomePage() {
           setHomePageData(result.data);
           setSection_3(newData);
         }
-      }).catch(error => console.log('error', error));
-      fetch(`${AdminPanelUrl}/home-slides?populate=*`, requestOptions)
+      }).catch(error => console.log('error', error)).finally(() => {
+        setData(v => ({ ...v, isLoading: false }))
+      });
+    setData(v => ({ ...v, isLoading: true }))
+    fetch(`${AdminPanelUrl}/home-slides?populate=*`, requestOptions)
       .then(response => response.json())
       .then(result => {
         if (result?.data) {
-          const newData = result.data.map((item:any) => {
-            return {...item,image:AdminPanelUrl.replace("/api", "") + item?.image?.url}
+          const newData = result.data.map((item: any) => {
+            return { ...item, image: AdminPanelUrl.replace("/api", "") + item?.image?.url }
           })
           setHomeSlideData(newData)
         }
-      }).catch(error => console.log('error', error));
-      
+      }).catch(error => console.log('error', error)).finally(() => {
+        setData(v => ({ ...v, isLoading: false }))
+      });
+
   }, [])
 
   return (
     <div className="min-h-screen bg-cream">
       {HomePageData && (
         <>
-          <Hero 
+          <Hero
             data={HomeSlideData}
             from="home" />
           <Vision />

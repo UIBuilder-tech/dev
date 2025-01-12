@@ -7,6 +7,7 @@ import { useLocation } from "react-router-dom";
 import aboutBanner from "../../assets/aboutBanner.webp";
 import { useEffect, useState } from "react";
 import DataProcess from "../../utils/dataProcess";
+import { UseDataContext } from "../context/DataContext";
 
 interface Props {
   title?: string;
@@ -18,22 +19,27 @@ export default function Vantiga({ title = "", description = "",
 }: Props) {
   const location = useLocation();
   const [PageData, setPageData] = useState([]);
+  const { setData } = UseDataContext()
   useEffect(() => {
     const api = async () => {
       const requestOptions: any = {
         method: 'GET',
         redirect: 'follow'
       };
+      setData(v => ({ ...v, isLoading: true }))
+
       fetch(`${AdminPanelUrl}/project-page?&populate[Section_2][populate]=*`, requestOptions)
         .then(response => response.json())
         .then(result => {
           if (result?.data) {
             if (result?.data?.Section_2) {
-              setPageData(v => ([...DataProcess(result.data.Section_2)]))
+              setPageData(DataProcess(result.data.Section_2))
             }
           }
         })
-        .catch(error => console.log('error', error));
+        .catch(error => console.log('error', error)).finally(() => {
+          setData(v => ({ ...v, isLoading: false }))
+        });
     }
 
     api();
