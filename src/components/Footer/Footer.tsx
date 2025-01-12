@@ -1,13 +1,17 @@
 import { Mail, MapPin, Phone } from "lucide-react";
 import footerbg from "../../assets/footerbg.svg";
-import logo from "../../assets/chfLogo.png";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+import ApiCalling from "../api/ApiCalling";
+import { toast } from "react-toastify";
 const AdminPanelUrl = import.meta.env.VITE_ADMIN_PANEL_API;
+const BASE_URL = import.meta.env.VITE_RETURN_BACKEND_API;
 
 export default function Footer() {
   const [PageData, setPageData] = useState(null);
   const [Contact, setContact] = useState(null);
+  const [email, setEmail] = useState("");
+  const [IsDisable, setIsDisable] = useState(false);
   useEffect(() => {
     const api = async () => {
       const requestOptions: any = {
@@ -42,6 +46,19 @@ export default function Footer() {
     api();
     api2();
   }, [])
+   const handleSubmit = (e:any) => {
+    e.preventDefault();
+    setIsDisable(true);
+    ApiCalling(`${BASE_URL}/api/newsletter`, "POST", { SubscriberEmail: email }).then(res => {
+      toast.success("Subscribed Successfully")
+    console.log("🚀 ~ ApiCalling ~ res:", res)
+    }).catch((e) => {
+      console.log("🚀 ~ ApiCalling ~ e:", e)
+     }).finally(() => {
+      setEmail("");
+      setIsDisable(false);
+    })
+  };
   return (
     <footer className="relative max-sm:mb-[50px] bg-secondary px-8 py-12 text-white">
       {/* Background graphic overlay */}
@@ -230,7 +247,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  to="/contribute#donation-table"
+                  to="/contribute#donation-table#education"
                   className="hover:underline"
                 >
                   Community Development
@@ -238,7 +255,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  to="/contribute#donation-table"
+                  to="/contribute#donation-table#women-empowerment"
                   className="hover:underline"
                 >
                   Cultural Preservation
@@ -301,13 +318,16 @@ export default function Footer() {
                   </li>
                   <li className="pt-6">
                     <p className="mb-2">Subscribe to our newsletter</p>
-                    <form className="flex items-center bg-white rounded-full">
+                    <form onSubmit={handleSubmit} className="flex items-center bg-white rounded-full">
                       <input
                         type="email"
+                        value={email}
+                        onChange={(v)=>setEmail(v.target.value)}
                         placeholder="Enter Your Email Address"
                         className="flex-1 rounded-l-full max-sm:px-4 px-2 bg-white py-2 text-sm font-thin text-gray-800 placeholder:text-gray-400 hover:border-none"
                       />
                       <button
+                      disabled={IsDisable}
                         type="submit"
                         className="rounded-r-full bg-white h-10 max-sm:h-9 w-10 p-3 flex text-secondary items-center justify-center hover:bg-white/20"
                       >

@@ -84,15 +84,18 @@ export default function ContributePage() {
   }, [])
   useEffect(() => {
     // Handle initial load with hash
-    const hash = location.hash.replace("#", "");
+    const hash = location.hash.split("#").filter(v=>v!=='' && v!==null)
+    console.log("🚀 ~ useEffect ~ hash:", hash)
     if (hash) {
-      // Add a small delay to ensure the content is rendered
-      setTimeout(() => {
-        const element = document.getElementById(hash);
-        if (element) {
-          element.scrollIntoView({ behavior: "smooth" });
-        }
-      }, 100);
+      hash.forEach((h,i) => {
+        console.log("🚀 ~ hash.forEach ~ h:", h)
+        setTimeout(() => {
+          const element = document.getElementById(h);
+          if (element) {
+            element.scrollIntoView({ behavior: "smooth" });
+          }
+        }, 100*i);
+      })
     }
   }, [location.hash]); // Only run when hash changes
 

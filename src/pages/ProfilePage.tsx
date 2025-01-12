@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { PencilIcon, XIcon, Power, Loader } from "lucide-react";
+import { PencilIcon, XIcon, Power, Loader, UserPlusIcon } from "lucide-react";
 import Footer from "../components/Footer/Footer";
 import { toast } from "react-toastify";
 import heritage1 from "../assets/heritage1.webp";
@@ -173,6 +173,7 @@ export default function Profile() {
 
   const handleFamilyMemberSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    const userData = JSON.parse(sessionStorage.getItem("user") || '');
     // Handle family member addition logic here
     const payload = {
       relName: newFamilyMember?.relation,
@@ -182,8 +183,11 @@ export default function Profile() {
       memMobile: newFamilyMember?.mobile,
       memCreateAcc: newFamilyMember?.createAccount,
       memDOB: newFamilyMember?.dateOfBirth,
+      useremail: userData?.email||'',
+      contactId:userData?.userId
     };
-    fetch(`${BASE_URL}/api/profile/add-member`, {
+
+    fetch(`${BASE_URL}/api/member/add`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -422,13 +426,13 @@ export default function Profile() {
                 <PencilIcon className="w-5 h-5 md:mr-2" />
                 Edit Info
               </button>
-              {/* <button
+              <button
                 className="flex items-center px-4 max-sm:px-3 max-sm:text-sm py-2 border-2 border-[#E67E22] rounded-full text-[#E67E22] hover:bg-[#E67E22] hover:text-white transition-colors duration-200"
                 onClick={() => setIsFamilyModalOpen(true)}
               >
                 <UserPlusIcon className="w-5 h-5 mr-2" />
                 Add Member
-              </button> */}
+              </button>
             </div>
           </div>
 

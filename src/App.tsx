@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {  Routes, Route, useLocation } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
 import HomePage from "./pages/HomePage";
 import ContributePage from "./pages/ContributePage";
@@ -33,7 +33,7 @@ function App() {
     appearance: { theme: "stripe" },
     loader: "auto",
   });
-
+const location = useLocation();
   const { data } = UseDataContext();
 
   const stripePromise: Promise<Stripe | null> = loadStripe(
@@ -50,9 +50,12 @@ function App() {
     }
   }, [data?.userData]);
 
+  useEffect(() => {
+   window.scrollTo(0, 0);
+  }, [location])
+  
   return (
     <>
-      <Router>
         <ImagePreviewProvider>
           <ToastContainer />
           <Navbar />
@@ -96,7 +99,6 @@ function App() {
           </Routes>
           <ImagePreview />
         </ImagePreviewProvider>
-      </Router>
     </>
   );
 }

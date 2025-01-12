@@ -114,6 +114,10 @@ export default function ProjectsCategory({ categoryTitle, }: ProjectsCategoryPro
                 <div className="underline-gradient rounded-xl" />
                 <p className="text-[#808080] text-sm md:text-xl md:leading-6 md:max-w-[90%] desktop-1500:text-[18px] desktop-1200:text-[16px]  desktop-1900:max-w-[80%]">
                   {programs[currentProgram].description}
+                  {
+                    programs[currentProgram].knowMoreLink  &&
+                    <Link className="text-blue-600" target="_blank" to={programs[currentProgram].knowMoreLink}> Know more </Link>
+                  }
                 </p>
                 <div className="flex gap-4 md:pt-4">
                   {location?.pathname.includes("project") ? (

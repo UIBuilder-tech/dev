@@ -9,6 +9,7 @@ import AmountInput from "./AmountInput";
 import FilterSearch from "./FilterSearch";
 import { DonationItem,DonationSubcategory } from "./types";
 import { useWindowWidth } from "../../hooks/useWindowWidth";
+import { useLocation } from "react-router-dom";
 
 interface Props {
   setTotalDonationAmount: (amount: number) => void;
@@ -59,8 +60,9 @@ export default function DonationTable({
   const [remarks, setRemarks] = useState<Record<string, string>>({});
   const [useDefaultDonation, setUseDefaultDonation] = useState(false);
   const [donationData, setDonationData] = useState<DonationSubcategory[]>([])
-
+const location = useLocation();
   const windowWidth = useWindowWidth();
+
   const isMobile = windowWidth < 700; // md breakpoint
   const isTablet = windowWidth >= 700 && windowWidth <= 1099; // md breakpoint
 
@@ -141,7 +143,7 @@ export default function DonationTable({
     });
 
     return () => window.removeEventListener("hashchange", handleScroll);
-  }, []);
+  }, [location]);
 
   // Update selected projects whenever relevant state changes
   useEffect(() => {
