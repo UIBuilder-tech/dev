@@ -49,7 +49,7 @@ export default function AboutPage() {
         if (element) {
           element.scrollIntoView({ behavior: "smooth" });
         }
-      }, 100);
+      }, 3000);
     }
   }, [location.hash]); // Only run when hash changes
 
