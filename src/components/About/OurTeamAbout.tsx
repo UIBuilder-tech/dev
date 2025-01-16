@@ -74,7 +74,7 @@ export default function OurTeamAbout() {
       </h2>
 
       <div
-        className={`grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-x-1 gap-y-6 md:mb-12 md:px-20 transition-opacity duration-1000 desktop-1900:px-32 ${isAnimating ? "opacity-0" : "opacity-100"
+        className={`grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-x-1 gap-y-6 md:mb-12 md:px-20 transition-opacity duration-1000 desktop-1900:px-32 ${isAnimating ? "opacity-0" : "opacity-100"
           }`}
       >
         {getCurrentPageItems().map((member: Member, index: number) => (
