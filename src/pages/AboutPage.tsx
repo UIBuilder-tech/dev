@@ -36,22 +36,22 @@ export default function AboutPage() {
           setData(v => ({ ...v, isLoading: false}))
         });
     }
-
     api();
   }, [])
   useEffect(() => {
-    // Handle initial load with hash
+    if (PageData) {
+       // Handle initial load with hash
     const hash = location.hash.replace("#", "");
     if (hash) {
       // Add a small delay to ensure the content is rendered
-      setTimeout(() => {
-        const element = document.getElementById(hash);
-        if (element) {
-          element.scrollIntoView({ behavior: "smooth" });
-        }
-      }, 2500);
+      const element = document.getElementById(hash);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
     }
-  }, [location.hash]); // Only run when hash changes
+    }
+   
+  }, [location.hash,PageData]); // Only run when hash changes
 
   return (<>
     {

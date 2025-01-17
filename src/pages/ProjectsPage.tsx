@@ -51,29 +51,32 @@ export default function ProjectsPage() {
   }, [])
   useEffect(() => {
     // Get the hash from the URL
-    const hash = location.hash.replace("#", "");
-    if (hash) {
-      const scrollToElement = () => {
-        const element = document.getElementById(hash);
-        if (element) {
-          element.scrollIntoView({ behavior: "smooth" });
-        }
-      };
+    if (PageData) {
+      const hash = location.hash.replace("#", "");
+      if (hash) {
+        const scrollToElement = () => {
+          const element = document.getElementById(hash);
+          if (element) {
+            element.scrollIntoView({ behavior: "smooth" });
+          }
+        };
 
-      // Ensure content is rendered before scrolling
-      const observer = new MutationObserver(() => {
-        scrollToElement();
-        observer.disconnect(); // Stop observing after scrolling
-      });
+        // Ensure content is rendered before scrolling
+        const observer = new MutationObserver(() => {
+          scrollToElement();
+          observer.disconnect(); // Stop observing after scrolling
+        });
 
-      observer.observe(document.body, { childList: true, subtree: true });
+        observer.observe(document.body, { childList: true, subtree: true });
 
-      // Fallback in case observer isn't enough
-      setTimeout(scrollToElement, 800);
+        // Fallback in case observer isn't enough
+        setTimeout(scrollToElement, 100);
 
-      return () => observer.disconnect(); // Clean up the observer
+        return () => observer.disconnect(); // Clean up the observer
+      }
     }
-  }, [location.hash]);
+
+  }, [location.hash, PageData]);
   return (
     <div className="min-h-screen bg-cream">
       {

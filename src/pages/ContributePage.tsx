@@ -65,10 +65,10 @@ export default function ContributePage() {
   const location = useLocation();
 
   const { setData } = UseDataContext();
-  const [PageData, setPageData] = useState({});
+  const [PageData, setPageData] = useState(null);
   useEffect(() => {
     const api = async () => {
-      setData(v => ({ ...v, isLoading: true}))
+      setData(v => ({ ...v, isLoading: true }))
       const requestOptions: any = {
         method: 'GET',
         redirect: 'follow'
@@ -81,26 +81,29 @@ export default function ContributePage() {
           }
         })
         .catch(error => console.log('error', error)).finally(() => {
-          setData(v => ({ ...v, isLoading: false}))
+          setData(v => ({ ...v, isLoading: false }))
         });
     }
 
     api();
   }, [])
   useEffect(() => {
-    // Handle initial load with hash
-    const hash = location.hash.split("#").filter(v => v !== '' && v !== null)
-    if (hash) {
-      hash.forEach((h, i) => {
-        setTimeout(() => {
-          const element = document.getElementById(h);
-          if (element) {
-            element.scrollIntoView({ behavior: "smooth" });
-          }
-        }, 100 * i);
-      })
+    if (PageData) {
+      // Handle initial load with hash
+      const hash = location.hash.split("#").filter(v => v !== '' && v !== null)
+      if (hash) {
+        hash.forEach((h, i) => {
+          setTimeout(() => {
+            const element = document.getElementById(h);
+            if (element) {
+              element.scrollIntoView({ behavior: "smooth" });
+            }
+          }, 100 * i);
+        })
+      }
     }
-  }, [location.hash]); // Only run when hash changes
+
+  }, [location.hash, PageData]); // Only run when hash changes
 
   useEffect(() => {
     const initialApi = async () => {
@@ -108,7 +111,7 @@ export default function ContributePage() {
       apiCalledRef.current = true; // Mark API as called
 
       if (Object.keys(user)?.length > 0) {
-        setData(v => ({ ...v, isLoading: true}))
+        setData(v => ({ ...v, isLoading: true }))
         fetch(`${BASE_URL}/api/contact?email=${user?.email}`)
           .then((resp) => resp?.json())
           .then((response) => {
@@ -146,7 +149,7 @@ export default function ContributePage() {
           })
           .finally(() => {
             // setIsDisable(false);
-            setData(v => ({ ...v,isLoading: false}))
+            setData(v => ({ ...v, isLoading: false }))
           });
       }
     };
@@ -154,7 +157,8 @@ export default function ContributePage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-cream">
+   <>
+   {PageData && <div className="min-h-screen bg-cream">
       <Hero
         title={PageData.title}
         desc={PageData.description}
@@ -201,6 +205,7 @@ export default function ContributePage() {
       <FAQSection />
       <Footer />
       <Outlet />
-    </div>
+    </div>}
+   </>
   );
 }

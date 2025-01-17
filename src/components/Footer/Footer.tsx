@@ -159,8 +159,8 @@ export default function Footer() {
                 </h3>
                 <ul className="space-y-1 max-sm:text-xs">
                   {
-                    PageData?.CHFUSA &&
-                    PageData.CHFUSA.map(v => <li>
+                    PageData?.contribute &&
+                    PageData.contribute.map(v => <li>
                       <Link key={`chf${v.id}`} to={v.linkTo} className="hover:underline">
                         {v.title}
                       </Link>

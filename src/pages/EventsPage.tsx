@@ -13,21 +13,22 @@ const AdminPanelUrl = import.meta.env.VITE_ADMIN_PANEL_API;
 
 export default function EventsPage() {
   const location = useLocation();
-  const [PageData, setPageData] = useState({});
+  const [PageData, setPageData] = useState(null);
 
   useEffect(() => {
-    // Handle initial load with hash
-    const hash = location.hash.replace("#", "");
-    if (hash) {
-      // Add a small delay to ensure the content is rendered
-      setTimeout(() => {
+    if (PageData) {
+      // Handle initial load with hash
+      const hash = location.hash.replace("#", "");
+      if (hash) {
+        // Add a small delay to ensure the content is rendered
         const element = document.getElementById(hash);
         if (element) {
           element.scrollIntoView({ behavior: "smooth" });
         }
-      }, 100);
+      }
     }
-  }, [location.hash]); // Only run when hash changes
+
+  }, [location.hash, PageData]); // Only run when hash changes
 
   useEffect(() => {
     const api = async () => {
