@@ -98,7 +98,7 @@ const ProjectCard = ({
             <div className="flex justify-between items-start">
               <div>
                 <p className={` text-md ${range150 ? "text-lg" : "text-xl"}`}>
-                  {project.title} {project?.location.length > 0 && "at"}
+                  {project.title} {project?.location?.length > 0 && "at"}
                 </p>
                 <p className={` text-md ${range150 ? "text-lg" : "text-xl"}`}>
                   {project.location}
@@ -275,7 +275,7 @@ const SpecialProjects = ({
         method: 'GET',
         redirect: 'follow'
       };
-      fetch(`${AdminPanelUrl}/all-projects?populate=*&filters[category][$eq]=${title}`, requestOptions)
+      fetch(`${AdminPanelUrl}/all-projects?populate=*&filters[category][$eq]=${title}&sort[id]=desc`, requestOptions)
         .then(response => response.json())
         .then(result => {
           if (result?.data) {

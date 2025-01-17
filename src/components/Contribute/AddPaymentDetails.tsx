@@ -6,6 +6,8 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Loader } from "lucide-react";
 import PaymentModal from "./PaymentModal";
+import paypal from "../../assets/paypal.svg";
+
 
 interface FormErrors {
   [key: string]: string;
@@ -514,6 +516,24 @@ export default function PaymentForm({
                   <span className="max-sm:text-sm desktop-1200:text-sm desktop-1500:text-base desktop-1900:text-xl">
                     Offline <span className="italic">(Zelle)</span>
                   </span>
+                </div>
+              </label>
+              <label className="flex items-center gap-3 rounded-lg cursor-pointer">
+                <input
+                  disabled={IsFormValidate}
+                  type="radio"
+                  name="paymentMethod"
+                  value="online"
+                  checked={formData.paymentMethod === 'online'}
+                  onChange={handleInputChange}
+                  className="w-6 h-6 text-primary"
+                />
+                <div className="bg-white rounded-md w-full p-3 md:p-6 desktop-1200:p-4 desktop-1500:p-5 desktop-1900:p-7">
+                  <img
+                    src={paypal}
+                    alt="PayPal"
+                    className="w-24 desktop-1200:w-24 desktop-1500:w-28 desktop-1900:w-36"
+                  />
                 </div>
               </label>
             </div>

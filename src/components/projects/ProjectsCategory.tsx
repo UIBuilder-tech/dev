@@ -37,7 +37,7 @@ export default function ProjectsCategory({ categoryTitle, }: ProjectsCategoryPro
         method: 'GET',
         redirect: 'follow'
       };
-      fetch(`${AdminPanelUrl}/all-projects?populate=*&filters[category][$eq]=${categoryTitle}`, requestOptions)
+      fetch(`${AdminPanelUrl}/all-projects?populate=*&filters[category][$eq]=${categoryTitle}&sort[id]=desc`, requestOptions)
         .then(response => response.json())
         .then(result => {
           if (result?.data) {
@@ -96,6 +96,15 @@ export default function ProjectsCategory({ categoryTitle, }: ProjectsCategoryPro
     return null;
   }
 
+  const shoWMainImg =(program:any)=>{
+    return program?.url 
+    ? `https://img.youtube.com/vi/${getVideoId(program?.url)}/hqdefault.jpg` 
+    : (typeof program?.image === "string"
+        ? program?.image 
+        : program?.image?.length 
+            ? program?.image[0] 
+            : null);
+  }
   return (
     <>
       {programs.length > 0 &&
@@ -322,15 +331,7 @@ transform: scale(1.2);
                 >
                   <div className="relative h-full rounded-xl overflow-hidden">
                     <img
-                      src={
-                        program?.image?.length
-                          ? typeof program.image === "string"
-                            ? program?.image
-                            : program?.image[0]
-                          : `https://img.youtube.com/vi/${getVideoId(
-                            program?.url
-                          )}/hqdefault.jpg`
-                      }
+                      src={shoWMainImg(program)}
                       alt={program.title}
                       className="w-full h-full object-cover"
                     />
