@@ -281,6 +281,7 @@ const SpecialProjects = ({
           if (result?.data) {
             const newData =DataProcess(result.data);
             setProjects(newData)
+            setExpandedId(newData[0]?.id)
           }
         })
         .catch(error => console.log('error', error));
