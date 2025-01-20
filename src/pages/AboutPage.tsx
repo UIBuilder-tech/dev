@@ -11,7 +11,7 @@ import PhotoGallery from "../components/About/PhotoGallery";
 import Newsletter from "../components/About/Newsletter";
 import OurTeamAbout from "../components/About/OurTeamAbout";
 import ImpactSection from "../components/Home/OurImpact";
-import ChitrapurMathImg from "../assets/Shirali_Math.webp";
+import ChitrapurMathImg from "../assets/heritage2.webp";
 import { UseDataContext } from "../components/context/DataContext";
 const AdminPanelUrl = import.meta.env.VITE_ADMIN_PANEL_API;
 export default function AboutPage() {
