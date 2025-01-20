@@ -7,7 +7,7 @@ import PaymentForm from "../components/Contribute/AddPaymentDetails";
 import VolunteerForm from "../components/Contribute/VolunteerForm";
 import FAQSection from "../components/Home/FAQ";
 import Footer from "../components/Footer/Footer";
-import ChitrapurMathImg from "../assets/Shirali_Math.webp";
+import ChitrapurMathImg from "../assets/heritage3.webp";
 import PhotoGallery from "../components/About/PhotoGallery";
 import Ambassador from "../components/About/Ambassador";
 import VantigaDetailed from "../components/Contribute/VantigaDetailed";
