@@ -1,5 +1,11 @@
 /* From Uiverse.io by G4b413l */
 
+.no-scroll {
+  overflow: hidden;
+  height: 100%;
+  touch-action: none; /* Disable touch interactions */
+}
+
 .three-body-container {
     width: 100%;
     height: 100vh;
@@ -10,19 +16,20 @@
     overflow: hidden;
     position: fixed;
     z-index: 1024;
+    backdrop-filter: blur(5px)
 }
 .three-body {
   --uib-size: 35px;
   --uib-speed: 0.8s;
   --uib-color: #5d3fd3;
   position: relative;
-  display: inline-block;
-  height: var(--uib-size);
-  width: var(--uib-size);
-  animation: spin78236 calc(var(--uib-speed) * 2.5) infinite linear;
+  /* display: inline-block; */
+  /* height: 50px;
+  width: 50px; */
+  /* animation: spin78236 calc(var(--uib-speed) * 2.5) infinite linear; */
   position: absolute;
-  top: 50%;
-  left: 50%;
+  /* top: 50%;
+  left: 50%; */
   z-index: 1;
 }
 
@@ -115,5 +122,59 @@
   50% {
     transform: translateY(66%) scale(0.65);
     opacity: 0.8;
+  }
+}
+
+
+.dots-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
+
+.dot {
+  height: 16px;
+  width: 16px;
+  margin-right: 10px;
+  border-radius: 10px;
+  background-color: #1572E8;
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
+.dot:last-child {
+  margin-right: 0;
+}
+
+.dot:nth-child(1) {
+  animation-delay: -0.3s;
+}
+
+.dot:nth-child(2) {
+  animation-delay: -0.1s;
+}
+
+.dot:nth-child(3) {
+  animation-delay: 0.1s;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.8);
+    background-color: #b3d4fc;
+    box-shadow: 0 0 0 0 rgba(178, 212, 252, 0.7);
+  }
+
+  50% {
+    transform: scale(1.2);
+    background-color: #6793fb;
+    box-shadow: 0 0 0 10px rgba(178, 212, 252, 0);
+  }
+
+  100% {
+    transform: scale(0.8);
+    background-color: #b3d4fc;
+    box-shadow: 0 0 0 0 rgba(178, 212, 252, 0.7);
   }
 }
