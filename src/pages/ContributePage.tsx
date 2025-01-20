@@ -192,7 +192,7 @@ export default function ContributePage() {
       </div>
     </div> */}
       </div>
-      <div id='chf-grants'>
+      <div id='vantiga'>
         {
           PageData?.vantigaList && <VantigaDetailed data={PageData} />
         }
