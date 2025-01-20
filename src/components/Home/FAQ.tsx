@@ -70,7 +70,7 @@ export default function FAQSection() {
 
   const totalPages = Math.ceil(PageData.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
-  const currentFaqs = PageData.slice(startIndex, startIndex + itemsPerPage);
+  const currentFaqs = PageData?.slice(startIndex, startIndex + itemsPerPage);
 
   const toggleQuestion = (id: number) => {
     setOpenQuestion(openQuestion === id ? null : id);

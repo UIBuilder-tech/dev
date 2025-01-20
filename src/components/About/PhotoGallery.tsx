@@ -32,8 +32,8 @@ function PhotoGallery() {
 
     api();
   }, []);
-  const firstHalf = PageData.slice(0, Math.ceil(PageData.length / 2));
-  const secondHalf = PageData.slice(Math.ceil(PageData.length / 2));
+  const firstHalf = PageData?.slice(0, Math.ceil(PageData.length / 2));
+  const secondHalf = PageData?.slice(Math.ceil(PageData.length / 2));
   return (
     <div className="mx-auto pb-10 md:py-16">
       <div className="text-center">

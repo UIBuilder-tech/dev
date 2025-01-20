@@ -417,7 +417,7 @@ const SpecialProjects = ({
     }
   };
 
-  const visibleProjects = projects.slice(
+  const visibleProjects = projects?.slice(
     currentPage * itemsPerPage,
     (currentPage + 1) * itemsPerPage
   );

@@ -68,7 +68,7 @@ export default function ProjectsCategory({ categoryTitle, }: ProjectsCategoryPro
 
   useEffect(() => {
     const startIndex = currentPage * itemsPerPage;
-    const newItems = programs.slice(startIndex, startIndex + itemsPerPage);
+    const newItems = programs?.slice(startIndex, startIndex + itemsPerPage);
     setCurrentItems(newItems);
   }, [currentPage, programs, itemsPerPage]);
 
@@ -316,7 +316,7 @@ transform: scale(1.2);
                   </div>
                   <div className="max-sm:hidden flex flex-wrap w-full">
                     {
-                      programs[currentProgram]?.image.slice(1, programs[currentProgram].image.length).map(item => (
+                      programs[currentProgram]?.image?.slice(1, programs[currentProgram].image.length).map(item => (
                         <div className="w-1/2 pr-4  desktop-1200:w-[225px] desktop-1500:w-[250px]  desktop-1900:w-[300px]">
                           <motion.img
                             key={`sub1-${currentProgram}`}
