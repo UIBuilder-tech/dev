@@ -100,7 +100,7 @@ export default function DonationTable({
 
   useEffect(() => {
     const handleScroll = () => {
-      if (initialScrollDone.current) return;
+      // if (initialScrollDone.current) return;
 
       const hash = window.location.hash.split("#")[2];
       if (!hash) return;
@@ -123,6 +123,7 @@ export default function DonationTable({
         setExpandedCategories((prev) =>
           prev.includes(targetCategory.id) ? prev : [...prev, targetCategory.id]
         );
+        window.scrollTo(window.scrollX, window.scrollY - 1);
 
         // Wait for category expansion and DOM update
         setTimeout(() => {

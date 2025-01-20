@@ -96,6 +96,7 @@ export default function ContributePage() {
           setTimeout(() => {
             const element = document.getElementById(h);
             if (element) {
+              window.scrollTo(window.scrollX, window.scrollY - 1);
               element.scrollIntoView({ behavior: "smooth" });
             }
           }, 100 * i);
@@ -103,7 +104,7 @@ export default function ContributePage() {
       }
     }
 
-  }, [location.hash, PageData]); // Only run when hash changes
+  }, [location.hash, PageData, location.key]); // Only run when hash changes
 
   useEffect(() => {
     const initialApi = async () => {
