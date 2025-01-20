@@ -61,6 +61,7 @@ export default function DonationTable({
   const [useDefaultDonation, setUseDefaultDonation] = useState(false);
   const [donationData, setDonationData] = useState<DonationSubcategory[]>([])
   const windowWidth = useWindowWidth();
+  const location = useLocation();
 
   const isMobile = windowWidth < 700; // md breakpoint
   const isTablet = windowWidth >= 700 && windowWidth <= 1099; // md breakpoint
@@ -142,7 +143,7 @@ export default function DonationTable({
     });
 
     return () => window.removeEventListener("hashchange", handleScroll);
-  }, [donationData]);
+  }, [donationData,location.hash]);
 
   // Update selected projects whenever relevant state changes
   useEffect(() => {
