@@ -18,7 +18,7 @@ const AdminPanelUrl = import.meta.env.VITE_ADMIN_PANEL_API;
 export default function ProjectsPage() {
   const location = useLocation();
   const [PageData, setPageData] = useState(null);
-  const { setData } = UseDataContext();
+  const { data,setData } = UseDataContext();
   useEffect(() => {
     const api = async () => {
       const requestOptions: any = {
@@ -79,14 +79,14 @@ export default function ProjectsPage() {
   }, [location.hash, PageData]);
   return (
     <div className="min-h-screen bg-cream">
-      {
-        PageData?.heroSection && <Hero
-          title={PageData.heroSection.title}
-          desc={PageData.heroSection.description}
+      { <Hero
+          title={PageData?.heroSection?.title}
+          desc={PageData?.heroSection?.description}
           img={HeroImg}
           from="projects"
-          button1={PageData.heroSection.Button1}
-          button2={PageData.heroSection.Button2}
+          button1={PageData?.heroSection?.Button1}
+          button2={PageData?.heroSection?.Button2}
+          isLoading={data?.isLoading}
         />
       }
 

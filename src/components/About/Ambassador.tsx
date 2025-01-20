@@ -11,9 +11,69 @@ interface pageDataInteraction {
     image: string;
   }
 }
+
+// Skeleton loader component
+const SkeletonLoader = () => {
+  return (
+    <div className="bg-white desktop-1900:mb-8 desktop-1900:mt-10">
+      <div className="max-w-7xl mx-auto px-4 pt-10 pb-20">
+        {/* Title and description skeleton */}
+        <div className="text-center mb-12 animate-pulse">
+          <div className="h-10 md:h-12 bg-gray-200 rounded-lg w-3/4 md:w-1/2 mx-auto mb-4" />
+          <div className="h-4 bg-gray-200 rounded w-full md:w-2/3 mx-auto mb-2" />
+          <div className="h-4 bg-gray-200 rounded w-5/6 md:w-1/2 mx-auto" />
+        </div>
+
+        {/* Desktop skeleton */}
+        <div className="hidden md:grid md:grid-cols-4 gap-8 desktop-1200:gap-0 animate-pulse">
+          {[1, 2, 3, 4].map((index) => (
+            <div key={index} className="flex flex-col items-center text-center">
+              {/* Image skeleton */}
+              <div className="mb-6 w-32 h-32 desktop-1200:w-[130px] desktop-1900:w-[160px] bg-gray-200 rounded-lg" />
+              {/* Text content skeleton */}
+              <div className="w-full">
+                <div className="h-6 bg-gray-200 rounded w-3/4 mx-auto mb-2" />
+                <div className="space-y-2">
+                  <div className="h-4 bg-gray-200 rounded w-full" />
+                  <div className="h-4 bg-gray-200 rounded w-5/6 mx-auto" />
+                  <div className="h-4 bg-gray-200 rounded w-4/6 mx-auto" />
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Mobile skeleton */}
+        <div className="md:hidden animate-pulse">
+          <div className="flex flex-col items-center">
+            {/* Image skeleton */}
+            <div className="mb-6 w-32 h-32 bg-gray-200 rounded-lg" />
+            {/* Text content skeleton */}
+            <div className="w-full px-4">
+              <div className="h-6 bg-gray-200 rounded w-3/4 mx-auto mb-2" />
+              <div className="space-y-2">
+                <div className="h-4 bg-gray-200 rounded w-full" />
+                <div className="h-4 bg-gray-200 rounded w-5/6 mx-auto" />
+                <div className="h-4 bg-gray-200 rounded w-4/6 mx-auto" />
+              </div>
+            </div>
+          </div>
+          {/* Navigation dots skeleton */}
+          <div className="flex justify-center mt-4 gap-1">
+            {[1, 2, 3, 4].map((index) => (
+              <div key={index} className="w-2 h-2 rounded-full bg-gray-200" />
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+
 export default function Ambassador() {
 
-  const { setData } = UseDataContext();
+  const {data, setData } = UseDataContext();
   const [pageData, setPageData] = useState<pageDataInteraction | null>(null)
   useEffect(() => {
     const api = async () => {
@@ -39,15 +99,10 @@ export default function Ambassador() {
   }, [])
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  const nextSlide = () => {
-    if (pageData) {
-      setCurrentSlide((prev) => (prev + 1) % pageData.steps.length);
-    }
-  };
 
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + (pageData?.steps.length || 0)) % (pageData?.steps.length || 1));
-  };
+  if (data?.isLoading) {
+    return <SkeletonLoader />;
+  }
 
   return (
     <>
