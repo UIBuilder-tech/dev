@@ -1,6 +1,7 @@
 import volunteer from "../../assets/volunteer.svg";
 import heritage from "../../assets/heritage.svg";
-import spirituality from "../../assets/spirituality.svg";
+// import spirituality from "../../assets/spirituality.svg";
+import spirituality from "../../assets/women-empowerment.svg";
 import education from "../../assets/education.svg";
 import { useWindowWidth } from "../../hooks/useWindowWidth";
 import { Link } from "react-router-dom";
@@ -76,7 +77,7 @@ export default function VolunteerSection() {
                   <div className="rounded-full">
                     <img
                       src={spirituality}
-                      alt="Spirituality"
+                      alt="women empowement"
                       width={
                         (isMobile || isTablet) ? 90 : range150 ? 120 : range100 ? 200 : 160
                       }
