@@ -11,9 +11,10 @@ interface Props {
   button1?: string;
   button2?: string;
   data?: [];
+  isLoading?: boolean;
 }
 
-export default function Hero({ title, subTitle, desc, img, data = [], from = "", button2 = '', button1 = '' }: Props) {
+export default function Hero({ title, subTitle, desc, img, data = [], from = "", button2 = '', button1 = '',isLoading = false  }: Props) {
   const [currentIndex, setCurrentIndex] = useState(-1)
 
   useEffect(() => {
@@ -31,6 +32,35 @@ export default function Hero({ title, subTitle, desc, img, data = [], from = "",
   const goToSlide = (index: number) => {
     setCurrentIndex(index)
   }
+
+  const renderSkeleton = () => (
+    <div className="flex-grow flex items-center">
+      <div className="max-w-7xl mx-auto px-4 w-full">
+        <div className="max-w-3xl pt-24 md:pt-32">
+          {/* Skeleton Title */}
+          <div className="h-12 md:h-16 bg-gray-200 rounded-lg mb-3 md:mb-6 animate-pulse" />
+          
+          {/* Skeleton Subtitle if from === "home" */}
+          {from === "home" && (
+            <div className="h-6 bg-gray-200 rounded-lg mb-2 animate-pulse w-2/3" />
+          )}
+          
+          {/* Skeleton Description */}
+          <div className="space-y-2 mb-8">
+            <div className="h-4 bg-gray-200 rounded-lg animate-pulse w-full" />
+            <div className="h-4 bg-gray-200 rounded-lg animate-pulse w-5/6" />
+            <div className="h-4 bg-gray-200 rounded-lg animate-pulse w-4/6" />
+          </div>
+          
+          {/* Skeleton Buttons */}
+          <div className="flex">
+            <div className="h-12 w-32 bg-gray-200 rounded-l-full animate-pulse" />
+            <div className="h-12 w-32 bg-gray-200 rounded-r-full animate-pulse" />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 
   const renderButtons = (Button1, Button1Link, Button2, Button2Link) => (
     <div className="flex">
@@ -83,7 +113,9 @@ export default function Hero({ title, subTitle, desc, img, data = [], from = "",
           alt="Heritage Building"
           className="w-full h-full object-cover hero-bg"
         /> */}
-        {currentIndex!=-1 ?
+        {isLoading ? (
+          <div className="w-full h-full bg-gray-400 animate-pulse" />
+        ) : currentIndex!=-1 ?
            <img
            src={data[currentIndex].image}
            alt={`Hero Image ${data[currentIndex].index}`}
@@ -106,11 +138,15 @@ export default function Hero({ title, subTitle, desc, img, data = [], from = "",
           : "h-full desktop-1500:pt-12 desktop-1900:pt-28"
           } flex flex-col justify-between`}
       >
-        <>
-          {currentIndex!=-1
-            ?renderContent(data[currentIndex])
-            : renderContent({ title, subTitle, description: desc, Button1: button1, Button2: button2 })}
-        </>
+        {isLoading ? (
+          renderSkeleton()
+        ) : (
+          <>
+            {currentIndex !== -1
+              ? renderContent(data[currentIndex])
+              : renderContent({ title, subTitle, description: desc, Button1: button1, Button2: button2 })}
+          </>
+        )}
 
         {/* Carousel Navigation */}
         <div className="absolute bottom-28 md:bottom-14 left-0 right-0 flex justify-center gap-2">
