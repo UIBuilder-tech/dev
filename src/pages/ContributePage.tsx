@@ -99,7 +99,7 @@ export default function ContributePage() {
               window.scrollTo(window.scrollX, window.scrollY - 1);
               element.scrollIntoView({ behavior: "smooth" });
             }
-          }, 100 * i);
+          }, 200 * i);
         })
       }
     }
