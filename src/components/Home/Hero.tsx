@@ -10,11 +10,13 @@ interface Props {
   subTitle?: string;
   button1?: string;
   button2?: string;
+  Button1Link?: string|null;
+  Button2Link?: string|null;
   data?: [];
   isLoading?: boolean;
 }
 
-export default function Hero({ title, subTitle, desc, img, data = [], from = "", button2 = '', button1 = '',isLoading = false  }: Props) {
+export default function Hero({ title, subTitle, desc, img, data = [], from = "", button2 = 'Donate', button1 = 'Join Us',isLoading = false ,Button1Link=null,Button2Link=null }: Props) {
   const [currentIndex, setCurrentIndex] = useState(-1)
 
   useEffect(() => {
@@ -62,11 +64,11 @@ export default function Hero({ title, subTitle, desc, img, data = [], from = "",
     </div>
   );
 
-  const renderButtons = (Button1, Button1Link, Button2, Button2Link) => (
+  const renderButtons = (Button1='Join Us', Button1Link, Button2='Donate', Button2Link) => (
     <div className="flex">
       {Button1 && (
         <Link
-          to={Button1Link || '#'}
+          to={Button1Link||'/contribute#volunteer'}
           className="text-white border-[1px] border-r-0 border-[#fbf3e8] md:px-8 md:py-3 rounded-l-full hover:bg-white/20 transition max-sm:text-sm px-4 py-2 desktop-1200:px-6 desktop-1200:py-2 desktop-1500:px-7 desktop-1500:py-2.5 desktop-1900:px-8 desktop-1900:py-3"
         >
           {Button1}
@@ -75,7 +77,7 @@ export default function Hero({ title, subTitle, desc, img, data = [], from = "",
       {Button2 && (
         <div className="border-[1px] border-l-0 rounded-r-full border-[#fbf3e8]">
           <Link
-            to={Button2Link || '#'}
+            to={Button2Link || '/contribute#donation-table'}
             className="bg-[#fbf3e8] text-secondary font-[450] md:px-8 md:py-3 rounded-full hover:bg-opacity-90 flex items-center gap-2 max-sm:text-sm px-4 py-2 desktop-1200:px-6 desktop-1200:py-2 desktop-1500:px-7 desktop-1500:py-2.5 desktop-1900:px-8 desktop-1900:py-3"
           >
             {Button2} <Heart className="h-5 w-5" fill="#e67e22" />
@@ -144,7 +146,7 @@ export default function Hero({ title, subTitle, desc, img, data = [], from = "",
           <>
             {currentIndex !== -1
               ? renderContent(data[currentIndex])
-              : renderContent({ title, subTitle, description: desc, Button1: button1, Button2: button2 })}
+              : renderContent({ title, subTitle, description: desc, Button1: button1, Button2: button2,Button1Link,Button2Link })}
           </>
         )}
 

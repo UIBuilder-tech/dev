@@ -1,7 +1,4 @@
 import sectionBorder from "../../assets/section-border.svg";
-import donate from "../../assets/contribute-donate.svg";
-import volunteer from "../../assets/contribute-volunteer.svg";
-import involved from "../../assets/contribute-get-invloved.svg";
 import mountain from "../../assets/mountain.svg";
 import { useLocation } from "react-router-dom";
 import aboutBanner from "../../assets/aboutBanner.webp";

@@ -67,7 +67,9 @@ export default function AboutPage() {
           img={ChitrapurMathImg}
           from="about"
           button1={PageData.Button1}
-          button2={PageData.Button2}
+          button1={PageData.Button1}
+          Button1Link={PageData.Button1Link}
+          Button2Link={PageData.Button2Link}
           isLoading={data?.isLoading}
         />
         <Vantiga

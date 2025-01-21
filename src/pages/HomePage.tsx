@@ -49,12 +49,12 @@ export default function HomePage() {
               Description: string;
               image: { url: string };
             }) => {
-              const id = item.Title.replace(" ", "_").toLowerCase();
+              const id = item.Title.replace(" ", "-").toLowerCase();
               return {
                 id: id,
                 title: item.Title,
                 description: item.Description,
-                linkTo: id,
+                linkTo: item.linkTo,
                 image: AdminPanelUrl.replace("/api", "") + item?.image?.url,
               };
             }

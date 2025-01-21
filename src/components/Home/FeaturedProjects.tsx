@@ -28,99 +28,7 @@ interface Project {
   donationLink?:string;
 }
 
-const projects: Project[] = [
-  {
-    id: "1",
-    title: "Vantiga",
-    tag: "Heritage",
-    status: "Ongoing",
-    images: [vantiga],
-    linkTo: "heritage-preservation",
-    donationLink: "vtg"
-  },
-  {
-    id: "2",
-    title: "Samvit Sudha",
-    tag: "Women Empowerment",
-    status: "Ongoing",
-    images: [SamvitSudha, SamvitSudha1],
-    linkTo: "women-empowerment",
-    donationLink: "ss"
-  },
-  {
-    id: "3",
-    title: "SPEVC School",
-    tag: "Education",
-    status: "Ongoing",
-    images: [spevc1, spevc2],
-    linkTo: "education",
-    donationLink:"education"
-  },
-  {
-    id: "4",
-    title: "Parijanashram Vidyalaya",
-    tag: "Education",
-    status: "Ongoing",
-    images: [Parijnanashram],
-    linkTo: "education",
-    donationLink:"education"
-  },
-  {
-    id: "5",
-    title: "Yatri Nivas Varanasi",
-    tag: "Heritage",
-    status: "Ongoing",
-    images: [Yatri],
-    linkTo: "special-projects",
-    donationLink:"heritage"
-  },
-  {
-    id: "6",
-    title: "Goshala Maintenance",
-    tag: "Heritage",
-    status: "Ongoing",
-    images: [cows],
-    linkTo: "heritage-preservation",
-    donationLink:"gm"
-  },
-  {
-    id: "9",
-    title: "Kotekar Project",
-    tag: "Education",
-    status: "Completed",
-    images: [Kotekar, Kotekar1],
-    linkTo: "education",
-    donationLink:"education"
-  },
-  {
-    id: "11",
-    title: "Grid Connected Solar Project",
-    tag: "Special Project",
-    status: "Completed",
-    images: [Solar],
-    linkTo: "special-projects",
-    donationLink:"education"
-  },
-  {
-    id: "8",
-    title: "Sponsor-A-Student (Srivali School)",
-    tag: "Education",
-    status: "Ongoing",
-    images: [Srivali],
-    linkTo: "education",
-    donationLink:"education"
-  },
-  // {
-  //   id: "7",
-  //   title: "Meditation Centre at Tiruvannamalai",
-  //   tag: "Heritage",
-  //   status: "Planned",
-  //   images: [
-  //     "https://images.unsplash.com/photo-1547354225-3e5a5f001d24?w=500&auto=format&fit=crop&q=60",
-  //   ],
-  //   linkTo: "heritage-preservation",
-  // },
-];
+
 
 interface Props {
   title: string;
@@ -151,7 +59,8 @@ export default function FeaturedProjects({ title }: Props) {
                 tag: v.tag,
                 status: v.statusType,
                 images: path,
-                linkTo: v.tag.toLowerCase().replace(" ", "-"),
+                linkTo: v.linkTo,
+                donationLink:v.donationLink
               }
             })
             setProjects(newData)
