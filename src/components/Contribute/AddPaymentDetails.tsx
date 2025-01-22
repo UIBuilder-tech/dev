@@ -135,10 +135,6 @@ export default function PaymentForm({
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     if (validateForm()) {
-      if (
-        formData.paymentMethod === "cheque" ||
-        formData.paymentMethod === "zelle"
-      ) {
         setIsFormValidate(true);
         const payload = {
           donAmt: totalDonationAmount, // Total donation amount
@@ -168,8 +164,32 @@ export default function PaymentForm({
           .then((response) => {
             if (response?.success) {
               // toast.success(response?.message);
+              sessionStorage.setItem("Opportunity",response?.opportunity)
+              if (
+                formData.paymentMethod === "cheque" ||
+                formData.paymentMethod === "zelle"
+              ){
               setModalContent(formData.paymentMethod);
               setShowModal(true);
+            }else if (formData.paymentMethod === "online") {
+                fetch(`${BASE_URL}/create-payment-intent`, {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify({ items: [{ ...formData }] }),
+                })
+                  .then((res) => res.json())
+                  .then((data) => {
+                    setData((v) => ({ ...v, clientSecret: data.clientSecret }));
+                    sessionStorage.setItem("clientSecret", data.clientSecret);
+                    // Save data to sessionStorage
+                    sessionStorage.setItem("formdata", JSON.stringify(formData));
+        
+                    navigation("checkout");
+                  })
+                  .catch((err) => {
+                    toast.error(err.message);
+                  })
+              }
             } else {
               toast.error(response?.message);
             }
@@ -183,32 +203,6 @@ export default function PaymentForm({
             setData(v => ({ ...v, isLoading: false }))
             setIsFormValidate(false);
           });
-      } else if (formData.paymentMethod === "online") {
-        setIsFormValidate(true);
-        setData(v => ({ ...v, isLoading: true }))
-        fetch(`${BASE_URL}/create-payment-intent`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ items: [{ ...formData }] }),
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            setData((v) => ({ ...v, clientSecret: data.clientSecret }));
-            sessionStorage.setItem("clientSecret", data.clientSecret);
-            // Save data to sessionStorage
-            sessionStorage.setItem("formdata", JSON.stringify(formData));
-
-            navigation("checkout");
-          })
-          .catch((err) => {
-            setIsFormValidate(false);
-            toast.error(err.message);
-          })
-          .finally(() => {
-            setData(v => ({ ...v, isLoading: false }))
-            setIsFormValidate(false);
-          });
-      }
     }
   };
 
