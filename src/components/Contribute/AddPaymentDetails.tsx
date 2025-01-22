@@ -529,11 +529,9 @@ export default function PaymentForm({
                   className="w-6 h-6 text-primary"
                 />
                 <div className="bg-white rounded-md w-full p-3 md:p-6 desktop-1200:p-4 desktop-1500:p-5 desktop-1900:p-7">
-                  <img
-                    src={paypal}
-                    alt="PayPal"
-                    className="w-24 desktop-1200:w-24 desktop-1500:w-28 desktop-1900:w-36"
-                  />
+                <span className="max-sm:text-sm desktop-1200:text-sm desktop-1500:text-base desktop-1900:text-xl">
+                    Online
+                  </span>
                 </div>
               </label>
             </div>

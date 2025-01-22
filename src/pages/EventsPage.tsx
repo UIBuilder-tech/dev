@@ -8,12 +8,15 @@ import SpecialProjects from "../components/projects/SpecialProjects";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import EventsHero from "../assets/eventsHero.webp";
+import { UseDataContext } from "../components/context/DataContext";
 const AdminPanelUrl = import.meta.env.VITE_ADMIN_PANEL_API;
 
 
 export default function EventsPage() {
   const location = useLocation();
   const [PageData, setPageData] = useState(null);
+  const { data ,setData} = UseDataContext();
+  
 
   useEffect(() => {
     if (PageData) {
@@ -51,13 +54,14 @@ export default function EventsPage() {
   return (
     <div className="min-h-screen bg-cream">
       {
-        PageData && <Hero
-          title={PageData.title}
-          desc={PageData.description}
-          button1={PageData.Button1}
-          button2={PageData.Button2}
+         <Hero
+          title={PageData?.title}
+          desc={PageData?.description}
+          button1={PageData?.Button1}
+          button2={PageData?.Button2}
           img={EventsHero}
           from="events"
+          isLoading={data?.isLoading}
         />
       }
 

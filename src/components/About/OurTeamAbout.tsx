@@ -64,7 +64,7 @@ export default function OurTeamAbout() {
 
   const getCurrentPageItems = () => {
     const start = currentPage * itemsPerPage;
-    return TeamMembers.slice(start, start + itemsPerPage);
+    return TeamMembers?.slice(start, start + itemsPerPage);
   };
 
   return (

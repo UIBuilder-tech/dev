@@ -31,21 +31,28 @@ export default function ProjectsCategory({ categoryTitle, }: ProjectsCategoryPro
   const isMobile = windowWidth < 768;
   const location = useLocation();
   const [programs, setPrograms] = useState([])
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     const api = async () => {
-      const requestOptions: any = {
+      setLoading(true);
+      const requestOptions = {
         method: 'GET',
         redirect: 'follow'
       };
-      fetch(`${AdminPanelUrl}/all-projects?populate=*&filters[category][$eq]=${categoryTitle}&sort[id]=desc`, requestOptions)
-        .then(response => response.json())
-        .then(result => {
-          if (result?.data) {
-            setPrograms(DataProcess(result.data))
-          }
-        })
-        .catch(error => console.log('error', error));
-    }
+      
+      try {
+        const response = await fetch(`${AdminPanelUrl}/all-projects?populate=*&filters[category][$eq]=${categoryTitle}&sort[id]=desc`, requestOptions);
+        const result = await response.json();
+        if (result?.data) {
+          setPrograms(DataProcess(result.data));
+        }
+      } catch (error) {
+        console.log('error', error);
+      } finally {
+        setLoading(false);
+      }
+    };
     api();
   }, [categoryTitle])
   const itemsPerPage = 3; // Changed to 3 items per page
@@ -61,7 +68,7 @@ export default function ProjectsCategory({ categoryTitle, }: ProjectsCategoryPro
 
   useEffect(() => {
     const startIndex = currentPage * itemsPerPage;
-    const newItems = programs.slice(startIndex, startIndex + itemsPerPage);
+    const newItems = programs?.slice(startIndex, startIndex + itemsPerPage);
     setCurrentItems(newItems);
   }, [currentPage, programs, itemsPerPage]);
 
@@ -105,6 +112,61 @@ export default function ProjectsCategory({ categoryTitle, }: ProjectsCategoryPro
             ? program?.image[0] 
             : null);
   }
+
+ // Skeleton loader component
+ const SkeletonLoader = () => {
+  return (
+    <div className="relative px-5 md:p-8 md:mx-14 py-6 md:py-12 animate-pulse">
+      {/* Title skeleton */}
+      <div className="h-10 md:h-14 bg-gray-200 rounded-lg w-1/3 mb-4 md:mb-8" />
+      
+      {/* Main content skeleton */}
+      <div className="bg-white rounded-3xl p-2 md:p-10">
+        <div className="grid grid-cols-1 lg:grid-cols-[1.45fr_1fr] md:gap-16">
+          {/* Left content */}
+          <div className="md:space-y-6 space-y-4 flex flex-col justify-center px-4 md:px-10">
+            <div className="h-8 md:h-10 bg-gray-200 rounded-lg w-1/2" />
+            <div className="h-1 bg-gray-200 rounded w-24" />
+            <div className="space-y-2">
+              <div className="h-4 bg-gray-200 rounded w-full" />
+              <div className="h-4 bg-gray-200 rounded w-5/6" />
+              <div className="h-4 bg-gray-200 rounded w-4/6" />
+            </div>
+            <div className="flex gap-4 pt-4">
+              <div className="h-10 bg-gray-200 rounded-full w-32" />
+              <div className="h-10 bg-gray-200 rounded-full w-32" />
+            </div>
+          </div>
+          
+          {/* Right content */}
+          <div className="w-full h-[250px] md:h-[400px] bg-gray-200 rounded-tr-3xl rounded-bl-3xl my-4" />
+        </div>
+      </div>
+      
+      {/* Bottom carousel skeleton */}
+      <div className="flex gap-4 mt-8 overflow-hidden">
+        {[1, 2, 3].map((item) => (
+          <div key={item} className="flex-none w-[250px] md:w-[500px] aspect-[3/2]">
+            <div className="w-full h-full bg-gray-200 rounded-xl" />
+          </div>
+        ))}
+      </div>
+      
+      {/* Navigation dots skeleton */}
+      <div className="flex justify-center space-x-2 mt-6">
+        {[1, 2, 3].map((item) => (
+          <div key={item} className="w-2 h-2 rounded-full bg-gray-200" />
+        ))}
+      </div>
+    </div>
+  );
+};
+
+if (loading) {
+  return <SkeletonLoader />;
+}
+
+
   return (
     <>
       {programs.length > 0 &&
@@ -254,7 +316,7 @@ transform: scale(1.2);
                   </div>
                   <div className="max-sm:hidden flex flex-wrap w-full">
                     {
-                      programs[currentProgram]?.image.slice(1, programs[currentProgram].image.length).map(item => (
+                      programs[currentProgram]?.image?.slice(1, programs[currentProgram].image.length).map(item => (
                         <div className="w-1/2 pr-4  desktop-1200:w-[225px] desktop-1500:w-[250px]  desktop-1900:w-[300px]">
                           <motion.img
                             key={`sub1-${currentProgram}`}

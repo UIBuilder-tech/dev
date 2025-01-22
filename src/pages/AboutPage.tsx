@@ -11,12 +11,12 @@ import PhotoGallery from "../components/About/PhotoGallery";
 import Newsletter from "../components/About/Newsletter";
 import OurTeamAbout from "../components/About/OurTeamAbout";
 import ImpactSection from "../components/Home/OurImpact";
-import ChitrapurMathImg from "../assets/Shirali_Math.webp";
+import ChitrapurMathImg from "../assets/heritage2.webp";
 import { UseDataContext } from "../components/context/DataContext";
 const AdminPanelUrl = import.meta.env.VITE_ADMIN_PANEL_API;
 export default function AboutPage() {
   const location = useLocation();
-  const { setData } = UseDataContext();
+  const {data, setData } = UseDataContext();
   const [PageData, setPageData] = useState({});
   useEffect(() => {
     const api = async () => {
@@ -43,15 +43,19 @@ export default function AboutPage() {
        // Handle initial load with hash
     const hash = location.hash.replace("#", "");
     if (hash) {
-      // Add a small delay to ensure the content is rendered
-      const element = document.getElementById(hash);
-      if (element) {
-        element.scrollIntoView({ behavior: "smooth" });
-      }
-    }
+      // Force a reflow to ensure the element is properly positioned
+      setTimeout(() => {
+          const element = document.getElementById(hash);
+          if (element) {
+              // Reset scroll position slightly to force new scroll even if already at position
+              window.scrollTo(window.scrollX, window.scrollY - 1);
+              element.scrollIntoView({ behavior: "smooth" });
+          }
+      }, 100);
+  }
     }
    
-  }, [location.hash,PageData]); // Only run when hash changes
+  }, [location.hash,PageData, location.key]); // Only run when hash changes
 
   return (<>
     {
@@ -63,7 +67,10 @@ export default function AboutPage() {
           img={ChitrapurMathImg}
           from="about"
           button1={PageData.Button1}
-          button2={PageData.Button2}
+          button1={PageData.Button1}
+          Button1Link={PageData.Button1Link}
+          Button2Link={PageData.Button2Link}
+          isLoading={data?.isLoading}
         />
         <Vantiga
           title={PageData.title}

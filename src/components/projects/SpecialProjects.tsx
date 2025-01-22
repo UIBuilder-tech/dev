@@ -18,6 +18,106 @@ interface Project {
   linkTo?:string;
 }
 
+const ProjectCardSkeleton = ({ isExpanded }: { isExpanded: boolean }) => {
+  const windowWidth = useWindowWidth();
+  const range150 = windowWidth >= 1200 && windowWidth <= 1500;
+  const range100 = windowWidth >= 1900;
+
+  return (
+    <motion.div
+      className="relative bg-white rounded-2xl shadow-md"
+      initial={false}
+      animate={
+        isExpanded
+          ? {
+            width:
+              window.innerWidth < 768
+                ? "375px"
+                : range150
+                  ? "520px"
+                  : range100
+                    ? "800px"
+                    : "640px",
+            height:
+              window.innerWidth < 768 ? "auto" : range100 ? "500px" : "450px",
+          }
+          : {
+            width:
+              window.innerWidth < 768
+                ? "180px"
+                : range150
+                  ? "280px"
+                  : range100
+                    ? "375px"
+                    : "320px",
+            height:
+              window.innerWidth < 768 ? "auto" : range100 ? "500px" : "450px",
+          }
+      }
+      transition={{ duration: 0.3 }}
+    >
+      <div className={`${range150 ? "p-6" : "md:p-8"} p-3 h-full flex flex-col`}>
+        <div className="flex justify-between items-start">
+          <div className="w-full">
+            {/* Title skeleton */}
+            <div className="h-6 bg-gray-200 rounded-lg w-3/4 mb-2 animate-pulse" />
+            {/* Location skeleton */}
+            <div className="h-6 bg-gray-200 rounded-lg w-1/2 mb-2 animate-pulse" />
+            {/* Orange line skeleton */}
+            <div className="w-12 h-1 bg-gray-200 animate-pulse mt-2 mb-4" />
+          </div>
+          {/* Icon placeholder */}
+          <div className="w-16 h-16 bg-gray-200 rounded-lg animate-pulse" />
+        </div>
+
+        {isExpanded ? (
+          <div className="flex md:gap-8 flex-1">
+            <div className="flex-1">
+              {/* Description lines */}
+              <div className="space-y-2">
+                <div className="h-4 bg-gray-200 rounded-lg w-full animate-pulse" />
+                <div className="h-4 bg-gray-200 rounded-lg w-5/6 animate-pulse" />
+                <div className="h-4 bg-gray-200 rounded-lg w-4/6 animate-pulse" />
+              </div>
+              {/* Button skeleton */}
+              <div className="mt-8 h-12 w-32 bg-gray-200 rounded-full animate-pulse" />
+            </div>
+            <div className="flex-1 flex flex-col justify-center items-end">
+              {/* Image skeleton */}
+              <div className={`${range150 ? "w-[200px] h-[300px]" : "w-full h-[250px] md:h-64"} bg-gray-200 rounded-lg animate-pulse`} />
+              {/* Dots skeleton */}
+              <div className="flex gap-2 mt-4">
+                {[1, 2, 3].map((_, i) => (
+                  <div key={i} className="w-2 h-2 rounded-full bg-gray-200 animate-pulse" />
+                ))}
+              </div>
+            </div>
+          </div>
+        ) : (
+          <>
+            {/* Collapsed view skeletons */}
+            <div className="flex justify-left mt-2">
+              {[1, 2, 3].map((_, i) => (
+                <div
+                  key={i}
+                  className="w-12 h-12 bg-gray-200 rounded-full -ml-2 first:ml-0 animate-pulse"
+                />
+              ))}
+            </div>
+            <div className="space-y-2 mt-4">
+              <div className="h-4 bg-gray-200 rounded-lg w-full animate-pulse" />
+              <div className="h-4 bg-gray-200 rounded-lg w-5/6 animate-pulse" />
+              <div className="h-4 bg-gray-200 rounded-lg w-4/6 animate-pulse" />
+            </div>
+            {/* Read More button skeleton */}
+            <div className="mt-4 h-12 w-full bg-gray-200 rounded-full animate-pulse" />
+          </>
+        )}
+      </div>
+    </motion.div>
+  );
+};
+
 const ProjectCard = ({
   project,
   isExpanded,
@@ -262,6 +362,7 @@ const SpecialProjects = ({
   const [projects, setProjects] = useState([])
   const [currentPage, setCurrentPage] = useState(0);
   const [expandedId, setExpandedId] = useState(1); // Set first card as expanded by default
+  const [isLoading, setIsLoading] = useState(true);
   const itemsPerPage = 3;
   const totalPages = Math.ceil(projects.length / itemsPerPage);
   const windowWidth = useWindowWidth();
@@ -271,21 +372,25 @@ const SpecialProjects = ({
   // const range120 = windowWidth>1500 && windowWidth <=1900;
   useEffect(() => {
     const api = async () => {
-      const requestOptions: any = {
-        method: 'GET',
-        redirect: 'follow'
-      };
-      fetch(`${AdminPanelUrl}/all-projects?populate=*&filters[category][$eq]=${title}&sort[id]=desc`, requestOptions)
-        .then(response => response.json())
-        .then(result => {
-          if (result?.data) {
-            const newData =DataProcess(result.data);
-            setProjects(newData)
-            setExpandedId(newData[0]?.id)
-          }
-        })
-        .catch(error => console.log('error', error));
-    }
+      setIsLoading(true);
+      try {
+        const requestOptions: any = {
+          method: 'GET',
+          redirect: 'follow'
+        };
+        const response = await fetch(`${AdminPanelUrl}/all-projects?populate=*&filters[category][$eq]=${title}&sort[id]=desc`, requestOptions);
+        const result = await response.json();
+        if (result?.data) {
+          const newData = DataProcess(result.data);
+          setProjects(newData);
+          setExpandedId(newData[0]?.id);
+        }
+      } catch (error) {
+        console.log('error', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
     api();
   }, [title])
   const handleExpand = (id: number) => {
@@ -312,10 +417,51 @@ const SpecialProjects = ({
     }
   };
 
-  const visibleProjects = projects.slice(
+  const visibleProjects = projects?.slice(
     currentPage * itemsPerPage,
     (currentPage + 1) * itemsPerPage
   );
+
+  if (isLoading) {
+    return (
+      <div className="w-full max-w-7xl mx-auto py-12 desktop-1900:max-w-full">
+        {/* Title skeleton */}
+        <div className={`h-10 bg-gray-200 w-48 rounded-lg animate-pulse mb-8 max-sm:px-5 ${range150 ? "pl-20" : ""}`} />
+
+        <div className="relative">
+          <div className="flex items-center justify-center gap-6 mb-8">
+            {(!isMobile && !isTablet) && (
+              <div className="p-2 h-10 rounded-full bg-gray-200 animate-pulse" />
+            )}
+
+            <div className="flex md:flex-row items-center flex-col gap-4 md:gap-6">
+              {(isMobile || isTablet) ? (
+                <ProjectCardSkeleton isExpanded={true} />
+              ) : (
+                [...Array(3)].map((_, index) => (
+                  <ProjectCardSkeleton 
+                    key={index} 
+                    isExpanded={index === 0} 
+                  />
+                ))
+              )}
+            </div>
+
+            {(!isMobile && !isTablet) && (
+              <div className="p-2 h-10 rounded-full bg-gray-200 animate-pulse" />
+            )}
+          </div>
+
+          {/* Pagination dots skeleton */}
+          <div className="flex justify-center gap-2">
+            {[1, 2, 3].map((_, i) => (
+              <div key={i} className="w-2 h-2 rounded-full bg-gray-200 animate-pulse" />
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="w-full max-w-7xl mx-auto py-12 desktop-1900:max-w-full">

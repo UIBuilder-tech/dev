@@ -7,7 +7,7 @@ import PaymentForm from "../components/Contribute/AddPaymentDetails";
 import VolunteerForm from "../components/Contribute/VolunteerForm";
 import FAQSection from "../components/Home/FAQ";
 import Footer from "../components/Footer/Footer";
-import ChitrapurMathImg from "../assets/Shirali_Math.webp";
+import ChitrapurMathImg from "../assets/heritage3.webp";
 import PhotoGallery from "../components/About/PhotoGallery";
 import Ambassador from "../components/About/Ambassador";
 import VantigaDetailed from "../components/Contribute/VantigaDetailed";
@@ -96,14 +96,15 @@ export default function ContributePage() {
           setTimeout(() => {
             const element = document.getElementById(h);
             if (element) {
+              window.scrollTo(window.scrollX, window.scrollY - 1);
               element.scrollIntoView({ behavior: "smooth" });
             }
-          }, 100 * i);
+          }, 200 * i);
         })
       }
     }
 
-  }, [location.hash, PageData]); // Only run when hash changes
+  }, [location.hash, PageData, location.key]); // Only run when hash changes
 
   useEffect(() => {
     const initialApi = async () => {
@@ -192,7 +193,7 @@ export default function ContributePage() {
       </div>
     </div> */}
       </div>
-      <div id='chf-grants'>
+      <div id='vantiga'>
         {
           PageData?.vantigaList && <VantigaDetailed data={PageData} />
         }
