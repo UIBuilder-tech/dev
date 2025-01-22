@@ -1,15 +1,11 @@
 import { useState, useMemo, useEffect, useRef } from "react";
-import {
-  ChevronDown,
-  ChevronUp,
-  Trash2,
-  Info
-} from "lucide-react";
+import { ChevronDown, ChevronUp, Trash2, Info } from "lucide-react";
 import AmountInput from "./AmountInput";
 import FilterSearch from "./FilterSearch";
-import { DonationItem,DonationSubcategory } from "./types";
+import { DonationItem, DonationSubcategory } from "./types";
 import { useWindowWidth } from "../../hooks/useWindowWidth";
 import { useLocation } from "react-router-dom";
+import { UseDataContext } from "../context/DataContext";
 
 interface Props {
   setTotalDonationAmount: (amount: number) => void;
@@ -24,7 +20,10 @@ interface SelectedProject {
   remark: string;
 }
 
-const generateDonationId = (selectedProjects: SelectedProject[],donationData:any) => {
+const generateDonationId = (
+  selectedProjects: SelectedProject[],
+  donationData: any
+) => {
   const currentYear = new Date().getFullYear();
   const projectIds = donationData
     .flatMap((category) => [
@@ -40,7 +39,9 @@ const generateDonationId = (selectedProjects: SelectedProject[],donationData:any
     .sort()
     .join("-");
 
-  return projectIds ? `${currentYear}-Donation-${projectIds.toUpperCase()}` : "";
+  return projectIds
+    ? `${currentYear}-Donation-${projectIds.toUpperCase()}`
+    : "";
 };
 
 const AdminPanelUrl = import.meta.env.VITE_ADMIN_PANEL_API;
@@ -59,10 +60,10 @@ export default function DonationTable({
   const [quantities, setQuantities] = useState<Record<string, number>>({});
   const [remarks, setRemarks] = useState<Record<string, string>>({});
   const [useDefaultDonation, setUseDefaultDonation] = useState(false);
-  const [donationData, setDonationData] = useState<DonationSubcategory[]>([])
+  const [donationData, setDonationData] = useState<DonationSubcategory[]>([]);
   const windowWidth = useWindowWidth();
   const location = useLocation();
-
+  const { data, setData } = UseDataContext();
   const isMobile = windowWidth < 700; // md breakpoint
   const isTablet = windowWidth >= 700 && windowWidth <= 1099; // md breakpoint
 
@@ -75,7 +76,7 @@ export default function DonationTable({
   };
 
   const toggleSubcategory = (subcategoryId: string) => {
-    setExpandedSubcategories(prev =>
+    setExpandedSubcategories((prev) =>
       prev.includes(subcategoryId)
         ? prev.filter((id) => id !== subcategoryId)
         : [...prev, subcategoryId]
@@ -105,7 +106,7 @@ export default function DonationTable({
       const hash = window.location.hash.split("#")[2];
       if (!hash) return;
 
-      let targetCategory = donationData.find((cat:any) => cat.id === hash);
+      let targetCategory = donationData.find((cat: any) => cat.id === hash);
       let targetItem;
 
       if (!targetCategory) {
@@ -143,7 +144,7 @@ export default function DonationTable({
     });
 
     return () => window.removeEventListener("hashchange", handleScroll);
-  }, [donationData,location.hash]);
+  }, [donationData, location.hash]);
 
   // Update selected projects whenever relevant state changes
   useEffect(() => {
@@ -174,10 +175,17 @@ export default function DonationTable({
       }
     });
 
-    const baseDonationId = generateDonationId(selectedProjects,donationData);
+    const baseDonationId = generateDonationId(selectedProjects, donationData);
     setSelectedProjects(selectedProjects);
     setBaseDonationId(baseDonationId);
-  }, [donationData,amounts, quantities, remarks, setSelectedProjects, setBaseDonationId]);
+  }, [
+    donationData,
+    amounts,
+    quantities,
+    remarks,
+    setSelectedProjects,
+    setBaseDonationId,
+  ]);
 
   const updateAmount = (itemId: string, value: number) => {
     setAmounts((prev) => ({ ...prev, [itemId]: value }));
@@ -482,36 +490,47 @@ export default function DonationTable({
   );
   useEffect(() => {
     const api = async () => {
+      setData((v) => ({ ...v, isLoading: true }));
       const requestOptions: any = {
-        method: 'GET',
-        redirect: 'follow'
+        method: "GET",
+        redirect: "follow",
       };
       fetch(`${AdminPanelUrl}/donates?pagination[pageSize]=100`, requestOptions)
-        .then(response => response.json())
-        .then(result => {
+        .then((response) => response.json())
+        .then((result) => {
           if (result?.data) {
-            const uniqueCategories = [...new Set(result.data.map(item => item.category))];
-            const finalData = uniqueCategories.map(item => {
+            const uniqueCategories = [
+              ...new Set(result.data.map((item) => item.category)),
+            ];
+            const finalData = uniqueCategories.map((item) => {
               return {
-                id: (item as string).toLowerCase().replace(/ /g, '-'),
+                id: (item as string).toLowerCase().replace(/ /g, "-"),
                 name: item,
-                items: result.data.filter((data:any) => data.category === item).map(data => ({
-                  id: data.donationId,
-                  name: data.name,
-                  amount: data.amount,
-                  description: data.description,
-                  hasQuantity: data.hasQuantity,
-                }))
-              }
-            })
-            setExpandedCategories([finalData.length > 0 ? finalData[0].id : ''])
-            setDonationData(finalData)
+                items: result.data
+                  .filter((data: any) => data.category === item)
+                  .map((data) => ({
+                    id: data.donationId,
+                    name: data.name,
+                    amount: data.amount,
+                    description: data.description,
+                    hasQuantity: data.hasQuantity,
+                  })),
+              };
+            });
+            setExpandedCategories([
+              finalData.length > 0 ? finalData[0].id : "",
+            ]);
+            setDonationData(finalData);
+            setData((v) => ({ ...v, isLoading: false }));
           }
         })
-        .catch(error => console.log('error', error));
-    }
+        .catch((error) => {
+          console.log("error", error);
+          setData((v) => ({ ...v, isLoading: true }));
+        });
+    };
     api();
-  }, [])
+  }, []);
 
   return (
     <div className="bg-cream rounded-lg p-5 md:px-16 mx-auto py-16">
