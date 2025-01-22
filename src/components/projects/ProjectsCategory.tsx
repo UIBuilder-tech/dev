@@ -33,6 +33,15 @@ export default function ProjectsCategory({ categoryTitle, }: ProjectsCategoryPro
   const [programs, setPrograms] = useState([])
   const [loading, setLoading] = useState(true);
 
+  function prioritizeItem(data, keyword) {
+    return data.sort((a, b) => {
+      if (a.title.toLowerCase() === keyword.toLowerCase()) return -1;
+      if (b.title.toLowerCase() === keyword.toLowerCase()) return 1;
+      return 0;
+    });
+  }
+  
+
   useEffect(() => {
     const api = async () => {
       setLoading(true);
@@ -45,7 +54,7 @@ export default function ProjectsCategory({ categoryTitle, }: ProjectsCategoryPro
         const response = await fetch(`${AdminPanelUrl}/all-projects?populate=*&filters[category][$eq]=${categoryTitle}&sort[id]=desc`, requestOptions);
         const result = await response.json();
         if (result?.data) {
-          setPrograms(DataProcess(result.data));
+          setPrograms(DataProcess(prioritizeItem(result.data,'vantiga')));
         }
       } catch (error) {
         console.log('error', error);

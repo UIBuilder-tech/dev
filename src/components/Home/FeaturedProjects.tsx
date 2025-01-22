@@ -40,6 +40,15 @@ const AdminPanelUrl = import.meta.env.VITE_ADMIN_PANEL_API;
 export default function FeaturedProjects({ title }: Props) {
   const [hoveredId, setHoveredId] = useState<string | null>(null);
   const [projects, setProjects] = useState(null);
+
+  function prioritizeItem(data, keyword) {
+    return data.sort((a, b) => {
+      if (a.title.toLowerCase() === keyword.toLowerCase()) return -1;
+      if (b.title.toLowerCase() === keyword.toLowerCase()) return 1;
+      return 0;
+    });
+  }
+
   useEffect(() => {
     const api = async () => {
       const requestOptions: any = {
@@ -64,7 +73,7 @@ export default function FeaturedProjects({ title }: Props) {
                 donationLink:v.donationLink
               }
             })
-            setProjects(newData)
+            setProjects(prioritizeItem(newData,'vantiga'))
           }
         })
         .catch(error => console.log('error', error));
