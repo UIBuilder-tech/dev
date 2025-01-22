@@ -70,7 +70,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/projects" element={<ProjectsPage />} />
-          <Route path="/contribute" element={<ContributePage />} />
+          {/* <Route path="/contribute" element={<ContributePage />} /> */}
           <Route path="/donate" element={<ContributePage />} />
           <Route path="/contribute" element={<ContributePage />}>
             {stripeOptions?.clientSecret ? (
