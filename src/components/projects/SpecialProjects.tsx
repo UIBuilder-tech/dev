@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Heart, Plus } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useWindowWidth } from "../../hooks/useWindowWidth";
 import ActiveArrow from "../../assets/arrowActive.svg";
 import DonateActive from "../../assets/projectActiveDonateIcon.svg";
@@ -17,6 +17,7 @@ interface Project {
   description: string;
   images: string[];
   linkTo?:string;
+  knowMoreLink?:string;
 }
 
 const ProjectCardSkeleton = ({ isExpanded }: { isExpanded: boolean }) => {
@@ -237,6 +238,10 @@ const ProjectCard = ({
                     }`}
                 >
                   {project.description}
+                  {
+                                      project.knowMoreLink  &&
+                                      <Link className="text-blue-600" target="_blank" to={project.knowMoreLink}> Know more </Link>
+                                    }
                 </p>
                 {from === "projects" && (
                   <motion.button
