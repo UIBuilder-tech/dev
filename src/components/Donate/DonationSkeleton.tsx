@@ -2,7 +2,7 @@ import React from "react";
 import { ChevronDown } from "lucide-react";
 
 const DonationSkeleton = () => {
-  const items = 3; // Number of skeleton items to show
+  const items = 6; // Number of skeleton items to show
 
   return (
     <div className="bg-cream rounded-lg p-5 md:px-16 mx-auto py-16 animate-pulse">

@@ -68,42 +68,52 @@ export default function ContributePage() {
   const [PageData, setPageData] = useState(null);
   useEffect(() => {
     const api = async () => {
-      setData(v => ({ ...v, isLoading: true }))
+      setData((v) => ({ ...v, isLoading: true }));
       const requestOptions: any = {
-        method: 'GET',
-        redirect: 'follow'
+        method: "GET",
+        redirect: "follow",
       };
-      fetch(`${AdminPanelUrl}/contribute-page?populate[vantigaList][populate]=*`, requestOptions)
-        .then(response => response.json())
-        .then(result => {
+      fetch(
+        `${AdminPanelUrl}/contribute-page?populate[vantigaList][populate]=*`,
+        requestOptions
+      )
+        .then((response) => response.json())
+        .then((result) => {
           if (result?.data) {
-            setPageData(result.data)
+            setPageData(result.data);
           }
         })
-        .catch(error => console.log('error', error)).finally(() => {
-          setData(v => ({ ...v, isLoading: false }))
+        .catch((error) => console.log("error", error))
+        .finally(() => {
+          setData((v) => ({ ...v, isLoading: false }));
         });
-    }
+    };
 
     api();
-  }, [])
+  }, []);
   useEffect(() => {
     if (PageData) {
       // Handle initial load with hash
-      const hash = location.hash.split("#").filter(v => v !== '' && v !== null)
+      const hash = location.hash
+        .split("#")
+        .filter((v) => v !== "" && v !== null);
       if (hash) {
         hash.forEach((h, i) => {
           setTimeout(() => {
             const element = document.getElementById(h);
+            console.log(h);
             if (element) {
-              window.scrollTo(window.scrollX, window.scrollY - 1);
+              if (h !== "volunteer") {
+                window.scrollTo(window.scrollX, window.scrollY - 1);
+              } else {
+                window.scrollTo(window.scrollX, window.scrollY + 10);
+              }
               element.scrollIntoView({ behavior: "smooth" });
             }
           }, 200 * i);
-        })
+        });
       }
     }
-
   }, [location.hash, PageData, location.key]); // Only run when hash changes
 
   useEffect(() => {
@@ -112,7 +122,7 @@ export default function ContributePage() {
       apiCalledRef.current = true; // Mark API as called
 
       if (Object.keys(user)?.length > 0) {
-        setData(v => ({ ...v, isLoading: true }))
+        setData((v) => ({ ...v, isLoading: true }));
         fetch(`${BASE_URL}/api/contact?email=${user?.email}`)
           .then((resp) => resp?.json())
           .then((response) => {
@@ -150,7 +160,7 @@ export default function ContributePage() {
           })
           .finally(() => {
             // setIsDisable(false);
-            setData(v => ({ ...v, isLoading: false }))
+            setData((v) => ({ ...v, isLoading: false }));
           });
       }
     };
@@ -158,55 +168,56 @@ export default function ContributePage() {
   }, []);
 
   return (
-   <>
-   {PageData && <div className="min-h-screen bg-cream">
-      <Hero
-        title={PageData.title}
-        desc={PageData.description}
-        img={ChitrapurMathImg}
-        button1={PageData.Button1}
-        button2={PageData.Button2}
-      />
-      {/* <div id="vantiga">
+    <>
+      {PageData && (
+        <div className="bg-cream">
+          <Hero
+            title={PageData.title}
+            desc={PageData.description}
+            img={ChitrapurMathImg}
+            button1={PageData.Button1}
+            button2={PageData.Button2}
+          />
+          {/* <div id="vantiga">
         <Vantiga />
       </div> */}
-      <div className="relative">
-        <div id="donation-table">
-          <DonationTable
-            setTotalDonationAmount={setTotalDonationAmount}
-            setSelectedProjects={setSelectedProjects}
-            setBaseDonationId={setBaseDonationId}
-          />
-        </div>
-        <div id="payment">
-          <PaymentForm
-            totalDonationAmount={totalDonationAmount}
-            baseDonationId={baseDonationId}
-            selectedProjects={selectedProjects}
-            initialFormData={initialFormData}
-          />
-        </div>
-        {/* <div className="absolute inset-0 bg-cream bg-opacity-75 backdrop-filter backdrop-blur-sm flex items-center justify-center z-10">
+
+          <div id="donation-table" className="md:min-h-[130dvh]">
+            <DonationTable
+              setTotalDonationAmount={setTotalDonationAmount}
+              setSelectedProjects={setSelectedProjects}
+              setBaseDonationId={setBaseDonationId}
+            />
+          </div>
+          <div id="payment">
+            <PaymentForm
+              totalDonationAmount={totalDonationAmount}
+              baseDonationId={baseDonationId}
+              selectedProjects={selectedProjects}
+              initialFormData={initialFormData}
+            />
+          </div>
+          {/* <div className="absolute inset-0 bg-cream bg-opacity-75 backdrop-filter backdrop-blur-sm flex items-center justify-center z-10">
       <div className="text-center">
         <h2 className="text-5xl md:text-7xl text-gray-800 mb-2">Coming Soon</h2>
         <p className="text-sm md:text-lg text-gray-600">We're working hard to bring you this feature. Stay tuned!</p>
       </div>
     </div> */}
-      </div>
-      <div id='vantiga'>
-        {
-          PageData?.vantigaList && <VantigaDetailed data={PageData} />
-        }
-      </div>
-      <div id="volunteer">
-        <VolunteerForm initialFormData={initialFormData} />
-      </div>
-      <PhotoGallery />
-      <Ambassador />
-      <FAQSection />
-      <Footer />
-      <Outlet />
-    </div>}
-   </>
+
+          <div id="vantiga">
+            {PageData?.vantigaList && <VantigaDetailed data={PageData} />}
+          </div>
+          <div id="volunteer">
+            <VolunteerForm initialFormData={initialFormData} />
+          </div>
+
+          <PhotoGallery />
+          <Ambassador />
+          <FAQSection />
+          <Footer />
+          <Outlet />
+        </div>
+      )}
+    </>
   );
 }
