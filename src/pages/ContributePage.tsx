@@ -103,12 +103,12 @@ export default function ContributePage() {
             const element = document.getElementById(h);
             console.log(h);
             if (element) {
-              if (h !== "volunteer") {
-                window.scrollTo(window.scrollX, window.scrollY - 1);
+              if (h === "volunteer") {
+                window.scrollTo(0, element.offsetTop + window.innerHeight * 0.035);
               } else {
-                window.scrollTo(window.scrollX, window.scrollY + 10);
+                window.scrollTo(window.scrollX, window.scrollY - 1);
+                element.scrollIntoView({ behavior: "smooth" });
               }
-              element.scrollIntoView({ behavior: "smooth" });
             }
           }, 200 * i);
         });
@@ -182,7 +182,7 @@ export default function ContributePage() {
         <Vantiga />
       </div> */}
 
-          <div id="donation-table" className="md:min-h-[130dvh]">
+          <div id="donation-table" className="">
             <DonationTable
               setTotalDonationAmount={setTotalDonationAmount}
               setSelectedProjects={setSelectedProjects}
