@@ -6,6 +6,7 @@ import { DonationItem, DonationSubcategory } from "./types";
 import { useWindowWidth } from "../../hooks/useWindowWidth";
 import { useLocation } from "react-router-dom";
 import { UseDataContext } from "../context/DataContext";
+import DonationSkeleton from "./DonationSkeleton";
 
 interface Props {
   setTotalDonationAmount: (amount: number) => void;
@@ -532,7 +533,9 @@ export default function DonationTable({
     };
     api();
   }, []);
-
+  if (data?.isLoading) {
+    return <DonationSkeleton />;
+  }
   return (
     <div className="bg-cream rounded-lg p-5 md:px-16 mx-auto py-16">
       <div className="mb-3 md:mb-6 flex flex-row items-center justify-between">
