@@ -528,7 +528,7 @@ export default function DonationTable({
         })
         .catch((error) => {
           console.log("error", error);
-          setData((v) => ({ ...v, isLoading: true }));
+          setData((v) => ({ ...v, isLoading: false }));
         });
     };
     api();
