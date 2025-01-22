@@ -19,6 +19,7 @@ export default function ProjectsPage() {
   const location = useLocation();
   const [PageData, setPageData] = useState(null);
   const { data,setData } = UseDataContext();
+  const [loading, setLoading] = useState(true)
   useEffect(() => {
     const api = async () => {
       const requestOptions: any = {
@@ -45,6 +46,7 @@ export default function ProjectsPage() {
         .catch(error => console.log('error', error))
         .finally(() => {
           setData(v => ({ ...v, isLoading: false }))
+          setLoading(false)
         });;
     }
     api();
@@ -86,7 +88,7 @@ export default function ProjectsPage() {
           from="projects"
           button1={PageData?.heroSection?.Button1}
           button2={PageData?.heroSection?.Button2}
-          isLoading={data?.isLoading}
+          isLoading={data?.isLoading || loading}
         />
       }
 

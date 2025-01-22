@@ -25,14 +25,14 @@ const SkeletonLoader = () => {
               className="flex flex-col space-y-2 md:space-y-4 items-start p-2 md:p-4"
             >
               {/* Icon skeleton */}
-              <div className="w-8 h-8 md:w-14 md:h-14 desktop-1900:w-16 desktop-1900:h-16 bg-gray-200 rounded-lg" />
+              <div className="w-8 h-8 md:w-14 md:h-14 desktop-1900:w-16 desktop-1900:h-16 bg-gray-300 rounded-lg" />
               {/* Title skeleton */}
-              <div className="h-4 md:h-6 bg-gray-200 rounded w-24 md:w-32" />
+              <div className="h-4 md:h-6 bg-gray-300 rounded w-24 md:w-32" />
               {/* Description skeleton */}
               <div className="space-y-2 w-full">
-                <div className="h-3 bg-gray-200 rounded w-full" />
-                <div className="h-3 bg-gray-200 rounded w-5/6" />
-                <div className="h-3 bg-gray-200 rounded w-4/6" />
+                <div className="h-3 bg-gray-300 rounded w-full" />
+                <div className="h-3 bg-gray-300 rounded w-5/6" />
+                <div className="h-3 bg-gray-300 rounded w-4/6" />
               </div>
             </div>
           ))}
@@ -64,6 +64,7 @@ export default function Vantiga({ title = "", description = "" }: Props) {
   const location = useLocation();
   const [PageData, setPageData] = useState([]);
   const { data, setData } = UseDataContext();
+  const [loading, setLoading] = useState(true)
   useEffect(() => {
     const api = async () => {
       const requestOptions: any = {
@@ -87,13 +88,14 @@ export default function Vantiga({ title = "", description = "" }: Props) {
         .catch((error) => console.log("error", error))
         .finally(() => {
           setData((v) => ({ ...v, isLoading: false }));
+          setLoading(false)
         });
     };
 
     api();
   }, []);
 
-  if (data?.isLoading) {
+  if (data?.isLoading || loading) {
     return <SkeletonLoader />;
   }
 

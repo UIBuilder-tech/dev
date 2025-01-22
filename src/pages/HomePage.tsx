@@ -29,57 +29,60 @@ export default function HomePage() {
   const [HomePageData, setHomePageData] = useState<HomePageDataType | null>(null);
   const [Section_3, setSection_3] = useState([])
   const [HomeSlideData, setHomeSlideData] = useState([])
-  const { setData } = UseDataContext()
+  const { data,setData } = UseDataContext()
+  const [loading, setLoading] = useState(true)
+
   useEffect(() => {
-    const requestOptions: RequestInit = {
-      method: "GET",
-      redirect: "follow",
+    const fetchData = async (url: string) => {
+      const response = await fetch(url, {
+        method: "GET",
+        redirect: "follow"
+      });
+      const result = await response.json();
+      return result;
     };
-    setData(v => ({ ...v, isLoading: true }))
-    fetch(
-      `${AdminPanelUrl}/home-page?populate[Section_3][populate]=*&populate[Our_Impact_Big_Card][populate]=*`,
-      requestOptions
-    )
-      .then((response) => response.json())
-      .then((result) => {
-        if (result?.data) {
-          const newData = result.data.Section_3.map(
-            (item: {
-              Title: string;
-              Description: string;
-              image: { url: string };
-            }) => {
-              const id = item.Title.replace(" ", "-").toLowerCase();
-              return {
-                id: id,
-                title: item.Title,
-                description: item.Description,
-                linkTo: item.linkTo,
-                image: AdminPanelUrl.replace("/api", "") + item?.image?.url,
-              };
-            }
+
+    const loadAllData = async () => {
+      setData(v => ({ ...v, isLoading: true }));
+      
+      try {
+        const [homePageResult, slidesResult] = await Promise.all([
+          fetchData(`${AdminPanelUrl}/home-page?populate[Section_3][populate]=*&populate[Our_Impact_Big_Card][populate]=*`),
+          fetchData(`${AdminPanelUrl}/home-slides?populate=*`)
+        ]);
+
+        if (homePageResult?.data) {
+          const newData = homePageResult.data.Section_3.map(
+            (item: { Title: string; Description: string; image: { url: string }; linkTo: string }) => ({
+              id: item.Title.replace(" ", "-").toLowerCase(),
+              title: item.Title,
+              description: item.Description,
+              linkTo: item.linkTo,
+              image: AdminPanelUrl.replace("/api", "") + item?.image?.url,
+            })
           );
-          setHomePageData(result.data);
+          setHomePageData(homePageResult.data);
           setSection_3(newData);
         }
-      }).catch(error => console.log('error', error)).finally(() => {
-        setData(v => ({ ...v, isLoading: false }))
-      });
-    setData(v => ({ ...v, isLoading: true }))
-    fetch(`${AdminPanelUrl}/home-slides?populate=*`, requestOptions)
-      .then(response => response.json())
-      .then(result => {
-        if (result?.data) {
-          const newData = result.data.map((item: any) => {
-            return { ...item, image: AdminPanelUrl.replace("/api", "") + item?.image?.url }
-          })
-          setHomeSlideData(newData)
-        }
-      }).catch(error => console.log('error', error)).finally(() => {
-        setData(v => ({ ...v, isLoading: false }))
-      });
 
-  }, [])
+        if (slidesResult?.data) {
+          const newData = slidesResult.data.map((item: any) => ({
+            ...item,
+            image: AdminPanelUrl.replace("/api", "") + item?.image?.url
+          }));
+          setHomeSlideData(newData);
+        }
+      } catch (error) {
+        console.log('error', error);
+      } finally {
+        setData(v => ({ ...v, isLoading: false }));
+        setLoading(false)
+      }
+    };
+
+    loadAllData();
+  }, []);
+
 
   return (
     <div className="min-h-screen bg-cream">
@@ -87,7 +90,9 @@ export default function HomePage() {
         <>
           <Hero
             data={HomeSlideData}
-            from="home" />
+            from="home" 
+             isLoading={loading || data?.isLoading}
+            />
           <Vision />
           {Section_3 && <Programs data={Section_3} />}
           <FeaturedProjects title="Featured Projects" />

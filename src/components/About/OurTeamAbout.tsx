@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useImagePreviewTrigger } from "../../utils/imagePreviewUtils";
 import { UseDataContext } from "../context/DataContext";
+import { ImageComponent } from "../../utils/ImageComponent";
 
 interface Member {
   name: string;
@@ -80,7 +81,7 @@ export default function OurTeamAbout() {
         {getCurrentPageItems().map((member: Member, index: number) => (
           <div key={index} className="flex items-center space-x-4">
             <div className="flex-shrink-0">
-              <img
+              <ImageComponent
                 src={member.image}
                 alt={member.name}
                 onClick={() => triggerImagePreview(member.image)}

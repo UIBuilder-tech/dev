@@ -18,6 +18,8 @@ export default function AboutPage() {
   const location = useLocation();
   const { data, setData } = UseDataContext();
   const [PageData, setPageData] = useState({});
+  const [loading, setLoading] = useState(true)
+
   useEffect(() => {
     const api = async () => {
       setData((v) => ({ ...v, isLoading: true }));
@@ -35,6 +37,7 @@ export default function AboutPage() {
         .catch((error) => console.log("error", error))
         .finally(() => {
           setData((v) => ({ ...v, isLoading: false }));
+          setLoading(false)
         });
     };
     api();
@@ -69,7 +72,7 @@ export default function AboutPage() {
             button1={PageData.Button1}
             Button1Link={PageData.Button1Link}
             Button2Link={PageData.Button2Link}
-            isLoading={data?.isLoading}
+            isLoading={data?.isLoading || loading}
           />
           <Vantiga title={PageData.title} description={PageData.description} />
           <div id="vision-mission">

@@ -64,8 +64,9 @@ export default function ContributePage() {
   });
   const location = useLocation();
 
-  const { setData } = UseDataContext();
+  const { data,setData } = UseDataContext();
   const [PageData, setPageData] = useState(null);
+  const [loading, setLoading] = useState(true)
   useEffect(() => {
     const api = async () => {
       setData((v) => ({ ...v, isLoading: true }));
@@ -86,6 +87,7 @@ export default function ContributePage() {
         .catch((error) => console.log("error", error))
         .finally(() => {
           setData((v) => ({ ...v, isLoading: false }));
+          setLoading(false)
         });
     };
 
@@ -177,6 +179,7 @@ export default function ContributePage() {
             img={ChitrapurMathImg}
             button1={PageData.Button1}
             button2={PageData.Button2}
+            isLoading={data.isLoading || loading}
           />
           {/* <div id="vantiga">
         <Vantiga />

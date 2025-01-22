@@ -1,6 +1,7 @@
 import { Heart } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { ImageComponent } from "../../utils/ImageComponent";
 
 interface Props {
   title?: string;
@@ -116,16 +117,16 @@ export default function Hero({ title, subTitle, desc, img, data = [], from = "",
           className="w-full h-full object-cover hero-bg"
         /> */}
         {isLoading ? (
-          <div className="w-full h-full bg-gray-400 animate-pulse" />
+          <div className="w-full h-full bg-gray-100 animate-pulse" />
         ) : currentIndex!=-1 ?
-           <img
+           <ImageComponent
            src={data[currentIndex].image}
            alt={`Hero Image ${data[currentIndex].index}`}
            className={`absolute w-full h-full object-cover transition-opacity duration-500 hero-bg }`}
          />
           :
-          <img
-            src={img}
+          <ImageComponent
+            src={img || ""}
             alt="Heritage Building"
             className="w-full h-full object-cover hero-bg"
           />}

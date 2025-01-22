@@ -67,6 +67,7 @@ export default function DonationTable({
   const { data, setData } = UseDataContext();
   const isMobile = windowWidth < 700; // md breakpoint
   const isTablet = windowWidth >= 700 && windowWidth <= 1099; // md breakpoint
+  const [loading, setLoading] = useState(true)
 
   const toggleCategory = (categoryId: string) => {
     setExpandedCategories((prev) =>
@@ -523,17 +524,20 @@ export default function DonationTable({
               finalData.length > 0 ? finalData[0].id : "",
             ]);
             setDonationData(finalData);
-            setData((v) => ({ ...v, isLoading: false }));
           }
         })
         .catch((error) => {
           console.log("error", error);
+        })
+        .finally(()=>{
           setData((v) => ({ ...v, isLoading: false }));
-        });
+          setLoading(false)
+        }
+        )
     };
     api();
   }, []);
-  if (data?.isLoading) {
+  if (data?.isLoading || loading) {
     return <DonationSkeleton />;
   }
   return (

@@ -8,6 +8,7 @@ import DonateActive from "../../assets/projectActiveDonateIcon.svg";
 import DonateInctive from "../../assets/projectInactiveDonateIcon.svg";
 import DataProcess from "../../utils/dataProcess";
 import { useImagePreviewTrigger } from "../../utils/imagePreviewUtils";
+import { ImageComponent } from "../../utils/ImageComponent";
 
 interface Project {
   id: number;
@@ -250,7 +251,7 @@ const ProjectCard = ({
                 )}
               </div>
               <div className="flex-1 flex flex-col justify-center items-end">
-                <img
+                <ImageComponent
                   src={project.image[currentImageIndex]}
                   alt={project.title}
                   className={`${range150 || range120

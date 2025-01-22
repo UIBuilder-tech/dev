@@ -16,6 +16,7 @@ export default function EventsPage() {
   const location = useLocation();
   const [PageData, setPageData] = useState(null);
   const { data ,setData} = UseDataContext();
+  const [loading, setLoading] = useState(true)
   
 
   useEffect(() => {
@@ -35,6 +36,7 @@ export default function EventsPage() {
 
   useEffect(() => {
     const api = async () => {
+      setData((v) => ({ ...v, isLoading: true }));
       const requestOptions: any = {
         method: 'GET',
         redirect: 'follow'
@@ -46,7 +48,11 @@ export default function EventsPage() {
             setPageData(result.data)
           }
         })
-        .catch(error => console.log('error', error));
+        .catch(error => console.log('error', error))
+        .finally(() => {
+          setData((v) => ({ ...v, isLoading: false }));
+          setLoading(false)
+        });
     }
 
     api();
@@ -61,7 +67,7 @@ export default function EventsPage() {
           button2={PageData?.Button2}
           img={EventsHero}
           from="events"
-          isLoading={data?.isLoading}
+          isLoading={data?.isLoading || loading}
         />
       }
 
