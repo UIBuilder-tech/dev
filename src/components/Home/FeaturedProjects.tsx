@@ -17,6 +17,7 @@ import Yatri from "../../assets/Shirali_Math.webp";
 import cows from "../../assets/Cows in Rath Gadde 2.webp";
 
 import { Link } from "react-router-dom";
+import { ImageComponent } from "../../utils/ImageComponent";
 
 interface Project {
   id: string;
@@ -45,7 +46,7 @@ export default function FeaturedProjects({ title }: Props) {
         method: 'GET',
         redirect: 'follow'
       };
-      fetch(`${AdminPanelUrl}/featured-projects?populate=*`, requestOptions)
+      fetch(`${AdminPanelUrl}/featured-projects?populate=*&sort[id]=desc`, requestOptions)
         .then(response => response.json())
         .then(result => {
         console.log("🚀 ~ api ~ result:", result)
@@ -147,7 +148,7 @@ export default function FeaturedProjects({ title }: Props) {
                               }}
                             >
                               <div className="h-20 w-28 overflow-hidden rounded-lg border-2 border-white shadow-md">
-                                <img
+                                <ImageComponent
                                   src={image}
                                   alt={`${project.title} image ${index + 1}`}
                                   className="h-full w-full object-cover"
