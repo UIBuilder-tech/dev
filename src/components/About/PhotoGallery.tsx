@@ -46,7 +46,7 @@ function PhotoGallery() {
               key={index}
               className="relative md:h-[300px] desktop-1500:h-[275px] desktop-1500:w-[400px] h-[200px] w-[300px] md:w-[450px] cursor-pointer overflow-hidden rounded-[30px] flex flex-col justify-end object-cover bg-white desktop-1200:h-[225px] desktop-1200:w-[375px]"
               src={review.image}
-              onClick={() => triggerImagePreview(review.img)}
+              onClick={() => triggerImagePreview(review.image)}
             />
           ))}
         </Marquee>
@@ -56,7 +56,7 @@ function PhotoGallery() {
               key={index}
               className="relative md:h-[300px]  desktop-1500:h-[275px] desktop-1500:w-[400px]  desktop-1200:h-[225px] desktop-1200:w-[375px] h-[200px] w-[300px] md:w-[450px] cursor-pointer overflow-hidden rounded-[30px] flex flex-col justify-end object-cover bg-white"
               src={review.image}
-              onClick={() => triggerImagePreview(review.img)}
+              onClick={() => triggerImagePreview(review.image)}
             />
           ))}
         </Marquee>

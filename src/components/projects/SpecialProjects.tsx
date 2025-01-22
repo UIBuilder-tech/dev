@@ -257,7 +257,7 @@ const ProjectCard = ({
                       ? "w-[200px] h-[300px]"
                       : "w-full h-[250px] md:h-64"
                   } object-cover rounded-lg`}
-                  onClick={() => triggerImagePreview(project.images[currentImageIndex])}
+                  onClick={() => triggerImagePreview(project.image[currentImageIndex])}
                 />
                 <div
                   className={`${range150 || range120
