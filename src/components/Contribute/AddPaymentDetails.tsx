@@ -140,7 +140,7 @@ export default function PaymentForm({
           donAmt: totalDonationAmount, // Total donation amount
           donorName: `${formData?.FirstName} ${formData?.LastName}`, // Full name of the donor
           displayName: `${baseDonationId}-${formData?.FirstName}-${formData?.LastName
-            }-${formData.paymentMethod === "cheque" ? "Check" : "Zelle"}`, // Display name for the donation record
+            }-${formData.paymentMethod === "cheque" ? "Check" :formData.paymentMethod === "Zelle" ? "Zelle" : "Online"}`, // Display name for the donation record
           donorEmail: formData?.Email, // Donor's email
           donorMobile: formData?.Phone, // Donor's mobile number
           donorBillSt: formData?.address, // Donor's billing street

@@ -69,6 +69,19 @@ export default function CompletePage() {
       }
       console.log("paymentIntent", paymentIntent);
       setStatus(paymentIntent.status);
+      const oppId = sessionStorage.getItem("Opportunity")
+      const payload = {
+        stageName: "Payment successful"
+      }
+      if(paymentIntent.status === "succeeded"){
+        fetch(`/api/opportunity/${oppId}`, {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(payload),
+        }).then(res=>res.json).then(res=>console.log(res))
+      }
       setIntentId(paymentIntent.id);
       /**
        * 
