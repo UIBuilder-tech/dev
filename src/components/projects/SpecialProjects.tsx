@@ -499,7 +499,7 @@ const SpecialProjects = ({
             </button>
           )}
 
-          <div className="flex md:flex-row items-center flex-col gap-4 md:gap-6">
+          <div className="flex md:flex-row items-center md:min-w-[85dvw] flex-col gap-4 md:gap-6">
             {(isMobile || isTablet)
               ? visibleProjects.map(
                 (project) =>

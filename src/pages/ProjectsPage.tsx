@@ -114,7 +114,7 @@ export default function ProjectsPage() {
       </div>
       <div id="women-empowerment">
         <ProjectsCategory
-          categoryTitle="Women Empowerment"
+          categoryTitle="Women's Empowerment"
         />
       </div>
 

@@ -19,7 +19,7 @@ export default function Vision() {
         if (result?.data?.vision_mission_section) {
           const data = result.data.vision_mission_section
           setPageData(data)
-          setActiveSlide(2)
+          setActiveSlide(0)
           const newData = data.map((v: any) => {
             const baseurl = AdminPanelUrl.replace("/api", "")
             return {
@@ -31,8 +31,8 @@ export default function Vision() {
         }
       }).catch(error => console.log('error', error));
     const interval = setInterval(() => {
-      setActiveSlide((prevSlide) => (prevSlide + 1) % 3);
-    }, 7000); // Change slide every 5 seconds
+      setActiveSlide((prevSlide) => (prevSlide + 1) % 2);
+    }, 9000); // Change slide every 5 seconds
 
     return () => clearInterval(interval);
   }, [])
@@ -50,7 +50,6 @@ export default function Vision() {
                   key={index}
                   className="w-full flex-shrink-0 flex flex-col md:flex-row justify-between gap-8 md:gap-12 items-center"
                 >
-                  {slide?.Title ? (
                     <>
                       <div className="w-full md:max-w-2xl md:ml-4 space-y-16 desktop-1500:space-y-14 desktop-1200:space-y-12 desktop-1900:space-y-16 desktop-1900:pl-10">
                         <h2 className="font-display text-3xl md:text-5xl mb-4 md:mb-6 text-secondary desktop-1500:text-[40px] desktop-1200:text-[35px] desktop-1900:text-[55px]">
@@ -85,44 +84,6 @@ export default function Vision() {
                         </div>
                       </div>
                     </>
-                  ) :
-                    <div className="bg-[#F4A460] max-sm:h-full max-sm:items-center max-sm:justify-center rounded-xl  w-full overflow-hidden max-sm:flex max-sm:flex-col desktop-1900:h-full desktop-1900:flex desktop-1900:justify-center desktop-1900:items-center desktop-1900:flex-col">
-                      {/* <h2 className="font-display text-xl desktop-1500:text-3xl desktop-1200:pt-5 pt-10 md:text-2xl text-white text-center desktop-1900:text-4xl">
-                  Chitrapur Heritage Foundation, USA
-                </h2>
-                <p className="text-sm md:text-sm text-white text-center px-4 md:px-8">
-                  IRS certified 501c(3) organization, Tax id: 20-2738955
-                </p> */}
-                      <div className=" flex max-sm:flex-col items-center justify-between gap-8 desktop-1200:mt-2 mt-8">
-                        <div className="w-[262px] max-sm:w-[150px] desktop-1500:w-[260px] desktop-1200:w-[240px] desktop-1900:w-[400px] shrink-0 ">
-                          <img
-                            src={slide.image[0]}
-                            alt=""
-                            className="w-full h-auto object-contain"
-                          />
-                        </div>
-
-                        <div className="flex-1 text-center max-w-5xl mx-auto">
-                          <h2 className="font-display text-xl md:text-2xl desktop-1500:text-3xl desktop-1200:text-xl mb-4 md:mb-6 text-white max-sm:px-1 desktop-1900:text-3xl">
-                            {slide.Quotes}
-                          </h2>
-                          <p className="text-sm md:text-xl desktop-1500:text-lg desktop-1200:text-sm desktop-1900:text-2xl text-white mb-6 md:mb-8">
-                            {slide.Author}
-                          </p>
-                        </div>
-
-                        <div className="w-[262px] desktop-1500:w-[260px] desktop-1200:w-[240px] shrink-0 max-sm:w-[150px] desktop-1900:w-[350px] md:block">
-                          {
-                            slide?.image[1] && <img
-                              src={slide.image[1]}
-                              alt=""
-                              className="w-full h-auto object-contain"
-                            />
-                          }
-                        </div>
-                      </div>
-                    </div>
-                  }
                 </div>
               ))}
             </div>

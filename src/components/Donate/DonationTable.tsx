@@ -498,7 +498,7 @@ export default function DonationTable({
         method: "GET",
         redirect: "follow",
       };
-      fetch(`${AdminPanelUrl}/donates?pagination[pageSize]=100`, requestOptions)
+      fetch(`${AdminPanelUrl}/donates?pagination[pageSize]=100&sort[id]=desc`, requestOptions)
         .then((response) => response.json())
         .then((result) => {
           if (result?.data) {

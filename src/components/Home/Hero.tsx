@@ -27,7 +27,7 @@ export default function Hero({ title, subTitle, desc, img, data = [], from = "",
       setCurrentIndex((prevIndex) => 
         prevIndex === data.length - 1 ? 0 : prevIndex + 1
       )
-    }, 5000) // Change image every 5 seconds
+    }, 10000) // Change image every 5 seconds
 
     return () => clearInterval(timer)}
   }, [data])

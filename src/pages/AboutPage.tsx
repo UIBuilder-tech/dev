@@ -74,7 +74,7 @@ export default function AboutPage() {
             Button2Link={PageData.Button2Link}
             isLoading={data?.isLoading || loading}
           />
-          <Vantiga title={PageData.title} description={PageData.description} />
+          <Vantiga title={PageData.vantigaTitle} description={PageData.vantigaDescription} />
           <div id="vision-mission">
             <Vision />
           </div>

@@ -51,7 +51,7 @@ export default function ProjectsCategory({ categoryTitle, }: ProjectsCategoryPro
       };
       
       try {
-        const response = await fetch(`${AdminPanelUrl}/all-projects?populate=*&filters[category][$eq]=${categoryTitle}&sort[id]=desc`, requestOptions);
+        const response = await fetch(`${AdminPanelUrl}/all-projects?populate=*&filters[category][$eq]=${categoryTitle.includes("Women's") ? "Women Empowerment" : categoryTitle}&sort[id]=desc`, requestOptions);
         const result = await response.json();
         if (result?.data) {
           setPrograms(DataProcess(prioritizeItem(result.data,'vantiga')));

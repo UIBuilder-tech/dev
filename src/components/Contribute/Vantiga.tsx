@@ -5,6 +5,8 @@ import aboutBanner from "../../assets/aboutBanner.webp";
 import { useEffect, useState } from "react";
 import DataProcess from "../../utils/dataProcess";
 import { UseDataContext } from "../context/DataContext";
+import about1 from '../../assets/about1.png';
+import about2 from '../../assets/about2.png';
 
 interface Props {
   title?: string;
@@ -133,16 +135,39 @@ export default function Vantiga({ title = "", description = "" }: Props) {
         )}
       </div>
 
-      <div className="container relative z-[10] mx-auto px-4 w-full py-14 md:py-20 desktop-1200:py-10 desktop-1500:py-16 mt-14 desktop-1900:mt-28">
-        <div className="flex flex-col justify-center item-center text-center space-y-5 md:space-y-10 w-full">
-          <h2 className="text-3xl md:text-5xl text-white desktop-1500:text-4xl desktop-1200:text-3xl desktop-1900:text-5xl">
-            {title}
-          </h2>
-          <p className="text-sm md:text-lg text-white mx-auto md:w-[75%] desktop-1200:text-[16px] desktop-1500:text-[18px] desktop-1900:text-xl">
-            {description}
-          </p>
-        </div>
+      <div className="container relative z-[10] mx-auto px-4 w-full max-sm:py-14 py-4 mt-14 desktop-1900:mt-28">
+      <div className=" flex max-sm:flex-col items-center justify-between gap-8 desktop-1200:mt-2 mt-8">
+                        
+
+                        <div className="flex flex-col justify-center item-center desktop-1200:h-[250px] desktop-1500:h-[300px] desktop-1900:h-[450px] text-center space-y-5 md:space-y-10 w-full max-sm:py-5">
+                          <h2 className="text-xl md:text-5xl text-white desktop-1500:text-2xl desktop-1200:text-xl desktop-1900:text-3xl md:w-[69%] mx-auto ">
+                            {title}
+                          </h2>
+                          <p className={`text-sm md:text-lg text-white mx-auto ${location?.pathname?.includes("/project") ? 'md:w-[75%]' : 'md:w-[55%]'} desktop-1200:text-[14px] desktop-1500:text-[18px] desktop-1900:text-xl`}>
+                            {description}
+                          </p>
+                        </div>
+
+                        
+                      </div>
       </div>
+{location?.pathname?.includes("about") && <>      <div className="w-[262px] max-sm:hidden desktop-1500:w-[275px] desktop-1200:w-[250px] desktop-1900:w-[400px] shrink-0 absolute bottom-0 z-[10] left-0">
+                          <img
+                            src={about1}
+                            alt=""
+                            className="w-full h-auto object-contain"
+                          />
+                        </div>
+      <div className="w-[262px] desktop-1500:w-[260px] desktop-1200:w-[240px] shrink-0 max-sm:hidden desktop-1900:w-[350px] md:block absolute bottom-0 z-[10] right-0">
+                          {
+                            about2 && <img
+                              src={about2}
+                              alt=""
+                              className="w-full h-auto object-contain"
+                            />
+                          }
+                        </div>
+                        </>}
 
       {/* Bottom border pattern */}
       {location?.pathname?.includes("/project") && (
@@ -158,7 +183,7 @@ export default function Vantiga({ title = "", description = "" }: Props) {
           <img
             src={aboutBanner}
             alt="Mountain"
-            className="w-full object-cover max-sm:max-h-[700px] desktop-1500:max-h-[495px] desktop-1200:max-h-[445px]"
+            className="w-full object-cover max-sm:h-[600px] desktop-1500:max-h-[800px] desktop-1200:max-h-[475  px]"
           />
         </div>
       )}
