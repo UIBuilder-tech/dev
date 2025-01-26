@@ -24,12 +24,12 @@ const InfoIcon =
 
 const STATUS_CONTENT_MAP = {
   succeeded: {
-    text: "Payment succeeded",
+    text: "Payment succeeded!",
     iconColor: "#30B130",
     icon: SuccessIcon,
   },
   processing: {
-    text: "Your payment is processing.",
+    text: "Your payment is processing....",
     iconColor: "#6D6E78",
     icon: InfoIcon,
   },
@@ -39,9 +39,9 @@ const STATUS_CONTENT_MAP = {
     icon: ErrorIcon,
   },
   default: {
-    text: "Something went wrong, please try again.",
-    iconColor: "#DF1B41",
-    icon: ErrorIcon,
+    text: "Please wait...",
+    iconColor: "#6D6E78",
+    icon: InfoIcon,
   }
 };
 export default function CompletePage() {
@@ -128,7 +128,7 @@ export default function CompletePage() {
         ...UserSessionData
       }
       // ApiCalling("/submitForm", "POST", userData).then(() => {
-      toast.success("Payment successfully Done!");
+      // toast.success("Payment successfully Done!");
       // }).catch(err => {
       //   toast.error(err.message)
       // });
