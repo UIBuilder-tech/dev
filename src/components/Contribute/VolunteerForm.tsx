@@ -225,7 +225,7 @@ export default function VolunteerForm({initialFormData}:Props) {
               </p>
 
               <p className="text-[#808080] font-medium leading-6">
-                Become a part of the solution to community's challenges by
+                Become a part of the solution to the challenges faced by the community by
                 showing them how even your smallest action can make a
                 significant difference in the lives of others. For more
                 information on how you can become a CHF Volunteer, please
