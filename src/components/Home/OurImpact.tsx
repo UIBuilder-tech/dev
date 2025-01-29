@@ -20,24 +20,27 @@ interface ImpactCard {
 const AdminPanelUrl = import.meta.env.VITE_ADMIN_PANEL_API;
 export default function ImpactSection() {
   const [impactCards, setImpactCards] = useState<ImpactCard[] | null>(null);
-  const [activeCard, setActiveCard] = useState({});
+  const [activeCard, setActiveCard] = useState<ImpactCard | null>(null);
 
   const handleCardClick = (card: ImpactCard) => {
-    if (card.id !== activeCard?.id) {
+    if (card?.title !== activeCard?.title) {
       setActiveCard(card);
     }
   };
   useEffect(() => {
     const requestOptions: RequestInit = {
-      method: 'GET',
-      redirect: 'follow'
+      method: "GET",
+      redirect: "follow",
     };
 
-    fetch(`${AdminPanelUrl}/home-page?populate[Our_Impact_Big_Card][populate]=*`, requestOptions)
-      .then(response => response.json())
-      .then(result => {
+    fetch(
+      `${AdminPanelUrl}/home-page?populate[Our_Impact_Big_Card][populate]=*`,
+      requestOptions
+    )
+      .then((response) => response.json())
+      .then((result) => {
         if (result?.data?.Our_Impact_Big_Card) {
-          const data = result.data?.Our_Impact_Big_Card
+          const data = result.data?.Our_Impact_Big_Card;
           const newData = data.map((item: any) => {
             const id = item.SubTitle.replace(" ", "_").toLowerCase();
             return {
@@ -46,7 +49,7 @@ export default function ImpactSection() {
               subtitle: item.SubTitle,
               description: item.Description,
               linkTo: item.linkTo,
-              donationLink:item.donationLink,
+              donationLink: item.donationLink,
               // linkTo: id,
               stats1: item?.stats?.[0] || null,
               stats2: item?.stats?.[1] || null,
@@ -57,9 +60,9 @@ export default function ImpactSection() {
           setActiveCard(newData[0]);
           setImpactCards(newData);
         }
-      }).catch(error => console.log('error', error));
-  }, [])
-
+      })
+      .catch((error) => console.log("error", error));
+  }, []);
 
   return (
     <div className="py-8 px-4 md:p-8 bg-cream md:mx-14 desktop-1900:mx-16">
@@ -73,7 +76,7 @@ export default function ImpactSection() {
             <div className="lg:col-span-1">
               <AnimatePresence mode="wait">
                 <motion.div
-                  key={activeCard?.id}
+                  key={activeCard?.title}
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
@@ -154,10 +157,11 @@ export default function ImpactSection() {
                 {activeCard?.stats2 && (
                   <div className="bg-[#F4F5F7] p-3 md:p-6 flex flex-col space-y-2 items-center justify-center rounded-xl">
                     <div
-                      className={`font-bold text-[#0066FF] ${activeCard?.stats2?.values?.includes("%")
+                      className={`font-bold text-[#0066FF] ${
+                        activeCard?.stats2?.values?.includes("%")
                           ? "text-2xl md:text-4xl desktop-1500:text-4xl desktop-1200:text-3xl desktop-1200:-mx-5"
                           : "text-3xl md:text-5xl desktop-1500:text-5xl desktop-1200:text-4xl"
-                        }`}
+                      }`}
                     >
                       {activeCard?.stats2?.values}
                     </div>
@@ -184,9 +188,10 @@ export default function ImpactSection() {
           <div className="grid grid-cols-3 md:grid-cols-3 gap-2 md:gap-6 mt-4 md:mt-6">
             {impactCards.map((card) => (
               <motion.div
-                key={card.id}
-                className={`relative h-[200px] desktop-1200:h-[300px] md:h-[350px] desktop-1500:h-[350px] rounded-xl md:rounded-3xl overflow-hidden cursor-pointer ${activeCard?.id === card.id ? "ring-2 ring-primary" : ""
-                  }`}
+                key={card.title}
+                className={`relative h-[200px] desktop-1200:h-[300px] md:h-[350px] desktop-1500:h-[350px] rounded-xl md:rounded-3xl overflow-hidden cursor-pointer ${
+                  activeCard?.id === card.id ? "ring-2 ring-primary" : ""
+                }`}
                 onClick={() => handleCardClick(card)}
                 whileHover={{ scale: 1.02 }}
               >
@@ -211,8 +216,11 @@ export default function ImpactSection() {
                         )}
                       </div>
                       <div
-                        className={`h-0.5 bg-white transition-all duration-500 ${activeCard?.id === card.id ? "w-[80%]" : "w-10 md:w-24"
-                          }`}
+                        className={`h-0.5 bg-white transition-all duration-500 ${
+                          activeCard?.id === card.id
+                            ? "w-[80%]"
+                            : "w-10 md:w-24"
+                        }`}
                       />
                     </div>
                     {activeCard?.id === card.id ? (
