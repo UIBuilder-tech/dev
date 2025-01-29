@@ -42,9 +42,9 @@ export default function ImpactSection() {
         if (result?.data?.Our_Impact_Big_Card) {
           const data = result.data?.Our_Impact_Big_Card;
           const newData = data.map((item: any) => {
-            const id = item.SubTitle.replace(" ", "_").toLowerCase();
+            // const id = item.SubTitle.replace(" ", "_").toLowerCase();
             return {
-              id: id,
+              id: item.id,
               title: item.Title,
               subtitle: item.SubTitle,
               description: item.Description,
