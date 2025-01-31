@@ -105,7 +105,7 @@ export default function FAQSection() {
 
       <div className="relative z-[10] mx-auto max-w-3xl">
         <h1 className="mb-12 text-3xl md:text-5xl text-primary desktop-1900:text-6xl">
-          FAQ's
+          FAQs
         </h1>
 
         <div
