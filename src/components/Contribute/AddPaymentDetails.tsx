@@ -140,7 +140,7 @@ export default function PaymentForm({
           donAmt: totalDonationAmount, // Total donation amount
           donorName: `${formData?.FirstName} ${formData?.LastName}`, // Full name of the donor
           displayName: `${baseDonationId}-${formData?.FirstName}-${formData?.LastName
-            }-${formData.paymentMethod === "cheque" ? "Check" :formData.paymentMethod === "Zelle" ? "Zelle" : "Online"}`, // Display name for the donation record
+            }-${formData.paymentMethod === "check" ? "Check" :formData.paymentMethod === "Zelle" ? "Zelle" : "Online"}`, // Display name for the donation record
           donorEmail: formData?.Email, // Donor's email
           donorMobile: formData?.Phone, // Donor's mobile number
           donorBillSt: formData?.address, // Donor's billing street
@@ -166,7 +166,7 @@ export default function PaymentForm({
               // toast.success(response?.message);
               sessionStorage.setItem("Opportunity",response?.opportunity)
               if (
-                formData.paymentMethod === "cheque" ||
+                formData.paymentMethod === "check" ||
                 formData.paymentMethod === "zelle"
               ){
               setModalContent(formData.paymentMethod);
@@ -484,14 +484,14 @@ export default function PaymentForm({
                   disabled={IsFormValidate}
                   type="radio"
                   name="paymentMethod"
-                  value="cheque"
-                  checked={formData.paymentMethod === "cheque"}
+                  value="check"
+                  checked={formData.paymentMethod === "check"}
                   onChange={handleInputChange}
                   className="w-6 h-6 text-primary"
                 />
                 <div className="bg-white rounded-md w-full p-3 md:p-6 desktop-1200:p-4 desktop-1500:p-5 desktop-1900:p-7">
                   <span className="max-sm:text-sm desktop-1200:text-sm desktop-1500:text-base desktop-1900:text-xl">
-                    Offline <span className="italic">(Cheque)</span>
+                    Offline <span className="italic">(check)</span>
                   </span>
                 </div>
               </label>

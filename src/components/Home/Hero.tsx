@@ -16,6 +16,7 @@ interface Props {
   data?: [];
   isLoading?: boolean;
 }
+const slideInterval = import.meta.env.VITE_API_SLIDE_INTERVAL_SEC;
 
 export default function Hero({ title, subTitle, desc, img, data = [], from = "", button2 = 'Donate', button1 = 'Join Us',isLoading = false ,Button1Link=null,Button2Link=null }: Props) {
   const [currentIndex, setCurrentIndex] = useState(-1)
@@ -27,7 +28,7 @@ export default function Hero({ title, subTitle, desc, img, data = [], from = "",
       setCurrentIndex((prevIndex) => 
         prevIndex === data.length - 1 ? 0 : prevIndex + 1
       )
-    }, 10000) // Change image every 5 seconds
+    }, slideInterval*1000) // Change image every 5 seconds
 
     return () => clearInterval(timer)}
   }, [data])

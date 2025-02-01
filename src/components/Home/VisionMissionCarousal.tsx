@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import Mission from "./Mission";
 import Vision from "./Vision";
+const slideInterval = import.meta.env.VITE_API_SLIDE_INTERVAL_SEC;
 
 function VisionMissionCarousal() {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -9,7 +10,7 @@ function VisionMissionCarousal() {
   useEffect(() => {
     const interval = setInterval(() => {
       setActiveIndex((current) => (current === 0 ? 1 : 0));
-    }, 50000);
+    }, slideInterval*1000);
 
     return () => clearInterval(interval);
   }, []);

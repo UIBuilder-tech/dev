@@ -101,7 +101,11 @@ function App() {
           />
           <Route
             path="/reset-password/:uidb64/:token"
-            element={<ForgotPassword />}
+            element={<ForgotPassword isForgot={false}/>}
+          /> 
+          <Route
+            path="/forgot-password/:uidb64/:token"
+            element={<ForgotPassword isForgot={true}/>}
           />
         </Routes>
         <ImagePreview />

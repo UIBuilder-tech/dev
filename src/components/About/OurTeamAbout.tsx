@@ -9,6 +9,7 @@ interface Member {
   image: string;
 }
 const AdminPanelUrl = import.meta.env.VITE_ADMIN_PANEL_API;
+const slideInterval = import.meta.env.VITE_API_SLIDE_INTERVAL_SEC;
 export default function OurTeamAbout() {
   const [TeamMembers, setTeamMembers] = useState(null);
   const [currentPage, setCurrentPage] = useState(0);
@@ -55,7 +56,7 @@ export default function OurTeamAbout() {
         setCurrentPage((prevPage) => (prevPage + 1) % totalPages);
         setIsAnimating(false);
       }, 500); // Half of the transition duration
-    }, 5000); // Change slide every 5 seconds
+    }, slideInterval*1000); // Change slide every 5 seconds
 
     return () => {
       clearInterval(timer);

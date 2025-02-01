@@ -1,7 +1,8 @@
 import { useState, FormEvent, useEffect } from "react";
-import {  Phone, Mail } from "lucide-react";
+import { Phone, Mail } from "lucide-react";
 import volunteerGroup from "../../assets/volunteerGroup.svg";
 import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 
 interface FormData {
   category: string;
@@ -30,15 +31,16 @@ interface FormType {
   amount: number | null; // Total amount
 }
 
-interface Props{
+interface Props {
   initialFormData: FormType
 }
 
 interface FormErrors {
   [key: string]: string;
 }
+const AdminPanelUrl = import.meta.env.VITE_ADMIN_PANEL_API;
 
-export default function VolunteerForm({initialFormData}:Props) {
+export default function VolunteerForm({ initialFormData }: Props) {
   const [formData, setFormData] = useState<FormData>({
     category: "",
     name: "",
@@ -49,24 +51,24 @@ export default function VolunteerForm({initialFormData}:Props) {
     zipCode: "",
     country: "",
   });
-
+  const [PageData, setPageData] = useState({});
   const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
 
 
-    // Synchronize formData with initialFormData
-    useEffect(() => {
-      setFormData({
-        category: "",
-        name: initialFormData?.FirstName ? `${initialFormData?.FirstName} ${initialFormData?.LastName}` : '',
-        email: initialFormData?.Email,
-        phone: initialFormData?.Phone,
-        address: initialFormData?.address,
-        city: initialFormData?.city,
-        zipCode: initialFormData?.zipCode,
-        country: initialFormData?.country,
-      });
-    }, [initialFormData]);
+  // Synchronize formData with initialFormData
+  useEffect(() => {
+    setFormData({
+      category: "",
+      name: initialFormData?.FirstName ? `${initialFormData?.FirstName} ${initialFormData?.LastName}` : '',
+      email: initialFormData?.Email,
+      phone: initialFormData?.Phone,
+      address: initialFormData?.address,
+      city: initialFormData?.city,
+      zipCode: initialFormData?.zipCode,
+      country: initialFormData?.country,
+    });
+  }, [initialFormData]);
 
   const validateForm = (): boolean => {
     const newErrors: FormErrors = {};
@@ -109,7 +111,7 @@ export default function VolunteerForm({initialFormData}:Props) {
 
   const submitToGoogleForms = async () => {
     const formUrl = 'https://docs.google.com/forms/d/1au5bKnT9xyD2IlIHZuc8aBd5VcC-bZU8KcjiRNTWwl0/formResponse';
-    
+
     // Create URL encoded data
     const formDataEncoded = new URLSearchParams();
     formDataEncoded.append('entry.816547937', formData.category);
@@ -147,7 +149,7 @@ export default function VolunteerForm({initialFormData}:Props) {
 
       // Set form target to the hidden iframe
       form.target = 'hidden-iframe';
-      
+
       // Submit the form
       form.submit();
 
@@ -206,7 +208,24 @@ export default function VolunteerForm({initialFormData}:Props) {
       setErrors((prev) => ({ ...prev, [name]: "" }));
     }
   };
+  useEffect(() => {
+    const api = async () => {
+      const requestOptions: any = {
+        method: 'GET',
+        redirect: 'follow'
+      };
+      fetch(`${AdminPanelUrl}/volunteer-section`, requestOptions)
+        .then(response => response.json())
+        .then(result => {
+          if (result?.data) {
+            setPageData(result.data)
+          }
+        })
+        .catch(error => console.log('error', error));
+    }
 
+    api();
+  }, [])
   // Rest of your component remains exactly the same...
   return (
     <div className="bg-white relative">
@@ -218,38 +237,35 @@ export default function VolunteerForm({initialFormData}:Props) {
         <div className="grid grid-cols-1 lg:grid-cols-[1.75fr_1fr] gap-10 md:gap-16">
           {/* Left Column - Description and Image */}
           <div className="space-y-8">
-            <div className="space-y-6 md:text-xl max-w-[80%] max-sm:contents desktop-1200:text-sm desktop-1500:text-lg desktop-1900:text-xl">
-              <p className="text-[#808080] font-medium leading-6">
-                We offer volunteering opportunities in the US as well as
-                community projects in and around Chitrapur/Shirali.
-              </p>
+            {
+              PageData && <div className="space-y-6 md:text-xl max-w-[80%] max-sm:contents desktop-1200:text-sm desktop-1500:text-lg desktop-1900:text-xl">
+                <p className="text-[#808080] font-medium leading-6">
+                  {PageData.Title}
+                </p>
 
-              <p className="text-[#808080] font-medium leading-6">
-                Become a part of the solution to the challenges faced by the community by
-                showing them how even your smallest action can make a
-                significant difference in the lives of others. For more
-                information on how you can become a CHF Volunteer, please
-                contact us via phone or email as shown below-
-              </p>
+                <p className="text-[#808080] font-medium leading-6">
+                  {PageData.Description}
+                </p>
 
-              <div className="space-y-3">
-                <a
-                  href="tel:(215) 666 3200"
-                  className="flex items-center gap-2 text-[#516072] hover:text-primary/90"
-                >
-                  <Phone className="h-5 w-5 text-secondary" />
-                  <span className="underline">(215) 666 3200</span>
-                </a>
+                <div className="space-y-3">
+                  <Link
+                    to={`tel:${PageData.Phone}`}
+                    className="flex items-center gap-2 text-[#516072] hover:text-primary/90"
+                  >
+                    <Phone className="h-5 w-5 text-secondary" />
+                    <span className="underline">{PageData.Phone}</span>
+                  </Link>
 
-                <a
-                  href="mailto:contactus@chfusa.org"
-                  className="flex items-center gap-2 text-[#516072] hover:text-primary/90"
-                >
-                  <Mail className="h-5 w-5 text-secondary" />
-                  <span className="underline">contactus@chfusa.org</span>
-                </a>
+                  <Link
+                    to={`mailto:${PageData.Email}`}
+                    className="flex items-center gap-2 text-[#516072] hover:text-primary/90"
+                  >
+                    <Mail className="h-5 w-5 text-secondary" />
+                    <span className="underline">{PageData.Email}</span>
+                  </Link>
+                </div>
               </div>
-            </div>
+            }
 
             {/* Illustration */}
             <div className="absolute bottom-0">
@@ -272,9 +288,8 @@ export default function VolunteerForm({initialFormData}:Props) {
                   name="category"
                   value={formData.category}
                   onChange={handleInputChange}
-                  className={`w-full border-b ${
-                    errors.category ? "border-red-500" : "border-gray-200"
-                  } py-3 focus:outline-none focus:border-primary bg-transparent`}
+                  className={`w-full border-b ${errors.category ? "border-red-500" : "border-gray-200"
+                    } py-3 focus:outline-none focus:border-primary bg-transparent`}
                 >
                   <option value="">Select Category</option>
                   <option value="education">Education</option>
@@ -307,9 +322,8 @@ export default function VolunteerForm({initialFormData}:Props) {
                   name="email"
                   value={formData.email}
                   onChange={handleInputChange}
-                  className={`w-full border-b ${
-                    errors.email ? "border-red-500" : "border-gray-200"
-                  } py-3 focus:outline-none focus:border-primary desktop-1200:text-base desktop-1500:text-lg desktop-1900:text-xl`}
+                  className={`w-full border-b ${errors.email ? "border-red-500" : "border-gray-200"
+                    } py-3 focus:outline-none focus:border-primary desktop-1200:text-base desktop-1500:text-lg desktop-1900:text-xl`}
                   placeholder="Email Address"
                 />
                 {errors.email && (
@@ -323,9 +337,8 @@ export default function VolunteerForm({initialFormData}:Props) {
                   name="phone"
                   value={formData.phone}
                   onChange={handleInputChange}
-                  className={`w-full border-b ${
-                    errors.phone ? "border-red-500" : "border-gray-200"
-                  } py-3 focus:outline-none focus:border-primary desktop-1200:text-base desktop-1500:text-lg desktop-1900:text-xl`}
+                  className={`w-full border-b ${errors.phone ? "border-red-500" : "border-gray-200"
+                    } py-3 focus:outline-none focus:border-primary desktop-1200:text-base desktop-1500:text-lg desktop-1900:text-xl`}
                   placeholder="Phone Number"
                 />
                 {errors.phone && (
@@ -339,9 +352,8 @@ export default function VolunteerForm({initialFormData}:Props) {
                   name="address"
                   value={formData.address}
                   onChange={handleInputChange}
-                  className={`w-full border-b ${
-                    errors.address ? "border-red-500" : "border-gray-200"
-                  } py-3 focus:outline-none focus:border-primary desktop-1200:text-base desktop-1500:text-lg desktop-1900:text-xl`}
+                  className={`w-full border-b ${errors.address ? "border-red-500" : "border-gray-200"
+                    } py-3 focus:outline-none focus:border-primary desktop-1200:text-base desktop-1500:text-lg desktop-1900:text-xl`}
                   placeholder="Address"
                 />
                 {errors.address && (
@@ -356,9 +368,8 @@ export default function VolunteerForm({initialFormData}:Props) {
                     name="city"
                     value={formData.city}
                     onChange={handleInputChange}
-                    className={`w-full border-b ${
-                      errors.city ? "border-red-500" : "border-gray-200"
-                    } py-3 focus:outline-none focus:border-primary desktop-1200:text-base desktop-1500:text-lg desktop-1900:text-xl`}
+                    className={`w-full border-b ${errors.city ? "border-red-500" : "border-gray-200"
+                      } py-3 focus:outline-none focus:border-primary desktop-1200:text-base desktop-1500:text-lg desktop-1900:text-xl`}
                     placeholder="City"
                   />
                   {errors.city && (
@@ -371,9 +382,8 @@ export default function VolunteerForm({initialFormData}:Props) {
                     name="zipCode"
                     value={formData.zipCode}
                     onChange={handleInputChange}
-                    className={`w-full border-b ${
-                      errors.zipCode ? "border-red-500" : "border-gray-200"
-                    } py-3 focus:outline-none focus:border-primary desktop-1200:text-base desktop-1500:text-lg desktop-1900:text-xl`}
+                    className={`w-full border-b ${errors.zipCode ? "border-red-500" : "border-gray-200"
+                      } py-3 focus:outline-none focus:border-primary desktop-1200:text-base desktop-1500:text-lg desktop-1900:text-xl`}
                     placeholder="Zip Code"
                   />
                   {errors.zipCode && (
@@ -387,9 +397,8 @@ export default function VolunteerForm({initialFormData}:Props) {
                   name="country"
                   value={formData.country}
                   onChange={handleInputChange}
-                  className={`w-full border-b ${
-                    errors.country ? "border-red-500" : "border-gray-200"
-                  } py-3 focus:outline-none focus:border-primary desktop-1200:text-base desktop-1500:text-lg desktop-1900:text-xl`}
+                  className={`w-full border-b ${errors.country ? "border-red-500" : "border-gray-200"
+                    } py-3 focus:outline-none focus:border-primary desktop-1200:text-base desktop-1500:text-lg desktop-1900:text-xl`}
                 >
                   <option value="">Country</option>
                   <option value="US">United States</option>

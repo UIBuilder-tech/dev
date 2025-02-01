@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Heart } from "lucide-react";
 import { Link } from "react-router-dom";
 const AdminPanelUrl = import.meta.env.VITE_ADMIN_PANEL_API;
+const slideInterval = import.meta.env.VITE_API_SLIDE_INTERVAL_SEC;
 
 export default function Vision() {
   const [activeSlide, setActiveSlide] = useState(0);
@@ -32,7 +33,7 @@ export default function Vision() {
       }).catch(error => console.log('error', error));
     const interval = setInterval(() => {
       setActiveSlide((prevSlide) => (prevSlide + 1) % 2);
-    }, 9000); // Change slide every 5 seconds
+    }, slideInterval*1000); // Change slide every 5 seconds
 
     return () => clearInterval(interval);
   }, [])
