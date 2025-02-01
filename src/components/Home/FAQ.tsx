@@ -123,7 +123,7 @@ export default function FAQSection() {
 
       <div className="relative z-[10] mx-auto max-w-3xl">
         <h1 className="mb-12 text-3xl md:text-5xl text-primary desktop-1900:text-6xl">
-          FAQ's
+          FAQs
         </h1>
         <div
           className="space-y-4 max-h-[450px] desktop-1900:max-h-[400px] overflow-y-scroll "
