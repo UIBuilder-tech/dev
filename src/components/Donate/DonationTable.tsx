@@ -562,7 +562,7 @@ export default function DonationTable({
               onClick={() => toggleCategory(category.id)}
               className="w-full flex items-center justify-between py-4 text-left"
             >
-              <span className="font-semibold text-lg ">{category.name}</span>
+              <span className="font-semibold text-lg ">{category.name === "WOMEN EMPOWERMENT" ? "WOMEN'S EMPOWERMENT" : category.name}</span>
               {expandedCategories.includes(category.id) ? (
                 <ChevronUp className="h-5 w-5" />
               ) : (
