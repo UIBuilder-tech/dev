@@ -8,7 +8,6 @@ import { Loader } from "lucide-react";
 import PaymentModal from "./PaymentModal";
 import paypal from "../../assets/paypal.svg";
 
-
 interface FormErrors {
   [key: string]: string;
 }
@@ -112,22 +111,6 @@ export default function PaymentForm({
     return Object.keys(newErrors).length === 0;
   };
 
-  // Synchronize formData with initialFormData
-  useEffect(() => {
-    setFormData({
-      ...formData,
-      FirstName: initialFormData?.FirstName ? initialFormData?.FirstName : "",
-      LastName: initialFormData?.LastName ? initialFormData?.LastName : "",
-      Email: initialFormData?.Email,
-      Phone: initialFormData?.Phone,
-      address: initialFormData?.address,
-      city: initialFormData?.city,
-      zipCode: initialFormData?.zipCode,
-      country: initialFormData?.country,
-      state: initialFormData?.state,
-    });
-  }, [initialFormData]);
-
   useEffect(() => {
     setFormData((v: FormType) => ({ ...v, amount: totalDonationAmount }));
   }, [totalDonationAmount]);
@@ -135,74 +118,81 @@ export default function PaymentForm({
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     if (validateForm()) {
-        setIsFormValidate(true);
-        const payload = {
-          donAmt: totalDonationAmount, // Total donation amount
-          donorName: `${formData?.FirstName} ${formData?.LastName}`, // Full name of the donor
-          displayName: `${baseDonationId}-${formData?.FirstName}-${formData?.LastName
-            }-${formData.paymentMethod === "check" ? "Check" :formData.paymentMethod === "Zelle" ? "Zelle" : "Online"}`, // Display name for the donation record
-          donorEmail: formData?.Email, // Donor's email
-          donorMobile: formData?.Phone, // Donor's mobile number
-          donorBillSt: formData?.address, // Donor's billing street
-          donorCity: formData?.city, // Donor's billing city
-          donorState: formData?.state, // Donor's billing state
-          donorZip: formData?.zipCode, // Donor's billing zip/postal code
-          donorCountry: formData?.country, // Donor's billing country
-          tnxId: formData?.paymentMethod, // Transaction ID or payment mode
-          donationCategories: selectedProjects, // Array of donation category objects
-        };
-        setData(v => ({ ...v, isLoading: true }))
+      setIsFormValidate(true);
+      const payload = {
+        donAmt: totalDonationAmount, // Total donation amount
+        donorName: `${formData?.FirstName} ${formData?.LastName}`, // Full name of the donor
+        displayName: `${baseDonationId}-${formData?.FirstName}-${
+          formData?.LastName
+        }-${
+          formData.paymentMethod === "check"
+            ? "Check"
+            : formData.paymentMethod === "Zelle"
+            ? "Zelle"
+            : "Online"
+        }`, // Display name for the donation record
+        donorEmail: formData?.Email, // Donor's email
+        donorMobile: formData?.Phone, // Donor's mobile number
+        donorBillSt: formData?.address, // Donor's billing street
+        donorCity: formData?.city, // Donor's billing city
+        donorState: formData?.state, // Donor's billing state
+        donorZip: formData?.zipCode, // Donor's billing zip/postal code
+        donorCountry: formData?.country, // Donor's billing country
+        tnxId: formData?.paymentMethod, // Transaction ID or payment mode
+        donationCategories: selectedProjects, // Array of donation category objects
+      };
+      setData((v) => ({ ...v, isLoading: true }));
 
-        fetch(`${BASE_URL}/api/donate/create`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(payload),
-        })
-          .then((resp) => resp?.json())
-          .then((response) => {
-            if (response?.success) {
-              // toast.success(response?.message);
-              sessionStorage.setItem("Opportunity",response?.opportunity)
-              if (
-                formData.paymentMethod === "check" ||
-                formData.paymentMethod === "zelle"
-              ){
+      fetch(`${BASE_URL}donate/create`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      })
+        .then((resp) => resp?.json())
+        .then((response) => {
+          if (response?.success) {
+            // toast.success(response?.message);
+            sessionStorage.setItem("Opportunity", response?.opportunity);
+            if (
+              formData.paymentMethod === "check" ||
+              formData.paymentMethod === "zelle"
+            ) {
               setModalContent(formData.paymentMethod);
               setShowModal(true);
-            }else if (formData.paymentMethod === "online") {
-                fetch(`${BASE_URL}/create-payment-intent`, {
-                  method: "POST",
-                  headers: { "Content-Type": "application/json" },
-                  body: JSON.stringify({ items: [{ ...formData }] }),
+            } else if (formData.paymentMethod === "online") {
+              fetch(`${BASE_URL}create-payment-intent`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ items: [{ ...formData }] }),
+              })
+                .then((res) => res.json())
+                .then((data) => {
+                  setData((v) => ({ ...v, clientSecret: data.clientSecret }));
+                  sessionStorage.setItem("clientSecret", data.clientSecret);
+                  // Save data to sessionStorage
+                  sessionStorage.setItem("formdata", JSON.stringify(formData));
+
+                  navigation("checkout");
                 })
-                  .then((res) => res.json())
-                  .then((data) => {
-                    setData((v) => ({ ...v, clientSecret: data.clientSecret }));
-                    sessionStorage.setItem("clientSecret", data.clientSecret);
-                    // Save data to sessionStorage
-                    sessionStorage.setItem("formdata", JSON.stringify(formData));
-        
-                    navigation("checkout");
-                  })
-                  .catch((err) => {
-                    toast.error(err.message);
-                  })
-              }
-            } else {
-              toast.error(response?.message);
+                .catch((err) => {
+                  toast.error(err.message);
+                });
             }
-          })
-          .catch((error) => {
-            setIsFormValidate(false);
-            toast.error("Something went wrong. Please try again later.");
-            console.error(error);
-          })
-          .finally(() => {
-            setData(v => ({ ...v, isLoading: false }))
-            setIsFormValidate(false);
-          });
+          } else {
+            toast.error(response?.message);
+          }
+        })
+        .catch((error) => {
+          setIsFormValidate(false);
+          toast.error("Something went wrong. Please try again later.");
+          console.error(error);
+        })
+        .finally(() => {
+          setData((v) => ({ ...v, isLoading: false }));
+          setIsFormValidate(false);
+        });
     }
   };
 
@@ -234,6 +224,23 @@ export default function PaymentForm({
       }));
     }
   }, [data]);
+
+  // Synchronize formData with initialFormData
+  useEffect(() => {
+    console.log(initialFormData);
+    setFormData({
+      ...formData,
+      FirstName: initialFormData?.FirstName ? initialFormData?.FirstName : "",
+      LastName: initialFormData?.LastName ? initialFormData?.LastName : "",
+      Email: initialFormData?.Email,
+      Phone: initialFormData?.Phone,
+      address: initialFormData?.address,
+      city: initialFormData?.city,
+      zipCode: initialFormData?.zipCode,
+      country: initialFormData?.country,
+      state: initialFormData?.state,
+    });
+  }, [initialFormData]);
 
   return (
     <div className="md:mx-8 p-6 md:p-12 py-16 desktop-1200:p-14 desktop-1500:p-16 desktop-1900:p-24">
@@ -281,8 +288,9 @@ export default function PaymentForm({
                 value={formData.Email}
                 disabled={IsFormValidate}
                 onChange={handleInputChange}
-                className={`w-full border-b ${errors.Email ? "border-red-500" : "border-gray-200"
-                  } py-3 focus:outline-none focus:border-primary desktop-1200:text-base desktop-1500:text-lg desktop-1900:text-xl`}
+                className={`w-full border-b ${
+                  errors.Email ? "border-red-500" : "border-gray-200"
+                } py-3 focus:outline-none focus:border-primary desktop-1200:text-base desktop-1500:text-lg desktop-1900:text-xl`}
                 placeholder="Email Address"
               />
               {errors.Email && (
@@ -298,8 +306,9 @@ export default function PaymentForm({
                 name="Phone"
                 value={formData.Phone}
                 onChange={handleInputChange}
-                className={`w-full border-b ${errors.Phone ? "border-red-500" : "border-gray-200"
-                  } py-3 focus:outline-none focus:border-primary desktop-1200:text-base desktop-1500:text-lg desktop-1900:text-xl`}
+                className={`w-full border-b ${
+                  errors.Phone ? "border-red-500" : "border-gray-200"
+                } py-3 focus:outline-none focus:border-primary desktop-1200:text-base desktop-1500:text-lg desktop-1900:text-xl`}
                 placeholder="Phone Number"
               />
               {errors.Phone && (
@@ -315,8 +324,9 @@ export default function PaymentForm({
                 name="address"
                 value={formData.address}
                 onChange={handleInputChange}
-                className={`w-full border-b ${errors.address ? "border-red-500" : "border-gray-200"
-                  } py-3 focus:outline-none focus:border-primary desktop-1200:text-base desktop-1500:text-lg desktop-1900:text-xl`}
+                className={`w-full border-b ${
+                  errors.address ? "border-red-500" : "border-gray-200"
+                } py-3 focus:outline-none focus:border-primary desktop-1200:text-base desktop-1500:text-lg desktop-1900:text-xl`}
                 placeholder="Address"
               />
               {errors.address && (
@@ -333,8 +343,9 @@ export default function PaymentForm({
                   name="city"
                   value={formData.city}
                   onChange={handleInputChange}
-                  className={`w-full border-b ${errors.city ? "border-red-500" : "border-gray-200"
-                    } py-3 focus:outline-none focus:border-primary desktop-1200:text-base desktop-1500:text-lg desktop-1900:text-xl`}
+                  className={`w-full border-b ${
+                    errors.city ? "border-red-500" : "border-gray-200"
+                  } py-3 focus:outline-none focus:border-primary desktop-1200:text-base desktop-1500:text-lg desktop-1900:text-xl`}
                   placeholder="City"
                 />
                 {errors.city && (
@@ -348,8 +359,9 @@ export default function PaymentForm({
                   name="zipCode"
                   value={formData.zipCode}
                   onChange={handleInputChange}
-                  className={`w-full border-b ${errors.zipCode ? "border-red-500" : "border-gray-200"
-                    } py-3 focus:outline-none focus:border-primary desktop-1200:text-base desktop-1500:text-lg desktop-1900:text-xl`}
+                  className={`w-full border-b ${
+                    errors.zipCode ? "border-red-500" : "border-gray-200"
+                  } py-3 focus:outline-none focus:border-primary desktop-1200:text-base desktop-1500:text-lg desktop-1900:text-xl`}
                   placeholder="Zip Code"
                 />
                 {errors.zipCode && (
@@ -365,8 +377,9 @@ export default function PaymentForm({
                 name="state"
                 value={formData.state}
                 onChange={handleInputChange}
-                className={`w-48 border-b ${errors.country ? "border-red-500" : "border-gray-200"
-                  } py-3 focus:outline-none focus:border-primary bg-transparent desktop-1200:text-base desktop-1500:text-lg desktop-1900:text-xl`}
+                className={`w-48 border-b ${
+                  errors.country ? "border-red-500" : "border-gray-200"
+                } py-3 focus:outline-none focus:border-primary bg-transparent desktop-1200:text-base desktop-1500:text-lg desktop-1900:text-xl`}
               >
                 <option value="">Select State</option>
                 <option value="Alabama">Alabama</option>
@@ -427,8 +440,9 @@ export default function PaymentForm({
                 name="country"
                 value={formData.country}
                 onChange={handleInputChange}
-                className={`w-48 border-b ${errors.country ? "border-red-500" : "border-gray-200"
-                  } py-3 focus:outline-none focus:border-primary bg-transparent desktop-1200:text-base desktop-1500:text-lg desktop-1900:text-xl`}
+                className={`w-48 border-b ${
+                  errors.country ? "border-red-500" : "border-gray-200"
+                } py-3 focus:outline-none focus:border-primary bg-transparent desktop-1200:text-base desktop-1500:text-lg desktop-1900:text-xl`}
               >
                 <option value="">Select Country</option>
                 <option value="United States">United States</option>
@@ -463,10 +477,11 @@ export default function PaymentForm({
                 </span>
                 <span className="text-[#516072] text-xl font-medium flex flex-row items-center gap-2 desktop-1200:text-xl desktop-1500:text-2xl desktop-1900:text-4xl">
                   <div
-                    className={`flex items-center justify-center w-6 h-6 ${Number(totalDonationAmount) === 0
+                    className={`flex items-center justify-center w-6 h-6 ${
+                      Number(totalDonationAmount) === 0
                         ? "bg-[#D3D3D3]"
                         : "bg-secondary"
-                      } rounded-full desktop-1200:w-7 desktop-1200:h-7 desktop-1500:w-8 desktop-1500:h-8 desktop-1900:w-12 desktop-1900:h-12`}
+                    } rounded-full desktop-1200:w-7 desktop-1200:h-7 desktop-1500:w-8 desktop-1500:h-8 desktop-1900:w-12 desktop-1900:h-12`}
                   >
                     <span className="text-white text-sm desktop-1200:text-base desktop-1500:text-lg desktop-1900:text-xl">
                       $
@@ -518,12 +533,12 @@ export default function PaymentForm({
                   type="radio"
                   name="paymentMethod"
                   value="online"
-                  checked={formData.paymentMethod === 'online'}
+                  checked={formData.paymentMethod === "online"}
                   onChange={handleInputChange}
                   className="w-6 h-6 text-primary"
                 />
                 <div className="bg-white rounded-md w-full p-3 md:p-6 desktop-1200:p-4 desktop-1500:p-5 desktop-1900:p-7">
-                <span className="max-sm:text-sm desktop-1200:text-sm desktop-1500:text-base desktop-1900:text-xl">
+                  <span className="max-sm:text-sm desktop-1200:text-sm desktop-1500:text-base desktop-1900:text-xl">
                     Online
                   </span>
                 </div>

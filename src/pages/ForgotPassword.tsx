@@ -73,7 +73,7 @@ const ForgotPassword = ({ isForgot = false }) => {
     };
     setIsVerifying(true);
     try {
-      const response = await fetch(`${BASE_URL}/api/auth/${isForgot ? 'forgot-password' : 'reset-password'}`, {
+      const response = await fetch(`${BASE_URL}auth/${isForgot ? 'forgot-password' : 'reset-password'}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

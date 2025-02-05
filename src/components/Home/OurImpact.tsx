@@ -18,6 +18,8 @@ interface ImpactCard {
   donationLink?: string;
 }
 const AdminPanelUrl = import.meta.env.VITE_ADMIN_PANEL_API;
+const AdminPanelImgUrl = import.meta.env.VITE_ADMIN_PANEL_IMG_API;
+
 export default function ImpactSection() {
   const [impactCards, setImpactCards] = useState<ImpactCard[] | null>(null);
   const [activeCard, setActiveCard] = useState<ImpactCard | null>(null);
@@ -54,7 +56,7 @@ export default function ImpactSection() {
               stats1: item?.stats?.[0] || null,
               stats2: item?.stats?.[1] || null,
               stats3: item?.stats?.[2] || null,
-              image: AdminPanelUrl.replace("/api", "") + item.image.url,
+              image: AdminPanelImgUrl + item.image.url,
             };
           });
           setActiveCard(newData[0]);

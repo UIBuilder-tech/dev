@@ -19,7 +19,7 @@ const EmailVerification = () => {
       apiCalledRef.current = true; // Mark API as called
 
       try {
-        const response = await fetch(`${BASE_URL}/activate/${uidb64}/${token}`);
+        const response = await fetch(`${BASE_URL}activate/${uidb64}/${token}`);
         const data = await response.json();
 
         if (data?.success) {

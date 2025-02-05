@@ -5,6 +5,7 @@ import { UseDataContext } from "../context/DataContext";
 import { ImageComponent } from "../../utils/ImageComponent";
 
 const AdminPanelUrl = import.meta.env.VITE_ADMIN_PANEL_API;
+const AdminPanelImgUrl = import.meta.env.VITE_ADMIN_PANEL_IMG_API;
 
 function PhotoGallery() {
   const triggerImagePreview = useImagePreviewTrigger();
@@ -15,26 +16,26 @@ function PhotoGallery() {
     const controller = new AbortController();
 
     const fetchImages = async () => {
-      setData(v => ({ ...v, isLoading: true }));
+      setData((v) => ({ ...v, isLoading: true }));
       try {
         const response = await fetch(
           `${AdminPanelUrl}/gallery-section?populate=*`,
           { signal: controller.signal }
         );
         const result = await response.json();
-        
+
         if (result?.data.image) {
-          const images = result.data.image.map(img => ({
-            image: AdminPanelUrl.replace("/api", "") + img.url
+          const images = result.data.image.map((img) => ({
+            image: AdminPanelImgUrl + img.url,
           }));
           setPageData(images);
         }
       } catch (error) {
-        if (error.name !== 'AbortError') {
+        if (error.name !== "AbortError") {
           console.error("Gallery fetch error:", error);
         }
       } finally {
-        setData(v => ({ ...v, isLoading: false }));
+        setData((v) => ({ ...v, isLoading: false }));
       }
     };
 

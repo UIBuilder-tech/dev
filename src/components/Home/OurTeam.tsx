@@ -8,52 +8,57 @@ import { Link } from "react-router-dom";
 // Sample team data - replace with your actual data
 
 const AdminPanelUrl = import.meta.env.VITE_ADMIN_PANEL_API;
+const AdminPanelImgUrl = import.meta.env.VITE_ADMIN_PANEL_IMG_API;
+
 export default function TeamSection() {
   const [PageData, setPageData] = useState({});
   const [isHovered, setIsHovered] = useState(false);
-  const [teamMembers, setTeamMembers] = useState([])
+  const [teamMembers, setTeamMembers] = useState([]);
   const containerRef = useRef(null);
   const isInView = useInView(containerRef, { once: false, margin: "-100px" });
   const controls = useAnimation();
   useEffect(() => {
     const api = async () => {
       const requestOptions: any = {
-        method: 'GET',
-        redirect: 'follow'
+        method: "GET",
+        redirect: "follow",
       };
-      fetch(`${AdminPanelUrl}/home-page?populate[OurTeam][populate]=*`, requestOptions)
-        .then(response => response.json())
-        .then(result => {
+      fetch(
+        `${AdminPanelUrl}/home-page?populate[OurTeam][populate]=*`,
+        requestOptions
+      )
+        .then((response) => response.json())
+        .then((result) => {
           if (result?.data?.OurTeam) {
-            setPageData(result.data.OurTeam)
+            setPageData(result.data.OurTeam);
           }
         })
-        .catch(error => console.log('error', error));
-    }
+        .catch((error) => console.log("error", error));
+    };
     const api2 = async () => {
       const requestOptions: any = {
-        method: 'GET',
-        redirect: 'follow'
+        method: "GET",
+        redirect: "follow",
       };
       fetch(`${AdminPanelUrl}/teams?populate=Image`, requestOptions)
-        .then(response => response.json())
-        .then(result => {
+        .then((response) => response.json())
+        .then((result) => {
           if (result?.data) {
             const teams = result.data.map((team) => {
               return {
                 name: team.Name,
                 role: team.Designation,
-                image: AdminPanelUrl.replace("/api", "") + team.Image?.url
-              }
-            })
-            setTeamMembers(teams)
+                image: AdminPanelImgUrl + team.Image?.url,
+              };
+            });
+            setTeamMembers(teams);
           }
         })
-        .catch(error => console.log('error', error));
-    }
+        .catch((error) => console.log("error", error));
+    };
     api();
     api2();
-  }, [])
+  }, []);
   useEffect(() => {
     if (isInView && !isHovered) {
       controls.start({
@@ -74,8 +79,8 @@ export default function TeamSection() {
 
   return (
     <>
-      {
-        PageData && <section
+      {PageData && (
+        <section
           ref={containerRef}
           className="relative  flex w-full flex-row items-center justify-center py-10 max-sm:bg-white"
         >
@@ -90,7 +95,10 @@ export default function TeamSection() {
                   {PageData.description}
                 </p>
                 <div className="pt-8">
-                  <Link to='/about#our-team' className="rounded-full border-2 border-primary px-4 py-1 md:px-4 md:py-3 text-primary transition-colors hover:bg-[#4299E1] hover:text-white  text-lg max-sm:text-sm desktop-1900:text-2xl">
+                  <Link
+                    to="/about#our-team"
+                    className="rounded-full border-2 border-primary px-4 py-1 md:px-4 md:py-3 text-primary transition-colors hover:bg-[#4299E1] hover:text-white  text-lg max-sm:text-sm desktop-1900:text-2xl"
+                  >
                     Learn More
                   </Link>
                 </div>
@@ -123,7 +131,12 @@ export default function TeamSection() {
                   ))}
                 </Marquee>
 
-                <Marquee reverse pauseOnHover vertical className="[--duration:10s]">
+                <Marquee
+                  reverse
+                  pauseOnHover
+                  vertical
+                  className="[--duration:10s]"
+                >
                   {teamMembers.map((review, index) => (
                     <div
                       key={`${review.name}-${index}`}
@@ -149,9 +162,7 @@ export default function TeamSection() {
             </div>
           </div>
         </section>
-      }
-
+      )}
     </>
-
   );
 }

@@ -96,7 +96,7 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
       password: formData.Password__c,
     };
     setData(v => ({ ...v, isLoading: true }))
-    fetch(`${BASE_URL}/api/auth/login`, {
+    fetch(`${BASE_URL}auth/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -133,7 +133,7 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
     const payload = {
       forgot_email: formData.Email,
     };
-    fetch(`${BASE_URL}/api/auth/check-email`, {
+    fetch(`${BASE_URL}auth/check-email`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -178,7 +178,7 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
       userconfirmPassword: formData.confirmPassword
     };
     setData(v => ({ ...v, isLoading: true }))
-    fetch(`${BASE_URL}/api/auth/register`, {
+    fetch(`${BASE_URL}auth/register`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

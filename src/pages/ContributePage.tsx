@@ -125,7 +125,7 @@ export default function ContributePage() {
 
       if (Object.keys(user)?.length > 0) {
         setData((v) => ({ ...v, isLoading: true }));
-        fetch(`${BASE_URL}/api/contact?email=${user?.email}`)
+        fetch(`${BASE_URL}contact?email=${user?.email}`)
           .then((resp) => resp?.json())
           .then((response) => {
             if (response) {

@@ -10,6 +10,9 @@ interface Member {
 }
 const AdminPanelUrl = import.meta.env.VITE_ADMIN_PANEL_API;
 const slideInterval = import.meta.env.VITE_API_SLIDE_INTERVAL_SEC;
+const AdminPanelImgUrl = import.meta.env.VITE_ADMIN_PANEL_IMG_API;
+
+
 export default function OurTeamAbout() {
   const [TeamMembers, setTeamMembers] = useState(null);
   const [currentPage, setCurrentPage] = useState(0);
@@ -34,7 +37,7 @@ export default function OurTeamAbout() {
               return {
                 name: team.Name,
                 role: team.Designation,
-                image: AdminPanelUrl.replace("/api", "") + team.Image?.url
+                image: AdminPanelImgUrl + team.Image?.url
               }
             })
             const teamCount = Math.ceil(teams.length / itemsPerPage);

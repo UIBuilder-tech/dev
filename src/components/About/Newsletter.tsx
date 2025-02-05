@@ -41,7 +41,7 @@ function Newsletter() {
     e.preventDefault();
     setData(v => ({ ...v, isLoading: true }))
     setIsDisable(true);
-    ApiCalling(`${BASE_URL}/api/newsletter`, "POST", { SubscriberEmail: email }).then(res => {
+    ApiCalling(`${BASE_URL}newsletter`, "POST", { SubscriberEmail: email }).then(res => {
       toast.success("Subscribed Successfully")
     }).catch((e) => {
     }).finally(() => {

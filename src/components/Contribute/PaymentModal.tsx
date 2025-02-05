@@ -1,6 +1,6 @@
-import React from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { X, CheckCircle, DollarSign, Mail, CreditCard } from 'lucide-react';
+import React from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { X, CheckCircle, DollarSign, Mail, CreditCard } from "lucide-react";
 
 interface PaymentModalProps {
   isOpen: boolean;
@@ -8,24 +8,35 @@ interface PaymentModalProps {
   paymentMethod: string;
 }
 
-const PaymentModal: React.FC<PaymentModalProps> = ({ isOpen, onClose, paymentMethod }) => {
+const PaymentModal: React.FC<PaymentModalProps> = ({
+  isOpen,
+  onClose,
+  paymentMethod,
+}) => {
   const modalContent = {
-    cheque: {
-      title: 'Offline Check Donation',
+    check: {
+      title: "Offline Check Donation",
       icon: <CreditCard className="w-12 h-12 text-secondary" />,
       content: (
         <div className="space-y-4">
-          <p className="font-semibold text-gray-700">Please follow the steps below for Check Payment:</p>
+          <p className="font-semibold text-gray-700">
+            Please follow the steps below for Check Payment:
+          </p>
           <div className="bg-gray-100 p-4 rounded-lg">
-            <p className="font-medium text-gray-800">Send check made payable to:</p>
+            <p className="font-medium text-gray-800">
+              Send check made payable to:
+            </p>
             <p className="text-primary">"Chitrapur Heritage Foundation"</p>
           </div>
           <div className="bg-gray-100 p-4 rounded-lg">
             <p className="font-medium text-gray-800">Mail to:</p>
             <address className="not-italic text-gray-600">
-              The Treasurer,<br />
-              Chitrapur Heritage Foundation USA Inc.<br />
-              P.O. Box 1253<br />
+              The Treasurer,
+              <br />
+              Chitrapur Heritage Foundation USA Inc.
+              <br />
+              P.O. Box 1253
+              <br />
               Langhorne, PA 19047
             </address>
           </div>
@@ -33,19 +44,21 @@ const PaymentModal: React.FC<PaymentModalProps> = ({ isOpen, onClose, paymentMet
       ),
     },
     zelle: {
-      title: 'Offline Zelle Donation',
+      title: "Offline Zelle Donation",
       icon: <DollarSign className="w-12 h-12 text-secondary" />,
       content: (
         <div className="space-y-4">
-          <p className="font-semibold text-gray-700">Please follow these steps for Zelle Payment:</p>
+          <p className="font-semibold text-gray-700">
+            Please follow these steps for Zelle Payment:
+          </p>
           <ol className="list-none space-y-3">
             {[
-              'Send your Zelle payments to our email: donations@chfusa.org',
-              'Login to your bank account (if it offers Zelle)',
-              'Add Chitrapur Heritage Foundation as a Payee',
-              'Zelle offers you option to send money to email or phone number',
-              'Please use our email id donations@chfusa.org',
-              'Indicate how you want us to handle your donation split between Vantiga, Shrivali school, Special Projects (COVID Relief) etc.',
+              "Send your Zelle payments to our email: donations@chfusa.org",
+              "Login to your bank account (if it offers Zelle)",
+              "Add Chitrapur Heritage Foundation as a Payee",
+              "Zelle offers you option to send money to email or phone number",
+              "Please use our email id donations@chfusa.org",
+              "Indicate how you want us to handle your donation split between Vantiga, Shrivali school, Special Projects etc.",
             ].map((step, index) => (
               <li key={index} className="flex items-start">
                 <CheckCircle className="w-5 h-5 text-secondary mr-2 flex-shrink-0 mt-1" />
@@ -58,7 +71,8 @@ const PaymentModal: React.FC<PaymentModalProps> = ({ isOpen, onClose, paymentMet
     },
   };
 
-  const { title, icon, content } = modalContent[paymentMethod as keyof typeof modalContent];
+  const { title, icon, content } =
+    modalContent[paymentMethod as keyof typeof modalContent];
 
   return (
     <AnimatePresence>
@@ -79,7 +93,7 @@ const PaymentModal: React.FC<PaymentModalProps> = ({ isOpen, onClose, paymentMet
             <div className="p-6">
               <div className="flex justify-between items-center mb-4">
                 <h2 className="text-2xl text-gray-800 flex items-center">
-                <div
+                  <div
                     className={`flex items-center justify-center w-6 h-6 bg-secondary rounded-full desktop-1200:w-7 desktop-1200:h-7 desktop-1500:w-8 desktop-1500:h-8 desktop-1900:w-12 desktop-1900:h-12`}
                   >
                     <span className="text-white text-sm desktop-1200:text-base desktop-1500:text-lg desktop-1900:text-xl">
@@ -95,9 +109,7 @@ const PaymentModal: React.FC<PaymentModalProps> = ({ isOpen, onClose, paymentMet
                   <X size={24} />
                 </button>
               </div>
-              <div className="text-gray-600">
-                {content}
-              </div>
+              <div className="text-gray-600">{content}</div>
             </div>
             <div className="bg-gray-100 px-6 py-4 flex items-center justify-between">
               <div className="flex items-center text-sm text-gray-500">
@@ -119,4 +131,3 @@ const PaymentModal: React.FC<PaymentModalProps> = ({ isOpen, onClose, paymentMet
 };
 
 export default PaymentModal;
-

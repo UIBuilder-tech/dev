@@ -67,7 +67,7 @@ export default function DonationTable({
   const { data, setData } = UseDataContext();
   const isMobile = windowWidth < 700; // md breakpoint
   const isTablet = windowWidth >= 700 && windowWidth <= 1099; // md breakpoint
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(true);
 
   const toggleCategory = (categoryId: string) => {
     setExpandedCategories((prev) =>
@@ -498,7 +498,10 @@ export default function DonationTable({
         method: "GET",
         redirect: "follow",
       };
-      fetch(`${AdminPanelUrl}/donates?pagination[pageSize]=100&sort[id]=desc`, requestOptions)
+      fetch(
+        `${AdminPanelUrl}/donates?pagination[pageSize]=100&sort[id]=desc`,
+        requestOptions
+      )
         .then((response) => response.json())
         .then((result) => {
           if (result?.data) {
@@ -529,11 +532,10 @@ export default function DonationTable({
         .catch((error) => {
           console.log("error", error);
         })
-        .finally(()=>{
+        .finally(() => {
           setData((v) => ({ ...v, isLoading: false }));
-          setLoading(false)
-        }
-        )
+          setLoading(false);
+        });
     };
     api();
   }, []);
@@ -562,7 +564,11 @@ export default function DonationTable({
               onClick={() => toggleCategory(category.id)}
               className="w-full flex items-center justify-between py-4 text-left"
             >
-              <span className="font-semibold text-lg ">{category.name === "WOMEN EMPOWERMENT" ? "WOMEN'S EMPOWERMENT" : category.name}</span>
+              <span className="font-semibold text-lg ">
+                {category.name === "WOMEN EMPOWERMENT"
+                  ? "WOMEN'S EMPOWERMENT"
+                  : category.name}
+              </span>
               {expandedCategories.includes(category.id) ? (
                 <ChevronUp className="h-5 w-5" />
               ) : (
