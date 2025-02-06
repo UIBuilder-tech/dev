@@ -3,7 +3,7 @@ const returnUrl = import.meta.env.VITE_RETURN_URL;
 import {
   PaymentElement,
   useStripe,
-  useElements
+  useElements,
 } from "@stripe/react-stripe-js";
 
 export default function CheckoutForm() {
@@ -47,19 +47,28 @@ export default function CheckoutForm() {
 
   const paymentElementOptions = {
     layout: "accordion" as const,
-  }
+  };
 
   return (
-    <form id="payment-form" onSubmit={handleSubmit}>
-
-      <PaymentElement id="payment-element" options={paymentElementOptions} />
-      <button disabled={isLoading || !stripe || !elements} id="submit">
-        <span id="button-text">
-          {isLoading ? <div className="spinner" id="spinner"></div> : "Pay now"}
-        </span>
-      </button>
-      {/* Show any error or success messages */}
-      {message && <div id="payment-message">{message}</div>}
+    <form
+      id="payment-form"
+      onSubmit={handleSubmit}
+      className="max-h-[80vh] flex flex-col"
+    >
+      <div className="flex-1 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent px-4">
+        <PaymentElement id="payment-element" options={paymentElementOptions} />
+        <button disabled={isLoading || !stripe || !elements} id="submit">
+          <span id="button-text">
+            {isLoading ? (
+              <div className="spinner" id="spinner"></div>
+            ) : (
+              "Pay now"
+            )}
+          </span>
+        </button>
+        {/* Show any error or success messages */}
+        {message && <div id="payment-message">{message}</div>}
+      </div>
     </form>
   );
 }

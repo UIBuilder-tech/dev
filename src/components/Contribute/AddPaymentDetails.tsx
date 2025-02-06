@@ -127,7 +127,7 @@ export default function PaymentForm({
         }-${
           formData.paymentMethod === "check"
             ? "Check"
-            : formData.paymentMethod === "Zelle"
+            : formData.paymentMethod === "zelle"
             ? "Zelle"
             : "Online"
         }`, // Display name for the donation record
@@ -212,18 +212,18 @@ export default function PaymentForm({
       setErrors((prev) => ({ ...prev, [name]: "" }));
     }
   };
-  useEffect(() => {
-    if (data?.userData) {
-      const { FirstName, LastName, Email, Phone } = data.userData;
-      setFormData((v: FormType) => ({
-        ...v,
-        FirstName,
-        LastName,
-        Email,
-        Phone,
-      }));
-    }
-  }, [data]);
+  // useEffect(() => {
+  //   if (data?.userData) {
+  //     const { FirstName, LastName, Email, Phone } = data.userData;
+  //     setFormData((v: FormType) => ({
+  //       ...v,
+  //       FirstName,
+  //       LastName,
+  //       Email,
+  //       Phone,
+  //     }));
+  //   }
+  // }, [data]);
 
   // Synchronize formData with initialFormData
   useEffect(() => {
@@ -302,7 +302,7 @@ export default function PaymentForm({
             <div>
               <input
                 disabled={IsFormValidate}
-                type="tel"
+                type="text"
                 name="Phone"
                 value={formData.Phone}
                 onChange={handleInputChange}
