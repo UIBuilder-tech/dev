@@ -62,7 +62,7 @@ export default function PaymentForm({
     city: "",
     zipCode: "",
     state: "",
-    country: "",
+    country: "United States",
     paymentMethod: "zelle",
     rememberMe: false,
     amount: 0,
@@ -174,7 +174,7 @@ export default function PaymentForm({
                   // Save data to sessionStorage
                   sessionStorage.setItem("formdata", JSON.stringify(formData));
 
-                  navigation("checkout");
+                  navigation(`checkout/${totalDonationAmount}`);
                 })
                 .catch((err) => {
                   toast.error(err.message);
@@ -592,7 +592,10 @@ export default function PaymentForm({
       {showModal && (
         <PaymentModal
           isOpen={showModal}
-          onClose={() => setShowModal(false)}
+          onClose={() => {
+            setShowModal(false);
+            window.location.reload();
+          }}
           paymentMethod={modalContent}
         />
       )}

@@ -35,7 +35,7 @@ function App() {
     loader: "auto",
   });
   const location = useLocation();
-  const { data ,setData} = UseDataContext();
+  const { data, setData } = UseDataContext();
 
   const stripePromise: Promise<Stripe | null> = loadStripe(
     stripePublicKey || ""
@@ -53,13 +53,13 @@ function App() {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [location])
+  }, [location]);
 
   useEffect(() => {
-    setData(v=>({...v,isLoading:false}));
-    return setData(v=>({...v,isLoading:true}));
-  }, [])
-  
+    setData((v) => ({ ...v, isLoading: false }));
+    return setData((v) => ({ ...v, isLoading: true }));
+  }, []);
+
   return (
     <>
       <LoaderComponents isLoading={data.isLoading} />
@@ -82,7 +82,7 @@ function App() {
                   />
                 }
               >
-                <Route path="checkout" element={<CheckoutForm />} />
+                <Route path="checkout/:amount" element={<CheckoutForm />} />
                 <Route path="complete" element={<CompletePage />} />
               </Route>
             ) : null}
@@ -101,11 +101,11 @@ function App() {
           />
           <Route
             path="/reset-password/:uidb64/:token"
-            element={<ForgotPassword isForgot={false}/>}
-          /> 
+            element={<ForgotPassword isForgot={false} />}
+          />
           <Route
             path="/forgot-password/:uidb64/:token"
-            element={<ForgotPassword isForgot={true}/>}
+            element={<ForgotPassword isForgot={true} />}
           />
         </Routes>
         <ImagePreview />

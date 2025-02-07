@@ -1,17 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 const returnUrl = import.meta.env.VITE_RETURN_URL;
 import {
   PaymentElement,
   useStripe,
   useElements,
 } from "@stripe/react-stripe-js";
+import { useParams } from "react-router-dom";
 
 export default function CheckoutForm() {
+  const { amount } = useParams();
+  console.log(amount);
   const stripe = useStripe();
   const elements = useElements();
 
   const [message, setMessage] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -56,6 +60,11 @@ export default function CheckoutForm() {
       className="max-h-[80vh] flex flex-col"
     >
       <div className="flex-1 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent px-4">
+        {amount && (
+          <div className="mb-4 text-lg font-semibold">
+            Amount Payable: ${parseInt(amount).toFixed(2)}
+          </div>
+        )}
         <PaymentElement id="payment-element" options={paymentElementOptions} />
         <button disabled={isLoading || !stripe || !elements} id="submit">
           <span id="button-text">
