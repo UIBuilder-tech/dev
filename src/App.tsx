@@ -20,6 +20,7 @@ import ForgotPassword from "./pages/ForgotPassword";
 import { ImagePreviewProvider } from "./context/ImagePreviewContext";
 import ImagePreview from "./components/ImagePreview";
 import LoaderComponents from "./components/loder/LoderComponents";
+import AdminVerifyPage from "./pages/AdminVerifyPage";
 const stripePublicKey = import.meta.env.VITE_STRIPE_PUBLIC_KEY;
 interface StripeOptions {
   appearance: {
@@ -106,6 +107,10 @@ function App() {
           <Route
             path="/forgot-password/:uidb64/:token"
             element={<ForgotPassword isForgot={true} />}
+          />
+          <Route
+            path="/admin/verify/:contactId/:status"
+            element={<AdminVerifyPage />}
           />
         </Routes>
         <ImagePreview />

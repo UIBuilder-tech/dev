@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 
 interface AmountInputProps {
   value: number;
@@ -19,11 +19,14 @@ export default function AmountInput({
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value;
-    
+
     // Allow empty string or positive numbers
-    if (newValue === '' || (/^\d*\.?\d*$/.test(newValue) && parseFloat(newValue) >= 0)) {
+    if (
+      newValue === "" ||
+      (/^\d*\.?\d*$/.test(newValue) && parseFloat(newValue) >= 0)
+    ) {
       setInputValue(newValue);
-      onChange?.(newValue === '' ? 0 : parseFloat(newValue));
+      onChange?.(newValue === "" ? 0 : parseFloat(newValue));
     }
   };
 
@@ -43,7 +46,7 @@ export default function AmountInput({
         value={inputValue}
         onChange={handleChange}
         readOnly={readOnly}
-        className={`pl-10 pr-3 py-2 border border-gray-200 rounded-lg w-full ${
+        className={`pl-3 md:pl-10 pr-3 py-2 border border-gray-200 rounded-lg w-full ${
           readOnly ? "bg-gray-50" : "bg-white"
         } focus:outline-none focus:ring-2 focus:ring-primary/20`}
       />

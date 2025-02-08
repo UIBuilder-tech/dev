@@ -318,7 +318,19 @@ export default function DonationTable({
                   <td className="py-2">
                     <AmountInput
                       value={itemAmount}
-                      onChange={(value) => updateAmount(item.id, value)}
+                      onChange={(value) => {
+                        updateAmount(item.id, value);
+                        if (item.hasQuantity) {
+                          console.log("here");
+                          let quantity = itemQuantity;
+                          if (value > 0 && itemQuantity === 0) {
+                            quantity = 1;
+                          } else if (value === 0 && itemQuantity > 0) {
+                            quantity = 0;
+                          }
+                          updateQuantity(item.id, quantity);
+                        }
+                      }}
                     />
                   </td>
                   <td className="py-2 w-full text-center flex ">
@@ -438,7 +450,20 @@ export default function DonationTable({
             <td className="py-2 px-2">
               <AmountInput
                 value={itemAmount}
-                onChange={(value) => updateAmount(item.id, value)}
+                onChange={(value) => {
+                  updateAmount(item.id, value);
+                  if (item.hasQuantity) {
+                    console.log("here");
+                    let quantity = itemQuantity;
+                    if (value > 0 && itemQuantity === 0) {
+                      quantity = 1;
+                    } else if (value === 0 && itemQuantity > 0) {
+                      quantity = 0;
+                    }
+
+                    updateQuantity(item.id, quantity);
+                  }
+                }}
               />
             </td>
             <td className="py-2 px-2 text-center flex mx-8">

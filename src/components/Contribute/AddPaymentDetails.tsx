@@ -79,6 +79,9 @@ export default function PaymentForm({
     if (!formData.FirstName) {
       newErrors.FirstName = "First Name is required";
     }
+    if (!formData.LastName) {
+      newErrors.LastName = "Last Name is required";
+    }
     if (!formData.Email) {
       newErrors.Email = "Email is required";
     } else if (!/\S+@\S+\.\S+/.test(formData.Email)) {
@@ -107,8 +110,11 @@ export default function PaymentForm({
       newErrors.country = "Country is required";
     }
 
+    if (totalDonationAmount === 0) {
+      toast.error("Please select a donation amount");
+    }
     setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
+    return Object.keys(newErrors).length === 0 && totalDonationAmount > 0;
   };
 
   useEffect(() => {
@@ -237,7 +243,6 @@ export default function PaymentForm({
       address: initialFormData?.address,
       city: initialFormData?.city,
       zipCode: initialFormData?.zipCode,
-      country: initialFormData?.country,
       state: initialFormData?.state,
     });
   }, [initialFormData]);
@@ -262,7 +267,9 @@ export default function PaymentForm({
                 name="FirstName"
                 value={formData.FirstName}
                 onChange={handleInputChange}
-                className="w-full border-b border-gray-200 py-3 focus:outline-none focus:border-primary desktop-1200:text-base desktop-1500:text-lg desktop-1900:text-xl"
+                className={`w-full border-b border-gray-200 ${
+                  errors.FirstName ? "border-red-500" : "border-gray-200"
+                } py-3 focus:outline-none focus:border-primary desktop-1200:text-base desktop-1500:text-lg desktop-1900:text-xl`}
                 placeholder="First Name"
               />
               {errors.FirstName && (
@@ -275,9 +282,14 @@ export default function PaymentForm({
                 name="LastName"
                 value={formData.LastName}
                 onChange={handleInputChange}
-                className="w-full border-b border-gray-200 py-3 focus:outline-none focus:border-primary desktop-1200:text-base desktop-1500:text-lg desktop-1900:text-xl"
+                className={`w-full border-b border-gray-200 ${
+                  errors.LastName ? "border-red-500" : "border-gray-200"
+                } py-3 focus:outline-none focus:border-primary desktop-1200:text-base desktop-1500:text-lg desktop-1900:text-xl`}
                 placeholder="Last Name"
               />
+              {errors.LastName && (
+                <p className="text-red-500 text-sm mt-1">{errors.LastName}</p>
+              )}
             </div>
 
             {/* Email Field */}
@@ -440,6 +452,7 @@ export default function PaymentForm({
                 name="country"
                 value={formData.country}
                 onChange={handleInputChange}
+                defaultValue={"United States"}
                 className={`w-48 border-b ${
                   errors.country ? "border-red-500" : "border-gray-200"
                 } py-3 focus:outline-none focus:border-primary bg-transparent desktop-1200:text-base desktop-1500:text-lg desktop-1900:text-xl`}
