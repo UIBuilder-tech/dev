@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useStripe } from "@stripe/react-stripe-js";
 import "./PaymentPage.css";
 import { toast } from "react-toastify";
+const BASE_URL = import.meta.env.VITE_RETURN_BACKEND_API;
 
 const SuccessIcon = (
   <svg
@@ -115,10 +116,10 @@ export default function CompletePage() {
       setAmount(paymentIntent.amount / 100);
       const oppId = sessionStorage.getItem("Opportunity");
       const payload = {
-        stageName: "Payment successful",
+        stageName: "Payment Received",
       };
       if (paymentIntent.status === "succeeded") {
-        fetch(`/api/opportunity/${oppId}`, {
+        fetch(`${BASE_URL}opportunity/${oppId}`, {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
