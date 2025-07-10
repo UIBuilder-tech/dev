@@ -1,12 +1,12 @@
-import { useState, useMemo, useEffect, useRef } from "react";
-import { ChevronDown, ChevronUp, Trash2, Info } from "lucide-react";
+import { ChevronDown, ChevronUp, Info, Trash2 } from "lucide-react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { useLocation } from "react-router-dom";
+import { useWindowWidth } from "../../hooks/useWindowWidth";
+import { UseDataContext } from "../context/DataContext";
 import AmountInput from "./AmountInput";
+import DonationSkeleton from "./DonationSkeleton";
 import FilterSearch from "./FilterSearch";
 import { DonationItem, DonationSubcategory } from "./types";
-import { useWindowWidth } from "../../hooks/useWindowWidth";
-import { useLocation } from "react-router-dom";
-import { UseDataContext } from "../context/DataContext";
-import DonationSkeleton from "./DonationSkeleton";
 
 interface Props {
   setTotalDonationAmount: (amount: number) => void;
@@ -312,6 +312,17 @@ export default function DonationTable({
                     </a>
                   </>
                 )}
+                {item?.id === "ChaturmasSevas" && (
+                  <>
+                    <a
+                      target="blank"
+                      href="https://docs.google.com/spreadsheets/d/1s5mDK4NFnL79z5FHzZnCN9sUFm5GVwo4/edit?usp=sharing&ouid=117091562326059449775&rtpof=true&sd=true"
+                      className="text-blue-500 cursor-pointer underline font-normal text-xs pl-2"
+                    >
+                      Know more
+                    </a>
+                  </>
+                )}
               </td>
               <div className="flex flex-row">
                 <tr className=" flex flex-row">
@@ -430,6 +441,17 @@ export default function DonationTable({
                   <>
                     <a
                       href="https://chitrapurmath.net/site/rates"
+                      target="blank"
+                      className="text-blue-500 cursor-pointer underline font-normal text-xs"
+                    >
+                      Know more
+                    </a>
+                  </>
+                )}
+                {item?.id === "ChaturmasSevas" && (
+                  <>
+                    <a
+                      href="https://docs.google.com/spreadsheets/d/1s5mDK4NFnL79z5FHzZnCN9sUFm5GVwo4/edit?usp=sharing&ouid=117091562326059449775&rtpof=true&sd=true"
                       target="blank"
                       className="text-blue-500 cursor-pointer underline font-normal text-xs"
                     >
