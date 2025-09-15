@@ -20,7 +20,7 @@ export default function Footer() {
         <div className="grid grid-cols-2 gap-x-8 gap-y-12 max-[1099px]:grid-cols-2 lg:grid-cols-5">
           <div className="space-y-12 items-center justify-center flex">
             <div className=" flex flex-col  items-center justify-center">
-              <img src={logo} className="w-36" />
+              <img loading="lazy" src={logo} className="w-36" />
               <h2 className="font-display text-xl desktop-1500:text-3xl desktop-1200:pt-5 pt-10 md:text-2xl text-white text-center desktop-1900:text-xl">
                 Chitrapur Heritage Foundation USA, Inc.
               </h2>

@@ -87,7 +87,6 @@ const ForgotPassword = () => {
       } else {
         toast.error(data.message);
       }
-      console.log("RESPONSE__>", data);
     } catch (error) {
       toast.error("Something went wrong. Please try again later.");
       console.error(error);

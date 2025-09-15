@@ -19,6 +19,7 @@ import Vantiga from "../components/Contribute/Vantiga";
 import HeroImg from "../assets/photoGallery/img11.webp";
 import solar from "../assets/solar1.jpg";
 import solar1 from "../assets/solar2.jpg";
+import SEO from "../components/seo/Seo";
 
 interface Project {
   id: number;
@@ -56,7 +57,7 @@ export default function ProjectsPage() {
         "https://chitrapurmath.net/documents/upload/1588069798C_(2).png",
         "https://chitrapurmath.net/documents/upload/1588074364A_(1).png",
       ],
-      linkTo:"heritage"
+      linkTo: "heritage"
     },
     {
       id: 2,
@@ -65,7 +66,7 @@ export default function ProjectsPage() {
       description:
         "The Solar Plant in Karla project involves installing a 16kW grid-tied solar system at the Parijnan PU College and Parijnan Vidyalaya in Kotekar to reduce reliance on non-renewable energy, lower operational costs, and promote sustainability.",
       images: [solar, solar1],
-      linkTo:"education"
+      linkTo: "education"
     },
     {
       id: 3,
@@ -77,58 +78,64 @@ export default function ProjectsPage() {
         "https://images.unsplash.com/photo-1584466990297-7e8ab67a5eb0?q=80&w=1965&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         "https://images.unsplash.com/photo-1585282284319-e38fb6c29dd1?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mjd8fGNvdmlkfGVufDB8fDB8fHwy",
       ],
-      linkTo:"education"
+      linkTo: "education"
     },
   ];
 
   return (
-    <div className="min-h-screen bg-cream">
-      <Hero
-        title="Empowering Progress through Impactful Projects"
-        desc="Explore our transformative initiatives that preserve heritage, empower communities, and promote education. From sustainable development to women's empowerment, our projects reflect a commitment to creating a brighter future rooted in tradition and progress."
-        img={HeroImg}
-        from="projects"
+    <>
+      <SEO
+        title="Projects"
+        description="Explore our transformative initiatives that preserve heritage, empower communities, and promote education. From sustainable development to women's empowerment, our projects reflect a commitment to creating a brighter future rooted in tradition and progress."
       />
-      <div id="vantiga">
-        <Vantiga />
-      </div>
-      {/* <div id="our-projects">
+      <div className="min-h-screen bg-cream">
+        <Hero
+          title="Empowering Progress through Impactful Projects"
+          desc="Explore our transformative initiatives that preserve heritage, empower communities, and promote education. From sustainable development to women's empowerment, our projects reflect a commitment to creating a brighter future rooted in tradition and progress."
+          img={HeroImg}
+          from="projects"
+        />
+        <div id="vantiga">
+          <Vantiga />
+        </div>
+        {/* <div id="our-projects">
         <FeaturedProjects title="Our Projects" />
       </div> */}
-      <div id="heritage-preservation">
-        <ProjectsCategory
-          categoryTitle="Heritage Preservation"
-          programs={HeritagePrograms}
-        />
-      </div>
-      <VolunteerSection />
+        <div id="heritage-preservation">
+          <ProjectsCategory
+            categoryTitle="Heritage Preservation"
+            programs={HeritagePrograms}
+          />
+        </div>
+        <VolunteerSection />
 
-      <div id="education">
-        <ProjectsCategory
-          categoryTitle="Education"
-          programs={EducationPrograms}
-        />
-      </div>
-      <div id="chf-ambassador">
-        <Ambassador />
-      </div>
-      <div id="women-empowerment">
-        <ProjectsCategory
-          categoryTitle="Women Empowerment"
-          programs={WomenEmpowermentPrograms}
-        />
-      </div>
+        <div id="education">
+          <ProjectsCategory
+            categoryTitle="Education"
+            programs={EducationPrograms}
+          />
+        </div>
+        <div id="chf-ambassador">
+          <Ambassador />
+        </div>
+        <div id="women-empowerment">
+          <ProjectsCategory
+            categoryTitle="Women Empowerment"
+            programs={WomenEmpowermentPrograms}
+          />
+        </div>
 
-      <div id="special-projects">
-        <SpecialProjects title="Special Projects" projects={projects} />
+        <div id="special-projects">
+          <SpecialProjects title="Special Projects" projects={projects} />
+        </div>
+        <div id="chf-grants" className="bg-white">
+          <GrantsSection />
+        </div>
+        <Newsletter />
+        <OurTeam />
+        <FAQSection />
+        <Footer />
       </div>
-      <div id="chf-grants" className="bg-white">
-        <GrantsSection />
-      </div>
-      <Newsletter />
-      <OurTeam />
-      <FAQSection />
-      <Footer />
-    </div>
+    </>
   );
 }

@@ -11,7 +11,7 @@ interface Member {
 export default function OurTeamAbout() {
   const [currentPage, setCurrentPage] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
-  const itemsPerPage = 9;
+  const itemsPerPage = 6;
   const totalPages = Math.ceil(boardMembers.length / itemsPerPage);
   const animationRef = useRef<number | null>(null);
   const triggerImagePreview = useImagePreviewTrigger();
@@ -43,14 +43,14 @@ export default function OurTeamAbout() {
       </h2>
 
       <div
-        className={`grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-x-1 gap-y-6 md:mb-12 md:px-20 transition-opacity duration-1000 desktop-1900:px-32 ${
-          isAnimating ? "opacity-0" : "opacity-100"
-        }`}
+        className={`grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-x-1 gap-y-6 md:mb-12 md:px-20 transition-opacity duration-1000 desktop-1900:px-32 ${isAnimating ? "opacity-0" : "opacity-100"
+          }`}
       >
         {getCurrentPageItems().map((member: Member, index: number) => (
           <div key={index} className="flex items-center space-x-4">
             <div className="flex-shrink-0">
               <img
+                loading="lazy"
                 src={member.img}
                 alt={member.name}
                 onClick={() => triggerImagePreview(member.img)}
@@ -80,9 +80,8 @@ export default function OurTeamAbout() {
                 setIsAnimating(false);
               }, 500);
             }}
-            className={`w-2 h-2 rounded-full transition-colors ${
-              currentPage === index ? "bg-orange-500" : "bg-gray-300"
-            }`}
+            className={`w-2 h-2 rounded-full transition-colors ${currentPage === index ? "bg-orange-500" : "bg-gray-300"
+              }`}
             aria-label={`Go to page ${index + 1}`}
           />
         ))}

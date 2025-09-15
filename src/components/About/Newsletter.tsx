@@ -7,7 +7,6 @@ function Newsletter() {
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     // Add your newsletter signup logic here
-    console.log("Email submitted:", email);
     setEmail("");
   };
   return (

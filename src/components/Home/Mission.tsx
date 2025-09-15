@@ -33,7 +33,7 @@ export default function Mission() {
           </div>
         </div>
 
-        <img src={MissionImg} alt="Heritage" className="mission-img" />
+        <img loading="lazy" src={MissionImg} alt="Heritage" className="mission-img" />
       </div>
     </div>
   );

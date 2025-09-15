@@ -47,12 +47,10 @@ export default function Navbar() {
   const navigate = useNavigate();
 
   const ProfileClickHandler = () => {
-    console.log("🚀 ~ ProfileClickHandler ~ data:", data)
     if (data?.userData?.userId) {
       navigate("/profile")
       setNavigateTo("/profile")
     } else {
-      console.log("else condition");
       setIsModalOpen(true)
       setNavigateTo("#")
     }
@@ -78,7 +76,7 @@ export default function Navbar() {
             </button>
 
             <Link to='/' className='absolute left-1/2 -translate-x-1/2'>
-              <img src={logo} alt='CHF Logo' className='mobile-logo' />
+              <img loading="lazy" src={logo} alt='CHF Logo' className='mobile-logo' />
             </Link>
 
             <Link
@@ -96,7 +94,7 @@ export default function Navbar() {
               className={`logo-container ${scrollDirection === 'down' ? '!hidden' : ''
                 }`}
             >
-              <img src={logo} alt='CHF Logo' className='logo' />
+              <img loading="lazy" src={logo} alt='CHF Logo' className='logo' />
             </Link>
 
             <div className='w-[150px]' />

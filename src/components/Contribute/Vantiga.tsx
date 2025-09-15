@@ -85,7 +85,7 @@ export default function Vantiga({
       {location?.pathname?.includes("/project") && (
         <div className="absolute bottom-0 left-0 right-0">
           <div className="h-8 w-full bg-[url('../../assets/section-border.svg')] bg-repeat-x">
-            <img src={sectionBorder} className="w-full h-full" />
+            <img loading="lazy" src={sectionBorder} className="w-full h-full" />
           </div>
         </div>
       )}

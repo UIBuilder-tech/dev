@@ -277,7 +277,6 @@ const SpecialProjects = ({
   const isTablet = windowWidth >= 700 && windowWidth <= 1099 // md breakpoint
   // const range120 = windowWidth>1500 && windowWidth <=1900;
 
-  console.log(from);
   const handleExpand = (id: number) => {
     setExpandedId(id === expandedId ? id : id); // Always set to clicked id
   };

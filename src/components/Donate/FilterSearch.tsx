@@ -55,7 +55,7 @@ export default function FilterSearch({
           className="flex items-center gap-2 px-4 py-2 italic max-sm:text-sm text-gray-600"
         >
           <span className="text-primary">
-            <img src={filter} className="h-5 w-5" />
+            <img loading="lazy" src={filter} className="h-5 w-5" />
           </span>{" "}
           Filter & Search
         </button> */}

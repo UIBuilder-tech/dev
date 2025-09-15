@@ -43,7 +43,7 @@ export default function GrantsSection() {
                 </p>
               </div>
               {/* <div className="flex gap-3">
-                <img src={grantsPointer} className="w-5 h-5 text-[#E67E22] flex-shrink-0 mt-1" />
+                <img loading="lazy" src={grantsPointer} className="w-5 h-5 text-[#E67E22] flex-shrink-0 mt-1" />
                 <p className="text-sm desktop-1500:text-sm desktop-1200:text-xs sm:text-base text-gray-600">
                   We do not provide grants for budget line items labeled as
                   "Operational Expenses," "Endowments" or for individuals; and

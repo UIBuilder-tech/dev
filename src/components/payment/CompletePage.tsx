@@ -67,7 +67,6 @@ export default function CompletePage() {
       if (!paymentIntent) {
         return;
       }
-      console.log("paymentIntent", paymentIntent);
       setStatus(paymentIntent.status);
       setIntentId(paymentIntent.id);
       /**

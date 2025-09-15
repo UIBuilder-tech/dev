@@ -1,10 +1,15 @@
 import React from "react";
 import Footer from "../components/Footer/Footer";
 import { Asterisk } from "lucide-react";
+import SEO from "../components/seo/Seo";
 
 const PrivacyPolicyPage: React.FC = () => {
   return (
     <>
+      <SEO
+        title="Privacy Policy"
+        description=" Chitrapur Heritage Foundation USA, Inc. is committed to protecting your privacy and ensuring the security of your personal information."
+      />
       <div className="min-h-screen bg-cream">
         <div className="container mx-auto pt-28 px-4 py-12 sm:px-6 lg:px-8 max-w-[1200px]">
           {/* Header */}

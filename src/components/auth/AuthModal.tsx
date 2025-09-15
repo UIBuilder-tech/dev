@@ -112,7 +112,6 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
             } else {
                 toast.error(response?.message);
             }
-            console.log("RESPONSE__>", response)
           })
           .catch(error => {
             toast.error('Something went wrong. Please try again later.');
@@ -145,7 +144,6 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
             } else {
                 toast.error(response?.message);
             }
-            console.log("RESPONSE__>", response)
           })
           .catch(error => {
             toast.error('Something went wrong. Please try again later.');

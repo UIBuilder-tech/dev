@@ -12,6 +12,7 @@ import PhotoGallery from "../components/About/PhotoGallery";
 import Ambassador from "../components/About/Ambassador";
 import VantigaDetailed from "../components/Contribute/VantigaDetailed";
 import { Outlet } from "react-router-dom";
+import SEO from "../components/seo/Seo";
 
 interface SelectedProject {
   id?: string;
@@ -62,10 +63,6 @@ export default function ContributePage() {
     amount: 0,
   });
   const location = useLocation();
-
-  console.log("selectedProjects--->", selectedProjects);
-  console.log("baseDonationId-->", baseDonationId);
-
   useEffect(() => {
     // Handle initial load with hash
     const hash = location.hash.replace("#", "");
@@ -116,7 +113,6 @@ export default function ContributePage() {
             } else {
               console.error("error fetching response");
             }
-            console.log("RESPONSE__>", response);
           })
           .catch((error) => {
             console.error(error);
@@ -130,49 +126,55 @@ export default function ContributePage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-cream">
-      <Hero
-        title="Support Our Mission to Preserve Heritage and Empower Communities"
-        desc="Your contributions enable the Chitrapur Heritage Foundation to sustain its initiatives in heritage preservation, education, women’s empowerment, and community development. Choose from various donation options and be a part of creating lasting positive change for generations to come."
-        img={ChitrapurMathImg}
+    <>
+      <SEO
+        title="Contribute"
+        description="Your contributions enable the Chitrapur Heritage Foundation to sustain its initiatives in heritage preservation, education, women’s empowerment, and community development. Choose from various donation options and be a part of creating lasting positive change for generations to come."
       />
-      {/* <div id="vantiga">
+      <div className="min-h-screen bg-cream">
+        <Hero
+          title="Support Our Mission to Preserve Heritage and Empower Communities"
+          desc="Your contributions enable the Chitrapur Heritage Foundation to sustain its initiatives in heritage preservation, education, women’s empowerment, and community development. Choose from various donation options and be a part of creating lasting positive change for generations to come."
+          img={ChitrapurMathImg}
+        />
+        {/* <div id="vantiga">
         <Vantiga />
       </div> */}
-      <div className="relative">
-        <div id="donation-table">
-          <DonationTable
-            setTotalDonationAmount={setTotalDonationAmount}
-            setSelectedProjects={setSelectedProjects}
-            setBaseDonationId={setBaseDonationId}
-          />
-        </div>
-        <div id="payment">
-          <PaymentForm
-            totalDonationAmount={totalDonationAmount}
-            baseDonationId={baseDonationId}
-            selectedProjects={selectedProjects}
-            initialFormData={initialFormData}
-          />
-        </div>
-        {/* <div className="absolute inset-0 bg-cream bg-opacity-75 backdrop-filter backdrop-blur-sm flex items-center justify-center z-10">
+        <div className="relative">
+          <div id="donation-table">
+            <DonationTable
+              setTotalDonationAmount={setTotalDonationAmount}
+              setSelectedProjects={setSelectedProjects}
+              setBaseDonationId={setBaseDonationId}
+            />
+          </div>
+          <div id="payment">
+            <PaymentForm
+              totalDonationAmount={totalDonationAmount}
+              baseDonationId={baseDonationId}
+              selectedProjects={selectedProjects}
+              initialFormData={initialFormData}
+            />
+          </div>
+          {/* <div className="absolute inset-0 bg-cream bg-opacity-75 backdrop-filter backdrop-blur-sm flex items-center justify-center z-10">
       <div className="text-center">
         <h2 className="text-5xl md:text-7xl text-gray-800 mb-2">Coming Soon</h2>
         <p className="text-sm md:text-lg text-gray-600">We're working hard to bring you this feature. Stay tuned!</p>
       </div>
     </div> */}
+        </div>
+        <div id="chf-grants">
+          <VantigaDetailed />
+        </div>
+        <div id="volunteer">
+          <VolunteerForm initialFormData={initialFormData} />
+        </div>
+        <PhotoGallery />
+        <Ambassador />
+        <FAQSection />
+        <Footer />
+        <Outlet />
       </div>
-      <div id="chf-grants">
-        <VantigaDetailed />
-      </div>
-      <div id="volunteer">
-        <VolunteerForm initialFormData={initialFormData} />
-      </div>
-      <PhotoGallery />
-      <Ambassador />
-      <FAQSection />
-      <Footer />
-      <Outlet />
-    </div>
+    </>
   );
 }

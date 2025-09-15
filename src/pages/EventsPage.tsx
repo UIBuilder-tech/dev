@@ -30,6 +30,7 @@ import DipaImg from "../assets/Spotlight_Photos/Dipa_Sashital.png";
 import Heritage2 from "../assets/heritage2.webp";
 import SamvitSudha from "../assets/photoGallery/img13.webp";
 import SamvitSudha1 from "../assets/photoGallery/img12.webp";
+import SEO from "../components/seo/Seo";
 
 export default function EventsPage() {
   const location = useLocation();
@@ -175,46 +176,52 @@ export default function EventsPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-cream">
-      <Hero
-        title="Celebrating Tradition and Community"
-        desc="Join us as we commemorate festivals, organize satsangs, and conduct enriching activities for children and youth. Stay updated with our latest programs and events that honor tradition, foster spiritual growth, and strengthen the Chitrapur Saraswat community."
-        img={EventsHero}
-        from="events"
+    <>
+      <SEO
+        title="Events"
+        description="Join us as we commemorate festivals, organize satsangs, and conduct enriching activities for children and youth. Stay updated with our latest programs and events that honor tradition, foster spiritual growth, and strengthen the Chitrapur Saraswat community."
       />
-      <div id="spotlight">
-        <SpecialProjects
-          title="CHF Spotlight"
-          projects={Spotlight}
+      <div className="min-h-screen bg-cream">
+        <Hero
+          title="Celebrating Tradition and Community"
+          desc="Join us as we commemorate festivals, organize satsangs, and conduct enriching activities for children and youth. Stay updated with our latest programs and events that honor tradition, foster spiritual growth, and strengthen the Chitrapur Saraswat community."
+          img={EventsHero}
           from="events"
         />
+        <div id="spotlight">
+          <SpecialProjects
+            title="CHF Spotlight"
+            projects={Spotlight}
+            from="events"
+          />
+        </div>
+        <div id="festivals">
+          <ProjectsCategory
+            categoryTitle="Chitrapur Talks"
+            programs={EventsFestivals}
+          />
+        </div>
+        <div id="children-activities">
+          <ProjectsCategory
+            categoryTitle="Children & Youth Activities"
+            programs={EventChildrenEducation}
+          />
+        </div>
+        <div id="get-togethers">
+          <ProjectsCategory categoryTitle="Events" programs={EventGettogthers} />
+        </div>
+        <div id="featured-news">
+          <SpecialProjects
+            title="Featured News"
+            projects={FeaturedNews}
+            from="events"
+          />
+        </div>
+        <Newsletter />
+        <OurTeam />
+        <FAQSection />
+        <Footer />
       </div>
-      <div id="festivals">
-        <ProjectsCategory
-          categoryTitle="Chitrapur Talks"
-          programs={EventsFestivals}
-        />
-      </div>
-      <div id="children-activities">
-        <ProjectsCategory
-          categoryTitle="Children & Youth Activities"
-          programs={EventChildrenEducation}
-        />
-      </div>
-      <div id="get-togethers">
-        <ProjectsCategory categoryTitle="Events" programs={EventGettogthers} />
-      </div>
-      <div id="featured-news">
-        <SpecialProjects
-          title="Featured News"
-          projects={FeaturedNews}
-          from="events"
-        />
-      </div>
-      <Newsletter />
-      <OurTeam />
-      <FAQSection />
-      <Footer />
-    </div>
+    </>
   );
 }
