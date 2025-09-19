@@ -2,7 +2,14 @@ import { Mail, MapPin, Phone } from "lucide-react";
 import footerbg from "../../assets/footerbg.svg";
 import logo from "../../assets/chfLogo.png";
 import { Link } from "react-router-dom";
-
+import { Facebook, Instagram, Twitter, Linkedin, Youtube } from "lucide-react";
+const socialLinks = [
+  { name: "Facebook", url: "https://www.facebook.com/share/1AweHMeMYU/?mibextid=wwXIfr", bgColor: "#1877F2", icon: Facebook },
+  { name: "Instagram", url: "https://www.instagram.com/chfusa?igsh=bmdvN3BlZGwyczM2", bgColor: "#E1306C", icon: Instagram },
+  // { name: "Twitter", url: "https://twitter.com", bgColor: "#1DA1F2", icon: Twitter },
+  // { name: "LinkedIn", url: "https://linkedin.com", bgColor: "#0077B5", icon: Linkedin },
+  // { name: "YouTube", url: "https://youtube.com", bgColor: "#FF0000", icon: Youtube }
+];
 export default function Footer() {
   return (
     <footer className="relative max-sm:mb-[50px] bg-secondary px-8 py-12 text-white">
@@ -18,8 +25,9 @@ export default function Footer() {
 
       <div className="relative z-10 mx-auto max-w-7xl">
         <div className="grid grid-cols-2 gap-x-8 gap-y-12 max-[1099px]:grid-cols-2 lg:grid-cols-5">
+
           <div className="space-y-12 items-center justify-center flex">
-            <div className=" flex flex-col  items-center justify-center">
+            <div className="flex flex-col items-center justify-center">
               <img loading="lazy" src={logo} className="w-36" />
               <h2 className="font-display text-xl desktop-1500:text-3xl desktop-1200:pt-5 pt-10 md:text-2xl text-white text-center desktop-1900:text-xl">
                 Chitrapur Heritage Foundation USA, Inc.
@@ -28,6 +36,21 @@ export default function Footer() {
                 IRS certified 501(c)(3) organization,
                 <br /> Tax Id: 20-2738955
               </p>
+              <div className="flex gap-4 pt-4">
+                {socialLinks.map(({ name, url, bgColor, icon: Icon }) => (
+                  <a
+                    key={name}
+                    href={url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`p-2 rounded-full hover:scale-110 transition-transform duration-200`}
+                    style={{ backgroundColor: bgColor }}
+                    aria-label={name}
+                  >
+                    <Icon className="text-white w-5 h-5" />
+                  </a>
+                ))}
+              </div>
             </div>
           </div>
           {/* First Column: Support Us + Useful Links */}
