@@ -111,7 +111,6 @@ export default function CompletePage() {
       if (!paymentIntent) {
         return;
       }
-      console.log("paymentIntent", paymentIntent);
       setStatus(paymentIntent.status);
       setAmount(paymentIntent.amount / 100);
       const oppId = sessionStorage.getItem("Opportunity");
@@ -127,7 +126,6 @@ export default function CompletePage() {
           body: JSON.stringify(payload),
         })
           .then((res) => res.json)
-          .then((res) => console.log(res));
       }
       setIntentId(paymentIntent.id);
       /**

@@ -61,7 +61,6 @@ export default function FeaturedProjects({ title }: Props) {
       )
         .then((response) => response.json())
         .then((result) => {
-          console.log("🚀 ~ api ~ result:", result);
 
           if (result?.data) {
             const newData = result.data.map((v) => {

@@ -332,7 +332,6 @@ export default function DonationTable({
                       onChange={(value) => {
                         updateAmount(item.id, value);
                         if (item.hasQuantity) {
-                          console.log("here");
                           let quantity = itemQuantity;
                           if (value > 0 && itemQuantity === 0) {
                             quantity = 1;
@@ -475,7 +474,6 @@ export default function DonationTable({
                 onChange={(value) => {
                   updateAmount(item.id, value);
                   if (item.hasQuantity) {
-                    console.log("here");
                     let quantity = itemQuantity;
                     if (value > 0 && itemQuantity === 0) {
                       quantity = 1;

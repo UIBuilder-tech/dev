@@ -103,7 +103,6 @@ export default function ContributePage() {
         hash.forEach((h, i) => {
           setTimeout(() => {
             const element = document.getElementById(h);
-            console.log(h);
             if (element) {
               if (h === "volunteer") {
                 window.scrollTo(0, element.offsetTop + window.innerHeight * 0.035);
@@ -155,7 +154,6 @@ export default function ContributePage() {
             } else {
               console.error("error fetching response");
             }
-            console.log("RESPONSE__>", response);
           })
           .catch((error) => {
             console.error(error);

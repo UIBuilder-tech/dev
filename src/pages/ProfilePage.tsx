@@ -325,7 +325,6 @@ export default function Profile() {
     };
     setIsFormValidate(true);
     setData((v) => ({ ...v, isLoading: true }));
-    console.log("payload", payload);
     fetch(`${BASE_URL}profile/address`, {
       method: "PATCH",
       headers: {

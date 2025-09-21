@@ -9,7 +9,6 @@ import { useParams } from "react-router-dom";
 
 export default function CheckoutForm() {
   const { amount } = useParams();
-  console.log(amount);
   const stripe = useStripe();
   const elements = useElements();
 

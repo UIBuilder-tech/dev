@@ -64,11 +64,6 @@ export default function HomePage() {
               image: { url: string };
               linkTo: string;
             }) => {
-              console.log(
-                "imggggggggg",
-                item?.image?.url,
-                AdminPanelImgUrl + item?.image?.url
-              );
               return {
                 id: item.Title.replace(" ", "-").toLowerCase(),
                 title: item.Title,

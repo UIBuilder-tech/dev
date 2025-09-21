@@ -233,7 +233,6 @@ export default function PaymentForm({
 
   // Synchronize formData with initialFormData
   useEffect(() => {
-    console.log(initialFormData);
     setFormData({
       ...formData,
       FirstName: initialFormData?.FirstName ? initialFormData?.FirstName : "",
