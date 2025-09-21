@@ -13,6 +13,7 @@ import Ambassador from "../components/About/Ambassador";
 import VantigaDetailed from "../components/Contribute/VantigaDetailed";
 import { Outlet } from "react-router-dom";
 import { UseDataContext } from "../components/context/DataContext";
+import SEO from "../components/seo/Seo";
 
 interface SelectedProject {
   id?: string;
@@ -64,7 +65,7 @@ export default function ContributePage() {
   });
   const location = useLocation();
 
-  const { data,setData } = UseDataContext();
+  const { data, setData } = UseDataContext();
   const [PageData, setPageData] = useState(null);
   const [loading, setLoading] = useState(true)
   useEffect(() => {
@@ -169,6 +170,11 @@ export default function ContributePage() {
 
   return (
     <>
+      <SEO
+        title="Contribute"
+        description="Your contributions enable the Chitrapur Heritage Foundation to sustain its initiatives in heritage preservation, education, women’s empowerment, and community development. Choose from various donation options and be a part of creating lasting positive change for generations to come."
+
+      />
       {PageData && (
         <div className="bg-cream">
           <Hero

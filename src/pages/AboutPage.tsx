@@ -13,6 +13,7 @@ import OurTeamAbout from "../components/About/OurTeamAbout";
 import ImpactSection from "../components/Home/OurImpact";
 import ChitrapurMathImg from "../assets/heritage2.webp";
 import { UseDataContext } from "../components/context/DataContext";
+import SEO from "../components/seo/Seo";
 const AdminPanelUrl = import.meta.env.VITE_ADMIN_PANEL_API;
 export default function AboutPage() {
   const location = useLocation();
@@ -62,6 +63,10 @@ export default function AboutPage() {
 
   return (
     <>
+      <SEO
+        title="About"
+        description="Founded in 2005, the Chitrapur Heritage Foundation USA, Inc(CHF) is a nonprofit organization dedicated to fostering sustainable development and preserving the rich cultural heritage of the Chitrapur Saraswat community. With a focus on Heritage, Education,Women's Empowerment and Spiritual Development"
+      />
       {PageData && (
         <div className="min-h-screen bg-cream">
           <Hero

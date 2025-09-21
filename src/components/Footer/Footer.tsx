@@ -96,8 +96,8 @@ export default function Footer() {
             />
           </div>
 
-          <div className="relative z-10 mx-auto max-w-7xl">
-            <div className="grid grid-cols-2 gap-x-8 gap-y-12 max-[1099px]:grid-cols-2 lg:grid-cols-5">
+          <div className="relative z-10 mx-auto md:px-10 lg:px-10">
+            <div className="grid grid-cols-1 gap-8 gap-y-12 max-[1099px]:grid-cols-1 lg:grid-cols-6">
               {PageData && (
                 <div className="space-y-12 items-center justify-center flex">
                   <div className=" flex flex-col  items-center justify-center">
@@ -151,6 +151,8 @@ export default function Footer() {
                 </div>
 
                 {/* Useful Links Section */}
+              </div>
+              <div className="space-y-12">
                 <div className="space-y-4">
                   <h3 className="border-b border-white pb-2  text-md md:text-3xl font-light">
                     Useful Links

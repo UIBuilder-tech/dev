@@ -14,11 +14,12 @@ import Vantiga from "../components/Contribute/Vantiga";
 import HeroImg from "../assets/photoGallery/img11.webp";
 import DataProcess from "../utils/dataProcess";
 import { UseDataContext } from "../components/context/DataContext";
+import SEO from "../components/seo/Seo";
 const AdminPanelUrl = import.meta.env.VITE_ADMIN_PANEL_API;
 export default function ProjectsPage() {
   const location = useLocation();
   const [PageData, setPageData] = useState(null);
-  const { data,setData } = UseDataContext();
+  const { data, setData } = UseDataContext();
   const [loading, setLoading] = useState(true)
   useEffect(() => {
     const api = async () => {
@@ -80,8 +81,13 @@ export default function ProjectsPage() {
 
   }, [location.hash, PageData]);
   return (
-    <div className="min-h-screen bg-cream">
-      { <Hero
+    <>
+      <SEO
+        title="Projects"
+        description="Explore our transformative initiatives that preserve heritage, empower communities, and promote education. From sustainable development to women's empowerment, our projects reflect a commitment to creating a brighter future rooted in tradition and progress."
+      />
+      <div className="min-h-screen bg-cream">
+        {<Hero
           title={PageData?.heroSection?.title}
           desc={PageData?.heroSection?.description}
           img={HeroImg}
@@ -90,44 +96,45 @@ export default function ProjectsPage() {
           button2={PageData?.heroSection?.Button2}
           isLoading={data?.isLoading || loading}
         />
-      }
+        }
 
-      <div id="vantiga">
-        <Vantiga title={PageData?.Section_3?.title || ""} description={PageData?.Section_3?.description || ""} />
-      </div>
-      {/* <div id="our-projects">
+        <div id="vantiga">
+          <Vantiga title={PageData?.Section_3?.title || ""} description={PageData?.Section_3?.description || ""} />
+        </div>
+        {/* <div id="our-projects">
         <FeaturedProjects title="Our Projects" />
       </div> */}
-      <div id="heritage-preservation">
-        <ProjectsCategory
-          categoryTitle="Heritage Preservation" />
-      </div>
-      <VolunteerSection />
+        <div id="heritage-preservation">
+          <ProjectsCategory
+            categoryTitle="Heritage Preservation" />
+        </div>
+        <VolunteerSection />
 
-      <div id="education">
-        <ProjectsCategory
-          categoryTitle="Education"
-        />
-      </div>
-      <div id="chf-ambassador">
-        <Ambassador />
-      </div>
-      <div id="women-empowerment">
-        <ProjectsCategory
-          categoryTitle="Women's Empowerment"
-        />
-      </div>
+        <div id="education">
+          <ProjectsCategory
+            categoryTitle="Education"
+          />
+        </div>
+        <div id="chf-ambassador">
+          <Ambassador />
+        </div>
+        <div id="women-empowerment">
+          <ProjectsCategory
+            categoryTitle="Women's Empowerment"
+          />
+        </div>
 
-      <div id="special-projects">
-        <SpecialProjects title="Special Projects" />
+        <div id="special-projects">
+          <SpecialProjects title="Special Projects" />
+        </div>
+        <div id="chf-grants" className="bg-white">
+          <GrantsSection />
+        </div>
+        <Newsletter />
+        <OurTeam />
+        <FAQSection />
+        <Footer />
       </div>
-      <div id="chf-grants" className="bg-white">
-        <GrantsSection />
-      </div>
-      <Newsletter />
-      <OurTeam />
-      <FAQSection />
-      <Footer />
-    </div>
+    </>
   );
 }

@@ -4,13 +4,16 @@ import App from './App.tsx';
 import './index.css';
 import { DataProvider } from './components/context/DataContext.tsx';
 import { BrowserRouter } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <BrowserRouter>
-      <DataProvider>
-        <App />
-      </DataProvider>
-    </BrowserRouter>
+    <HelmetProvider>
+      <BrowserRouter>
+        <DataProvider>
+          <App />
+        </DataProvider>
+      </BrowserRouter>
+    </HelmetProvider>
   </StrictMode>
 );

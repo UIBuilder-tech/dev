@@ -13,6 +13,7 @@ import heritage2 from "../assets/heritage2.webp";
 import heritage3 from "../assets/heritage3.webp";
 import { useEffect, useState } from "react";
 import { UseDataContext } from "../components/context/DataContext";
+import SEO from "../components/seo/Seo";
 const AdminPanelUrl = import.meta.env.VITE_ADMIN_PANEL_API;
 const AdminPanelImgUrl = import.meta.env.VITE_ADMIN_PANEL_IMG_API;
 // const AdminPanelUrl = import.meta.env.VITE_ADMIN_PANEL_API;
@@ -96,24 +97,29 @@ export default function HomePage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-cream">
-      {HomePageData && (
-        <>
-          <Hero
-            data={HomeSlideData}
-            from="home"
-            isLoading={loading || data?.isLoading}
-          />
-          <Vision />
-          {Section_3 && <Programs data={Section_3} />}
-          <FeaturedProjects title="Featured Projects" />
-          <ImpactSection />
-          <VolunteerSection />
-          <TeamSection />
-          <FAQSection />
-          <Footer />
-        </>
-      )}
-    </div>
+    <>
+      <SEO
+        title="Home"
+        description="Founded in 2005, the Chitrapur Heritage Foundation (CHF) is a nonprofit organization dedicated to fostering sustainable development and preserving the rich cultural heritage of the Chitrapur Saraswat community. With a focus on Heritage, Education,Women's Empowerment and Spiritual Development" />
+      <div className="min-h-screen bg-cream">
+        {HomePageData && (
+          <>
+            <Hero
+              data={HomeSlideData}
+              from="home"
+              isLoading={loading || data?.isLoading}
+            />
+            <Vision />
+            {Section_3 && <Programs data={Section_3} />}
+            <FeaturedProjects title="Featured Projects" />
+            <ImpactSection />
+            <VolunteerSection />
+            <TeamSection />
+            <FAQSection />
+            <Footer />
+          </>
+        )}
+      </div>
+    </>
   );
 }
