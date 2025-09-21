@@ -14,6 +14,7 @@ import heritage3 from "../assets/heritage3.webp";
 import { useEffect, useState } from "react";
 import { UseDataContext } from "../components/context/DataContext";
 import SEO from "../components/seo/Seo";
+import NewsTicker from "../components/Home/NewsTicker";
 const AdminPanelUrl = import.meta.env.VITE_ADMIN_PANEL_API;
 const AdminPanelImgUrl = import.meta.env.VITE_ADMIN_PANEL_IMG_API;
 // const AdminPanelUrl = import.meta.env.VITE_ADMIN_PANEL_API;
@@ -109,6 +110,8 @@ export default function HomePage() {
               from="home"
               isLoading={loading || data?.isLoading}
             />
+            <NewsTicker />
+
             <Vision />
             {Section_3 && <Programs data={Section_3} />}
             <FeaturedProjects title="Featured Projects" />

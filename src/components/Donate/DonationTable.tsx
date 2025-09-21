@@ -1,4 +1,4 @@
-import { ChevronDown, ChevronUp, Info, Trash2 } from "lucide-react";
+import { ChevronDown, ChevronUp, Info, Link, Trash2 } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useWindowWidth } from "../../hooks/useWindowWidth";
@@ -244,31 +244,31 @@ export default function DonationTable({
     return donationData.reduce((categoryTotal, category) => {
       const categoryItemsTotal = category.items
         ? category.items.reduce((itemTotal, item) => {
-            const itemAmount = useDefaultDonation
-              ? amounts[item.id] ?? item.amount
-              : amounts[item.id] ?? 0;
-            const itemQuantity = item.hasQuantity
-              ? quantities[item.id] ?? 0
-              : 1;
-            return itemTotal + itemAmount * itemQuantity;
-          }, 0)
+          const itemAmount = useDefaultDonation
+            ? amounts[item.id] ?? item.amount
+            : amounts[item.id] ?? 0;
+          const itemQuantity = item.hasQuantity
+            ? quantities[item.id] ?? 0
+            : 1;
+          return itemTotal + itemAmount * itemQuantity;
+        }, 0)
         : 0;
 
       const subcategoriesTotal = category.subcategories
         ? category.subcategories.reduce((subcategoryTotal, subcategory) => {
-            const subcategoryItemsTotal = subcategory.items
-              ? subcategory.items.reduce((itemTotal, item) => {
-                  const itemAmount = useDefaultDonation
-                    ? amounts[item.id] ?? item.amount
-                    : amounts[item.id] ?? 0;
-                  const itemQuantity = item.hasQuantity
-                    ? quantities[item.id] ?? 0
-                    : 1;
-                  return itemTotal + itemAmount * itemQuantity;
-                }, 0)
-              : 0;
-            return subcategoryTotal + subcategoryItemsTotal;
-          }, 0)
+          const subcategoryItemsTotal = subcategory.items
+            ? subcategory.items.reduce((itemTotal, item) => {
+              const itemAmount = useDefaultDonation
+                ? amounts[item.id] ?? item.amount
+                : amounts[item.id] ?? 0;
+              const itemQuantity = item.hasQuantity
+                ? quantities[item.id] ?? 0
+                : 1;
+              return itemTotal + itemAmount * itemQuantity;
+            }, 0)
+            : 0;
+          return subcategoryTotal + subcategoryItemsTotal;
+        }, 0)
         : 0;
 
       return categoryTotal + categoryItemsTotal + subcategoriesTotal;
@@ -300,26 +300,17 @@ export default function DonationTable({
                 className="py-4 px-2 w-full max-sm:text-sm"
                 style={{ wordWrap: "break-word" }}
               >
+
+
                 {item.name}
-                {item?.id === "sevas" && (
+                {item?.Url_Text && (
                   <>
                     <a
                       target="blank"
-                      href="https://chitrapurmath.net/site/rates"
+                      href={item.Url_text_link}
                       className="text-blue-500 cursor-pointer underline font-normal text-xs pl-2"
                     >
-                      Know more
-                    </a>
-                  </>
-                )}
-                {item?.id === "ChaturmasSevas" && (
-                  <>
-                    <a
-                      target="blank"
-                      href="https://docs.google.com/spreadsheets/d/1s5mDK4NFnL79z5FHzZnCN9sUFm5GVwo4/edit?usp=sharing&ouid=117091562326059449775&rtpof=true&sd=true"
-                      className="text-blue-500 cursor-pointer underline font-normal text-xs pl-2"
-                    >
-                      Know more
+                      {item.Url_Text}
                     </a>
                   </>
                 )}
@@ -409,11 +400,10 @@ export default function DonationTable({
               />
               <button
                 onClick={() => removeItem(item.id)}
-                className={`p-1 ${
-                  isTrashActive
-                    ? "text-black hover:text-red-500"
-                    : "text-gray-400 cursor-not-allowed"
-                }`}
+                className={`p-1 ${isTrashActive
+                  ? "text-black hover:text-red-500"
+                  : "text-gray-400 cursor-not-allowed"
+                  }`}
                 disabled={!isTrashActive}
               >
                 <Trash2 className="h-4 w-4" />
@@ -436,25 +426,15 @@ export default function DonationTable({
                 >
                   {item.name}
                 </span>
-                {item?.id === "sevas" && (
+
+               {item?.Url_Text && (
                   <>
                     <a
-                      href="https://chitrapurmath.net/site/rates"
                       target="blank"
-                      className="text-blue-500 cursor-pointer underline font-normal text-xs"
+                      href={item.Url_text_link}
+                      className="text-blue-500 cursor-pointer underline font-normal text-xs pl-2"
                     >
-                      Know more
-                    </a>
-                  </>
-                )}
-                {item?.id === "ChaturmasSevas" && (
-                  <>
-                    <a
-                      href="https://docs.google.com/spreadsheets/d/1s5mDK4NFnL79z5FHzZnCN9sUFm5GVwo4/edit?usp=sharing&ouid=117091562326059449775&rtpof=true&sd=true"
-                      target="blank"
-                      className="text-blue-500 cursor-pointer underline font-normal text-xs"
-                    >
-                      Know more
+                      {item.Url_Text}
                     </a>
                   </>
                 )}
@@ -521,11 +501,10 @@ export default function DonationTable({
               />
               <button
                 onClick={() => removeItem(item.id)}
-                className={`p-1 ${
-                  isTrashActive
-                    ? "text-black hover:text-red-500"
-                    : "text-gray-400 cursor-not-allowed"
-                }`}
+                className={`p-1 ${isTrashActive
+                  ? "text-black hover:text-red-500"
+                  : "text-gray-400 cursor-not-allowed"
+                  }`}
                 disabled={!isTrashActive}
               >
                 <Trash2 className="h-4 w-4" />
@@ -544,7 +523,7 @@ export default function DonationTable({
         redirect: "follow",
       };
       fetch(
-        `${AdminPanelUrl}/donates?pagination[pageSize]=100&sort[id]=desc`,
+        `${AdminPanelUrl}/donatespagination[pageSize]=100&sort[id]=desc`,
         requestOptions
       )
         .then((response) => response.json())
@@ -565,6 +544,8 @@ export default function DonationTable({
                     amount: data.amount,
                     description: data.description,
                     hasQuantity: data.hasQuantity,
+                    Url_Text: data.Url_Text,
+                    Url_text_link: data.Url_text_link,
                   })),
               };
             });

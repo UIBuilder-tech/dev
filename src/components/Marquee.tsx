@@ -7,11 +7,13 @@ interface MarqueeProps {
   children?: React.ReactNode;
   vertical?: boolean;
   repeat?: number;
+  duration?: string;
   [key: string]: unknown;
 }
 
 function Marquee({
   className,
+  duration = "[--duration:90s]",
   reverse = false,
   pauseOnHover = false,
   children,
@@ -24,10 +26,10 @@ function Marquee({
     "flex",
     "overflow-hidden",
     "p-2",
-    "[--duration:90s]",
     "[--gap:1rem]",
     "gap-[var(--gap)]",
     vertical ? "flex-col" : "flex-row",
+    duration,
     className
   ].filter(Boolean).join(" ");
 

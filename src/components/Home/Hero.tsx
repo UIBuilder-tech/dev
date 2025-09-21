@@ -168,11 +168,10 @@ export default function Hero({
       </div>
 
       <div
-        className={`relative ${
-          from !== "projects" && from !== "about"
+        className={`relative ${from !== "projects" && from !== "about"
             ? "h-[100vh]"
             : "h-full desktop-1500:pt-12 desktop-1900:pt-28"
-        } flex flex-col justify-between`}
+          } flex flex-col justify-between`}
       >
         {isLoading ? (
           renderSkeleton()
@@ -181,14 +180,14 @@ export default function Hero({
             {currentIndex !== -1
               ? renderContent(data[currentIndex])
               : renderContent({
-                  title,
-                  subTitle,
-                  description: desc,
-                  Button1: button1,
-                  Button2: button2,
-                  Button1Link,
-                  Button2Link,
-                })}
+                title,
+                subTitle,
+                description: desc,
+                Button1: button1,
+                Button2: button2,
+                Button1Link,
+                Button2Link,
+              })}
           </>
         )}
 
@@ -199,11 +198,10 @@ export default function Hero({
               <button
                 key={index}
                 onClick={() => goToSlide(index)}
-                className={`w-2 h-2 md:w-3 md:h-3 rounded-full transition-all ${
-                  index === currentIndex
+                className={`w-2 h-2 md:w-3 md:h-3 rounded-full transition-all ${index === currentIndex
                     ? "bg-secondary scale-125"
                     : "bg-[#D3D3D3]"
-                }`}
+                  }`}
                 aria-label={`Go to slide ${index + 1}`}
               />
             ))}
