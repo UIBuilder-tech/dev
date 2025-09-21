@@ -23,7 +23,7 @@ export default function VantigaDetailed({ data }) {
                   {
                     item.list.map((listItem, i) => (
                       <div key={`subitem_${i}`} className="flex gap-3 desktop-1200:gap-4 desktop-1500:gap-5 desktop-1900:gap-6">
-                        <img
+                        <img loading="lazy"
                           src={grantsIcon}
                           alt="grantsIcon"
                           className="w-5 h-5 text-[#E67E22] flex-shrink-0 mt-1"

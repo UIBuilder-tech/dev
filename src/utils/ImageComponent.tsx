@@ -38,7 +38,7 @@ export const ImageComponent = React.memo(({ src, onClick, className, alt }:image
   return (
     <>
       {!isLoaded && <div className={`${className} animate-pulse bg-gray-200`} />}
-      <img
+      <img loading="lazy"
         ref={imgRef}
         className={`${className} ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
         src="data:image/gif;base64,R0lGODlhAQABAIAAAMLCwgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=="

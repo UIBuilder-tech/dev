@@ -84,7 +84,7 @@ export default function ImpactSection() {
                   exit={{ opacity: 0 }}
                   className="relative h-[300px] desktop-1200:h-[480px] desktop-1500:h-[520px] md:h-[520px] rounded-3xl overflow-hidden"
                 >
-                  <img
+                  <img loading="lazy"
                     src={activeCard?.image}
                     alt={activeCard?.title}
                     className="w-full h-full object-cover"
@@ -114,7 +114,7 @@ export default function ImpactSection() {
                           Learn More
                         </Link>
                         <Link to="/projects" className="">
-                          <img
+                          <img loading="lazy"
                             src={activeArrow}
                             className="h-16 w-16 max-sm:h-10 max-sm:w-10"
                           />
@@ -197,7 +197,7 @@ export default function ImpactSection() {
                 onClick={() => handleCardClick(card)}
                 whileHover={{ scale: 1.02 }}
               >
-                <img
+                <img loading="lazy"
                   src={card.image}
                   alt={card.title}
                   className="w-full h-full object-cover"
@@ -227,13 +227,13 @@ export default function ImpactSection() {
                     </div>
                     {activeCard?.id === card.id ? (
                       <Link to="/projects" className="">
-                        <img
+                        <img loading="lazy"
                           src={activeArrow}
                           className="h-16 w-16 max-sm:h-10 max-sm:w-10"
                         />
                       </Link>
                     ) : (
-                      <img
+                      <img loading="lazy"
                         src={inactiveArrow}
                         className="h-16 w-16 max-sm:h-10 max-sm:w-10"
                       />

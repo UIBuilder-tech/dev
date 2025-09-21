@@ -149,7 +149,7 @@ export const OptimizedHeroImage: React.FC<OptimizedHeroImageProps> = ({
       {isLoading && (
         <div className={`${className} animate-pulse bg-gray-200`} />
       )}
-      <img
+      <img loading="lazy"
         ref={imgRef}
         src={imageData || src}
         alt={alt}

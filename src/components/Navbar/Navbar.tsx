@@ -76,7 +76,7 @@ export default function Navbar() {
             </button>
 
             <Link to='/' className='absolute left-1/2 -translate-x-1/2'>
-              <img src={logo} alt='CHF Logo' className='mobile-logo' />
+              <img loading="lazy" src={logo} alt='CHF Logo' className='mobile-logo' />
             </Link>
 
             <Link
@@ -94,7 +94,7 @@ export default function Navbar() {
               className={`logo-container ${scrollDirection === 'down' ? '!hidden' : ''
                 }`}
             >
-              <img src={logo} alt='CHF Logo' className='logo' />
+              <img loading="lazy" src={logo} alt='CHF Logo' className='logo' />
             </Link>
 
             <div className='w-[150px]' />
@@ -109,7 +109,7 @@ export default function Navbar() {
 
               <div className='bg-white backdrop-blur-sm rounded-full pl-6 flex items-center gap-5 desktop-1200:gap-4 desktop-1900:gap-5 desktop-1900:pl-8'>
                 <Link to='/'>
-                  <img
+                  <img loading="lazy"
                     src={HomeIcon}
                     className='desktop-1500:w-6 desktop-1500:h-6 desktop-1200:w-6 desktop-1200:h-6 desktop-1900:w-8 desktop-1900:h-8 w-7 h-7'
                     alt='Home'
@@ -117,7 +117,7 @@ export default function Navbar() {
                 </Link>
                 <div className='relative group'>
                   <button onClick={ProfileClickHandler} type='button'>
-                    <img
+                    <img loading="lazy"
                       src={ProfileIcon}
                       className='desktop-1200:w-5 desktop-1200:h-6 desktop-1500:w-6 desktop-1500:h-6 desktop-1900:w-7 desktop-1900:h-7 w-7 h-7'
                       alt='Profile'
@@ -142,7 +142,7 @@ export default function Navbar() {
                     });
                   }}
                 >
-                  <img
+                  <img loading="lazy"
                     src={ContactIcon}
                     className='desktop-1200:w-6 desktop-1200:h-6 desktop-1500:w-6 desktop-1500:h-6 desktop-1900:w-7 desktop-1900:h-7 w-7 h-7 '
                     alt='Contact'

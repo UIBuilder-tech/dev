@@ -111,7 +111,7 @@ export default function Vantiga({ title = "", description = "" }: Props) {
                 key={item.id}
                 className="flex flex-col space-y-2 md:space-y-4 items-start p-2 md:p-4"
               >
-                <img
+                <img loading="lazy"
                   src={item.image}
                   className="w-8 h-8 md:w-14 md:h-14 desktop-1900:w-16  desktop-1900:h-16"
                 />
@@ -126,7 +126,7 @@ export default function Vantiga({ title = "", description = "" }: Props) {
         </div>
         {PageData?.length > 0 && (
           <div className="absolute bottom-0 rounded-[30px] md:rounded-[50px] md:bottom-0 left-0 right-0 z-[998] overflow-hidden opacity-50">
-            <img
+            <img loading="lazy"
               src={mountain}
               alt="Mountain"
               className="w-full md:h-[250px]   desktop-1200:h-[200px] desktop-1900:h-[325px] object-cover"
@@ -152,7 +152,7 @@ export default function Vantiga({ title = "", description = "" }: Props) {
                       </div>
       </div>
 {location?.pathname?.includes("about") && <>      <div className="w-[262px] max-sm:hidden desktop-1500:w-[275px] desktop-1200:w-[250px] desktop-1900:w-[400px] shrink-0 absolute bottom-0 z-[10] left-0">
-                          <img
+                          <img loading="lazy"
                             src={about1}
                             alt=""
                             className="w-full h-auto object-contain"
@@ -160,7 +160,7 @@ export default function Vantiga({ title = "", description = "" }: Props) {
                         </div>
       <div className="w-[262px] desktop-1500:w-[260px] desktop-1200:w-[240px] shrink-0 max-sm:hidden desktop-1900:w-[350px] md:block absolute bottom-0 z-[10] right-0">
                           {
-                            about2 && <img
+                            about2 && <img loading="lazy"
                               src={about2}
                               alt=""
                               className="w-full h-auto object-contain"
@@ -173,14 +173,14 @@ export default function Vantiga({ title = "", description = "" }: Props) {
       {location?.pathname?.includes("/project") && (
         <div className="absolute bottom-0 left-0 right-0">
           <div className="h-8 w-full bg-[url('../../assets/section-border.svg')] bg-repeat-x">
-            <img src={sectionBorder} className="w-full h-full" />
+            <img loading="lazy" src={sectionBorder} className="w-full h-full" />
           </div>
         </div>
       )}
 
       {location?.pathname?.includes("about") && (
         <div className="absolute bottom-0 md:bottom-0 left-0 right-0 z-[9] overflow-hidden">
-          <img
+          <img loading="lazy"
             src={aboutBanner}
             alt="Mountain"
             className="w-full object-cover max-sm:h-[600px] desktop-1500:max-h-[800px] desktop-1200:max-h-[475  px]"

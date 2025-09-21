@@ -85,7 +85,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
           >
             <div className="flex justify-between items-center p-4 border-b border-white/20 bg-white">
               <Link to="/" className="w-24">
-                <img src={logo} alt="CHF Logo" className="w-full" />
+                <img loading="lazy" src={logo} alt="CHF Logo" className="w-full" />
               </Link>
               <button onClick={onClose} className="text-secondary">
                 <X className="h-6 w-6" />

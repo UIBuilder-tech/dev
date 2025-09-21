@@ -88,7 +88,7 @@ export default function Footer() {
         <footer className="relative max-sm:mb-[50px] bg-secondary px-8 py-12 text-white">
           {/* Background graphic overlay */}
           <div className="absolute top-14 bottom-0 left-0 right-0 -z-9 overflow-hidden">
-            <img
+            <img loading="lazy"
               src={footerbg}
               alt="Mountain"
               className="h-[700px] w-full"
@@ -101,7 +101,7 @@ export default function Footer() {
               {PageData && (
                 <div className="space-y-12 items-center justify-center flex">
                   <div className=" flex flex-col  items-center justify-center">
-                    <img src={PageData.image} className="w-36" />
+                    <img loading="lazy" src={PageData.image} className="w-36" />
                     <h2 className="font-display text-xl desktop-1500:text-3xl desktop-1200:pt-5 pt-10 md:text-2xl text-white text-center desktop-1900:text-xl">
                       {PageData.Title}
                     </h2>

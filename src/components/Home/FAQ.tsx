@@ -44,7 +44,7 @@ export default function FAQSection() {
     <div className="relative h-[650px] px-4 mt-16 py-12 mb-5 md:px-8">
       {/* Cloud 1 - Top right */}
       <div className="absolute top-0 right-0 w-32 h-16">
-        <img
+        <img loading="lazy"
           src={cloud1}
           alt="Cloud 1"
           className="w-full h-full object-contain"
@@ -53,7 +53,7 @@ export default function FAQSection() {
 
       {/* Cloud 2 - Top center-right */}
       <div className="absolute top-12 right-[22%] md:right-[10%] w-24 h-12">
-        <img
+        <img loading="lazy"
           src={cloud2}
           alt="Cloud 2"
           className="w-full h-full object-contain"
@@ -62,7 +62,7 @@ export default function FAQSection() {
 
       {/* Cloud 3 - Top center */}
       <div className="absolute top-4 right-[40%] md:right-[20%] w-20 h-10">
-        <img
+        <img loading="lazy"
           src={cloud3}
           alt="Cloud 3"
           className="w-full h-full object-contain"
@@ -146,7 +146,7 @@ export default function FAQSection() {
 
       {/* Mountain shape at the bottom */}
       <div className="absolute bottom-0 md:-bottom-10 left-0 right-0 -z-9 overflow-hidden">
-        <img
+        <img loading="lazy"
           src={mountain}
           alt="Mountain"
           className="w-full h-full object-cover"

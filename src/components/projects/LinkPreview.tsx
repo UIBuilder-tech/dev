@@ -100,7 +100,7 @@ const LinkPreview = ( props:Props ) => {
     return (
       <div onClick={handleClick} style={{ cursor: 'pointer' }}  className='mb-1'>
         <div className='flex flex-row items-center' style={{borderWidth:"1px",borderRadius:"5px", backgroundColor:"white"}}>
-        {props.from==="CREATE" ? <img src={previewData.videoThumbnail} alt="Video Thumbnail"  className='previewThumbnail'/> : (props?.noOfLinks <=1 && <img src={previewData.videoThumbnail} alt="Video Thumbnail"  className='previewThumbnail'/>)}
+        {props.from==="CREATE" ? <img loading="lazy" src={previewData.videoThumbnail} alt="Video Thumbnail"  className='previewThumbnail'/> : (props?.noOfLinks <=1 && <img loading="lazy" src={previewData.videoThumbnail} alt="Video Thumbnail"  className='previewThumbnail'/>)}
         <div className='flex flex-col ml-2'>
         <span className='previewMainDescription'>{props.url}</span>
       <span  className='previewDescription'>Click here to view more ...</span>
@@ -115,7 +115,7 @@ const LinkPreview = ( props:Props ) => {
   return (
         <div onClick={handleClick} style={{ cursor: 'pointer' }} className='mb-1'>
         <div className={'flex flex-row p-1 items-center linkContainer'} style={{borderWidth:"1px",borderRadius:"5px"}}>
-      {(previewData?.image) && ((props?.from === "CREATE" || props?.from === "MODAL") ? <img src={previewData.image} alt="Link Preview" className={props.from==="CREATE"?"previewThumbnail":"postPreviewThumbnail"}/> : props?.noOfLinks <=1 && <img src={previewData.image} alt="Link Preview" className={"postPreviewThumbnail"}/> )}
+      {(previewData?.image) && ((props?.from === "CREATE" || props?.from === "MODAL") ? <img loading="lazy" src={previewData.image} alt="Link Preview" className={props.from==="CREATE"?"previewThumbnail":"postPreviewThumbnail"}/> : props?.noOfLinks <=1 && <img loading="lazy" src={previewData.image} alt="Link Preview" className={"postPreviewThumbnail"}/> )}
 <div className='flex flex-col ml-2 justify-center'>
       {previewData?.title?.length > 0 ?
         <span className={props.from==="CREATE"?'previewTitle':'postPreviewTitle'}>{previewData.title}</span> :

@@ -210,7 +210,7 @@ const ProjectCard = ({
               <div className="flex flex-row cursor-pointer">
                 {/* <ArrowDownLeft className="md:w-6 md:h-6 w-4 h-4 text-white" /> */}
                 {from === "projects" && (
-                  <img
+                  <img loading="lazy"
                     onClick={(e) => {
                       e.stopPropagation();
                       navigate("/contribute#volunteer");
@@ -220,7 +220,7 @@ const ProjectCard = ({
                   />
                 )}
 
-                <img
+                <img loading="lazy"
                   onClick={(e) => {
                     e.stopPropagation();
                     // navigate("/contribute#donate-table");
@@ -319,7 +319,7 @@ const ProjectCard = ({
                     }}
                   >
                     {/* <Heart className="md:w-5 md:h-5 w-3 h-3 text-orange-500" /> */}
-                    <img
+                    <img loading="lazy"
                       src={DonateInctive}
                       className="md:w-16 md:h-16 w-8 h-8 "
                     />
@@ -330,7 +330,7 @@ const ProjectCard = ({
               <div className="mb-4">
                 <div className="flex justify-left mt-2">
                   {project.image.map((img, index) => (
-                    <img
+                    <img loading="lazy"
                       key={index}
                       src={img}
                       alt={project.title}

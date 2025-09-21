@@ -89,7 +89,7 @@ export default function Vision() {
                       </div>
                       <div className="w-full md:w-auto md:flex-shrink-0">
                         <div className="relative w-full desktop-1500:max-w-[500px] max-w-[600px] mx-auto desktop-1200:max-w-[400px] desktop-1900:max-w-[800px]">
-                          <img
+                          <img loading="lazy"
                             src={slide.image[0]}
                             alt={slide.Title}
                             className="w-full h-auto object-contain"

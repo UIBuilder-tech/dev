@@ -141,7 +141,7 @@ export default function Hero({
   return (
     <div className="relative md:min-h-screen">
       <div className="absolute inset-0">
-        {/* <img
+        {/* <img loading="lazy"
           src={img}
           alt="Heritage Building"
           className="w-full h-full object-cover hero-bg"

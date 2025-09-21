@@ -269,7 +269,7 @@ export default function VolunteerForm({ initialFormData }: Props) {
 
             {/* Illustration */}
             <div className="absolute bottom-0">
-              <img
+              <img loading="lazy"
                 src={volunteerGroup}
                 alt="Volunteer illustration"
                 className="w-full max-w-lg"

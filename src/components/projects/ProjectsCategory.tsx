@@ -290,7 +290,7 @@ transform: scale(1.2);
 <a href='https://www.youtube.com/embed/${getVideoId(
                     programs[currentProgram]?.url
                   )}?autoplay=1'>
-<img src='https://img.youtube.com/vi/${getVideoId(
+<img loading="lazy" src='https://img.youtube.com/vi/${getVideoId(
                     programs[currentProgram]?.url
                   )}/hqdefault.jpg' alt='Coffee Recipe Javascript Project'><div class='play-button'>
 <button class="ytp-large-play-button ytp-button ytp-large-play-button-red-bg" aria-label="Play" title="Play"><svg version="1.1"  width='50' height='50' viewBox='0 0 60 50'><path class="ytp-large-play-button-bg" d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,0,34,0S12.21,.13,6.9,1.55 C3.97,2.33,2.27,4.81,1.48,7.74C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19 C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z" fill="#f00"></path><path d="M 45,24 27,14 27,34" fill="#fff"></path></svg></button>
@@ -415,7 +415,7 @@ transform: scale(1.2);
                   }
                 >
                   <div className="relative h-full rounded-xl overflow-hidden">
-                    <img
+                    <img loading="lazy"
                       src={shoWMainImg(program)}
                       alt={program.title}
                       className="w-full h-full object-cover"
@@ -445,12 +445,12 @@ transform: scale(1.2);
                     >
                       {/* <ArrowUpRight className="md:w-8 md:h-8 w-4 h-4 text-gray-50" /> */}
                       {index + currentPage * itemsPerPage === currentProgram ? (
-                        <img
+                        <img loading="lazy"
                           src={activeArrow}
                           className="md:w-20 md:h-20 desktop-1200:w-12 desktop-1200:h-12 desktop-1500:w-16 desktop-1500:h-16 desktop-1900:w-20 desktop-1900:h-20 w-8 h-8 "
                         />
                       ) : (
-                        <img
+                        <img loading="lazy"
                           src={inactiveArrrow}
                           className="md:w-20 md:h-20 desktop-1200:w-12 desktop-1200:h-12 desktop-1500:w-16 desktop-1500:h-16 desktop-1900:w-20 desktop-1900:h-20 w-8 h-8 "
                         />

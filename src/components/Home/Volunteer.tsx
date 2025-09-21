@@ -42,7 +42,7 @@ export default function VolunteerSection() {
         <div className="flex flex-row">
           {/* Left illustration */}
           <div className="max-sm:hidden relative flex-shrink-0 md:mb-0 md:w-1/4">
-            <img
+            <img loading="lazy"
               src={volunteer}
               alt="Volunteer illustration"
               className={`w-full ${range150
@@ -59,7 +59,7 @@ export default function VolunteerSection() {
               <div className="absolute left-14 top-0">
                 <div className="flex flex-col items-center">
                   <div className="rounded-full ">
-                    <img
+                    <img loading="lazy"
                       src={heritage}
                       alt="Heritage"
                       width={
@@ -75,7 +75,7 @@ export default function VolunteerSection() {
               <div className="absolute left-10 md:left-5 top-1/3 -translate-x-1/2">
                 <div className="flex flex-col items-center">
                   <div className="rounded-full">
-                    <img
+                    <img loading="lazy"
                       src={spirituality}
                       alt="women empowement"
                       width={
@@ -94,7 +94,7 @@ export default function VolunteerSection() {
               >
                 <div className="flex flex-col items-center">
                   <div className="rounded-full">
-                    <img
+                    <img loading="lazy"
                       src={education}
                       alt="Education"
                       width={
@@ -142,7 +142,7 @@ export default function VolunteerSection() {
       {/* Bottom border pattern */}
       <div className="absolute bottom-0 left-0 right-0">
         <div className="h-8 max-sm:h-12 w-full bg-[url('../../assets/section-border.svg')] bg-repeat-x" />
-        <img src={sectionBorder} className="w-full h-full " />
+        <img loading="lazy" src={sectionBorder} className="w-full h-full " />
       </div>
     </section>
   );

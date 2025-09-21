@@ -71,7 +71,7 @@ const ImagePreview: React.FC = () => {
           className="overflow-hidden rounded-lg shadow-lg bg-cream flex items-center justify-center"
           style={{ minHeight: "40vh" }}
         >
-          <img
+          <img loading="lazy"
             ref={imageRef}
             src={previewSrc}
             alt="Preview"

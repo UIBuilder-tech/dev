@@ -564,7 +564,7 @@ export default function PaymentForm({
                 <span className="italic text-[#516072] text-sm desktop-1200:text-sm desktop-1500:text-base desktop-1900:text-xl">
                   Payment by
                 </span>
-                <img
+                <img loading="lazy"
                   src={stripe}
                   alt="Powered by Stripe"
                   className="h-6 desktop-1200:h-6 desktop-1500:h-7 desktop-1900:h-9"

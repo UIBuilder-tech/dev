@@ -172,12 +172,12 @@ export default function FeaturedProjects({ title }: Props) {
                         )}
                         <Link to={`/projects#${project?.linkTo}`}>
                           {isHovered ? (
-                            <img
+                            <img loading="lazy"
                               src={activeSideArrow}
                               className="md:w-14 md:h-14 w-20 h-20"
                             />
                           ) : (
-                            <img
+                            <img loading="lazy"
                               src={inactiveSideArrow}
                               className="md:w-14 md:h-14 w-20 h-20"
                             />
@@ -187,12 +187,12 @@ export default function FeaturedProjects({ title }: Props) {
                           to={`/contribute#donation-table#${project?.donationLink}`}
                         >
                           {isHovered ? (
-                            <img
+                            <img loading="lazy"
                               src={activeDonate}
                               className="md:w-14 md:h-14 w-16 h-16"
                             />
                           ) : (
-                            <img
+                            <img loading="lazy"
                               src={inactiveDonate}
                               className="md:w-14 md:h-14 w-20 h-20"
                             />

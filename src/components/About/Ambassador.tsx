@@ -126,7 +126,7 @@ export default function Ambassador() {
                   {pageData.steps.map((step, index) => (
                     <div key={index} className="flex flex-col items-center text-center">
                       <div className="mb-6">
-                        <img src={step.image} alt="" className="object-contain desktop-1200:w-[130px] desktop-1900:w-[160px]" />
+                        <img loading="lazy" src={step.image} alt="" className="object-contain desktop-1200:w-[130px] desktop-1900:w-[160px]" />
                       </div>
                       <div>
                         <p className="text-gray-600 text-lg desktop-1500:text-lg desktop-1200:max-w-[10rem]   desktop-1200:text-sm desktop-1500:max-w-52 text-left leading-6">
@@ -150,7 +150,7 @@ export default function Ambassador() {
                       {pageData.steps.map((step, index) => (
                         <div key={index} className="w-full flex-shrink-0 flex flex-col items-center text-center px-4">
                           <div className="mb-6">
-                            <img src={step.image} alt="" className="object-contain" />
+                            <img loading="lazy" src={step.image} alt="" className="object-contain" />
                           </div>
                           <div>
                             <p className="text-gray-600 text-lg max-w-52 mx-auto text-center leading-6">

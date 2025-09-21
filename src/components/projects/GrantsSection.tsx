@@ -70,7 +70,7 @@ export default function GrantsSection() {
                       {item?.list &&
                         item.list.map((listItem: GrantListItem, i: number) => (
                           <div className="flex gap-3" key={`grant_list_${i}`}>
-                            <img
+                            <img loading="lazy"
                               src={grantsPointer}
                               className="w-5 h-5 text-[#E67E22] flex-shrink-0 mt-1"
                             />

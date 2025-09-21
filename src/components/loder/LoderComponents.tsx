@@ -17,7 +17,7 @@ export default function LoaderComponent({ isLoading=false }) {
   return (
     <div className="three-body-container">
       <div className="three-body flex flex-col items-center">
-      <img src={logo} className=""/>
+      <img loading="lazy" src={logo} className=""/>
       <section className="dots-container py-5">
   <div className="dot"></div>
   <div className="dot"></div>

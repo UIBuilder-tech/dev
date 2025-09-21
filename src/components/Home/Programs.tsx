@@ -73,7 +73,7 @@ export default function Programs({ data }) {
                 >
                   <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-transparent" />
                   {card?.image ? (
-                    <img
+                    <img loading="lazy"
                       src={card.image}
                       alt={card.title || "Program"}
                       className="h-full w-full object-cover"
@@ -105,7 +105,7 @@ export default function Programs({ data }) {
                           }}
                           className=""
                         >
-                          <img
+                          <img loading="lazy"
                             src={ActiveArrow}
                             className="w-[40px] h-[40px] md:w-[80px] md:h-[80px] desktop-1200:w-[60px] desktop-1200:h-[60px]"
                           />
@@ -145,7 +145,7 @@ export default function Programs({ data }) {
                 >
                   <div className="absolute inset-0 bg-gradient-to-b from-black/70 to-transparent" />
                   {card?.image ? (
-                    <img
+                    <img loading="lazy"
                       src={card.image}
                       alt={card.title || "Program"}
                       className="h-full w-full object-cover"
@@ -170,7 +170,7 @@ export default function Programs({ data }) {
                         }}
                         className=""
                       >
-                        <img
+                        <img loading="lazy"
                           src={InactiveArrow}
                           className="w-[40px] h-[40px] md:w-[80px] md:h-[80px] desktop-1200:w-[60px] desktop-1200:h-[60px]"
                         />
@@ -204,7 +204,7 @@ export default function Programs({ data }) {
           >
             <div className="relative h-[350px] md:h-[726px]">
               <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-transparent" />
-              <img
+              <img loading="lazy"
                 src={orderedCards[0].image}
                 alt={orderedCards[0].title}
                 className="h-full w-full object-cover"
@@ -231,7 +231,7 @@ export default function Programs({ data }) {
                       }}
                       className=""
                     >
-                      <img
+                      <img loading="lazy"
                         src={ActiveArrow}
                         className="w-[40px] h-[40px] md:w-[80px] md:h-[80px]  desktop-1200:w-[60px]  desktop-1200:h-[60px]"
                       />
@@ -270,7 +270,7 @@ export default function Programs({ data }) {
             >
               <div className="relative h-[200px] md:h-[726px]">
                 <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-transparent" />
-                <img
+                <img loading="lazy"
                   src={card.image}
                   alt={card.title}
                   className="h-full w-full object-cover"
@@ -290,7 +290,7 @@ export default function Programs({ data }) {
                       }}
                       className=""
                     >
-                      <img
+                      <img loading="lazy"
                         src={InactiveArrow}
                         className="w-[40px] h-[40px] md:w-[80px] md:h-[80px]  desktop-1200:w-[60px]  desktop-1200:h-[60px]"
                       />
