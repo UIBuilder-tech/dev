@@ -8,7 +8,14 @@ import { UseDataContext } from "../context/DataContext";
 const AdminPanelUrl = import.meta.env.VITE_ADMIN_PANEL_API;
 const BASE_URL = import.meta.env.VITE_RETURN_BACKEND_API;
 const AdminPanelImgUrl = import.meta.env.VITE_ADMIN_PANEL_IMG_API;
-
+import { Facebook, Instagram, Twitter, Linkedin, Youtube } from "lucide-react";
+const socialLinks = [
+  { name: "Facebook", url: "https://www.facebook.com/share/1AweHMeMYU/?mibextid=wwXIfr", bgColor: "#1877F2", icon: Facebook },
+  { name: "Instagram", url: "https://www.instagram.com/chfusa?igsh=bmdvN3BlZGwyczM2", bgColor: "#E1306C", icon: Instagram },
+  // { name: "Twitter", url: "https://twitter.com", bgColor: "#1DA1F2", icon: Twitter },
+  // { name: "LinkedIn", url: "https://linkedin.com", bgColor: "#0077B5", icon: Linkedin },
+  // { name: "YouTube", url: "https://youtube.com", bgColor: "#FF0000", icon: Youtube }
+];
 export default function Footer() {
   const [PageData, setPageData] = useState(null);
   const [Contact, setContact] = useState(null);
@@ -68,7 +75,7 @@ export default function Footer() {
       .then((res) => {
         toast.success("Subscribed Successfully");
       })
-      .catch((e) => {})
+      .catch((e) => { })
       .finally(() => {
         setEmail("");
         setData((v) => ({ ...v, isLoading: false }));
@@ -101,6 +108,21 @@ export default function Footer() {
                     <p className="text-sm md:text-sm text-white text-center px-4 md:px-8">
                       {PageData.Title}
                     </p>
+                    <div className="flex gap-4 pt-4">
+                      {socialLinks.map(({ name, url, bgColor, icon: Icon }) => (
+                        <a
+                          key={name}
+                          href={url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className={`p-2 rounded-full hover:scale-110 transition-transform duration-200`}
+                          style={{ backgroundColor: bgColor }}
+                          aria-label={name}
+                        >
+                          <Icon className="text-white w-5 h-5" />
+                        </a>
+                      ))}
+                    </div>
                   </div>
                 </div>
               )}
