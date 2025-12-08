@@ -97,14 +97,15 @@ export default function Navbar() {
               <img loading="lazy" src={logo} alt='CHF Logo' className='logo' />
             </Link>
 
-            <div className='w-[150px]' />
+            <div className='w-[100px]' />
 
-            <div className='flex items-center gap-10'>
+            <div className='flex items-center gap-7'>
               <div className='bg-white text-[20px] lg:text-[16px] desktop-1900:text-[20px] desktop-1500:text-[16px] desktop-1200:text-[14px] rounded-full px-8 flex items-center gap-10 desktop-1500:gap-8 desktop-1200:gap-5 font-medium'>
                 <NavLink to='/about'>About</NavLink>
                 <NavLink to='/projects'>Projects</NavLink>
                 <NavLink to='/contribute'>Contribute</NavLink>
                 <NavLink to='/events'>Events & News</NavLink>
+                <NavLink to='/endowments'>Endowments</NavLink>
               </div>
 
               <div className='bg-white backdrop-blur-sm rounded-full pl-6 flex items-center gap-5 desktop-1200:gap-4 desktop-1900:gap-5 desktop-1900:pl-8'>

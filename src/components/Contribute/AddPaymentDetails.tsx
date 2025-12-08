@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Loader } from "lucide-react";
 import PaymentModal from "./PaymentModal";
-import paypal from "../../assets/paypal.svg";
 
 interface FormErrors {
   [key: string]: string;
@@ -23,6 +22,8 @@ interface FormType {
   zipCode: string; // Zip/postal code
   state: string; // State name
   country: string; // Country name
+  companyMatch: string; // Company matching gift
+  companyName: string; // Company name
   paymentMethod: string; // Payment method (e.g., 'online', 'offline')
   rememberMe: boolean; // Whether the user opts for "remember me"
   amount: number | null; // Total amount
@@ -61,6 +62,8 @@ export default function PaymentForm({
     address: "",
     city: "",
     zipCode: "",
+    companyMatch: "",
+    companyName: "",
     state: "",
     country: "United States",
     paymentMethod: "zelle",
@@ -474,6 +477,42 @@ export default function PaymentForm({
                   Remember me
                 </span>
               </label> */}
+            </div>
+
+              {/* City and ZIP Row */}
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <input
+                  disabled={IsFormValidate}
+                  type="text"
+                  name="companyMatch"
+                  value={formData?.companyMatch||''}
+                  onChange={handleInputChange}
+                  className={`w-full border-b ${
+                    errors.companyMatch ? "border-red-500" : "border-gray-200"
+                  } py-3 focus:outline-none focus:border-primary desktop-1200:text-base desktop-1500:text-lg desktop-1900:text-xl`}
+                  placeholder="Company Match"
+                />
+                {errors.companyMatch && (
+                  <p className="text-red-500 text-sm mt-1">{errors.companyMatch}</p>
+                )}
+              </div>
+              <div>
+                <input
+                  disabled={IsFormValidate}
+                  type="text"
+                  name="companyName"
+                  value={formData?.companyName||''}
+                  onChange={handleInputChange}
+                  className={`w-full border-b ${
+                    errors.companyName ? "border-red-500" : "border-gray-200"
+                  } py-3 focus:outline-none focus:border-primary desktop-1200:text-base desktop-1500:text-lg desktop-1900:text-xl`}
+                  placeholder="Company Name"
+                />
+                {errors.companyName && (
+                  <p className="text-red-500 text-sm mt-1">{errors.companyName}</p>
+                )}
+              </div>
             </div>
           </div>
         </div>

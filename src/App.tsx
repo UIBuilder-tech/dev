@@ -21,6 +21,7 @@ import { ImagePreviewProvider } from "./context/ImagePreviewContext";
 import ImagePreview from "./components/ImagePreview";
 import LoaderComponents from "./components/loder/LoderComponents";
 import AdminVerifyPage from "./pages/AdminVerifyPage";
+import EndowmentsPage from "./pages/EndowmentsPage";
 const stripePublicKey = import.meta.env.VITE_STRIPE_PUBLIC_KEY;
 interface StripeOptions {
   appearance: {
@@ -96,6 +97,7 @@ function App() {
           <Route path="/donate" element={<ComingSoon />} />
           <Route path="/join" element={<ComingSoon />} />
           <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+          <Route path="/endowments" element={<EndowmentsPage />} />
           <Route
             path="/activate/:uidb64/:token"
             element={<EmailVerification />}

@@ -361,8 +361,10 @@ const AdminPanelUrl = import.meta.env.VITE_ADMIN_PANEL_API;
 const SpecialProjects = ({
   title,
   from = "projects",
+  isCenter=false
 }: {
   title: string;
+  isCenter: boolean;
   from?: string;
 }) => {
   const [projects, setProjects] = useState([])
@@ -472,7 +474,7 @@ const SpecialProjects = ({
   return (
     <div className="w-full max-w-7xl mx-auto py-12 desktop-1900:max-w-full">
       <h2
-        className={`text-3xl desktop-1200:text-4xl desktop-1900:text-5xl desktop-1900:pl-[160px] desktop-1900:relative mb-4 md:mb-8 max-sm:px-5 ${range150 ? "pl-20" : ""
+        className={`text-3xl desktop-1200:text-4xl desktop-1900:text-5xl desktop-1900:pl-[160px] desktop-1900:relative mb-4 md:mb-8 max-sm:px-5 ${isCenter?"text-center":""} ${range150 ? "pl-20" : ""
           }`}
       >
         {title}

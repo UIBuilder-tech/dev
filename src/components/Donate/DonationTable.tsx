@@ -523,7 +523,7 @@ export default function DonationTable({
         redirect: "follow",
       };
       fetch(
-        `${AdminPanelUrl}/donatespagination[pageSize]=100&sort[id]=desc`,
+        `${AdminPanelUrl}/donates?pagination[pageSize]=100&sort[id]=desc`,
         requestOptions
       )
         .then((response) => response.json())
