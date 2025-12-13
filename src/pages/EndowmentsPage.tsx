@@ -8,19 +8,14 @@ import EventsHero from "../assets/eventsHero.webp";
 import { UseDataContext } from "../components/context/DataContext";
 import SEO from "../components/seo/Seo";
 import ImpactSection from "../components/Home/OurImpact";
-const AdminPanelUrl = import.meta.env.VITE_ADMIN_PANEL_API;
-import endDomainImg from '../assets/end/Pasted image.png'
-import crishna from '../assets/end/crishna.png'
-import krishanV from '../assets/end/krishanV.png'
 import gif from '../assets/end/gif.png'
-
+const AdminPanelUrl = import.meta.env.VITE_ADMIN_PANEL_API;
+const imageUrl = import.meta.env.VITE_ADMIN_PANEL_API.replace("/api", '');
 export default function EndowmentsPage() {
   const location = useLocation();
   const [PageData, setPageData] = useState(null);
   const { data, setData } = UseDataContext();
   const [loading, setLoading] = useState(true)
-
-
   useEffect(() => {
     if (PageData) {
       // Handle initial load with hash
@@ -43,7 +38,7 @@ export default function EndowmentsPage() {
         method: 'GET',
         redirect: 'follow'
       };
-      fetch(`${AdminPanelUrl}/event-page`, requestOptions)
+      fetch(`${AdminPanelUrl}/endowment?populate[section_1][populate]=*&populate[section_2][populate]=*&populate[section_3][populate]=*&populate[section_4][populate]=*&populate[FAQ][populate]=*&populate[People][populate]=*`, requestOptions)
         .then(response => response.json())
         .then(result => {
           if (result?.data) {
@@ -68,28 +63,30 @@ export default function EndowmentsPage() {
       <div className="min-h-screen bg-cream">
         {
           <Hero
-            title={PageData?.title}
-            desc={PageData?.description}
+            title={PageData?.Title}
+            desc={PageData?.Description}
             button1={PageData?.Button1}
+            Button1Link={PageData?.Button1Link}
             button2={PageData?.Button2}
+            Button2Link={PageData?.Button2Link}
             img={EventsHero}
             from="events"
             isLoading={data?.isLoading || loading}
           />
         }
-        <EndowmentSection />
+        <EndowmentSection data={PageData?.section_1} />
         {/* Endowment Projects */}
         <div id="endowmentsProject">
           <SpecialProjects
             isCenter={true}
-            title="CHF Spotlight"
+            title="Endowment Projects"
             from="events"
           />
         </div>
-        <CHFEndowmentInfo />
-        <ImpactSection />
-        <WhyEndowmentSection />
-        <PeopleSection />
+        <CHFEndowmentInfo data={PageData} />
+        <ImpactSection url="endowment" />
+        <WhyEndowmentSection data={PageData?.FAQ} />
+        <PeopleSection data={PageData?.People} />
         <GiftSection />
         <FAQSection />
         <Footer />
@@ -97,458 +94,337 @@ export default function EndowmentsPage() {
     </>
   );
 }
-
-function EndowmentSection() {
+function EndowmentSection({ data }) {
   return (
-    <div className="relative bg-gradient-to-br from-orange-400 via-orange-500 to-orange-600 px-8 py-20 overflow-hidden">
-      {/* Left flower */}
-      <div className="absolute top-12 left-8 w-24 h-24 md:w-32 md:h-32">
-        <svg viewBox="0 0 200 200" fill="none" className="w-full h-full">
-          {/* Stem */}
-          <path d="M100 180 L100 100" stroke="#4A1F1F" strokeWidth="8" strokeLinecap="round" />
+    data && (
+      <div className="relative bg-gradient-to-br from-orange-400 via-orange-500 to-orange-600 px-8 py-20 overflow-hidden">
+        {/* Left flower */}
+        <div className="absolute top-12 left-8 w-24 h-24 md:w-32 md:h-32">
+          <svg viewBox="0 0 200 200" fill="none" className="w-full h-full">
+            {/* Stem */}
+            <path d="M100 180 L100 100" stroke="#4A1F1F" strokeWidth="8" strokeLinecap="round" />
 
-          {/* Base of flower */}
-          <ellipse cx="100" cy="95" rx="20" ry="15" fill="#5D2835" />
+            {/* Base of flower */}
+            <ellipse cx="100" cy="95" rx="20" ry="15" fill="#5D2835" />
 
-          {/* Back petals */}
-          <ellipse cx="70" cy="70" rx="35" ry="50" fill="#D4A574" opacity="0.9" transform="rotate(-30 70 70)" />
-          <ellipse cx="130" cy="70" rx="35" ry="50" fill="#D4A574" opacity="0.9" transform="rotate(30 130 70)" />
+            {/* Back petals */}
+            <ellipse cx="70" cy="70" rx="35" ry="50" fill="#D4A574" opacity="0.9" transform="rotate(-30 70 70)" />
+            <ellipse cx="130" cy="70" rx="35" ry="50" fill="#D4A574" opacity="0.9" transform="rotate(30 130 70)" />
 
-          {/* Top petal */}
-          <ellipse cx="100" cy="40" rx="40" ry="55" fill="#C9956B" opacity="0.95" />
+            {/* Top petal */}
+            <ellipse cx="100" cy="40" rx="40" ry="55" fill="#C9956B" opacity="0.95" />
 
-          {/* Side petals */}
-          <ellipse cx="50" cy="85" rx="30" ry="45" fill="#E09052" opacity="0.9" transform="rotate(-40 50 85)" />
-          <ellipse cx="150" cy="85" rx="40" ry="55" fill="#D17F3E" opacity="0.95" transform="rotate(20 150 85)" />
+            {/* Side petals */}
+            <ellipse cx="50" cy="85" rx="30" ry="45" fill="#E09052" opacity="0.9" transform="rotate(-40 50 85)" />
+            <ellipse cx="150" cy="85" rx="40" ry="55" fill="#D17F3E" opacity="0.95" transform="rotate(20 150 85)" />
 
-          {/* Center petal overlay */}
-          <ellipse cx="100" cy="75" rx="25" ry="30" fill="#D9B89A" opacity="0.8" />
+            {/* Center petal overlay */}
+            <ellipse cx="100" cy="75" rx="25" ry="30" fill="#D9B89A" opacity="0.8" />
 
-          {/* Stamens */}
-          <line x1="95" y1="75" x2="85" y2="55" stroke="#5D2835" strokeWidth="3" />
-          <line x1="100" y1="75" x2="95" y2="50" stroke="#5D2835" strokeWidth="3" />
-          <line x1="105" y1="75" x2="105" y2="48" stroke="#5D2835" strokeWidth="3" />
-          <line x1="110" y1="75" x2="115" y2="55" stroke="#5D2835" strokeWidth="3" />
+            {/* Stamens */}
+            <line x1="95" y1="75" x2="85" y2="55" stroke="#5D2835" strokeWidth="3" />
+            <line x1="100" y1="75" x2="95" y2="50" stroke="#5D2835" strokeWidth="3" />
+            <line x1="105" y1="75" x2="105" y2="48" stroke="#5D2835" strokeWidth="3" />
+            <line x1="110" y1="75" x2="115" y2="55" stroke="#5D2835" strokeWidth="3" />
 
-          <circle cx="85" cy="52" r="5" fill="#E8C547" />
-          <circle cx="95" cy="47" r="5" fill="#E8C547" />
-          <circle cx="105" cy="45" r="5" fill="#E8C547" />
-          <circle cx="115" cy="52" r="5" fill="#E8C547" />
+            <circle cx="85" cy="52" r="5" fill="#E8C547" />
+            <circle cx="95" cy="47" r="5" fill="#E8C547" />
+            <circle cx="105" cy="45" r="5" fill="#E8C547" />
+            <circle cx="115" cy="52" r="5" fill="#E8C547" />
 
-          {/* Additional pollen */}
-          <circle cx="90" cy="65" r="4" fill="#DDB83D" />
-          <circle cx="110" cy="65" r="4" fill="#DDB83D" />
-          <circle cx="100" cy="68" r="5" fill="#E8C547" />
-        </svg>
+            {/* Additional pollen */}
+            <circle cx="90" cy="65" r="4" fill="#DDB83D" />
+            <circle cx="110" cy="65" r="4" fill="#DDB83D" />
+            <circle cx="100" cy="68" r="5" fill="#E8C547" />
+          </svg>
+        </div>
+
+        {/* Right flower */}
+        <div className="absolute top-8 right-8 w-20 h-20 md:w-28 md:h-28">
+          <svg viewBox="0 0 200 200" fill="none" className="w-full h-full">
+            {/* Stem */}
+            <path d="M100 180 L100 100" stroke="#4A1F1F" strokeWidth="8" strokeLinecap="round" />
+
+            {/* Base of flower */}
+            <ellipse cx="100" cy="95" rx="18" ry="13" fill="#5D2835" />
+
+            {/* Back petals */}
+            <ellipse cx="75" cy="75" rx="30" ry="45" fill="#D4A574" opacity="0.9" transform="rotate(-25 75 75)" />
+            <ellipse cx="125" cy="75" rx="30" ry="45" fill="#D4A574" opacity="0.9" transform="rotate(25 125 75)" />
+
+            {/* Top petal */}
+            <ellipse cx="100" cy="45" rx="35" ry="48" fill="#C9956B" opacity="0.95" />
+
+            {/* Side petals */}
+            <ellipse cx="55" cy="85" rx="28" ry="40" fill="#E09052" opacity="0.9" transform="rotate(-35 55 85)" />
+            <ellipse cx="145" cy="85" rx="35" ry="48" fill="#D17F3E" opacity="0.95" transform="rotate(15 145 85)" />
+
+            {/* Center petal overlay */}
+            <ellipse cx="100" cy="75" rx="22" ry="28" fill="#D9B89A" opacity="0.8" />
+
+            {/* Stamens */}
+            <line x1="95" y1="75" x2="88" y2="58" stroke="#5D2835" strokeWidth="2.5" />
+            <line x1="100" y1="75" x2="97" y2="53" stroke="#5D2835" strokeWidth="2.5" />
+            <line x1="105" y1="75" x2="107" y2="55" stroke="#5D2835" strokeWidth="2.5" />
+            <line x1="110" y1="75" x2="115" y2="60" stroke="#5D2835" strokeWidth="2.5" />
+
+            <circle cx="88" cy="55" r="4.5" fill="#E8C547" />
+            <circle cx="97" cy="50" r="4.5" fill="#E8C547" />
+            <circle cx="107" cy="52" r="4.5" fill="#E8C547" />
+            <circle cx="115" cy="57" r="4.5" fill="#E8C547" />
+
+            {/* Additional pollen */}
+            <circle cx="92" cy="68" r="3.5" fill="#DDB83D" />
+            <circle cx="108" cy="68" r="3.5" fill="#DDB83D" />
+            <circle cx="100" cy="70" r="4.5" fill="#E8C547" />
+          </svg>
+        </div>
+
+        {/* Content */}
+        <div className="relative max-w-4xl mx-auto text-center">
+          <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
+            {data.title}
+          </h1>
+
+          <p className="text-white text-lg md:text-xl leading-relaxed">
+            {data.description}
+            {/* <a href="#" className="underline font-semibold hover:text-orange-100 transition-colors">
+              Join Us
+            </a> */}
+          </p>
+        </div>
+
+        {/* Greek key pattern border at bottom */}
+        <div className="absolute bottom-0 left-0 right-0 h-8">
+          <svg
+            className="w-full h-full"
+            preserveAspectRatio="none"
+            viewBox="0 0 1600 64"
+            fill="none"
+          >
+            <defs>
+              <pattern id="greekKey" x="0" y="0" width="64" height="64" patternUnits="userSpaceOnUse">
+                <rect width="64" height="64" fill="#F4E4D0" />
+                <path
+                  d="M 4 4 L 4 20 L 20 20 L 20 44 L 44 44 L 44 20 L 60 20 L 60 4 L 44 4 L 44 28 L 36 28 L 36 12 L 28 12 L 28 28 L 20 28 L 20 4 Z"
+                  fill="#D4A574"
+                  stroke="#B88A5C"
+                  strokeWidth="0.5"
+                />
+              </pattern>
+            </defs>
+            <rect width="1600" height="64" fill="url(#greekKey)" />
+          </svg>
+        </div>
       </div>
-
-      {/* Right flower */}
-      <div className="absolute top-8 right-8 w-20 h-20 md:w-28 md:h-28">
-        <svg viewBox="0 0 200 200" fill="none" className="w-full h-full">
-          {/* Stem */}
-          <path d="M100 180 L100 100" stroke="#4A1F1F" strokeWidth="8" strokeLinecap="round" />
-
-          {/* Base of flower */}
-          <ellipse cx="100" cy="95" rx="18" ry="13" fill="#5D2835" />
-
-          {/* Back petals */}
-          <ellipse cx="75" cy="75" rx="30" ry="45" fill="#D4A574" opacity="0.9" transform="rotate(-25 75 75)" />
-          <ellipse cx="125" cy="75" rx="30" ry="45" fill="#D4A574" opacity="0.9" transform="rotate(25 125 75)" />
-
-          {/* Top petal */}
-          <ellipse cx="100" cy="45" rx="35" ry="48" fill="#C9956B" opacity="0.95" />
-
-          {/* Side petals */}
-          <ellipse cx="55" cy="85" rx="28" ry="40" fill="#E09052" opacity="0.9" transform="rotate(-35 55 85)" />
-          <ellipse cx="145" cy="85" rx="35" ry="48" fill="#D17F3E" opacity="0.95" transform="rotate(15 145 85)" />
-
-          {/* Center petal overlay */}
-          <ellipse cx="100" cy="75" rx="22" ry="28" fill="#D9B89A" opacity="0.8" />
-
-          {/* Stamens */}
-          <line x1="95" y1="75" x2="88" y2="58" stroke="#5D2835" strokeWidth="2.5" />
-          <line x1="100" y1="75" x2="97" y2="53" stroke="#5D2835" strokeWidth="2.5" />
-          <line x1="105" y1="75" x2="107" y2="55" stroke="#5D2835" strokeWidth="2.5" />
-          <line x1="110" y1="75" x2="115" y2="60" stroke="#5D2835" strokeWidth="2.5" />
-
-          <circle cx="88" cy="55" r="4.5" fill="#E8C547" />
-          <circle cx="97" cy="50" r="4.5" fill="#E8C547" />
-          <circle cx="107" cy="52" r="4.5" fill="#E8C547" />
-          <circle cx="115" cy="57" r="4.5" fill="#E8C547" />
-
-          {/* Additional pollen */}
-          <circle cx="92" cy="68" r="3.5" fill="#DDB83D" />
-          <circle cx="108" cy="68" r="3.5" fill="#DDB83D" />
-          <circle cx="100" cy="70" r="4.5" fill="#E8C547" />
-        </svg>
-      </div>
-
-      {/* Content */}
-      <div className="relative max-w-4xl mx-auto text-center">
-        <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
-          What is an Endowment
-        </h1>
-
-        <p className="text-white text-lg md:text-xl leading-relaxed">
-          Chitrapur Heritage Foundation (CHF USA) is a 501(c)(3) nonprofit based in New
-          Jersey, dedicated to preserving the heritage, cultural traditions, education, and
-          community development of the Chitrapur Saraswat community.{' '}
-          <a href="#" className="underline font-semibold hover:text-orange-100 transition-colors">
-            Join Us
-          </a>
-        </p>
-      </div>
-
-      {/* Greek key pattern border at bottom */}
-      <div className="absolute bottom-0 left-0 right-0 h-8">
-        <svg
-          className="w-full h-full"
-          preserveAspectRatio="none"
-          viewBox="0 0 1600 64"
-          fill="none"
-        >
-          <defs>
-            <pattern id="greekKey" x="0" y="0" width="64" height="64" patternUnits="userSpaceOnUse">
-              <rect width="64" height="64" fill="#F4E4D0" />
-              <path
-                d="M 4 4 L 4 20 L 20 20 L 20 44 L 44 44 L 44 20 L 60 20 L 60 4 L 44 4 L 44 28 L 36 28 L 36 12 L 28 12 L 28 28 L 20 28 L 20 4 Z"
-                fill="#D4A574"
-                stroke="#B88A5C"
-                strokeWidth="0.5"
-              />
-            </pattern>
-          </defs>
-          <rect width="1600" height="64" fill="url(#greekKey)" />
-        </svg>
-      </div>
-    </div>
+    )
   );
 }
-
-function WhyEndowmentSection() {
-  const [openSection, setOpenSection] = useState('sustainability');
+function WhyEndowmentSection({ data }) {
+  const [openSection, setOpenSection] = useState(0);
+  const [faqTitle, setFaqTitle] = useState(null)
+  const [listitem, setListitem] = useState([])
 
   const toggleSection = (section) => {
     setOpenSection(openSection === section ? null : section);
   };
 
+  useEffect(() => {
+    if (data) {
+      const temp = data.find(v => v.__component === 'shared.title-description')
+      setFaqTitle(temp)
+      const t = data.filter(v => v.__component !== 'shared.title-description')
+      setListitem(t)
+    }
+
+  }, [data])
+
+
   return (
-    <div className="bg-gray-50 py-16 px-6 md:px-12">
-      <div className="max-w-6xl mx-auto">
-        {/* Header */}
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-navy-900 mb-2" style={{ color: '#1a2b4a' }}>
-            Why an Endowment is Essential for CHF
-          </h2>
-          <div className="w-24 h-1 bg-orange-500 mx-auto mb-6"></div>
+    data && (
+      <div className="bg-gray-50 py-16 px-6 md:px-12">
+        <div className="max-w-6xl mx-auto">
+          {/* Header */}
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-navy-900 mb-2" style={{ color: '#1a2b4a' }}>
+              {faqTitle?.title || ''}
+            </h2>
+            <div className="w-24 h-1 bg-orange-500 mx-auto mb-6"></div>
 
-          <p className="text-gray-600 text-lg max-w-4xl mx-auto leading-relaxed">
-            The Chitrapur Heritage Foundation (CHF) exists to sustain and strengthen the ecosystem surrounding
-            Chitrapur — nurturing its Heritage, Education, Women's Empowerment, and Spiritual Development. To secure
-            this mission for generations to come, establishing a permanent endowment is essential.{' '}
-            <a href="#" className="text-blue-600 hover:text-blue-700 font-semibold">Learn More</a>
-          </p>
-        </div>
+            <p className="text-gray-600 text-lg max-w-4xl mx-auto leading-relaxed">
+              {faqTitle?.description || ''}
+            </p>
+          </div>
+          <div className="space-y-4">
+            {
+              listitem.map((v, i) => (
+                <div className="bg-white rounded-lg shadow-sm overflow-hidden" key={`cbd_${i}`}>
+                  <button
+                    onClick={() => toggleSection(i)}
+                    className="w-full flex items-center justify-between p-6 text-left hover:bg-gray-50 transition-colors"
+                  >
+                    <h3 className="text-xl font-bold text-gray-900">
+                      {v.Title}
+                    </h3>
+                    <svg
+                      className={`w-6 h-6 transition-transform ${openSection === i ? 'rotate-180' : ''}`}
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
+                    </svg>
+                  </button>
 
-        {/* Accordion Sections */}
-        <div className="space-y-4">
-          {/* Section 1: Ensuring Long-Term Sustainability */}
-          <div className="bg-white rounded-lg shadow-sm overflow-hidden">
-            <button
-              onClick={() => toggleSection('sustainability')}
-              className="w-full flex items-center justify-between p-6 text-left hover:bg-gray-50 transition-colors"
-            >
-              <h3 className="text-xl font-bold text-gray-900">
-                Ensuring Long-Term Sustainability
-              </h3>
-              <svg
-                className={`w-6 h-6 transition-transform ${openSection === 'sustainability' ? 'rotate-180' : ''}`}
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
-              </svg>
-            </button>
+                  {openSection === i && (
+                    <div className="px-6 pb-6 border-t border-gray-200">
+                      <div className="flex flex-col md:flex-row gap-6 items-start mt-6">
+                        <div className="md:w-2/5">
+                          <img
+                            src={imageUrl + v?.image?.url}
+                            alt="Community gathering"
+                            className="rounded-lg w-full h-auto object-cover"
+                          />
+                        </div>
 
-            {openSection === 'sustainability' && (
-              <div className="px-6 pb-6 border-t border-gray-200">
-                <div className="flex flex-col md:flex-row gap-6 items-start mt-6">
-                  <div className="md:w-2/5">
-                    <img
-                      src={endDomainImg}
-                      alt="Community gathering"
-                      className="rounded-lg w-full h-auto object-cover"
-                    />
-                  </div>
-
-                  <div className="md:w-3/5 space-y-4">
-                    <p className="text-gray-700">
-                      A reserve of donated funds set aside to generate ongoing income, while preserving the principal.
-                    </p>
-
-                    <p className="text-gray-700">
-                      Used to support core operations, strategic programs, and emergencies, so we can maintain consistency in serving suffering children.
-                    </p>
-
-                    <p className="text-gray-700">
-                      Managed with care, transparency, and accountability to donors and partners.
-                    </p>
-                  </div>
+                        <div className="md:w-3/5 space-y-4">
+                          <p className="text-gray-700">
+                            {v?.Description || ''}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
-              </div>
-            )}
-          </div>
-
-          {/* Section 2: Supporting Education and Empowerment Consistently */}
-          <div className="bg-white rounded-lg shadow-sm overflow-hidden">
-            <button
-              onClick={() => toggleSection('education')}
-              className="w-full flex items-center justify-between p-6 text-left hover:bg-gray-50 transition-colors"
-            >
-              <h3 className="text-xl font-bold text-gray-900">
-                Supporting Education and Empowerment Consistently
-              </h3>
-              <svg
-                className={`w-6 h-6 transition-transform ${openSection === 'education' ? 'rotate-180' : ''}`}
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-              </svg>
-            </button>
-
-            {openSection === 'education' && (
-              <div className="px-6 pb-6 border-t border-gray-200 mt-4">
-                <p className="text-gray-700">
-                  Content for Supporting Education and Empowerment section goes here...
-                </p>
-              </div>
-            )}
-          </div>
-
-          {/* Section 3: Preserving Heritage and Spiritual Traditions */}
-          <div className="bg-white rounded-lg shadow-sm overflow-hidden">
-            <button
-              onClick={() => toggleSection('heritage')}
-              className="w-full flex items-center justify-between p-6 text-left hover:bg-gray-50 transition-colors"
-            >
-              <h3 className="text-xl font-bold text-gray-900">
-                Preserving Heritage and Spiritual Traditions
-              </h3>
-              <svg
-                className={`w-6 h-6 transition-transform ${openSection === 'heritage' ? 'rotate-180' : ''}`}
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-              </svg>
-            </button>
-
-            {openSection === 'heritage' && (
-              <div className="px-6 pb-6 border-t border-gray-200 mt-4">
-                <p className="text-gray-700">
-                  Content for Preserving Heritage and Spiritual Traditions section goes here...
-                </p>
-              </div>
-            )}
-          </div>
-
-          {/* Section 4: Protecting Independence and Integrity */}
-          <div className="bg-white rounded-lg shadow-sm overflow-hidden">
-            <button
-              onClick={() => toggleSection('independence')}
-              className="w-full flex items-center justify-between p-6 text-left hover:bg-gray-50 transition-colors"
-            >
-              <h3 className="text-xl font-bold text-gray-900">
-                Protecting Independence and Integrity
-              </h3>
-              <svg
-                className={`w-6 h-6 transition-transform ${openSection === 'independence' ? 'rotate-180' : ''}`}
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-              </svg>
-            </button>
-
-            {openSection === 'independence' && (
-              <div className="px-6 pb-6 border-t border-gray-200 mt-4">
-                <p className="text-gray-700">
-                  Content for Protecting Independence and Integrity section goes here...
-                </p>
-              </div>
-            )}
+              ))
+            }
           </div>
         </div>
       </div>
-    </div>
+
+    )
   );
 }
-function CHFEndowmentInfo() {
+function CHFEndowmentInfo({ data }) {
+  const [section4data, setSection4data] = useState(null)
+  const [section4, setSection4] = useState([])
+  useEffect(() => {
+    if (data?.section_4) {
+      const temp = data.section_4.find(v => v.image)
+      setSection4data(temp)
+      const t = data.section_4.filter(v => !v.image)
+      setSection4(t)
+    }
+  }, [data])
+
   return (
-    <div className="bg-white py-16 px-6 md:px-12">
-      <div className="max-w-6xl mx-auto">
-        {/* Title */}
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12" style={{ color: '#1a2b4a' }}>
-          CHF Endowment Information
-        </h2>
+    data && (
+      <div className="bg-white py-16 px-6 md:px-12">
+        <div className="max-w-6xl mx-auto">
+          {/* Title */}
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12" style={{ color: '#1a2b4a' }}>
+            CHF Endowment Information
+          </h2>
 
-        {/* Three areas of endowments */}
-        <div className="bg-gray-50 rounded-lg p-8 mb-8 flex flex-col md:flex-row gap-6 items-center">
-          <div className="md:w-2/5">
-            <img
-              src={endDomainImg}
-              alt="Community gathering"
-              className="rounded-lg w-full h-auto object-cover"
-            />
-          </div>
-
-          <div className="md:w-3/5">
-            <h3 className="text-xl font-bold text-gray-900 mb-4">
-              Three areas of endowments
-            </h3>
-
-            <p className="text-gray-700 mb-3">
-              A reserve of donated funds set aside to generate ongoing income, while <span className="font-semibold">preserving the principal.</span>
-            </p>
-
-            <p className="text-gray-700 mb-3">
-              Used to support core operations, strategic programs, and emergencies, so we can maintain consistency in serving suffering children.
-            </p>
-
-            <p className="text-gray-700">
-              Managed with care, transparency, and accountability to donors and partners.{' '}
-              <a href="#" className="text-blue-600 hover:text-blue-700 font-semibold">Learn More</a>
-            </p>
-          </div>
-        </div>
-
-        {/* How can a donor make Endowments */}
-        <div className="mb-8">
-          <div className="rounded-lg overflow-hidden">
-            <img
-              src={crishna}
-              alt="Deity illustration"
-              className="w-full h-64 object-cover"
-            />
-          </div>
-
-          <div className="mt-6">
-            <h3 className="text-xl font-bold text-gray-900 mb-4">
-              How can a donor make Endowments
-            </h3>
-
-            <ul className="space-y-2 text-gray-700">
-              <li className="flex items-start">
-                <span className="mr-2">•</span>
-                <span>Donating to any of the three causes listed I can be done the on the same website page</span>
-              </li>
-              <li className="flex items-start">
-                <span className="mr-2">•</span>
-                <span>Donating any assets like real estate/ listed stocks/ PPls will be an offline process</span>
-              </li>
-              <li className="flex items-start">
-                <span className="mr-2">•</span>
-                <span>Any special forms of the endowment that the donor would like to specific in terms naming rights will be need to be discussed seperately.</span>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        {/* How the Endowment Is Managed */}
-        <div className="bg-gray-50 rounded-lg p-8 flex flex-col md:flex-row gap-6 items-start">
-          <div className="md:w-2/5">
-            <img
-              src={krishanV}
-              alt="Deity with sunset"
-              className="rounded-lg w-full h-auto object-cover"
-            />
-          </div>
-
-          <div className="md:w-3/5">
-            <h3 className="text-xl font-bold text-gray-900 mb-4">
-              How the Endowment Is Managed
-            </h3>
-
-            <div className="mb-6">
-              <h4 className="font-semibold text-gray-900 mb-2">Investment Policy:</h4>
-              <ul className="space-y-2 text-gray-700 ml-4">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Balanced portfolio (mix of equities, bonds, possibly alternative investments) to balance growth vs risk.</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Aim for long-term returns that exceed inflation and cover withdrawal rates.</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Responsible investing / ESG / faith-aligned investing policies if applicable.</span>
-                </li>
-              </ul>
+          {/* Three areas of endowments */}
+          <div className="bg-gray-50 rounded-lg p-8 mb-8 flex flex-col md:flex-row gap-6 items-center">
+            <div className="md:w-2/5">
+              <img
+                src={imageUrl + `${data?.section_2?.image?.url}`}
+                alt="Community gathering"
+                className="rounded-lg w-full h-auto object-cover"
+              />
             </div>
 
-            <div>
-              <h4 className="font-semibold text-gray-900 mb-2">Spending Policy:</h4>
-              <ul className="space-y-2 text-gray-700 ml-4">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Typically, a fixed percentage of the endowment's value is distributed annually (ex: 4-5%) to fund CHF initiatives.</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Principal should be preserved unless under extraordinary circumstances.</span>
-                </li>
+            <div className="md:w-3/5">
+              <h3 className="text-xl font-bold text-gray-900 mb-4">
+                {data?.section_2?.Title || ''}
+              </h3>
+
+              <p className="text-gray-700 mb-3">
+                {data?.section_2?.Description || ''}
+              </p>
+            </div>
+          </div>
+
+          {/* How can a donor make Endowments */}
+          <div className="mb-8">
+            <div className="rounded-lg overflow-hidden">
+              <img
+                src={imageUrl + `${data?.section_3?.image?.url}`}
+                alt="Deity illustration"
+                className="w-full h-64 object-cover"
+              />
+            </div>
+
+            <div className="mt-6">
+              <h3 className="text-xl font-bold text-gray-900 mb-4">
+                {data?.section_3?.Title || ''}
+              </h3>
+
+              <ul className="space-y-2 text-gray-700">
+                {
+                  (data?.section_3?.list || []).map((v) => (
+                    <li className="flex items-start" key={v.id}>
+                      <span className="mr-2">•</span>
+                      <span>{v.text}</span>
+                    </li>
+
+                  ))
+                }
               </ul>
             </div>
           </div>
+
+          {/* How the Endowment Is Managed */}
+          <div className="bg-gray-50 rounded-lg p-8 flex flex-col md:flex-row gap-6 items-start">
+            <div className="md:w-2/5">
+              <img
+                src={imageUrl + section4data?.image.url}
+                alt="Deity with sunset"
+                className="rounded-lg w-full h-auto object-cover"
+              />
+            </div>
+
+            <div className="md:w-3/5">
+              <h3 className="text-xl font-bold text-gray-900 mb-4">
+                {section4data?.Title || ''}
+              </h3>
+
+              {
+                section4.map(v => (
+                  <div className="mb-6">
+                    <h4 className="font-semibold text-gray-900 mb-2">{v?.title || ''}</h4>
+                    <ul className="space-y-2 text-gray-700 ml-4">
+                      {
+                        v.list.map(a => (
+                          <li className="flex items-start" key={`list_${a.id}`}>
+                            <span className="mr-2">•</span>
+                            <span>{a.text}</span>
+                          </li>
+                        ))
+                      }
+                    </ul>
+                  </div>
+                ))
+              }
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
+      </div>)
   );
 }
-function PeopleSection() {
+function PeopleSection({ data }) {
   const [currentSlide, setCurrentSlide] = useState(0);
-  // Sample donor data - you can replace with actual data
-  const donors = [
-    { name: 'Name Last Name', type: 'Endowment' },
-    { name: 'Name Last Name', type: 'Endowment' },
-    { name: 'Name Last Name', type: 'Endowment' },
-    { name: 'Name Last Name', type: 'Endowment' },
-    { name: 'Name Last Name', type: 'Endowment' },
-    { name: 'Name Last Name', type: 'Endowment' },
-    { name: 'Name Last Name', type: 'Endowment' },
-    { name: 'Name Last Name', type: 'Endowment' },
-    { name: 'Name Last Name', type: 'Endowment' },
-    { name: 'Name Last Name', type: 'Endowment' },
-    { name: 'Name Last Name', type: 'Endowment' },
-    { name: 'Name Last Name', type: 'Endowment' },
-    { name: 'Name Last Name', type: 'Endowment' },
-    { name: 'Name Last Name', type: 'Endowment' },
-    { name: 'Name Last Name', type: 'Endowment' },
-    { name: 'Name Last Name', type: 'Endowment' },
-    { name: 'Name Last Name', type: 'Endowment' },
-    { name: 'Name Last Name', type: 'Endowment' },
-    { name: 'Name Last Name', type: 'Endowment' },
-    { name: 'Name Last Name', type: 'Endowment' },
-    { name: 'Name Last Name', type: 'Endowment' },
-    { name: 'Name Last Name', type: 'Endowment' },
-    { name: 'Name Last Name', type: 'Endowment' },
-    { name: 'Name Last Name', type: 'Endowment' },
-    { name: 'Name Last Name', type: 'Endowment' },
-    { name: 'Name Last Name', type: 'Endowment' },
-    { name: 'Name Last Name', type: 'Endowment' },
-    { name: 'Name Last Name', type: 'Endowment' },
-    { name: 'Name Last Name', type: 'Endowment' },
-    { name: 'Name Last Name', type: 'Endowment' }
-  ];
+  const [donors, setDonors] = useState([])
 
   const itemsPerSlide = 15;
   const totalSlides = Math.ceil(donors.length / itemsPerSlide);
+  useEffect(() => {
+    if (data) {
+      setDonors(data)
+    }
+  }, [data])
   return (
     <div className="bg-orange-50 py-16 px-6 md:px-12">
       <div className="max-w-7xl mx-auto">
@@ -565,14 +441,14 @@ function PeopleSection() {
               <div key={index} className="flex items-center gap-3">
                 <div className="w-12 h-12 rounded-full bg-pink-300 flex-shrink-0 overflow-hidden">
                   <img
-                    src={`https://ui-avatars.com/api/?name=${donor.name}&background=f472b6&color=fff&size=48`}
-                    alt={donor.name}
+                    src={imageUrl + donor?.image?.url}
+                    alt={donor.Title}
                     className="w-full h-full object-cover"
                   />
                 </div>
                 <div>
-                  <p className="font-semibold text-gray-900 text-sm">{donor.name}</p>
-                  <p className="text-gray-600 text-xs">{donor.type}</p>
+                  <p className="font-semibold text-gray-900 text-sm">{donor.Title}</p>
+                  <p className="text-gray-600 text-xs">{donor.Description}</p>
                 </div>
               </div>
             ))}

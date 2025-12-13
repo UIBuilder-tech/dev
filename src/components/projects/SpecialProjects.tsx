@@ -16,8 +16,8 @@ interface Project {
   location: string;
   description: string;
   images: string[];
-  linkTo?:string;
-  knowMoreLink?:string;
+  linkTo?: string;
+  knowMoreLink?: string;
 }
 
 const ProjectCardSkeleton = ({ isExpanded }: { isExpanded: boolean }) => {
@@ -239,9 +239,9 @@ const ProjectCard = ({
                 >
                   {project.description}
                   {
-                                      project.knowMoreLink  &&
-                                      <Link className="text-blue-600" target="_blank" to={project.knowMoreLink}> Know more </Link>
-                                    }
+                    project.knowMoreLink &&
+                    <Link className="text-blue-600" target="_blank" to={project.knowMoreLink}> Know more </Link>
+                  }
                 </p>
                 {from === "projects" && (
                   <motion.button
@@ -260,15 +260,15 @@ const ProjectCard = ({
                   src={project.image[currentImageIndex]}
                   alt={project.title}
                   className={`${range150 || range120
-                      ? "w-[200px] h-[300px]"
-                      : "w-full h-[250px] md:h-64"
-                  } object-cover rounded-lg`}
+                    ? "w-[200px] h-[300px]"
+                    : "w-full h-[250px] md:h-64"
+                    } object-cover rounded-lg`}
                   onClick={() => triggerImagePreview(project.image[currentImageIndex])}
                 />
                 <div
                   className={`${range150 || range120
-                      ? "w-[200px] h-[300px]"
-                      : "w-full md:h-64"
+                    ? "w-[200px] h-[300px]"
+                    : "w-full md:h-64"
                     } flex justify-center gap-2 mt-4`}
                 >
                   {project.image.map((_, index) => (
@@ -279,8 +279,8 @@ const ProjectCard = ({
                         setCurrentImageIndex(index);
                       }}
                       className={`w-2 h-2 rounded-full ${index === currentImageIndex
-                          ? "bg-orange-500"
-                          : "bg-gray-300"
+                        ? "bg-orange-500"
+                        : "bg-gray-300"
                         }`}
                     />
                   ))}
@@ -361,7 +361,7 @@ const AdminPanelUrl = import.meta.env.VITE_ADMIN_PANEL_API;
 const SpecialProjects = ({
   title,
   from = "projects",
-  isCenter=false
+  isCenter = false
 }: {
   title: string;
   isCenter: boolean;
@@ -447,9 +447,9 @@ const SpecialProjects = ({
                 <ProjectCardSkeleton isExpanded={true} />
               ) : (
                 [...Array(3)].map((_, index) => (
-                  <ProjectCardSkeleton 
-                    key={index} 
-                    isExpanded={index === 0} 
+                  <ProjectCardSkeleton
+                    key={index}
+                    isExpanded={index === 0}
                   />
                 ))
               )}
@@ -474,7 +474,7 @@ const SpecialProjects = ({
   return (
     <div className="w-full max-w-7xl mx-auto py-12 desktop-1900:max-w-full">
       <h2
-        className={`text-3xl desktop-1200:text-4xl desktop-1900:text-5xl desktop-1900:pl-[160px] desktop-1900:relative mb-4 md:mb-8 max-sm:px-5 ${isCenter?"text-center":""} ${range150 ? "pl-20" : ""
+        className={`text-3xl desktop-1200:text-4xl desktop-1900:text-5xl desktop-1900:pl-[160px] desktop-1900:relative mb-4 md:mb-8 max-sm:px-5 ${isCenter ? "text-center" : ""} ${range150 ? "pl-20" : ""
           }`}
       >
         {title}
@@ -516,14 +516,14 @@ const SpecialProjects = ({
                   )
               )
               : visibleProjects.map((project) => (
-                  <ProjectCard
-                    from={from}
-                    key={project.id}
-                    project={project}
-                    isExpanded={project.id === expandedId}
-                    onExpand={handleExpand}
-                  />
-                ))}
+                <ProjectCard
+                  from={from}
+                  key={project.id}
+                  project={project}
+                  isExpanded={project.id === expandedId}
+                  onExpand={handleExpand}
+                />
+              ))}
             {(isMobile || isTablet) && (
               <div className="flex-1 flex flex-row gap-3 md:gap-4">
                 {visibleProjects.map(

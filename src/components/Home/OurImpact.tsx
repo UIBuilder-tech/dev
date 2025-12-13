@@ -20,7 +20,7 @@ interface ImpactCard {
 const AdminPanelUrl = import.meta.env.VITE_ADMIN_PANEL_API;
 const AdminPanelImgUrl = import.meta.env.VITE_ADMIN_PANEL_IMG_API;
 
-export default function ImpactSection() {
+export default function ImpactSection({url="home-page"}) {
   const [impactCards, setImpactCards] = useState<ImpactCard[] | null>(null);
   const [activeCard, setActiveCard] = useState<ImpactCard | null>(null);
 
@@ -36,7 +36,7 @@ export default function ImpactSection() {
     };
 
     fetch(
-      `${AdminPanelUrl}/home-page?populate[Our_Impact_Big_Card][populate]=*`,
+      `${AdminPanelUrl}/${url}?populate[Our_Impact_Big_Card][populate]=*`,
       requestOptions
     )
       .then((response) => response.json())
