@@ -9,6 +9,9 @@ import { UseDataContext } from "../components/context/DataContext";
 import SEO from "../components/seo/Seo";
 import ImpactSection from "../components/Home/OurImpact";
 import gif from '../assets/end/gif.png'
+import Group from '../assets/end/Group.png'
+import sectionBorder from "../assets/section-border.svg";
+import GroupLeft from '../assets/end/GroupLeft.png'
 import { toast } from "react-toastify";
 
 interface FormData {
@@ -120,7 +123,7 @@ export default function EndowmentsPage() {
           />
         </div>
         <CHFEndowmentInfo data={PageData} />
-        <ImpactSection url="endowment" title="Current Size & Performance"/>
+        <ImpactSection url="endowment" title="Current Size & Performance" />
         <WhyEndowmentSection data={PageData?.FAQ} />
         <PeopleSection data={PageData?.People} />
         <GiftSection />
@@ -135,85 +138,13 @@ function EndowmentSection({ data }) {
     data && (
       <div className="relative bg-gradient-to-br from-orange-400 via-orange-500 to-orange-600 px-8 py-20 overflow-hidden">
         {/* Left flower */}
-        <div className="absolute top-12 left-8 w-24 h-24 md:w-32 md:h-32">
-          <svg viewBox="0 0 200 200" fill="none" className="w-full h-full">
-            {/* Stem */}
-            <path d="M100 180 L100 100" stroke="#4A1F1F" strokeWidth="8" strokeLinecap="round" />
-
-            {/* Base of flower */}
-            <ellipse cx="100" cy="95" rx="20" ry="15" fill="#5D2835" />
-
-            {/* Back petals */}
-            <ellipse cx="70" cy="70" rx="35" ry="50" fill="#D4A574" opacity="0.9" transform="rotate(-30 70 70)" />
-            <ellipse cx="130" cy="70" rx="35" ry="50" fill="#D4A574" opacity="0.9" transform="rotate(30 130 70)" />
-
-            {/* Top petal */}
-            <ellipse cx="100" cy="40" rx="40" ry="55" fill="#C9956B" opacity="0.95" />
-
-            {/* Side petals */}
-            <ellipse cx="50" cy="85" rx="30" ry="45" fill="#E09052" opacity="0.9" transform="rotate(-40 50 85)" />
-            <ellipse cx="150" cy="85" rx="40" ry="55" fill="#D17F3E" opacity="0.95" transform="rotate(20 150 85)" />
-
-            {/* Center petal overlay */}
-            <ellipse cx="100" cy="75" rx="25" ry="30" fill="#D9B89A" opacity="0.8" />
-
-            {/* Stamens */}
-            <line x1="95" y1="75" x2="85" y2="55" stroke="#5D2835" strokeWidth="3" />
-            <line x1="100" y1="75" x2="95" y2="50" stroke="#5D2835" strokeWidth="3" />
-            <line x1="105" y1="75" x2="105" y2="48" stroke="#5D2835" strokeWidth="3" />
-            <line x1="110" y1="75" x2="115" y2="55" stroke="#5D2835" strokeWidth="3" />
-
-            <circle cx="85" cy="52" r="5" fill="#E8C547" />
-            <circle cx="95" cy="47" r="5" fill="#E8C547" />
-            <circle cx="105" cy="45" r="5" fill="#E8C547" />
-            <circle cx="115" cy="52" r="5" fill="#E8C547" />
-
-            {/* Additional pollen */}
-            <circle cx="90" cy="65" r="4" fill="#DDB83D" />
-            <circle cx="110" cy="65" r="4" fill="#DDB83D" />
-            <circle cx="100" cy="68" r="5" fill="#E8C547" />
-          </svg>
+        <div className="absolute top-24 -left-8 w-20 h-20 md:w-48 md:h-w-48">
+          <img src={GroupLeft} />
         </div>
 
         {/* Right flower */}
-        <div className="absolute top-8 right-8 w-20 h-20 md:w-28 md:h-28">
-          <svg viewBox="0 0 200 200" fill="none" className="w-full h-full">
-            {/* Stem */}
-            <path d="M100 180 L100 100" stroke="#4A1F1F" strokeWidth="8" strokeLinecap="round" />
-
-            {/* Base of flower */}
-            <ellipse cx="100" cy="95" rx="18" ry="13" fill="#5D2835" />
-
-            {/* Back petals */}
-            <ellipse cx="75" cy="75" rx="30" ry="45" fill="#D4A574" opacity="0.9" transform="rotate(-25 75 75)" />
-            <ellipse cx="125" cy="75" rx="30" ry="45" fill="#D4A574" opacity="0.9" transform="rotate(25 125 75)" />
-
-            {/* Top petal */}
-            <ellipse cx="100" cy="45" rx="35" ry="48" fill="#C9956B" opacity="0.95" />
-
-            {/* Side petals */}
-            <ellipse cx="55" cy="85" rx="28" ry="40" fill="#E09052" opacity="0.9" transform="rotate(-35 55 85)" />
-            <ellipse cx="145" cy="85" rx="35" ry="48" fill="#D17F3E" opacity="0.95" transform="rotate(15 145 85)" />
-
-            {/* Center petal overlay */}
-            <ellipse cx="100" cy="75" rx="22" ry="28" fill="#D9B89A" opacity="0.8" />
-
-            {/* Stamens */}
-            <line x1="95" y1="75" x2="88" y2="58" stroke="#5D2835" strokeWidth="2.5" />
-            <line x1="100" y1="75" x2="97" y2="53" stroke="#5D2835" strokeWidth="2.5" />
-            <line x1="105" y1="75" x2="107" y2="55" stroke="#5D2835" strokeWidth="2.5" />
-            <line x1="110" y1="75" x2="115" y2="60" stroke="#5D2835" strokeWidth="2.5" />
-
-            <circle cx="88" cy="55" r="4.5" fill="#E8C547" />
-            <circle cx="97" cy="50" r="4.5" fill="#E8C547" />
-            <circle cx="107" cy="52" r="4.5" fill="#E8C547" />
-            <circle cx="115" cy="57" r="4.5" fill="#E8C547" />
-
-            {/* Additional pollen */}
-            <circle cx="92" cy="68" r="3.5" fill="#DDB83D" />
-            <circle cx="108" cy="68" r="3.5" fill="#DDB83D" />
-            <circle cx="100" cy="70" r="4.5" fill="#E8C547" />
-          </svg>
+        <div className="absolute top-4 right-8 w-20 h-20 md:w-28 md:h-28">
+          <img src={Group} />
         </div>
 
         {/* Content */}
@@ -224,33 +155,14 @@ function EndowmentSection({ data }) {
 
           <p className="text-white text-lg md:text-xl leading-relaxed">
             {data.description}
-            {/* <a href="#" className="underline font-semibold hover:text-orange-100 transition-colors">
-              Join Us
-            </a> */}
           </p>
         </div>
 
-        {/* Greek key pattern border at bottom */}
-        <div className="absolute bottom-0 left-0 right-0 h-8">
-          <svg
-            className="w-full h-full"
-            preserveAspectRatio="none"
-            viewBox="0 0 1600 64"
-            fill="none"
-          >
-            <defs>
-              <pattern id="greekKey" x="0" y="0" width="64" height="64" patternUnits="userSpaceOnUse">
-                <rect width="64" height="64" fill="#F4E4D0" />
-                <path
-                  d="M 4 4 L 4 20 L 20 20 L 20 44 L 44 44 L 44 20 L 60 20 L 60 4 L 44 4 L 44 28 L 36 28 L 36 12 L 28 12 L 28 28 L 20 28 L 20 4 Z"
-                  fill="#D4A574"
-                  stroke="#B88A5C"
-                  strokeWidth="0.5"
-                />
-              </pattern>
-            </defs>
-            <rect width="1600" height="64" fill="url(#greekKey)" />
-          </svg>
+
+       <div className="absolute bottom-0 left-0 right-0">
+          <div className="h-8 w-full bg-[url('../../assets/section-border.svg')] bg-repeat-x">
+            <img loading="lazy" src={sectionBorder} className="w-full h-full" />
+          </div>
         </div>
       </div>
     )
@@ -781,144 +693,144 @@ function GiftSection() {
 
           {/* Right side - Form */}
           <div className="bg-white rounded-lgp-8">
-              <form
-                onSubmit={handleSubmit}
-                className="space-y-8 desktop-1200:space-y-4 desktop-1900:space-y-6 desktop-1500:space-y-6 max-w-[80%] max-sm:contents"
-              >
-                <div>
-                  <select
-                    name="category"
-                    value={formData.category}
-                    onChange={handleInputChange}
-                    className={`w-full border-b ${errors.category ? "border-red-500" : "border-gray-200"
-                      } py-3 focus:outline-none focus:border-primary bg-transparent`}
-                  >
-                    <option value="">Select Category</option>
-                    <option value="education">Education</option>
-                    <option value="heritage">Heritage</option>
-                    <option value="women">Women Empowerment</option>
-                    <option value="general">General</option>
-                  </select>
-                  {errors.category && (
-                    <p className="text-red-500 text-sm mt-1">{errors.category}</p>
-                  )}
-                </div>
+            <form
+              onSubmit={handleSubmit}
+              className="space-y-8 desktop-1200:space-y-4 desktop-1900:space-y-6 desktop-1500:space-y-6 max-w-[80%] max-sm:contents"
+            >
+              <div>
+                <select
+                  name="category"
+                  value={formData.category}
+                  onChange={handleInputChange}
+                  className={`w-full border-b ${errors.category ? "border-red-500" : "border-gray-200"
+                    } py-3 focus:outline-none focus:border-primary bg-transparent`}
+                >
+                  <option value="">Select Category</option>
+                  <option value="education">Education</option>
+                  <option value="heritage">Heritage</option>
+                  <option value="women">Women Empowerment</option>
+                  <option value="general">General</option>
+                </select>
+                {errors.category && (
+                  <p className="text-red-500 text-sm mt-1">{errors.category}</p>
+                )}
+              </div>
 
-                <div className="relative">
-                  <input
-                    type="text"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleInputChange}
-                    className="w-full border-b border-gray-200 py-3 focus:outline-none focus:border-primary desktop-1200:text-base desktop-1500:text-lg desktop-1900:text-xl"
-                    placeholder="Full Name"
-                  />
-                  {/* {isNameVerified && (
+              <div className="relative">
+                <input
+                  type="text"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleInputChange}
+                  className="w-full border-b border-gray-200 py-3 focus:outline-none focus:border-primary desktop-1200:text-base desktop-1500:text-lg desktop-1900:text-xl"
+                  placeholder="Full Name"
+                />
+                {/* {isNameVerified && (
                   <Check className="absolute right-2 top-1/2 -translate-y-1/2 text-green-500 h-5 w-5" />
                 )} */}
-                </div>
+              </div>
 
-                <div>
-                  <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    className={`w-full border-b ${errors.email ? "border-red-500" : "border-gray-200"
-                      } py-3 focus:outline-none focus:border-primary desktop-1200:text-base desktop-1500:text-lg desktop-1900:text-xl`}
-                    placeholder="Email Address"
-                  />
-                  {errors.email && (
-                    <p className="text-red-500 text-sm mt-1">{errors.email}</p>
-                  )}
-                </div>
+              <div>
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  className={`w-full border-b ${errors.email ? "border-red-500" : "border-gray-200"
+                    } py-3 focus:outline-none focus:border-primary desktop-1200:text-base desktop-1500:text-lg desktop-1900:text-xl`}
+                  placeholder="Email Address"
+                />
+                {errors.email && (
+                  <p className="text-red-500 text-sm mt-1">{errors.email}</p>
+                )}
+              </div>
 
-                <div>
-                  <input
-                    type="tel"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleInputChange}
-                    className={`w-full border-b ${errors.phone ? "border-red-500" : "border-gray-200"
-                      } py-3 focus:outline-none focus:border-primary desktop-1200:text-base desktop-1500:text-lg desktop-1900:text-xl`}
-                    placeholder="Phone Number"
-                  />
-                  {errors.phone && (
-                    <p className="text-red-500 text-sm mt-1">{errors.phone}</p>
-                  )}
-                </div>
+              <div>
+                <input
+                  type="tel"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleInputChange}
+                  className={`w-full border-b ${errors.phone ? "border-red-500" : "border-gray-200"
+                    } py-3 focus:outline-none focus:border-primary desktop-1200:text-base desktop-1500:text-lg desktop-1900:text-xl`}
+                  placeholder="Phone Number"
+                />
+                {errors.phone && (
+                  <p className="text-red-500 text-sm mt-1">{errors.phone}</p>
+                )}
+              </div>
 
+              <div>
+                <input
+                  type="text"
+                  name="address"
+                  value={formData.address}
+                  onChange={handleInputChange}
+                  className={`w-full border-b ${errors.address ? "border-red-500" : "border-gray-200"
+                    } py-3 focus:outline-none focus:border-primary desktop-1200:text-base desktop-1500:text-lg desktop-1900:text-xl`}
+                  placeholder="Address"
+                />
+                {errors.address && (
+                  <p className="text-red-500 text-sm mt-1">{errors.address}</p>
+                )}
+              </div>
+
+              <div className="grid grid-cols-2 gap-4">
                 <div>
                   <input
                     type="text"
-                    name="address"
-                    value={formData.address}
+                    name="city"
+                    value={formData.city}
                     onChange={handleInputChange}
-                    className={`w-full border-b ${errors.address ? "border-red-500" : "border-gray-200"
+                    className={`w-full border-b ${errors.city ? "border-red-500" : "border-gray-200"
                       } py-3 focus:outline-none focus:border-primary desktop-1200:text-base desktop-1500:text-lg desktop-1900:text-xl`}
-                    placeholder="Address"
+                    placeholder="City"
                   />
-                  {errors.address && (
-                    <p className="text-red-500 text-sm mt-1">{errors.address}</p>
+                  {errors.city && (
+                    <p className="text-red-500 text-sm mt-1">{errors.city}</p>
                   )}
                 </div>
-
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <input
-                      type="text"
-                      name="city"
-                      value={formData.city}
-                      onChange={handleInputChange}
-                      className={`w-full border-b ${errors.city ? "border-red-500" : "border-gray-200"
-                        } py-3 focus:outline-none focus:border-primary desktop-1200:text-base desktop-1500:text-lg desktop-1900:text-xl`}
-                      placeholder="City"
-                    />
-                    {errors.city && (
-                      <p className="text-red-500 text-sm mt-1">{errors.city}</p>
-                    )}
-                  </div>
-                  <div>
-                    <input
-                      type="text"
-                      name="zipCode"
-                      value={formData.zipCode}
-                      onChange={handleInputChange}
-                      className={`w-full border-b ${errors.zipCode ? "border-red-500" : "border-gray-200"
-                        } py-3 focus:outline-none focus:border-primary desktop-1200:text-base desktop-1500:text-lg desktop-1900:text-xl`}
-                      placeholder="Zip Code"
-                    />
-                    {errors.zipCode && (
-                      <p className="text-red-500 text-sm mt-1">{errors.zipCode}</p>
-                    )}
-                  </div>
-                </div>
-
                 <div>
-                  <select
-                    name="country"
-                    value={formData.country}
+                  <input
+                    type="text"
+                    name="zipCode"
+                    value={formData.zipCode}
                     onChange={handleInputChange}
-                    className={`w-full border-b ${errors.country ? "border-red-500" : "border-gray-200"
+                    className={`w-full border-b ${errors.zipCode ? "border-red-500" : "border-gray-200"
                       } py-3 focus:outline-none focus:border-primary desktop-1200:text-base desktop-1500:text-lg desktop-1900:text-xl`}
-                  >
-                    <option value="">Country</option>
-                    <option value="US">United States</option>
-                    <option value="IN">India</option>
-                  </select>
-                  {errors.country && (
-                    <p className="text-red-500 text-sm mt-1">{errors.country}</p>
+                    placeholder="Zip Code"
+                  />
+                  {errors.zipCode && (
+                    <p className="text-red-500 text-sm mt-1">{errors.zipCode}</p>
                   )}
                 </div>
+              </div>
 
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full bg-secondary text-white rounded-full py-3 hover:bg-primary/90 transition-colors disabled:opacity-50"
+              <div>
+                <select
+                  name="country"
+                  value={formData.country}
+                  onChange={handleInputChange}
+                  className={`w-full border-b ${errors.country ? "border-red-500" : "border-gray-200"
+                    } py-3 focus:outline-none focus:border-primary desktop-1200:text-base desktop-1500:text-lg desktop-1900:text-xl`}
                 >
-                  {isSubmitting ? "Submitting..." : "Submit"}
-                </button>
-              </form>
+                  <option value="">Country</option>
+                  <option value="US">United States</option>
+                  <option value="IN">India</option>
+                </select>
+                {errors.country && (
+                  <p className="text-red-500 text-sm mt-1">{errors.country}</p>
+                )}
+              </div>
+
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="w-full bg-secondary text-white rounded-full py-3 hover:bg-primary/90 transition-colors disabled:opacity-50"
+              >
+                {isSubmitting ? "Submitting..." : "Submit"}
+              </button>
+            </form>
           </div>
         </div>
       </div>
