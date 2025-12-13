@@ -20,7 +20,7 @@ interface ImpactCard {
 const AdminPanelUrl = import.meta.env.VITE_ADMIN_PANEL_API;
 const AdminPanelImgUrl = import.meta.env.VITE_ADMIN_PANEL_IMG_API;
 
-export default function ImpactSection({url="home-page"}) {
+export default function ImpactSection({ url = "home-page", title }) {
   const [impactCards, setImpactCards] = useState<ImpactCard[] | null>(null);
   const [activeCard, setActiveCard] = useState<ImpactCard | null>(null);
 
@@ -68,8 +68,8 @@ export default function ImpactSection({url="home-page"}) {
 
   return (
     <div className="py-8 px-4 md:p-8 bg-cream md:mx-14 desktop-1900:mx-16">
-      <h2 className="text-3xl md:text-4xl font-display text-gray-900 mb-8 desktop-1900:text-5xl">
-        Our Impact
+      <h2 className={`text-3xl md:text-4xl font-display text-gray-900 mb-8 desktop-1900:text-5xl ${title?"text-center":''}`}>
+        {title || "Our Impact"}
       </h2>
       {impactCards && (
         <>
@@ -159,11 +159,10 @@ export default function ImpactSection({url="home-page"}) {
                 {activeCard?.stats2 && (
                   <div className="bg-[#F4F5F7] p-3 md:p-6 flex flex-col space-y-2 items-center justify-center rounded-xl">
                     <div
-                      className={`font-bold text-[#0066FF] ${
-                        activeCard?.stats2?.values?.includes("%")
+                      className={`font-bold text-[#0066FF] ${activeCard?.stats2?.values?.includes("%")
                           ? "text-2xl md:text-4xl desktop-1500:text-4xl desktop-1200:text-3xl desktop-1200:-mx-5"
                           : "text-3xl md:text-5xl desktop-1500:text-5xl desktop-1200:text-4xl"
-                      }`}
+                        }`}
                     >
                       {activeCard?.stats2?.values}
                     </div>
@@ -191,9 +190,8 @@ export default function ImpactSection({url="home-page"}) {
             {impactCards.map((card) => (
               <motion.div
                 key={card.title}
-                className={`relative h-[200px] desktop-1200:h-[300px] md:h-[350px] desktop-1500:h-[350px] rounded-xl md:rounded-3xl overflow-hidden cursor-pointer ${
-                  activeCard?.id === card.id ? "ring-2 ring-primary" : ""
-                }`}
+                className={`relative h-[200px] desktop-1200:h-[300px] md:h-[350px] desktop-1500:h-[350px] rounded-xl md:rounded-3xl overflow-hidden cursor-pointer ${activeCard?.id === card.id ? "ring-2 ring-primary" : ""
+                  }`}
                 onClick={() => handleCardClick(card)}
                 whileHover={{ scale: 1.02 }}
               >
@@ -218,11 +216,10 @@ export default function ImpactSection({url="home-page"}) {
                         )}
                       </div>
                       <div
-                        className={`h-0.5 bg-white transition-all duration-500 ${
-                          activeCard?.id === card.id
+                        className={`h-0.5 bg-white transition-all duration-500 ${activeCard?.id === card.id
                             ? "w-[80%]"
                             : "w-10 md:w-24"
-                        }`}
+                          }`}
                       />
                     </div>
                     {activeCard?.id === card.id ? (

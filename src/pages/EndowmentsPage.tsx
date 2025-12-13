@@ -120,7 +120,7 @@ export default function EndowmentsPage() {
           />
         </div>
         <CHFEndowmentInfo data={PageData} />
-        <ImpactSection url="endowment" />
+        <ImpactSection url="endowment" title="Current Size & Performance"/>
         <WhyEndowmentSection data={PageData?.FAQ} />
         <PeopleSection data={PageData?.People} />
         <GiftSection />
