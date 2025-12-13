@@ -46,7 +46,7 @@ interface FormErrors {
   [key: string]: string;
 }
 const AdminPanelUrl = import.meta.env.VITE_ADMIN_PANEL_API;
-const imageUrl = import.meta.env.VITE_ADMIN_PANEL_API.replace("/api", '');
+const imageUrl = import.meta.env.VITE_ADMIN_PANEL_IMG_API;
 export default function EndowmentsPage() {
   const location = useLocation();
   const [PageData, setPageData] = useState(null);
