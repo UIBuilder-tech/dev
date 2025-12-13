@@ -2,13 +2,49 @@ import Hero from "../components/Home/Hero";
 import FAQSection from "../components/Home/FAQ";
 import Footer from "../components/Footer/Footer";
 import SpecialProjects from "../components/projects/SpecialProjects";
-import { useEffect, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import EventsHero from "../assets/eventsHero.webp";
 import { UseDataContext } from "../components/context/DataContext";
 import SEO from "../components/seo/Seo";
 import ImpactSection from "../components/Home/OurImpact";
 import gif from '../assets/end/gif.png'
+import { toast } from "react-toastify";
+
+interface FormData {
+  category: string;
+  name: string;
+  email: string;
+  phone: string;
+  address: string;
+  city: string;
+  zipCode: string;
+  country: string;
+}
+
+interface FormType {
+  id: number; // A unique identifier (e.g., timestamp)
+  FirstName: string; // Name of the user
+  LastName: string; // Email address
+  Email: string; // Email address
+  Phone: string; // Phone number
+  address: string; // Address line
+  city: string; // City name
+  zipCode: string; // Zip/postal code
+  state: string; // State name
+  country: string; // Country name
+  paymentMethod: string; // Payment method (e.g., 'online', 'offline')
+  rememberMe: boolean; // Whether the user opts for "remember me"
+  amount: number | null; // Total amount
+}
+
+interface Props {
+  initialFormData: FormType
+}
+
+interface FormErrors {
+  [key: string]: string;
+}
 const AdminPanelUrl = import.meta.env.VITE_ADMIN_PANEL_API;
 const imageUrl = import.meta.env.VITE_ADMIN_PANEL_API.replace("/api", '');
 export default function EndowmentsPage() {
@@ -472,29 +508,245 @@ function PeopleSection({ data }) {
   );
 }
 function GiftSection() {
-  const [formData, setFormData] = useState({
-    category: '',
-    name: 'James Spencer',
-    email: '',
-    phone: '',
-    address: '',
-    city: '',
-    zipCode: '',
-    country: ''
+  const BASE_URL = import.meta.env.VITE_RETURN_BACKEND_API;
+  const apiCalledRef = useRef(false);
+  const user = JSON.parse(sessionStorage.getItem("user") || "{}");
+  const [initialFormData, setInitialFormData] = useState<FormType>({
+    id: Date.now(),
+    FirstName: "",
+    LastName: "",
+    Email: "",
+    Phone: "",
+    address: "",
+    city: "",
+    zipCode: "",
+    state: "",
+    country: "",
+    paymentMethod: "zelle",
+    rememberMe: false,
+    amount: 0,
   });
-  const handleInputChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+
+  useEffect(() => {
+    const initialApi = async () => {
+      if (apiCalledRef.current) return; // Skip if API has already been called
+      apiCalledRef.current = true; // Mark API as called
+
+      if (Object.keys(user)?.length > 0) {
+        setData((v) => ({ ...v, isLoading: true }));
+        fetch(`${BASE_URL}contact?email=${user?.email}`)
+          .then((resp) => resp?.json())
+          .then((response) => {
+            if (response) {
+              const {
+                firstName,
+                lastName,
+                email,
+                mobile,
+                billingStreet,
+                billingCity,
+                billingState,
+                billingPostalCode,
+                billingCountry,
+              } = response;
+              setInitialFormData((v: FormType) => ({
+                ...v,
+                FirstName: firstName,
+                LastName: lastName,
+                Email: email,
+                Phone: mobile,
+                address: billingStreet,
+                city: billingCity,
+                zipCode: billingPostalCode,
+                state: billingState,
+                country: billingCountry,
+              }));
+            } else {
+              console.error("error fetching response");
+            }
+          })
+          .catch((error) => {
+            console.error(error);
+          })
+          .finally(() => {
+            // setIsDisable(false);
+            setData((v) => ({ ...v, isLoading: false }));
+          });
+      }
+    };
+    initialApi();
+  }, []);
+
+  const [formData, setFormData] = useState<FormData>({
+    category: "",
+    name: "",
+    email: "",
+    phone: "",
+    address: "",
+    city: "",
+    zipCode: "",
+    country: "",
+  });
+  const [errors, setErrors] = useState<FormErrors>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Synchronize formData with initialFormData
+  useEffect(() => {
+    setFormData({
+      category: "",
+      name: initialFormData?.FirstName ? `${initialFormData?.FirstName} ${initialFormData?.LastName}` : '',
+      email: initialFormData?.Email,
+      phone: initialFormData?.Phone,
+      address: initialFormData?.address,
+      city: initialFormData?.city,
+      zipCode: initialFormData?.zipCode,
+      country: initialFormData?.country,
+    });
+  }, [initialFormData]);
+
+  const validateForm = (): boolean => {
+    const newErrors: FormErrors = {};
+
+    if (!formData.category) {
+      newErrors.category = "Please select a category";
+    }
+
+    if (!formData.email) {
+      newErrors.email = "Email is required";
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      newErrors.email = "Invalid email format";
+    }
+
+    if (!formData.phone) {
+      newErrors.phone = "Phone number is required";
+    } else if (!/^\+?[\d\s-]{10,}$/.test(formData.phone)) {
+      newErrors.phone = "Invalid phone number";
+    }
+
+    if (!formData.address) {
+      newErrors.address = "Address is required";
+    }
+
+    if (!formData.city) {
+      newErrors.city = "City is required";
+    }
+
+    if (!formData.zipCode) {
+      newErrors.zipCode = "ZIP code is required";
+    }
+
+    if (!formData.country) {
+      newErrors.country = "Country is required";
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = () => {
-    console.log('Form submitted:', formData);
-    alert('Form submitted! Check console for details.');
+  const submitToGoogleForms = async () => {
+    const formUrl = 'https://docs.google.com/forms/d/1au5bKnT9xyD2IlIHZuc8aBd5VcC-bZU8KcjiRNTWwl0/formResponse';
+
+    // Create URL encoded data
+    const formDataEncoded = new URLSearchParams();
+    formDataEncoded.append('entry.816547937', formData.category);
+    formDataEncoded.append('entry.2042403985', formData.name);
+    formDataEncoded.append('entry.1735881500', formData.email);
+    formDataEncoded.append('entry.1870600312', formData.phone);
+    formDataEncoded.append('entry.1097309659', formData.address);
+    formDataEncoded.append('entry.571495182', formData.city);
+    formDataEncoded.append('entry.925553067', formData.country);
+
+    try {
+      // Create a hidden form and submit it
+      const form = document.createElement('form');
+      form.method = 'POST';
+      form.action = formUrl;
+      form.style.display = 'none';
+
+      // Add form fields
+      formDataEncoded.forEach((value, key) => {
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = key;
+        input.value = value;
+        form.appendChild(input);
+      });
+
+      // Add the form to the document
+      document.body.appendChild(form);
+
+      // Create a hidden iframe
+      const iframe = document.createElement('iframe');
+      iframe.name = 'hidden-iframe';
+      iframe.style.display = 'none';
+      document.body.appendChild(iframe);
+
+      // Set form target to the hidden iframe
+      form.target = 'hidden-iframe';
+
+      // Submit the form
+      form.submit();
+
+      // Clean up
+      setTimeout(() => {
+        document.body.removeChild(form);
+        document.body.removeChild(iframe);
+      }, 500);
+
+      return true;
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      return false;
+    }
+  };
+
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    if (validateForm() && !isSubmitting) {
+      setIsSubmitting(true);
+      try {
+        await submitToGoogleForms();
+        // Reset form after successful submission
+        setFormData({
+          category: "",
+          name: "",
+          email: "",
+          phone: "",
+          address: "",
+          city: "",
+          zipCode: "",
+          country: "",
+        });
+        // alert('Form submitted successfully!');
+        toast.success("Submitted successfully!!")
+      } catch (error) {
+        console.error('Error submitting form:', error);
+        alert('There was an error submitting the form. Please try again.');
+      } finally {
+        setIsSubmitting(false);
+      }
+    }
+  };
+
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+
+    // Clear error when user starts typing
+    if (errors[name]) {
+      setErrors((prev) => ({ ...prev, [name]: "" }));
+    }
   };
 
   return (
     <div className="bg-white py-16 px-6 md:px-12">
       <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-64 items-start">
           <div>
             <h2 className="text-2xl md:text-3xl font-bold mb-4" style={{ color: '#1a2b4a' }}>
               Gift to the Endowment
@@ -528,109 +780,145 @@ function GiftSection() {
           </div>
 
           {/* Right side - Form */}
-          <div className="bg-white rounded-lg shadow-md p-8">
-            <div className="space-y-4">
-              <div>
-                <select
-                  name="category"
-                  value={formData.category}
-                  onChange={handleInputChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-orange-500 focus:border-transparent text-gray-600"
-                >
-                  <option value="">Select Category</option>
-                  <option value="heritage">Heritage</option>
-                  <option value="education">Education</option>
-                  <option value="empowerment">Women's Empowerment</option>
-                  <option value="spiritual">Spiritual Development</option>
-                </select>
-              </div>
-
-              <div className="relative">
-                <input
-                  type="text"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleInputChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-orange-500 focus:border-transparent"
-                  placeholder="Name"
-                />
-                <span className="absolute right-3 top-3 text-green-500 text-sm">✓</span>
-              </div>
-
-              <div>
-                <input
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleInputChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-orange-500 focus:border-transparent"
-                  placeholder="Email Address"
-                />
-              </div>
-
-              <div>
-                <input
-                  type="tel"
-                  name="phone"
-                  value={formData.phone}
-                  onChange={handleInputChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-orange-500 focus:border-transparent"
-                  placeholder="Phone Number"
-                />
-              </div>
-
-              <div>
-                <input
-                  type="text"
-                  name="address"
-                  value={formData.address}
-                  onChange={handleInputChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-orange-500 focus:border-transparent"
-                  placeholder="Address"
-                />
-              </div>
-
-              <div className="grid grid-cols-2 gap-4">
-                <input
-                  type="text"
-                  name="city"
-                  value={formData.city}
-                  onChange={handleInputChange}
-                  className="px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-orange-500 focus:border-transparent"
-                  placeholder="City"
-                />
-                <input
-                  type="text"
-                  name="zipCode"
-                  value={formData.zipCode}
-                  onChange={handleInputChange}
-                  className="px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-orange-500 focus:border-transparent"
-                  placeholder="Zip Code"
-                />
-              </div>
-
-              <div>
-                <select
-                  name="country"
-                  value={formData.country}
-                  onChange={handleInputChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-orange-500 focus:border-transparent text-gray-600"
-                >
-                  <option value="">Country</option>
-                  <option value="us">United States</option>
-                  <option value="india">India</option>
-                  <option value="uk">United Kingdom</option>
-                  <option value="canada">Canada</option>
-                </select>
-              </div>
-
-              <button
-                onClick={handleSubmit}
-                className="w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 px-6 rounded-md transition-colors"
+          <div className="bg-white rounded-lgp-8">
+              <form
+                onSubmit={handleSubmit}
+                className="space-y-8 desktop-1200:space-y-4 desktop-1900:space-y-6 desktop-1500:space-y-6 max-w-[80%] max-sm:contents"
               >
-                Submit
-              </button>
-            </div>
+                <div>
+                  <select
+                    name="category"
+                    value={formData.category}
+                    onChange={handleInputChange}
+                    className={`w-full border-b ${errors.category ? "border-red-500" : "border-gray-200"
+                      } py-3 focus:outline-none focus:border-primary bg-transparent`}
+                  >
+                    <option value="">Select Category</option>
+                    <option value="education">Education</option>
+                    <option value="heritage">Heritage</option>
+                    <option value="women">Women Empowerment</option>
+                    <option value="general">General</option>
+                  </select>
+                  {errors.category && (
+                    <p className="text-red-500 text-sm mt-1">{errors.category}</p>
+                  )}
+                </div>
+
+                <div className="relative">
+                  <input
+                    type="text"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleInputChange}
+                    className="w-full border-b border-gray-200 py-3 focus:outline-none focus:border-primary desktop-1200:text-base desktop-1500:text-lg desktop-1900:text-xl"
+                    placeholder="Full Name"
+                  />
+                  {/* {isNameVerified && (
+                  <Check className="absolute right-2 top-1/2 -translate-y-1/2 text-green-500 h-5 w-5" />
+                )} */}
+                </div>
+
+                <div>
+                  <input
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    className={`w-full border-b ${errors.email ? "border-red-500" : "border-gray-200"
+                      } py-3 focus:outline-none focus:border-primary desktop-1200:text-base desktop-1500:text-lg desktop-1900:text-xl`}
+                    placeholder="Email Address"
+                  />
+                  {errors.email && (
+                    <p className="text-red-500 text-sm mt-1">{errors.email}</p>
+                  )}
+                </div>
+
+                <div>
+                  <input
+                    type="tel"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleInputChange}
+                    className={`w-full border-b ${errors.phone ? "border-red-500" : "border-gray-200"
+                      } py-3 focus:outline-none focus:border-primary desktop-1200:text-base desktop-1500:text-lg desktop-1900:text-xl`}
+                    placeholder="Phone Number"
+                  />
+                  {errors.phone && (
+                    <p className="text-red-500 text-sm mt-1">{errors.phone}</p>
+                  )}
+                </div>
+
+                <div>
+                  <input
+                    type="text"
+                    name="address"
+                    value={formData.address}
+                    onChange={handleInputChange}
+                    className={`w-full border-b ${errors.address ? "border-red-500" : "border-gray-200"
+                      } py-3 focus:outline-none focus:border-primary desktop-1200:text-base desktop-1500:text-lg desktop-1900:text-xl`}
+                    placeholder="Address"
+                  />
+                  {errors.address && (
+                    <p className="text-red-500 text-sm mt-1">{errors.address}</p>
+                  )}
+                </div>
+
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <input
+                      type="text"
+                      name="city"
+                      value={formData.city}
+                      onChange={handleInputChange}
+                      className={`w-full border-b ${errors.city ? "border-red-500" : "border-gray-200"
+                        } py-3 focus:outline-none focus:border-primary desktop-1200:text-base desktop-1500:text-lg desktop-1900:text-xl`}
+                      placeholder="City"
+                    />
+                    {errors.city && (
+                      <p className="text-red-500 text-sm mt-1">{errors.city}</p>
+                    )}
+                  </div>
+                  <div>
+                    <input
+                      type="text"
+                      name="zipCode"
+                      value={formData.zipCode}
+                      onChange={handleInputChange}
+                      className={`w-full border-b ${errors.zipCode ? "border-red-500" : "border-gray-200"
+                        } py-3 focus:outline-none focus:border-primary desktop-1200:text-base desktop-1500:text-lg desktop-1900:text-xl`}
+                      placeholder="Zip Code"
+                    />
+                    {errors.zipCode && (
+                      <p className="text-red-500 text-sm mt-1">{errors.zipCode}</p>
+                    )}
+                  </div>
+                </div>
+
+                <div>
+                  <select
+                    name="country"
+                    value={formData.country}
+                    onChange={handleInputChange}
+                    className={`w-full border-b ${errors.country ? "border-red-500" : "border-gray-200"
+                      } py-3 focus:outline-none focus:border-primary desktop-1200:text-base desktop-1500:text-lg desktop-1900:text-xl`}
+                  >
+                    <option value="">Country</option>
+                    <option value="US">United States</option>
+                    <option value="IN">India</option>
+                  </select>
+                  {errors.country && (
+                    <p className="text-red-500 text-sm mt-1">{errors.country}</p>
+                  )}
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full bg-secondary text-white rounded-full py-3 hover:bg-primary/90 transition-colors disabled:opacity-50"
+                >
+                  {isSubmitting ? "Submitting..." : "Submit"}
+                </button>
+              </form>
           </div>
         </div>
       </div>
