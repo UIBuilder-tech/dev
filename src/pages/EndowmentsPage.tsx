@@ -96,7 +96,7 @@ export default function EndowmentsPage() {
   return (
     <>
       <SEO
-        title="Events"
+        title="Endowment Projects"
         description="Join us as we commemorate festivals, organize satsangs, and conduct enriching activities for children and youth. Stay updated with our latest programs and events that honor tradition, foster spiritual growth, and strengthen the Chitrapur Saraswat community."
       />
       <div className="min-h-screen bg-cream">
